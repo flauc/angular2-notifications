@@ -1,0 +1,36 @@
+
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8">
+        <title>Notifications Example</title>
+
+        <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+        <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+        <script src="node_modules/systemjs/dist/system.src.js"></script>
+        <script src="node_modules/angular2/bundles/http.min.js"></script>
+
+        <script>
+            System.config({
+                defaultJSExtensions: true,
+                packages: {
+                    "/angular2": {"defaultExtension": false}
+                },
+                map: {
+                    'angular2-notifications': 'node_modules/angular2-notifications'
+                }
+            });
+        </script>
+
+        <script src="/node_modules/rxjs/bundles/Rx.js"></script>
+        <script src="/node_modules/angular2/bundles/angular2.js"></script>
+
+        <script>
+            System.import('app').catch(console.log.bind(console));
+        </script>
+    </head>
+
+    <body>
+        <app></app>
+    </body>
+</html>
