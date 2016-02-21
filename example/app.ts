@@ -70,7 +70,8 @@ export class AppComponent {
     public options = {
         timeOut: 0,
         lastOnBottom: true,
-        clickToClose: true
+        clickToClose: true,
+        maxLength: 0
     };
 
 

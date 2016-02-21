@@ -5,6 +5,7 @@ import {NotificationType} from "./notificationType";
 import {AlertIcon} from "./icons/alert.icon";
 import {ErrorIcon} from "./icons/error.icon";
 import {SuccessIcon} from "./icons/success.icon";
+import {MaxPipe} from "./max.pipe";
 
 @Component({
     selector: 'simple-notification',
@@ -12,17 +13,18 @@ import {SuccessIcon} from "./icons/success.icon";
         'item',
         'timeOut',
         'position',
-        'clickToClose'
+        'clickToClose',
+        'maxLength'
     ],
     directives: [AlertIcon, ErrorIcon, SuccessIcon],
+    pipes: [MaxPipe],
     template: `
         <div class="notification"
             (click)="removeSelf()"
-            [ngClass]="{alert: item.type == 'alert', error: item.type == 'error', success: item.type == 'success'}"
-            [style.bottom]="setPosition()">
+            [ngClass]="{alert: item.type == 'alert', error: item.type == 'error', success: item.type == 'success'}">
 
             <h3>{{item.title}}</h3>
-            <p>{{item.content}}</p>
+            <p>{{item.content | max:maxLength}}</p>
 
             <alertIcon *ngIf="item.type == 'alert'"></alertIcon>
             <errorIcon *ngIf="item.type == 'error'"></errorIcon>
@@ -33,15 +35,28 @@ import {SuccessIcon} from "./icons/success.icon";
     styles: [`
         .notification {
             width: 100%;
-            padding: 20px;
+            padding: 10px 20px;
             box-sizing: border-box;
-            bottom: 0;
-            right: 0;
-            position: absolute;
+            position: relative;
+            float: left;
+            margin-bottom: 10px;
             color: #fff;
             cursor: pointer;
             transition: all 0.5s;
         }
+
+        h3 {
+            margin: 0;
+            padding: 0;
+            line-height: 30px;
+        }
+
+        p {
+            margin: 0;
+            padding: 0 50px 0 0;
+            line-height: 20px;
+        }
+
         .error {
             background: #ff6b6b;
         }
@@ -74,6 +89,8 @@ export class NotificationComponent {
     private timeOut: number;
     private position: number;
     private clickToClose: boolean;
+
+    public maxLength: number;
 
     setPosition() {
         return this.position != 0 ? this.position*90 : 0;

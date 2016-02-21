@@ -10,10 +10,11 @@ import {Component} from "angular2/core";
     styles: [`
         svg {
             position: absolute;
+            box-sizing: border-box;
             top: 0;
             right: 0;
             width: auto;
-            height: 100%;
+            height: 70px;
             padding: 10px;
             fill: #fff;
         }

@@ -15,6 +15,7 @@ import {NotificationComponent} from "./notification.component";
                 [item]="a"
                 [timeOut]="timeOut"
                 [clickToClose]="clickToClose"
+                [maxLength]="maxLength"
                 [position]="i">
 
             </simple-notification>
@@ -45,6 +46,7 @@ export class NotificationsComponent {
     // Sent values
     public timeOut: number = 0;
     public clickToClose: boolean = true;
+    public maxLength: number = 0;
 
 
     ngOnInit() {
@@ -83,6 +85,9 @@ export class NotificationsComponent {
                     break;
                 case 'clickToClose':
                     this.clickToClose = this.options.clickToClose;
+                    break;
+                case 'maxLength':
+                    this.maxLength = this.options.maxLength;
                     break;
             }
         })

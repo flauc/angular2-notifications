@@ -21,7 +21,8 @@ var AppComponent = (function () {
         this.options = {
             timeOut: 0,
             lastOnBottom: true,
-            clickToClose: true
+            clickToClose: true,
+            maxLength: 0
         };
     }
     AppComponent.prototype.create = function () {
