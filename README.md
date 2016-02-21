@@ -26,6 +26,7 @@ This are the currently available options you could pass to the component:
 * __timeOut__ -\[int] Determine how long a notification should wait before closing. If set to 0 a notification won't close it self.
 * __lastOnBottom__ - \[boolean] Determines if new notifications should appear at the bottom or top of the list.
 * __clickToClose__ - \[boolean] Determines if notifications should close on click.
+* __maxLength__ - \[int] Set the maximum allowed length of the content string. If set to 0 or not defined there is no maximum length.
 
 You will also need to use the NotificationsService in your component to create or remove the notifications.
 ```
