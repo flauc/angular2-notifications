@@ -2,3 +2,6 @@ example
 node_modules
 .idea
 src
+.npmignore
+.gitignore
+tsconfig.json
