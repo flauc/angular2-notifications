@@ -24,7 +24,7 @@ import {MaxPipe} from "./max.pipe";
             [ngClass]="{alert: item.type == 'alert', error: item.type == 'error', success: item.type == 'success'}">
 
             <h3>{{item.title}}</h3>
-            <p>{{item.content | max:maxLength}}</p>
+            <p>{{item.content}}</p>
 
             <alertIcon *ngIf="item.type == 'alert'"></alertIcon>
             <errorIcon *ngIf="item.type == 'error'"></errorIcon>
@@ -75,8 +75,6 @@ export class NotificationComponent {
     ) {}
 
     ngOnInit() {
-        console.log(this.item);
-        console.log(' timeOut: ' + this.timeOut, ' position: ' + this.position, ' clickToClose: ' + this.clickToClose);
         if(this.timeOut != 0) {
             setTimeout(()=> {
                 this.removeSelf();

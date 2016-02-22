@@ -41,6 +41,7 @@ export class NotificationsComponent {
 
     // Received values
     private lastOnBottom: boolean = true;
+    private maxStack: number = 5;
     public options: any;
 
     // Sent values
@@ -68,8 +69,13 @@ export class NotificationsComponent {
         item.id = Math.random().toString(36).substring(3);
 
         // Check if the notification should be added at the start or the end of the array
-        if(this.lastOnBottom) this.notifications.push(item);
-        else this.notifications.splice(0, 0, item);
+        if(this.lastOnBottom) {
+            if(this.notifications.length >= this.maxStack) this.notifications.splice(0,1);
+            this.notifications.push(item);
+        } else {
+            if(this.notifications.length >= this.maxStack) this.notifications.splice(this.notifications.length - 1, 1);
+            this.notifications.splice(0, 0, item);
+        }
     }
 
     // Attach all the changes received in the options object
@@ -88,6 +94,9 @@ export class NotificationsComponent {
                     break;
                 case 'maxLength':
                     this.maxLength = this.options.maxLength;
+                    break;
+                case 'maxStack':
+                    this.maxStack = this.options.maxStack;
                     break;
             }
         })

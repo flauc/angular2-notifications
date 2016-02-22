@@ -20,14 +20,13 @@ var AppComponent = (function () {
         this.temp = [true, false];
         this.options = {
             timeOut: 0,
-            lastOnBottom: true,
+            lastOnBottom: false,
             clickToClose: true,
-            maxLength: 0
+            maxLength: 0,
+            maxStack: 3
         };
     }
     AppComponent.prototype.create = function () {
-        console.log(this.options);
-        console.log(this.title, this.content, this.type);
         switch (this.type) {
             case 'success':
                 this._service.success(this.title, this.content);
@@ -46,7 +45,7 @@ var AppComponent = (function () {
             selector: 'app',
             directives: [components_1.NotificationsComponent],
             providers: [components_2.NotificationsService],
-            template: "\n        <form (ngSubmit)=\"create()\">\n            <div>\n                <label>Title</label>\n                <p>The title of the notification.</p>\n                <input type=\"text\" [(ngModel)]=\"title\">\n            </div>\n            <div>\n                <label>Content</label>\n                <p>The content of the notification.</p>\n                <input type=\"text\" [(ngModel)]=\"content\">\n            </div>\n            <div>\n                <label>Type</label>\n                <p>The type of the notification.</p>\n                <select [(ngModel)]=\"type\">\n                    <option value=\"success\" selected>Success</option>\n                    <option value=\"error\">Error</option>\n                    <option value=\"alert\">Alert</option>\n                </select>\n            </div>\n            <button type=\"submit\">Create Notification</button>\n        </form>\n        <div>\n            <div>\n                <label>Time Out</label>\n                <p>Set the amount of time before a notification disappears. If set to 0 then there is no time out.</p>\n                <input type=\"number\" [(ngModel)]=\"options.timeOut\">\n            </div>\n            <div>\n                <label>Last on bottom</label>\n                <p>Should the last notification created apper on the top or bottom of the list.</p>\n                <select [(ngModel)]=\"options.lastOnBottom\">\n                    <option *ngFor=\"#a of temp\" value=\"{{a}}\">{{a}}</option>\n                </select>\n            </div>\n            <div>\n                <label>Click to close</label>\n                <p>Should notifications close when clicked</p>\n                <select [(ngModel)]=\"options.clickToClose\">\n                    <option *ngFor=\"#a of temp\" value=\"{{a}}\">{{a}}</option>\n                </select>\n            </div>\n        </div>\n        <button (click)=\"removeAll()\">Clean all notifications</button>\n        <simple-notifications [options]=\"options\"></simple-notifications>\n    "
+            template: "\n        <form (ngSubmit)=\"create()\">\n            <div>\n                <label>Title</label>\n                <p>The title of the notification.</p>\n                <input type=\"text\" [(ngModel)]=\"title\">\n            </div>\n            <div>\n                <label>Content</label>\n                <p>The content of the notification.</p>\n                <input type=\"text\" [(ngModel)]=\"content\">\n            </div>\n            <div>\n                <label>Type</label>\n                <p>The type of the notification.</p>\n                <select [(ngModel)]=\"type\">\n                    <option value=\"success\" selected>Success</option>\n                    <option value=\"error\">Error</option>\n                    <option value=\"alert\">Alert</option>\n                </select>\n            </div>\n            <button type=\"submit\">Create Notification</button>\n        </form>\n        <button (click)=\"removeAll()\">Clean all notifications</button>\n        <simple-notifications [options]=\"options\"></simple-notifications>\n    "
         }), 
         __metadata('design:paramtypes', [components_2.NotificationsService])
     ], AppComponent);

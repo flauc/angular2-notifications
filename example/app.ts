@@ -29,27 +29,6 @@ import {NotificationsService} from "angular2-notifications/components";
             </div>
             <button type="submit">Create Notification</button>
         </form>
-        <div>
-            <div>
-                <label>Time Out</label>
-                <p>Set the amount of time before a notification disappears. If set to 0 then there is no time out.</p>
-                <input type="number" [(ngModel)]="options.timeOut">
-            </div>
-            <div>
-                <label>Last on bottom</label>
-                <p>Should the last notification created apper on the top or bottom of the list.</p>
-                <select [(ngModel)]="options.lastOnBottom">
-                    <option *ngFor="#a of temp" value="{{a}}">{{a}}</option>
-                </select>
-            </div>
-            <div>
-                <label>Click to close</label>
-                <p>Should notifications close when clicked</p>
-                <select [(ngModel)]="options.clickToClose">
-                    <option *ngFor="#a of temp" value="{{a}}">{{a}}</option>
-                </select>
-            </div>
-        </div>
         <button (click)="removeAll()">Clean all notifications</button>
         <simple-notifications [options]="options"></simple-notifications>
     `
@@ -69,16 +48,15 @@ export class AppComponent {
 
     public options = {
         timeOut: 0,
-        lastOnBottom: true,
+        lastOnBottom: false,
         clickToClose: true,
-        maxLength: 0
+        maxLength: 0,
+        maxStack: 3
     };
 
 
 
     create(){
-        console.log(this.options);
-        console.log(this.title, this.content, this.type);
         switch (this.type) {
             case 'success':
                 this._service.success(this.title, this.content);
