@@ -28,6 +28,7 @@ This are the currently available options you could pass to the component:
 * __clickToClose__ - \[boolean] Determines if notifications should close on click.
 * __maxLength__ - \[int] Set the maximum allowed length of the content string. If set to 0 or not defined there is no maximum length.
 * __maxStacks__ - \[int] Set the maximum number of notifications that can be on the screen at once. 
+
 You will also need to use the NotificationsService in your component to create or remove the notifications.
 ```
 ...
