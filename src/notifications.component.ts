@@ -41,7 +41,7 @@ export class NotificationsComponent {
 
     // Received values
     private lastOnBottom: boolean = true;
-    private maxStack: number = 5;
+    private maxStack: number = 8;
     public options: any;
 
     // Sent values
