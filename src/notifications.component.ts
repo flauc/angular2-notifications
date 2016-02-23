@@ -1,4 +1,4 @@
-import {Component} from "angular2/core";
+import {Component, OnInit, OnDestroy} from "angular2/core";
 import {Notification} from "./notification";
 import {NotificationsService} from "./notifications.service";
 import {NotificationComponent} from "./notification.component";
@@ -45,9 +45,9 @@ export class NotificationsComponent {
     public options: any;
 
     // Sent values
-    public timeOut: number = 0;
-    public clickToClose: boolean = true;
-    public maxLength: number = 0;
+    private timeOut: number = 0;
+    private clickToClose: boolean = true;
+    private maxLength: number = 0;
 
 
     ngOnInit() {
@@ -86,6 +86,9 @@ export class NotificationsComponent {
                 case 'lastOnBottom':
                     this.lastOnBottom = this.options.lastOnBottom;
                     break;
+                case 'maxStack':
+                    this.maxStack = this.options.maxStack;
+                    break;
                 case 'timeOut':
                     this.timeOut = this.options.timeOut;
                     break;
@@ -95,10 +98,9 @@ export class NotificationsComponent {
                 case 'maxLength':
                     this.maxLength = this.options.maxLength;
                     break;
-                case 'maxStack':
-                    this.maxStack = this.options.maxStack;
-                    break;
             }
         })
     }
+
+    ngOnDestroy() { this.listener.unsubscribe() }
 }

@@ -31,6 +31,7 @@ import {NotificationsService} from "angular2-notifications/components";
         </form>
         <button (click)="removeAll()">Clean all notifications</button>
         <simple-notifications [options]="options"></simple-notifications>
+        <button (click)="withOverride()">with override</button>
     `
 })
 
@@ -48,7 +49,7 @@ export class AppComponent {
 
     public options = {
         timeOut: 0,
-        lastOnBottom: false,
+        lastOnBottom: true,
         clickToClose: true,
         maxLength: 0,
         maxStack: 3
@@ -68,6 +69,10 @@ export class AppComponent {
                 this._service.error(this.title, this.content);
                 break;
         }
+    }
+
+    withOverride() {
+        this._service.set({title: 'pero', content: 'peric', type: 'success', override: {timeOut: 300, clickToClose:false, maxLength: 3}}, true);
     }
 
     removeAll() { this._service.removeAll() }

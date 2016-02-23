@@ -15,6 +15,7 @@ import {MaxPipe} from "./max.pipe";
         'position',
         'clickToClose',
         'maxLength'
+
     ],
     directives: [AlertIcon, ErrorIcon, SuccessIcon],
     pipes: [MaxPipe],
@@ -24,7 +25,7 @@ import {MaxPipe} from "./max.pipe";
             [ngClass]="{alert: item.type == 'alert', error: item.type == 'error', success: item.type == 'success'}">
 
             <h3>{{item.title}}</h3>
-            <p>{{item.content}}</p>
+            <p>{{item.content | max:maxLength}}</p>
 
             <alertIcon *ngIf="item.type == 'alert'"></alertIcon>
             <errorIcon *ngIf="item.type == 'error'"></errorIcon>
@@ -75,14 +76,18 @@ export class NotificationComponent {
     ) {}
 
     ngOnInit() {
+        if(this.item.override) {
+            this.attachOverrides();
+        }
         if(this.timeOut != 0) {
             setTimeout(()=> {
-                this.removeSelf();
+                this._service.set(this.item, false)
             }, this.timeOut)
         }
     }
 
     public item: Notification;
+    public overrides: any;
 
     private timeOut: number;
     private position: number;
@@ -90,10 +95,32 @@ export class NotificationComponent {
 
     public maxLength: number;
 
-    setPosition() {
-        return this.position != 0 ? this.position*90 : 0;
+    setPosition() { return this.position != 0 ? this.position*90 : 0; }
+
+
+    removeSelf() {
+        if(this.clickToClose) this._service.set(this.item, false)
     }
 
 
-    removeSelf() { if(this.clickToClose) this._service.set(this.item, false) }
+    // Attach all the overrides
+    attachOverrides() {
+        let keys = Object.keys(this.item.override);
+        keys.forEach(a=>{
+            switch (a) {
+                case 'timeOut':
+                    this.timeOut = this.item.override.timeOut;
+                    break;
+                case 'clickToClose':
+                    this.clickToClose = this.item.override.clickToClose;
+                    break;
+                case 'maxLength':
+                    this.maxLength = this.item.override.maxLength;
+                    break;
+                default:
+                    console.error(`no option with the key ${a} exists`);
+                    break;
+            }
+        })
+    }
 }

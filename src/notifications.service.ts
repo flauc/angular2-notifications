@@ -6,13 +6,13 @@ import {Notification} from "./notification";
 export class NotificationsService {
     public emiter : EventEmitter<any> = new EventEmitter();
 
-    set(notification: any, to: boolean) { this.emiter.emit({notification: notification, add: to}) }
+    set(notification: any, to: boolean) { this.emiter.emit({notification: notification, add: to}) };
     getChangeEmitter() { return this.emiter }
 
     //// Access methods
-    success(title: string, content: string) { this.set({title: title, content: content, type: 'success'}, true) }
-    error(title: string, content: string) { this.set({title: title, content: content, type: 'error'}, true) }
-    alert(title: string, content: string) { this.set({title: title, content: content, type: 'alert'}, true) }
+    success(title: string, content: string, override?: any) { this.set({title: title, content: content, type: 'success', override: override}, true) }
+    error(title: string, content: string, override?: any) { this.set({title: title, content: content, type: 'error', override: override}, true) }
+    alert(title: string, content: string, override?: any) { this.set({title: title, content: content, type: 'alert', override: override}, true) }
 
     // Remove all notifications method
     removeAll() { this.emiter.emit('clean') }
