@@ -48,11 +48,12 @@ export class AppComponent {
     public temp: boolean[] = [true, false];
 
     public options = {
-        timeOut: 0,
+        timeOut: 6000,
         lastOnBottom: true,
         clickToClose: true,
         maxLength: 0,
-        maxStack: 3
+        maxStack: 3,
+        showProgressBar: true
     };
 
 

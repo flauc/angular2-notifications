@@ -16,6 +16,7 @@ import {NotificationComponent} from "./notification.component";
                 [timeOut]="timeOut"
                 [clickToClose]="clickToClose"
                 [maxLength]="maxLength"
+                [showProgressBar]="showProgressBar"
                 [position]="i">
 
             </simple-notification>
@@ -46,8 +47,9 @@ export class NotificationsComponent {
 
     // Sent values
     private timeOut: number = 0;
-    private clickToClose: boolean = true;
     private maxLength: number = 0;
+    private clickToClose: boolean = true;
+    private showProgressBar: boolean = false;
 
 
     ngOnInit() {
@@ -97,6 +99,9 @@ export class NotificationsComponent {
                     break;
                 case 'maxLength':
                     this.maxLength = this.options.maxLength;
+                    break;
+                case 'showProgressBar':
+                    this.showProgressBar = this.options.showProgressBar;
                     break;
             }
         })

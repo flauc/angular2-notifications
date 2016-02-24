@@ -19,11 +19,12 @@ var AppComponent = (function () {
         this.type = 'success';
         this.temp = [true, false];
         this.options = {
-            timeOut: 0,
+            timeOut: 6000,
             lastOnBottom: true,
             clickToClose: true,
             maxLength: 0,
-            maxStack: 3
+            maxStack: 3,
+            showProgressBar: true
         };
     }
     AppComponent.prototype.create = function () {

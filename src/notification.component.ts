@@ -14,8 +14,8 @@ import {MaxPipe} from "./max.pipe";
         'timeOut',
         'position',
         'clickToClose',
-        'maxLength'
-
+        'maxLength',
+        'showProgressBar'
     ],
     directives: [AlertIcon, ErrorIcon, SuccessIcon],
     pipes: [MaxPipe],
@@ -30,6 +30,10 @@ import {MaxPipe} from "./max.pipe";
             <alertIcon *ngIf="item.type == 'alert'"></alertIcon>
             <errorIcon *ngIf="item.type == 'error'"></errorIcon>
             <successIcon *ngIf="item.type == 'success'"></successIcon>
+
+            <div class="progress" *ngIf="showProgressBar">
+                <span [ngStyle]="{'width': progressWidth + '%'}"></span>
+            </div>
 
         </div>
     `,
@@ -67,6 +71,20 @@ import {MaxPipe} from "./max.pipe";
         .alert {
             background: #ffdb5b;
         }
+
+        .progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+        }
+
+        .progress span {
+            float: left;
+            background: red;
+            height: 100%;
+        }
     `]
 })
 
@@ -80,9 +98,16 @@ export class NotificationComponent {
             this.attachOverrides();
         }
         if(this.timeOut != 0) {
+
+            let tickTime = this.timeOut/1000;
+            let interval = setInterval(()=> {
+                this.progressWidth += 0.1;
+            }, tickTime);
+
             setTimeout(()=> {
-                this._service.set(this.item, false)
-            }, this.timeOut)
+                this._service.set(this.item, false);
+                clearInterval(interval);
+            }, this.timeOut);
         }
     }
 
@@ -94,6 +119,9 @@ export class NotificationComponent {
     private clickToClose: boolean;
 
     public maxLength: number;
+    public showProgressBar: boolean;
+
+    public progressWidth: number = 0;
 
     setPosition() { return this.position != 0 ? this.position*90 : 0; }
 
@@ -116,6 +144,9 @@ export class NotificationComponent {
                     break;
                 case 'maxLength':
                     this.maxLength = this.item.override.maxLength;
+                    break;
+                case 'showProgressBar':
+                    this.showProgressBar = this.item.override.showProgressBar;
                     break;
                 default:
                     console.error(`no option with the key ${a} exists`);
