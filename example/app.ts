@@ -48,7 +48,7 @@ export class AppComponent {
     public temp: boolean[] = [true, false];
 
     public options = {
-        timeOut: 6000,
+        timeOut: 5000,
         lastOnBottom: true,
         clickToClose: true,
         maxLength: 0,
@@ -73,7 +73,7 @@ export class AppComponent {
     }
 
     withOverride() {
-        this._service.set({title: 'pero', content: 'peric', type: 'success', override: {timeOut: 300, clickToClose:false, maxLength: 3}}, true);
+        this._service.set({title: 'pero', content: 'peric', type: 'success', override: {timeOut: 200, clickToClose:false, maxLength: 3, showProgressBar: true}}, true);
     }
 
     removeAll() { this._service.removeAll() }

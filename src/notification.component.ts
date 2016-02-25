@@ -15,14 +15,17 @@ import {MaxPipe} from "./max.pipe";
         'position',
         'clickToClose',
         'maxLength',
-        'showProgressBar'
+        'showProgressBar',
+        'pauseOnHover'
     ],
     directives: [AlertIcon, ErrorIcon, SuccessIcon],
     pipes: [MaxPipe],
     template: `
         <div class="notification"
             (click)="removeSelf()"
-            [ngClass]="{alert: item.type == 'alert', error: item.type == 'error', success: item.type == 'success'}">
+            [ngClass]="{alert: item.type == 'alert', error: item.type == 'error', success: item.type == 'success'}"
+            (mouseenter)="onEnter()"
+            (mouseleave)="onLeave()">
 
             <h3>{{item.title}}</h3>
             <p>{{item.content | max:maxLength}}</p>
@@ -62,15 +65,9 @@ import {MaxPipe} from "./max.pipe";
             line-height: 20px;
         }
 
-        .error {
-            background: #ff6b6b;
-        }
-        .success {
-            background: #97fc8f;
-        }
-        .alert {
-            background: #ffdb5b;
-        }
+        .error { background: #ff6b6b; }
+        .success { background: #97fc8f; }
+        .alert { background: #ffdb5b; }
 
         .progress {
             position: absolute;
@@ -82,9 +79,12 @@ import {MaxPipe} from "./max.pipe";
 
         .progress span {
             float: left;
-            background: red;
             height: 100%;
         }
+
+        .success .progress span { background: #70ea62; }
+        .error .progress span { background: #e85555; }
+        .alert .progress span { background: #edc242; }
     `]
 })
 
@@ -94,21 +94,13 @@ export class NotificationComponent {
     ) {}
 
     ngOnInit() {
-        if(this.item.override) {
-            this.attachOverrides();
-        }
-        if(this.timeOut != 0) {
+        if(this.item.override) this.attachOverrides();
 
-            let tickTime = this.timeOut/1000;
-            let interval = setInterval(()=> {
-                this.progressWidth += 0.1;
-            }, tickTime);
-
-            setTimeout(()=> {
-                this._service.set(this.item, false);
-                clearInterval(interval);
-            }, this.timeOut);
-        }
+        this.doTimer(this.timeOut, 100, (steps, count)=> {
+            this.progressWidth += 100/steps;
+            console.log(steps);
+            console.log(count);
+        }, ()=> this._service.set(this.item, false));
     }
 
     public item: Notification;
@@ -120,14 +112,49 @@ export class NotificationComponent {
 
     public maxLength: number;
     public showProgressBar: boolean;
+    private pauseOnHover: boolean;
 
+    // Progress bar variables
     public progressWidth: number = 0;
+    public timer: any;
+    public stopTime: boolean = false;
+
+
+    onEnter() {
+        if(this.pauseOnHover) {
+            console.log('got called');
+            this.stopTime = true;
+            clearTimeout(this.timer);
+        }
+    }
+
+    onLeave() {
+        if(this.pauseOnHover) {
+            this.stopTime = false;
+        }
+    }
 
     setPosition() { return this.position != 0 ? this.position*90 : 0; }
+    removeSelf() { if(this.clickToClose) this._service.set(this.item, false); }
 
+    doTimer(length, frames, oninstance, oncomplete) {
+        let steps = (length / 100) * (frames / 10),
+            speed = length / steps,
+            count = 0,
+            start = new Date().getTime();
 
-    removeSelf() {
-        if(this.clickToClose) this._service.set(this.item, false)
+        function instance() {
+            if (count++ == steps) {
+                oncomplete(steps, count);
+            } else {
+                oninstance(steps, count);
+
+                var diff = (new Date().getTime() - start) - (count * speed);
+                window.setTimeout(instance, (speed - diff));
+            }
+        }
+
+        this.timer = setTimeout(instance, speed);
     }
 
 
@@ -147,6 +174,9 @@ export class NotificationComponent {
                     break;
                 case 'showProgressBar':
                     this.showProgressBar = this.item.override.showProgressBar;
+                    break;
+                case 'pauseOnHover':
+                    this.pauseOnHover = this.item.override.pauseOnHover;
                     break;
                 default:
                     console.error(`no option with the key ${a} exists`);

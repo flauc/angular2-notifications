@@ -19,7 +19,7 @@ var AppComponent = (function () {
         this.type = 'success';
         this.temp = [true, false];
         this.options = {
-            timeOut: 6000,
+            timeOut: 5000,
             lastOnBottom: true,
             clickToClose: true,
             maxLength: 0,
@@ -41,7 +41,7 @@ var AppComponent = (function () {
         }
     };
     AppComponent.prototype.withOverride = function () {
-        this._service.set({ title: 'pero', content: 'peric', type: 'success', override: { timeOut: 300, clickToClose: false, maxLength: 3 } }, true);
+        this._service.set({ title: 'pero', content: 'peric', type: 'success', override: { timeOut: 200, clickToClose: false, maxLength: 3, showProgressBar: true } }, true);
     };
     AppComponent.prototype.removeAll = function () { this._service.removeAll(); };
     AppComponent = __decorate([
@@ -51,9 +51,10 @@ var AppComponent = (function () {
             providers: [components_2.NotificationsService],
             template: "\n        <form (ngSubmit)=\"create()\">\n            <div>\n                <label>Title</label>\n                <p>The title of the notification.</p>\n                <input type=\"text\" [(ngModel)]=\"title\">\n            </div>\n            <div>\n                <label>Content</label>\n                <p>The content of the notification.</p>\n                <input type=\"text\" [(ngModel)]=\"content\">\n            </div>\n            <div>\n                <label>Type</label>\n                <p>The type of the notification.</p>\n                <select [(ngModel)]=\"type\">\n                    <option value=\"success\" selected>Success</option>\n                    <option value=\"error\">Error</option>\n                    <option value=\"alert\">Alert</option>\n                </select>\n            </div>\n            <button type=\"submit\">Create Notification</button>\n        </form>\n        <button (click)=\"removeAll()\">Clean all notifications</button>\n        <simple-notifications [options]=\"options\"></simple-notifications>\n        <button (click)=\"withOverride()\">with override</button>\n    "
         }), 
-        __metadata('design:paramtypes', [components_2.NotificationsService])
+        __metadata('design:paramtypes', [(typeof (_a = typeof components_2.NotificationsService !== 'undefined' && components_2.NotificationsService) === 'function' && _a) || Object])
     ], AppComponent);
     return AppComponent;
+    var _a;
 })();
 exports.AppComponent = AppComponent;
 browser_1.bootstrap(AppComponent);
