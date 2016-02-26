@@ -23,8 +23,9 @@ var AppComponent = (function () {
             lastOnBottom: true,
             clickToClose: true,
             maxLength: 0,
-            maxStack: 3,
-            showProgressBar: true
+            maxStack: 7,
+            showProgressBar: true,
+            pauseOnHover: true
         };
     }
     AppComponent.prototype.create = function () {
@@ -51,10 +52,9 @@ var AppComponent = (function () {
             providers: [components_2.NotificationsService],
             template: "\n        <form (ngSubmit)=\"create()\">\n            <div>\n                <label>Title</label>\n                <p>The title of the notification.</p>\n                <input type=\"text\" [(ngModel)]=\"title\">\n            </div>\n            <div>\n                <label>Content</label>\n                <p>The content of the notification.</p>\n                <input type=\"text\" [(ngModel)]=\"content\">\n            </div>\n            <div>\n                <label>Type</label>\n                <p>The type of the notification.</p>\n                <select [(ngModel)]=\"type\">\n                    <option value=\"success\" selected>Success</option>\n                    <option value=\"error\">Error</option>\n                    <option value=\"alert\">Alert</option>\n                </select>\n            </div>\n            <button type=\"submit\">Create Notification</button>\n        </form>\n        <button (click)=\"removeAll()\">Clean all notifications</button>\n        <simple-notifications [options]=\"options\"></simple-notifications>\n        <button (click)=\"withOverride()\">with override</button>\n    "
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof components_2.NotificationsService !== 'undefined' && components_2.NotificationsService) === 'function' && _a) || Object])
+        __metadata('design:paramtypes', [components_2.NotificationsService])
     ], AppComponent);
     return AppComponent;
-    var _a;
 })();
 exports.AppComponent = AppComponent;
 browser_1.bootstrap(AppComponent);

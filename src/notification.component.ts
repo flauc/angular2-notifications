@@ -1,4 +1,4 @@
-import {Component, OnInit} from "angular2/core";
+import {Component, OnInit, OnDestroy} from "angular2/core";
 import {Notification} from "./notification";
 import {NotificationsService} from "./notifications.service";
 import {NotificationType} from "./notificationType";
@@ -95,67 +95,62 @@ export class NotificationComponent {
 
     ngOnInit() {
         if(this.item.override) this.attachOverrides();
-
-        this.doTimer(this.timeOut, 100, (steps, count)=> {
-            this.progressWidth += 100/steps;
-            console.log(steps);
-            console.log(count);
-        }, ()=> this._service.set(this.item, false));
+        if(this.timeOut != 0) this.startTimeOut();
     }
 
-    public item: Notification;
-    public overrides: any;
 
+    ////// Inputs
+    public item: Notification;
+    public maxLength: number;
+    public showProgressBar: boolean;
+
+    public overrides: any;
     private timeOut: number;
     private position: number;
     private clickToClose: boolean;
-
-    public maxLength: number;
-    public showProgressBar: boolean;
     private pauseOnHover: boolean;
+
+    ////// Locals
 
     // Progress bar variables
     public progressWidth: number = 0;
-    public timer: any;
-    public stopTime: boolean = false;
+    private stopTime: boolean = false;
+    private timer: any;
+    private steps: number;
+    private speed: number;
+    private count: number = 0;
+    private start: any;
+    private diff: any;
 
+    private instance = ()=> {
+        this.diff = (new Date().getTime() - this.start) - (this.count * this.speed);
+        if (this.count++ == this.steps) this._service.set(this.item, false);
+        else if(!this.stopTime) {
+            if(this.showProgressBar) this.progressWidth += 100/this.steps;
+            this.timer = setTimeout(this.instance, (this.speed - this.diff));
+        }
+    };
+
+    startTimeOut() {
+        this.steps = this.timeOut/10;
+        this.speed = this.timeOut/this.steps;
+        this.start = new Date().getTime();
+        this.timer = setTimeout(this.instance, this.speed);
+    }
 
     onEnter() {
-        if(this.pauseOnHover) {
-            console.log('got called');
-            this.stopTime = true;
-            clearTimeout(this.timer);
-        }
+        if(this.pauseOnHover) this.stopTime = true
     }
 
     onLeave() {
-        if(this.pauseOnHover) {
+        if (this.pauseOnHover) {
             this.stopTime = false;
+            setTimeout(this.instance, (this.speed - this.diff));
         }
     }
 
     setPosition() { return this.position != 0 ? this.position*90 : 0; }
     removeSelf() { if(this.clickToClose) this._service.set(this.item, false); }
-
-    doTimer(length, frames, oninstance, oncomplete) {
-        let steps = (length / 100) * (frames / 10),
-            speed = length / steps,
-            count = 0,
-            start = new Date().getTime();
-
-        function instance() {
-            if (count++ == steps) {
-                oncomplete(steps, count);
-            } else {
-                oninstance(steps, count);
-
-                var diff = (new Date().getTime() - start) - (count * speed);
-                window.setTimeout(instance, (speed - diff));
-            }
-        }
-
-        this.timer = setTimeout(instance, speed);
-    }
 
 
     // Attach all the overrides
@@ -184,4 +179,6 @@ export class NotificationComponent {
             }
         })
     }
+
+    ngOnDestroy() { clearTimeout(this.timer) }
 }

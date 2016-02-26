@@ -52,8 +52,9 @@ export class AppComponent {
         lastOnBottom: true,
         clickToClose: true,
         maxLength: 0,
-        maxStack: 3,
-        showProgressBar: true
+        maxStack: 7,
+        showProgressBar: true,
+        pauseOnHover: true
     };
 
 

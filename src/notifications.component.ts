@@ -17,6 +17,7 @@ import {NotificationComponent} from "./notification.component";
                 [clickToClose]="clickToClose"
                 [maxLength]="maxLength"
                 [showProgressBar]="showProgressBar"
+                [pauseOnHover]="pauseOnHover"
                 [position]="i">
 
             </simple-notification>
@@ -50,6 +51,7 @@ export class NotificationsComponent {
     private maxLength: number = 0;
     private clickToClose: boolean = true;
     private showProgressBar: boolean = false;
+    private pauseOnHover: boolean = true;
 
 
     ngOnInit() {
@@ -102,6 +104,9 @@ export class NotificationsComponent {
                     break;
                 case 'showProgressBar':
                     this.showProgressBar = this.options.showProgressBar;
+                    break;
+                case 'pauseOnHover':
+                    this.pauseOnHover = this.options.pauseOnHover;
                     break;
             }
         })
