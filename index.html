@@ -14,11 +14,9 @@
 
         <script>
             System.config({
+                defaultJSExtensions: true,
                 packages: {
-                    app: {
-                        format: 'register',
-                        defaultExtension: 'js'
-                    }
+                    "/angular2": {"defaultExtension": false}
                 },
                 map: {
                     'notifications': 'angular2-notifications'
