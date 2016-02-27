@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": false,
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "removeComments": true,
+    "sourceMap": false,
+    "declaration": true
+  },
+  "exclude": [
+    "node_modules",
+    "angular2-notifications"
+  ]
+}

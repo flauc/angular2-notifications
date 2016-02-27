@@ -14,13 +14,12 @@
 
         <script>
             System.config({
-                transpiler: 'typescript',
-                typescriptOptions: { emitDecoratorMetadata: true },
+                defaultJSExtensions: true,
                 packages: {
-                    'app': {defaultExtension: 'ts'}
+                    "/angular2": {"defaultExtension": false}
                 },
                 map: {
-                    'notifications': 'angular2-notifications/components.d.ts'
+                    'notifications': 'angular2-notifications'
                 }
             });
             System.import('app/app')
