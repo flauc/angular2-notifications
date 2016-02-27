@@ -1,6 +1,7 @@
-import {Component, enableProdMode} from 'angular2/core';
-import {NotificationsService, NotificationsComponent} from 'notifications/components'
+import {Component, enableProdMode, OnInit, OnDestroy} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
+import {NotificationsComponent} from "./src/notifications.component";
+import {NotificationsService} from "./src/notifications.service";
 enableProdMode();
 
 @Component({
@@ -10,8 +11,9 @@ enableProdMode();
     providers: [NotificationsService]
 })
 
-export class AppComponent {
+class AppComponent {
     public test: string = 'test';
 }
+
 
 bootstrap(AppComponent);
