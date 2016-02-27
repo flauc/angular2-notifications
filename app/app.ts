@@ -1,5 +1,5 @@
 import {Component, enableProdMode} from 'angular2/core';
-import {NotificationsService, NotificationsComponent} from 'notifications'
+import {NotificationsService, NotificationsComponent} from 'notifications/components'
 import {bootstrap} from 'angular2/platform/browser';
 enableProdMode();
 

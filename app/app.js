@@ -5,7 +5,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require('angular2/core');
-var notifications_1 = require('notifications');
+var components_1 = require('notifications/components');
 var browser_1 = require('angular2/platform/browser');
 core_1.enableProdMode();
 var AppComponent = (function () {
@@ -16,8 +16,8 @@ var AppComponent = (function () {
         core_1.Component({
             selector: 'app',
             templateUrl: 'app/app.html',
-            directives: [notifications_1.NotificationsComponent],
-            providers: [notifications_1.NotificationsService]
+            directives: [components_1.NotificationsComponent],
+            providers: [components_1.NotificationsService]
         })
     ], AppComponent);
     return AppComponent;
