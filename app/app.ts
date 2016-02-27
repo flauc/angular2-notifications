@@ -1,9 +1,13 @@
-import {Component} from 'angular2/core';
-import {bootstrap}    from 'angular2/platform/browser'
+import {Component, enableProdMode} from 'angular2/core';
+import {NotificationsService, NotificationsComponent} from 'notifications/components'
+import {bootstrap} from 'angular2/platform/browser';
+enableProdMode();
 
 @Component({
     selector: 'app',
-    templateUrl: 'app/app.html'
+    templateUrl: 'app/app.html',
+    directives: [NotificationsComponent],
+    providers: [NotificationsService]
 })
 
 export class AppComponent {
