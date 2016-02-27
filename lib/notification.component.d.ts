@@ -1,0 +1,31 @@
+import { Notification } from "./notification";
+import { NotificationsService } from "./notifications.service";
+export declare class NotificationComponent {
+    private _service;
+    constructor(_service: NotificationsService);
+    ngOnInit(): void;
+    item: Notification;
+    maxLength: number;
+    showProgressBar: boolean;
+    overrides: any;
+    private timeOut;
+    private position;
+    private clickToClose;
+    private pauseOnHover;
+    progressWidth: number;
+    private stopTime;
+    private timer;
+    private steps;
+    private speed;
+    private count;
+    private start;
+    private diff;
+    private instance;
+    startTimeOut(): void;
+    onEnter(): void;
+    onLeave(): void;
+    setPosition(): number;
+    removeSelf(): void;
+    attachOverrides(): void;
+    ngOnDestroy(): void;
+}

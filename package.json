@@ -1,0 +1,18 @@
+{
+  "name": "gh-pages",
+  "version": "1.0.0",
+  "description": "gh-pages for angular2-notifications",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flauc/angular2-notifications.git"
+  },
+  "author": "filip.lauc93@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flauc/angular2-notifications/issues"
+  },
+  "homepage": "https://github.com/flauc/angular2-notifications#readme",
+  "dependencies": {
+    "angular2-notifications": "^0.1.17"
+  }
+}

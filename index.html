@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Angular 2 QuickStart</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.33.3/es6-shim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.20/system-polyfills.js"></script>
+        <script src="https://code.angularjs.org/2.0.0-beta.7/angular2-polyfills.js"></script>
+        <script src="https://code.angularjs.org/tools/system.js"></script>
+        <script src="https://code.angularjs.org/tools/typescript.js"></script>
+        <script src="https://code.angularjs.org/2.0.0-beta.7/Rx.js"></script>
+        <script src="https://code.angularjs.org/2.0.0-beta.7/angular2.dev.js"></script>
+
+        <script>
+            System.config({
+                transpiler: 'typescript',
+                typescriptOptions: { emitDecoratorMetadata: true },
+                packages: {
+                    'app': {defaultExtension: 'ts'}
+                },
+                map: {
+                    'notifications': 'lib'
+                }
+            });
+            System.import('app/main')
+                    .then(null, console.error.bind(console));
+        </script>
+    </head>
+
+    <body>
+        <app></app>
+    </body>
+
+</html>
