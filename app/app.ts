@@ -12,7 +12,63 @@ enableProdMode();
 })
 
 class AppComponent {
-    public test: string = 'test';
+    constructor(
+        private _service: NotificationsService
+    ) {}
+    public options = {
+        timeOut: 5000,
+        lastOnBottom: true,
+        clickToClose: true,
+        maxLength: 0,
+        maxStack: 7,
+        showProgressBar: true,
+        pauseOnHover: true
+    };
+
+    public title: string = 'just a title';
+    public content: string = 'just content';
+    public type: string = 'success';
+
+    create(){
+        switch (this.type) {
+            case 'success':
+                this._service.success(this.title, this.content);
+                break;
+            case 'alert':
+                this._service.alert(this.title, this.content);
+                break;
+            case 'error':
+                this._service.error(this.title, this.content);
+                break;
+        }
+    }
+
+    removeAll() { this._service.removeAll() }
+
+    public over = {
+        timeOut: 5000,
+        clickToClose: true,
+        maxLength: 100,
+        showProgressBar: true,
+        pauseOnHover: true
+    };
+
+    override() {
+
+        console.log(this.over);
+        //this._service.set({
+        //    title: 'Override',
+        //    content: 'This notification has overridden options',
+        //    type: 'alert',
+        //    override: {
+        //        timeOut: this.over.timeOut,
+        //        clickToClose: this.over.clickToClose,
+        //        maxLength: this.over.maxLength,
+        //        showProgressBar: this.over.showProgressBar,
+        //        pauseOnHover: this.over.pauseOnHover
+        //    }
+        //}, true);
+    }
 }
 
 

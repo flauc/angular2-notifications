@@ -27,9 +27,45 @@ System.register(['angular2/core', 'angular2/platform/browser', "./src/notificati
         execute: function() {
             core_1.enableProdMode();
             AppComponent = (function () {
-                function AppComponent() {
-                    this.test = 'test';
+                function AppComponent(_service) {
+                    this._service = _service;
+                    this.options = {
+                        timeOut: 5000,
+                        lastOnBottom: true,
+                        clickToClose: true,
+                        maxLength: 0,
+                        maxStack: 7,
+                        showProgressBar: true,
+                        pauseOnHover: true
+                    };
+                    this.title = 'just a title';
+                    this.content = 'just content';
+                    this.type = 'success';
+                    this.over = {
+                        timeOut: 5000,
+                        clickToClose: true,
+                        maxLength: 100,
+                        showProgressBar: true,
+                        pauseOnHover: true
+                    };
                 }
+                AppComponent.prototype.create = function () {
+                    switch (this.type) {
+                        case 'success':
+                            this._service.success(this.title, this.content);
+                            break;
+                        case 'alert':
+                            this._service.alert(this.title, this.content);
+                            break;
+                        case 'error':
+                            this._service.error(this.title, this.content);
+                            break;
+                    }
+                };
+                AppComponent.prototype.removeAll = function () { this._service.removeAll(); };
+                AppComponent.prototype.override = function () {
+                    console.log(this.over);
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'app',
@@ -37,7 +73,7 @@ System.register(['angular2/core', 'angular2/platform/browser', "./src/notificati
                         directives: [notifications_component_1.NotificationsComponent],
                         providers: [notifications_service_1.NotificationsService]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [notifications_service_1.NotificationsService])
                 ], AppComponent);
                 return AppComponent;
             })();

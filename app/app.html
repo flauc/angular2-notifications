@@ -1,1 +1,92 @@
-<simple-notifications></simple-notifications>
+<simple-notifications [options]="options"></simple-notifications>
+<div class="container">
+    <div class="row">
+        <h1 class="center">Angular2 Notifications Library</h1>
+        <p class="center sub">A light and easy to use notifications library for Angular 2.</p>
+    </div>
+    <div class="row">
+        <div class="columns six">
+            <h2>Create a Notification</h2>
+            <p>Notifications created using this form will use the standard settings set in the component.</p>
+            <pre><code>
+                public options = {
+                    timeOut: 5000,
+                    lastOnBottom: true,
+                    clickToClose: true,
+                    maxLength: 0,
+                    maxStack: 7,
+                    showProgressBar: true,
+                    pauseOnHover: true
+                };
+            </code></pre>
+
+            <form (ngSubmit)="create()">
+                <div class="row">
+                    <div class="six columns">
+                        <label for="title">Title</label>
+                        <input type="text" id="title" class="u-full-width" [(ngModel)]="title">
+                    </div>
+                    <div class="six columns">
+                        <label for="type">Type</label>
+                        <select class="u-full-width" [(ngModel)]="type" id="type">
+                            <option value="success" selected>Success</option>
+                            <option value="error">Error</option>
+                            <option value="alert">Alert</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="content">Message</label>
+                    <textarea class="u-full-width" id="content" [(ngModel)]="content"></textarea>
+                </div>
+                <div class="row">
+                    <button class="button-primary" type="submit">Create</button>
+                </div>
+            </form>
+        </div>
+        <div class="columns six">
+            <form (ngSubmit)="override()">
+                <div class="row">
+                    <div class="six columns">
+                        <label for="timeOut">Time Out</label>
+                        <input type="number" id="timeOut" class="u-full-width" [(ngModel)]="over.timeOut">
+                    </div>
+                    <div class="six columns">
+                        <label for="maxLength">Maximum Length</label>
+                        <input type="number" id="maxLength" class="u-full-width" [(ngModel)]="over.maxLength">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="columns four">
+                        <input type="checkbox" [(ngModel)]="over.showProgressBar">
+                        <span class="label-body">Show Progress Bar?</span>
+                    </div>
+                    <div class="columns four">
+                        <input type="checkbox" [(ngModel)]="over.clickToClose">
+                        <span class="label-body">Click To Close?</span>
+                    </div>
+                    <div class="columns four">
+                        <input type="checkbox" [(ngModel)]="over.pauseOnHover">
+                        <span class="label-body">Pause On Hover?</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="button-primary" type="submit">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="columns four">
+            <p>You can also clear all notifications from with in the component by calling:</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="columns four">
+            <pre><code>this._service.removeAll()</code></pre>
+        </div>
+    </div>
+    <div class="row">
+        <button (click)="removeAll()">Clear all notifications</button>
+    </div>
+</div>
