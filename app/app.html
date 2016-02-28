@@ -6,8 +6,8 @@
     </div>
     <div class="row">
         <div class="columns six">
-            <h2>Create a Notification</h2>
-            <p>Notifications created using this form will use the standard settings set in the component.</p>
+            <h3 class="center">Create a Notification</h3>
+            <p class="sub">Notifications created using this form will use the standard settings set in the component.</p>
             <pre><code>
                 public options = {
                     timeOut: 5000,
@@ -45,6 +45,8 @@
             </form>
         </div>
         <div class="columns six">
+            <h3>With overrides</h3>
+            <p class="sub">With this form you can create a notification with custom options.</p>
             <form (ngSubmit)="override()">
                 <div class="row">
                     <div class="six columns">
