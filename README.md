@@ -1,5 +1,9 @@
 # Angular2-Notifications
-An easy to use notifications library for Angular 2.
+A light and easy to use notifications library for Angular 2. 
+
+## Example
+Take a look at the live demo here: [Live Demo](http://flauc.github.io/angular2-notifications)
+You can also clone this repository and check out the example folder.
 
 ## Setup
 Download the library with npm
@@ -8,7 +12,7 @@ npm install --save angular2-notifications
 ```
 
 Map the library in your System.config if you're using SystemJs.
-```
+```js
 System.config({
     map: {
         'notifications': 'node_modules/angular2-notifications'
@@ -17,7 +21,7 @@ System.config({
 ```
 
 Add the NotificationComponent in to the component where you want to use the notifications.
-```
+```js
 ...
 directives: [NotificationComponent],
 template: '<simple-notifications [options]="options"></simple-notifications>'
@@ -25,7 +29,7 @@ template: '<simple-notifications [options]="options"></simple-notifications>'
 ```
 
 You will also need to use the NotificationsService in your component to create or remove the notifications.
-```typescript
+```js
 ...
 providers: [NotificationsService]
 ...
@@ -47,7 +51,7 @@ This are the current options that can be pass to the component:
 * __clickToClose__ *[boolean] [Default: true]* - Determines if notifications should close on click.
 * __maxLength__ *[int] [Default: 0]* - Set the maximum allowed length of the content string. If set to 0 or not defined there is no maximum length.
 * __maxStacks__ *[int] [Default: 8]* - Set the maximum number of notifications that can be on the screen at once.
-```
+```js
 ...
 template: '<simple-notifications [options]="options"></simple-notifications>'
 ...
@@ -66,7 +70,7 @@ The following options can be overridden by passing them to the override object:
 * pauseOnHover
 * clickToClose 
 * maxLength
-```
+```js
 this._notificationsService.success(
     title: 'example', 
     content:'example', 
@@ -78,11 +82,6 @@ this._notificationsService.success(
         maxLength: 10
     }
 ```
-
-## Example
-Take a look at the live demo here: [Live Demo](http://flauc.github.io/angular2-notifications)
-You can also clone this repository and check out the example folder.
-
 
 ## Planed Features
 * CSS Themes
