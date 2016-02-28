@@ -53,20 +53,18 @@ class AppComponent {
     };
 
     override() {
-
-        console.log(this.over);
-        //this._service.set({
-        //    title: 'Override',
-        //    content: 'This notification has overridden options',
-        //    type: 'alert',
-        //    override: {
-        //        timeOut: this.over.timeOut,
-        //        clickToClose: this.over.clickToClose,
-        //        maxLength: this.over.maxLength,
-        //        showProgressBar: this.over.showProgressBar,
-        //        pauseOnHover: this.over.pauseOnHover
-        //    }
-        //}, true);
+        this._service.set({
+            title: 'Override',
+            content: 'This notification has overridden options',
+            type: 'alert',
+            override: {
+                timeOut: this.over.timeOut,
+                clickToClose: this.over.clickToClose,
+                maxLength: this.over.maxLength,
+                showProgressBar: this.over.showProgressBar,
+                pauseOnHover: this.over.pauseOnHover
+            }
+        }, true);
     }
 }
 

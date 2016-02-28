@@ -63,7 +63,18 @@ System.register(['angular2/core', 'angular2/platform/browser', "./src/notificati
                 };
                 AppComponent.prototype.removeAll = function () { this._service.removeAll(); };
                 AppComponent.prototype.override = function () {
-                    console.log(this.over);
+                    this._service.set({
+                        title: 'Override',
+                        content: 'This notification has overridden options',
+                        type: 'alert',
+                        override: {
+                            timeOut: this.over.timeOut,
+                            clickToClose: this.over.clickToClose,
+                            maxLength: this.over.maxLength,
+                            showProgressBar: this.over.showProgressBar,
+                            pauseOnHover: this.over.pauseOnHover
+                        }
+                    }, true);
                 };
                 AppComponent = __decorate([
                     core_1.Component({

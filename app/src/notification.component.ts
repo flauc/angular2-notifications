@@ -27,8 +27,8 @@ import {MaxPipe} from "./max.pipe";
             (mouseenter)="onEnter()"
             (mouseleave)="onLeave()">
 
-            <h3>{{item.title}}</h3>
-            <p>{{item.content | max:maxLength}}</p>
+            <div class="title">{{item.title}}</div>
+            <div class="content">{{item.content | max:maxLength}}</div>
 
             <alertIcon *ngIf="item.type == 'alert'"></alertIcon>
             <errorIcon *ngIf="item.type == 'error'"></errorIcon>
@@ -53,14 +53,16 @@ import {MaxPipe} from "./max.pipe";
             transition: all 0.5s;
         }
 
-        h3 {
+        .title {
             margin: 0;
             padding: 0;
             line-height: 30px;
+            font-size: 20px;
         }
 
-        p {
+        .content {
             margin: 0;
+            font-size: 16px;
             padding: 0 50px 0 0;
             line-height: 20px;
         }

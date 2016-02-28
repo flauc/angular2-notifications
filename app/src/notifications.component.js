@@ -97,7 +97,7 @@ System.register(["angular2/core", "./notifications.service", "./notification.com
                         directives: [notification_component_1.NotificationComponent],
                         inputs: ['options'],
                         template: "\n        <div class=\"notification-wrapper\">\n            <simple-notification\n                *ngFor=\"#a of notifications; #i = index\"\n                [item]=\"a\"\n                [timeOut]=\"timeOut\"\n                [clickToClose]=\"clickToClose\"\n                [maxLength]=\"maxLength\"\n                [showProgressBar]=\"showProgressBar\"\n                [pauseOnHover]=\"pauseOnHover\"\n                [position]=\"i\">\n\n            </simple-notification>\n        </div>\n    ",
-                        styles: ["\n        .notification-wrapper {\n            position: fixed;\n            bottom: 20px;\n            right: 20px;\n            width: 300px;\n        }\n    "]
+                        styles: ["\n        .notification-wrapper {\n            position: fixed;\n            bottom: 20px;\n            right: 20px;\n            width: 300px;\n            z-index: 1000;\n        }\n    "]
                     }), 
                     __metadata('design:paramtypes', [notifications_service_1.NotificationsService])
                 ], NotificationsComponent);
