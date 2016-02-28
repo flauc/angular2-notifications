@@ -25,7 +25,6 @@ System.register(['angular2/core', 'angular2/platform/browser', "./src/notificati
                 notifications_service_1 = notifications_service_1_1;
             }],
         execute: function() {
-            core_1.enableProdMode();
             AppComponent = (function () {
                 function AppComponent(_service) {
                     this._service = _service;
