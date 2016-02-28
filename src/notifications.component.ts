@@ -29,6 +29,7 @@ import {NotificationComponent} from "./notification.component";
             bottom: 20px;
             right: 20px;
             width: 300px;
+            z-index: 1000;
         }
     `]
 })
