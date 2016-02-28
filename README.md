@@ -80,8 +80,9 @@ this._notificationsService.success(
 ```
 
 ## Example
-For a working example you can clone this repository and check out the example folder.
-I will create a live link soon.
+Take a look at the live demo here: [Live Demo](http://flauc.github.io/angular2-notifications)
+You can also clone this repository and check out the example folder.
+
 
 ## Planed Features
 * CSS Themes
