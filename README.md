@@ -51,6 +51,8 @@ This are the current options that can be pass to the component:
 * __clickToClose__ *[boolean] [Default: true]* - Determines if notifications should close on click.
 * __maxLength__ *[int] [Default: 0]* - Set the maximum allowed length of the content string. If set to 0 or not defined there is no maximum length.
 * __maxStacks__ *[int] [Default: 8]* - Set the maximum number of notifications that can be on the screen at once.
+* __preventDuplicates__ *[boolean] [Default: false] - If true prevents duplicates of open notifications.
+* __preventLastDuplicates__ *[boolean] [Default: false] - If true prevents duplicates of the latest notification shown.
 ```js
 ...
 template: '<simple-notifications [options]="options"></simple-notifications>'
