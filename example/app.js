@@ -20,12 +20,14 @@ var AppComponent = (function () {
         this.temp = [true, false];
         this.options = {
             timeOut: 5000,
-            lastOnBottom: true,
+            lastOnBottom: false,
             clickToClose: true,
             maxLength: 0,
             maxStack: 7,
             showProgressBar: true,
-            pauseOnHover: true
+            pauseOnHover: true,
+            preventDuplicates: true,
+            preventLastDuplicates: false
         };
     }
     AppComponent.prototype.create = function () {

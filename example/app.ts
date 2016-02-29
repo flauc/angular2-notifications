@@ -49,12 +49,14 @@ export class AppComponent {
 
     public options = {
         timeOut: 5000,
-        lastOnBottom: true,
+        lastOnBottom: false,
         clickToClose: true,
         maxLength: 0,
         maxStack: 7,
         showProgressBar: true,
-        pauseOnHover: true
+        pauseOnHover: true,
+        preventDuplicates: true,
+        preventLastDuplicates: false
     };
 
 
