@@ -1,4 +1,4 @@
-System.register(["angular2/core", "./notifications.service", "./icons/alert.icon", "./icons/error.icon", "./icons/success.icon", "./max.pipe"], function(exports_1) {
+System.register(["angular2/core", "./notifications.service", "./icons/alert.icon", "./icons/error.icon", "./icons/success.icon", "./max.pipe", "./icons/info.icon"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(["angular2/core", "./notifications.service", "./icons/alert.icon
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, notifications_service_1, alert_icon_1, error_icon_1, success_icon_1, max_pipe_1;
+    var core_1, notifications_service_1, alert_icon_1, error_icon_1, success_icon_1, max_pipe_1, info_icon_1;
     var NotificationComponent;
     return {
         setters:[
@@ -29,6 +29,9 @@ System.register(["angular2/core", "./notifications.service", "./icons/alert.icon
             },
             function (max_pipe_1_1) {
                 max_pipe_1 = max_pipe_1_1;
+            },
+            function (info_icon_1_1) {
+                info_icon_1 = info_icon_1_1;
             }],
         execute: function() {
             NotificationComponent = (function () {
@@ -113,10 +116,10 @@ System.register(["angular2/core", "./notifications.service", "./icons/alert.icon
                             'showProgressBar',
                             'pauseOnHover'
                         ],
-                        directives: [alert_icon_1.AlertIcon, error_icon_1.ErrorIcon, success_icon_1.SuccessIcon],
+                        directives: [alert_icon_1.AlertIcon, error_icon_1.ErrorIcon, success_icon_1.SuccessIcon, info_icon_1.InfoIcon],
                         pipes: [max_pipe_1.MaxPipe],
-                        template: "\n        <div class=\"notification\"\n            (click)=\"removeSelf()\"\n            [ngClass]=\"{alert: item.type == 'alert', error: item.type == 'error', success: item.type == 'success'}\"\n            (mouseenter)=\"onEnter()\"\n            (mouseleave)=\"onLeave()\">\n\n            <div class=\"title\">{{item.title}}</div>\n            <div class=\"content\">{{item.content | max:maxLength}}</div>\n\n            <alertIcon *ngIf=\"item.type == 'alert'\"></alertIcon>\n            <errorIcon *ngIf=\"item.type == 'error'\"></errorIcon>\n            <successIcon *ngIf=\"item.type == 'success'\"></successIcon>\n\n            <div class=\"progress\" *ngIf=\"showProgressBar\">\n                <span [ngStyle]=\"{'width': progressWidth + '%'}\"></span>\n            </div>\n\n        </div>\n    ",
-                        styles: ["\n        .notification {\n            width: 100%;\n            padding: 10px 20px;\n            box-sizing: border-box;\n            position: relative;\n            float: left;\n            margin-bottom: 10px;\n            color: #fff;\n            cursor: pointer;\n            transition: all 0.5s;\n        }\n\n        .title {\n            margin: 0;\n            padding: 0;\n            line-height: 30px;\n            font-size: 20px;\n        }\n\n        .content {\n            margin: 0;\n            font-size: 16px;\n            padding: 0 50px 0 0;\n            line-height: 20px;\n        }\n\n        .error { background: #ff6b6b; }\n        .success { background: #97fc8f; }\n        .alert { background: #ffdb5b; }\n\n        .progress {\n            position: absolute;\n            top: 0;\n            left: 0;\n            width: 100%;\n            height: 5px;\n        }\n\n        .progress span {\n            float: left;\n            height: 100%;\n        }\n\n        .success .progress span { background: #70ea62; }\n        .error .progress span { background: #e85555; }\n        .alert .progress span { background: #edc242; }\n    "]
+                        template: "\n        <div class=\"notification\"\n            (click)=\"removeSelf()\"\n            [ngClass]=\"{alert: item.type == 'alert', error: item.type == 'error', success: item.type == 'success', info: item.type == 'info'}\"\n            (mouseenter)=\"onEnter()\"\n            (mouseleave)=\"onLeave()\">\n\n            <div class=\"title\">{{item.title}}</div>\n            <div class=\"content\">{{item.content | max:maxLength}}</div>\n\n            <alertIcon *ngIf=\"item.type == 'alert'\"></alertIcon>\n            <errorIcon *ngIf=\"item.type == 'error'\"></errorIcon>\n            <successIcon *ngIf=\"item.type == 'success'\"></successIcon>\n            <infoIcon *ngIf=\"item.type == 'info'\"></infoIcon>\n\n            <div class=\"progress\" *ngIf=\"showProgressBar\">\n                <span [ngStyle]=\"{'width': progressWidth + '%'}\"></span>\n            </div>\n\n        </div>\n    ",
+                        styles: ["\n        .notification {\n            width: 100%;\n            padding: 10px 20px;\n            box-sizing: border-box;\n            position: relative;\n            float: left;\n            margin-bottom: 10px;\n            color: #fff;\n            cursor: pointer;\n            transition: all 0.5s;\n        }\n\n        .title {\n            margin: 0;\n            padding: 0;\n            line-height: 30px;\n            font-size: 20px;\n        }\n\n        .content {\n            margin: 0;\n            font-size: 16px;\n            padding: 0 50px 0 0;\n            line-height: 20px;\n        }\n\n        .error { background: #F44336; }\n        .success { background: #8BC34A; }\n        .alert { background: #ffdb5b; }\n        .info { background: #03A9F4; }\n\n        .progress {\n            position: absolute;\n            top: 0;\n            left: 0;\n            width: 100%;\n            height: 5px;\n        }\n\n        .progress span {\n            float: left;\n            height: 100%;\n        }\n\n        .success .progress span { background: #689F38; }\n        .error .progress span { background: #D32F2F; }\n        .alert .progress span { background: #edc242; }\n        .info .progress span { background: #0288D1; }\n    "]
                     }), 
                     __metadata('design:paramtypes', [notifications_service_1.NotificationsService])
                 ], NotificationComponent);

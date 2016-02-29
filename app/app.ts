@@ -21,7 +21,9 @@ class AppComponent {
         maxLength: 0,
         maxStack: 7,
         showProgressBar: true,
-        pauseOnHover: true
+        pauseOnHover: true,
+        preventDuplicates: false,
+        preventLastDuplicates: false
     };
 
     public title: string = 'just a title';
@@ -38,6 +40,9 @@ class AppComponent {
                 break;
             case 'error':
                 this._service.error(this.title, this.content);
+                break;
+            case 'info':
+                this._service.info(this.title, this.content);
                 break;
         }
     }

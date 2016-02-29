@@ -45,6 +45,9 @@ export class NotificationsComponent {
     // Received values
     private lastOnBottom: boolean = true;
     private maxStack: number = 8;
+    private preventLastDuplicates: boolean = false;
+    private preventDuplicates: boolean = false;
+
     public options: any;
 
     // Sent values
@@ -73,14 +76,30 @@ export class NotificationsComponent {
         item.createdOn = new Date();
         item.id = Math.random().toString(36).substring(3);
 
-        // Check if the notification should be added at the start or the end of the array
-        if(this.lastOnBottom) {
-            if(this.notifications.length >= this.maxStack) this.notifications.splice(0,1);
-            this.notifications.push(item);
-        } else {
-            if(this.notifications.length >= this.maxStack) this.notifications.splice(this.notifications.length - 1, 1);
-            this.notifications.splice(0, 0, item);
+        let toBlock = this.preventLastDuplicates || this.preventDuplicates ? this.block(item) : false;
+
+        if(!toBlock) {
+            // Check if the notification should be added at the start or the end of the array
+            if(this.lastOnBottom) {
+                if(this.notifications.length >= this.maxStack) this.notifications.splice(0,1);
+                this.notifications.push(item);
+            } else {
+                if(this.notifications.length >= this.maxStack) this.notifications.splice(this.notifications.length - 1, 1);
+                this.notifications.splice(0, 0, item);
+            }
         }
+    }
+
+    // Check if notifications should be prevented
+    block(item) {
+        if(this.preventDuplicates && this.notifications.length > 0) for(let i = 0; i < this.notifications.length; i++) if(this.notifications[i].type == item.type && this.notifications[i].title == item.title && this.notifications[i].content == item.content) return true;
+
+        if(this.preventLastDuplicates && this.notifications.length > 0) {
+            if(this.lastOnBottom) return this.notifications[this.notifications.length - 1].type == item.type && this.notifications[this.notifications.length - 1].title == item.title && this.notifications[this.notifications.length - 1].content == item.content;
+            else return this.notifications[0].type == item.type && this.notifications[0].title == item.title && this.notifications[0].content == item.content;
+        }
+
+        return false
     }
 
     // Attach all the changes received in the options object
@@ -108,6 +127,12 @@ export class NotificationsComponent {
                     break;
                 case 'pauseOnHover':
                     this.pauseOnHover = this.options.pauseOnHover;
+                    break;
+                case 'preventDuplicates':
+                    this.preventDuplicates = this.options.preventDuplicates;
+                    break;
+                case 'preventLastDuplicates':
+                    this.preventLastDuplicates = this.options.preventLastDuplicates;
                     break;
             }
         })

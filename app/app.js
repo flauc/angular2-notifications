@@ -35,7 +35,9 @@ System.register(['angular2/core', 'angular2/platform/browser', "./src/notificati
                         maxLength: 0,
                         maxStack: 7,
                         showProgressBar: true,
-                        pauseOnHover: true
+                        pauseOnHover: true,
+                        preventDuplicates: false,
+                        preventLastDuplicates: false
                     };
                     this.title = 'just a title';
                     this.content = 'just content';
@@ -58,6 +60,9 @@ System.register(['angular2/core', 'angular2/platform/browser', "./src/notificati
                             break;
                         case 'error':
                             this._service.error(this.title, this.content);
+                            break;
+                        case 'info':
+                            this._service.info(this.title, this.content);
                             break;
                     }
                 };

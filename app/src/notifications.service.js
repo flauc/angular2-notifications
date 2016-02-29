@@ -27,6 +27,7 @@ System.register(["angular2/core"], function(exports_1) {
                 NotificationsService.prototype.success = function (title, content, override) { this.set({ title: title, content: content, type: 'success', override: override }, true); };
                 NotificationsService.prototype.error = function (title, content, override) { this.set({ title: title, content: content, type: 'error', override: override }, true); };
                 NotificationsService.prototype.alert = function (title, content, override) { this.set({ title: title, content: content, type: 'alert', override: override }, true); };
+                NotificationsService.prototype.info = function (title, content, override) { this.set({ title: title, content: content, type: 'info', override: override }, true); };
                 NotificationsService.prototype.removeAll = function () { this.emiter.emit('clean'); };
                 NotificationsService = __decorate([
                     core_1.Injectable(), 

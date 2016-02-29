@@ -28,6 +28,8 @@ System.register(["angular2/core", "./notifications.service", "./notification.com
                     this.notifications = [];
                     this.lastOnBottom = true;
                     this.maxStack = 8;
+                    this.preventLastDuplicates = false;
+                    this.preventDuplicates = false;
                     this.timeOut = 0;
                     this.maxLength = 0;
                     this.clickToClose = true;
@@ -50,16 +52,32 @@ System.register(["angular2/core", "./notifications.service", "./notification.com
                 NotificationsComponent.prototype.add = function (item) {
                     item.createdOn = new Date();
                     item.id = Math.random().toString(36).substring(3);
-                    if (this.lastOnBottom) {
-                        if (this.notifications.length >= this.maxStack)
-                            this.notifications.splice(0, 1);
-                        this.notifications.push(item);
+                    var toBlock = this.preventLastDuplicates || this.preventDuplicates ? this.block(item) : false;
+                    if (!toBlock) {
+                        if (this.lastOnBottom) {
+                            if (this.notifications.length >= this.maxStack)
+                                this.notifications.splice(0, 1);
+                            this.notifications.push(item);
+                        }
+                        else {
+                            if (this.notifications.length >= this.maxStack)
+                                this.notifications.splice(this.notifications.length - 1, 1);
+                            this.notifications.splice(0, 0, item);
+                        }
                     }
-                    else {
-                        if (this.notifications.length >= this.maxStack)
-                            this.notifications.splice(this.notifications.length - 1, 1);
-                        this.notifications.splice(0, 0, item);
+                };
+                NotificationsComponent.prototype.block = function (item) {
+                    if (this.preventDuplicates && this.notifications.length > 0)
+                        for (var i = 0; i < this.notifications.length; i++)
+                            if (this.notifications[i].type == item.type && this.notifications[i].title == item.title && this.notifications[i].content == item.content)
+                                return true;
+                    if (this.preventLastDuplicates && this.notifications.length > 0) {
+                        if (this.lastOnBottom)
+                            return this.notifications[this.notifications.length - 1].type == item.type && this.notifications[this.notifications.length - 1].title == item.title && this.notifications[this.notifications.length - 1].content == item.content;
+                        else
+                            return this.notifications[0].type == item.type && this.notifications[0].title == item.title && this.notifications[0].content == item.content;
                     }
+                    return false;
                 };
                 NotificationsComponent.prototype.attachChanges = function () {
                     var _this = this;
@@ -86,6 +104,12 @@ System.register(["angular2/core", "./notifications.service", "./notification.com
                                 break;
                             case 'pauseOnHover':
                                 _this.pauseOnHover = _this.options.pauseOnHover;
+                                break;
+                            case 'preventDuplicates':
+                                _this.preventDuplicates = _this.options.preventDuplicates;
+                                break;
+                            case 'preventLastDuplicates':
+                                _this.preventLastDuplicates = _this.options.preventLastDuplicates;
                                 break;
                         }
                     });
