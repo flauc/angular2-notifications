@@ -6,6 +6,7 @@ import {AlertIcon} from "./icons/alert.icon";
 import {ErrorIcon} from "./icons/error.icon";
 import {SuccessIcon} from "./icons/success.icon";
 import {MaxPipe} from "./max.pipe";
+import {InfoIcon} from "./icons/info.icon";
 
 @Component({
     selector: 'simple-notification',
@@ -18,12 +19,12 @@ import {MaxPipe} from "./max.pipe";
         'showProgressBar',
         'pauseOnHover'
     ],
-    directives: [AlertIcon, ErrorIcon, SuccessIcon],
+    directives: [AlertIcon, ErrorIcon, SuccessIcon, InfoIcon],
     pipes: [MaxPipe],
     template: `
         <div class="notification"
             (click)="removeSelf()"
-            [ngClass]="{alert: item.type == 'alert', error: item.type == 'error', success: item.type == 'success'}"
+            [ngClass]="{alert: item.type == 'alert', error: item.type == 'error', success: item.type == 'success', info: item.type == 'info'}"
             (mouseenter)="onEnter()"
             (mouseleave)="onLeave()">
 
@@ -33,6 +34,7 @@ import {MaxPipe} from "./max.pipe";
             <alertIcon *ngIf="item.type == 'alert'"></alertIcon>
             <errorIcon *ngIf="item.type == 'error'"></errorIcon>
             <successIcon *ngIf="item.type == 'success'"></successIcon>
+            <infoIcon *ngIf="item.type == 'info'"></infoIcon>
 
             <div class="progress" *ngIf="showProgressBar">
                 <span [ngStyle]="{'width': progressWidth + '%'}"></span>
@@ -67,9 +69,10 @@ import {MaxPipe} from "./max.pipe";
             line-height: 20px;
         }
 
-        .error { background: #ff6b6b; }
-        .success { background: #97fc8f; }
+        .error { background: #F44336; }
+        .success { background: #8BC34A; }
         .alert { background: #ffdb5b; }
+        .info { background: #03A9F4; }
 
         .progress {
             position: absolute;
@@ -84,9 +87,10 @@ import {MaxPipe} from "./max.pipe";
             height: 100%;
         }
 
-        .success .progress span { background: #70ea62; }
-        .error .progress span { background: #e85555; }
+        .success .progress span { background: #689F38; }
+        .error .progress span { background: #D32F2F; }
         .alert .progress span { background: #edc242; }
+        .info .progress span { background: #0288D1; }
     `]
 })
 

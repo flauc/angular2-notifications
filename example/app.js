@@ -41,6 +41,9 @@ var AppComponent = (function () {
             case 'error':
                 this._service.error(this.title, this.content);
                 break;
+            case 'info':
+                this._service.info(this.title, this.content);
+                break;
         }
     };
     AppComponent.prototype.withOverride = function () {
@@ -52,7 +55,7 @@ var AppComponent = (function () {
             selector: 'app',
             directives: [components_1.NotificationsComponent],
             providers: [components_2.NotificationsService],
-            template: "\n        <form (ngSubmit)=\"create()\">\n            <div>\n                <label>Title</label>\n                <p>The title of the notification.</p>\n                <input type=\"text\" [(ngModel)]=\"title\">\n            </div>\n            <div>\n                <label>Content</label>\n                <p>The content of the notification.</p>\n                <input type=\"text\" [(ngModel)]=\"content\">\n            </div>\n            <div>\n                <label>Type</label>\n                <p>The type of the notification.</p>\n                <select [(ngModel)]=\"type\">\n                    <option value=\"success\" selected>Success</option>\n                    <option value=\"error\">Error</option>\n                    <option value=\"alert\">Alert</option>\n                </select>\n            </div>\n            <button type=\"submit\">Create Notification</button>\n        </form>\n        <button (click)=\"removeAll()\">Clean all notifications</button>\n        <simple-notifications [options]=\"options\"></simple-notifications>\n        <button (click)=\"withOverride()\">with override</button>\n    "
+            template: "\n        <form (ngSubmit)=\"create()\">\n            <div>\n                <label>Title</label>\n                <p>The title of the notification.</p>\n                <input type=\"text\" [(ngModel)]=\"title\">\n            </div>\n            <div>\n                <label>Content</label>\n                <p>The content of the notification.</p>\n                <input type=\"text\" [(ngModel)]=\"content\">\n            </div>\n            <div>\n                <label>Type</label>\n                <p>The type of the notification.</p>\n                <select [(ngModel)]=\"type\">\n                    <option value=\"success\" selected>Success</option>\n                    <option value=\"error\">Error</option>\n                    <option value=\"alert\">Alert</option>\n                    <option value=\"info\">Info</option>\n                </select>\n            </div>\n            <button type=\"submit\">Create Notification</button>\n        </form>\n        <button (click)=\"removeAll()\">Clean all notifications</button>\n        <simple-notifications [options]=\"options\"></simple-notifications>\n        <button (click)=\"withOverride()\">with override</button>\n    "
         }), 
         __metadata('design:paramtypes', [components_2.NotificationsService])
     ], AppComponent);

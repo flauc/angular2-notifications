@@ -40,6 +40,7 @@ This are the currently available access methods:
 * `success(title: string, content: string, override?: any)` - Creates a success notification with the provided title and content.
 * `error(title: string, content: string, override?: any)` - Creates an error notification with the provided title and content.
 * `alert(title: string, content: string, override?: any)` - Creates an alert notification with the provided title and content.
+* `info(title: string, content: string, override?: any)` - Creates an info notification with the provided title and content.
 * `removeAll()` - Closes all currently open notifications.
 
 ## Options

@@ -25,6 +25,7 @@ import {NotificationsService} from "angular2-notifications/components";
                     <option value="success" selected>Success</option>
                     <option value="error">Error</option>
                     <option value="alert">Alert</option>
+                    <option value="info">Info</option>
                 </select>
             </div>
             <button type="submit">Create Notification</button>
@@ -59,8 +60,6 @@ export class AppComponent {
         preventLastDuplicates: false
     };
 
-
-
     create(){
         switch (this.type) {
             case 'success':
@@ -71,6 +70,9 @@ export class AppComponent {
                 break;
             case 'error':
                 this._service.error(this.title, this.content);
+                break;
+            case 'info':
+                this._service.info(this.title, this.content);
                 break;
         }
     }
