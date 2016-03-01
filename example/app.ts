@@ -33,6 +33,7 @@ import {NotificationsService} from "angular2-notifications/components";
         <button (click)="removeAll()">Clean all notifications</button>
         <simple-notifications [options]="options"></simple-notifications>
         <button (click)="withOverride()">with override</button>
+        <button (click)="withHtml()">with html</button>
     `
 })
 
@@ -78,7 +79,13 @@ export class AppComponent {
     }
 
     withOverride() {
-        this._service.set({title: 'pero', content: 'peric', type: 'success', override: {timeOut: 200, clickToClose:false, maxLength: 3, showProgressBar: true}}, true);
+        this._service.create({title: 'pero', content: 'peric', type: 'success', override: {timeOut: 200, clickToClose:false, maxLength: 3, showProgressBar: true}});
+    }
+
+    private html = `<p>Test</p><p>A nother test</p>`;
+
+    withHtml() {
+        this._service.html(this.html, 'success');
     }
 
     removeAll() { this._service.removeAll() }

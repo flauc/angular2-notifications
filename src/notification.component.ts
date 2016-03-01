@@ -28,13 +28,16 @@ import {InfoIcon} from "./icons/info.icon";
             (mouseenter)="onEnter()"
             (mouseleave)="onLeave()">
 
-            <div class="title">{{item.title}}</div>
-            <div class="content">{{item.content | max:maxLength}}</div>
+            <div *ngIf="!item.html">
+                <div class="title">{{item.title}}</div>
+                <div class="content">{{item.content | max:maxLength}}</div>
 
-            <alertIcon *ngIf="item.type == 'alert'"></alertIcon>
-            <errorIcon *ngIf="item.type == 'error'"></errorIcon>
-            <successIcon *ngIf="item.type == 'success'"></successIcon>
-            <infoIcon *ngIf="item.type == 'info'"></infoIcon>
+                <alertIcon *ngIf="item.type == 'alert'"></alertIcon>
+                <errorIcon *ngIf="item.type == 'error'"></errorIcon>
+                <successIcon *ngIf="item.type == 'success'"></successIcon>
+                <infoIcon *ngIf="item.type == 'info'"></infoIcon>
+            </div>
+            <div *ngIf="item.html"[innerHTML]="item.html"></div>
 
             <div class="progress" *ngIf="showProgressBar">
                 <span [ngStyle]="{'width': progressWidth + '%'}"></span>
@@ -109,6 +112,7 @@ export class NotificationComponent {
     public item: Notification;
     public maxLength: number;
     public showProgressBar: boolean;
+    public theHtml: any;
 
     public overrides: any;
     private timeOut: number;
