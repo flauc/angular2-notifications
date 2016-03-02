@@ -64,6 +64,8 @@ System.register(['angular2/core', 'angular2/platform/browser', "./src/notificati
                         case 'info':
                             this._service.info(this.title, this.content);
                             break;
+                        case 'html':
+                            this._service.html(this.content, 'success');
                     }
                 };
                 AppComponent.prototype.removeAll = function () { this._service.removeAll(); };

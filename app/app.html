@@ -22,26 +22,27 @@
 
             <form (ngSubmit)="create()">
                 <div class="row">
-                    <div class="six columns">
-                        <label for="title">Title</label>
-                        <input type="text" id="title" class="u-full-width" [(ngModel)]="title">
-                    </div>
-                    <div class="six columns">
-                        <label for="type">Type</label>
-                        <select class="u-full-width" [(ngModel)]="type" id="type">
-                            <option value="success" selected>Success</option>
-                            <option value="error">Error</option>
-                            <option value="alert">Alert</option>
-                            <option value="info">Info</option>
-                        </select>
-                    </div>
+                    <label for="type">Type</label>
+                    <select class="u-full-width" [(ngModel)]="type" id="type">
+                        <option value="success" selected>Success</option>
+                        <option value="error">Error</option>
+                        <option value="alert">Alert</option>
+                        <option value="info">Info</option>
+                    </select>
+                </div>
+                <div class="row" *ngIf="type != 'html'">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" class="u-full-width" [(ngModel)]="title">
                 </div>
                 <div class="row">
-                    <label for="content">Message</label>
+                    <label for="content" *ngIf="type == 'html">Message</label>
+                    <label for="content" *ngIf="type != 'html'">Message</label>
                     <textarea class="u-full-width" id="content" [(ngModel)]="content"></textarea>
                 </div>
                 <div class="row">
-                    <button class="button-primary" type="submit">Create</button>
+                    <div class="row">
+                        <button class="button-primary" type="submit">Create</button>
+                    </div>
                 </div>
             </form>
         </div>
