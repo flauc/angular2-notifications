@@ -6,7 +6,7 @@ import {Notification} from "./notification";
 export class NotificationsService {
     public emiter : EventEmitter<any> = new EventEmitter();
 
-    private set(notification: any, to: boolean) { this.emiter.emit({notification: notification, add: to}) };
+    set(notification: any, to: boolean) { this.emiter.emit({notification: notification, add: to}) };
     getChangeEmitter() { return this.emiter }
 
     //// Access methods

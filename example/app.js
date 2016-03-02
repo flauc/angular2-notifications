@@ -47,12 +47,8 @@ var AppComponent = (function () {
                 break;
         }
     };
-    AppComponent.prototype.withOverride = function () {
-        this._service.create({ title: 'pero', content: 'peric', type: 'success', override: { timeOut: 200, clickToClose: false, maxLength: 3, showProgressBar: true } });
-    };
-    AppComponent.prototype.withHtml = function () {
-        this._service.html(this.html, 'success');
-    };
+    AppComponent.prototype.withOverride = function () { this._service.create('pero', 'peric', 'success', { timeOut: 0, clickToClose: false, maxLength: 3, showProgressBar: true, theClass: 'overrideTest' }); };
+    AppComponent.prototype.withHtml = function () { this._service.html(this.html, 'success'); };
     AppComponent.prototype.removeAll = function () { this._service.removeAll(); };
     AppComponent = __decorate([
         core_1.Component({

@@ -78,15 +78,10 @@ export class AppComponent {
         }
     }
 
-    withOverride() {
-        this._service.create({title: 'pero', content: 'peric', type: 'success', override: {timeOut: 200, clickToClose:false, maxLength: 3, showProgressBar: true}});
-    }
+    withOverride() { this._service.create('pero', 'peric', 'success', {timeOut: 0, clickToClose:false, maxLength: 3, showProgressBar: true, theClass: 'overrideTest'}); }
 
     private html = `<p>Test</p><p>A nother test</p>`;
-
-    withHtml() {
-        this._service.html(this.html, 'success');
-    }
+    withHtml() {this._service.html(this.html, 'success');}
 
     removeAll() { this._service.removeAll() }
 }

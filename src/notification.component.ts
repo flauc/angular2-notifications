@@ -1,4 +1,5 @@
 import {Component, OnInit, OnDestroy} from "angular2/core";
+
 import {Notification} from "./notification";
 import {NotificationsService} from "./notifications.service";
 import {NotificationType} from "./notificationType";
@@ -17,13 +18,15 @@ import {InfoIcon} from "./icons/info.icon";
         'clickToClose',
         'maxLength',
         'showProgressBar',
-        'pauseOnHover'
+        'pauseOnHover',
+        'theClass'
     ],
     directives: [AlertIcon, ErrorIcon, SuccessIcon, InfoIcon],
     pipes: [MaxPipe],
     template: `
         <div class="notification"
             (click)="removeSelf()"
+            [class]="theClass"
             [ngClass]="{alert: item.type == 'alert', error: item.type == 'error', success: item.type == 'success', info: item.type == 'info'}"
             (mouseenter)="onEnter()"
             (mouseleave)="onLeave()">
@@ -112,6 +115,7 @@ export class NotificationComponent {
     public item: Notification;
     public maxLength: number;
     public showProgressBar: boolean;
+    public theClass: string;
     public theHtml: any;
 
     public overrides: any;
@@ -182,6 +186,9 @@ export class NotificationComponent {
                     break;
                 case 'pauseOnHover':
                     this.pauseOnHover = this.item.override.pauseOnHover;
+                    break;
+                case 'theClass':
+                    this.theClass = this.item.override.theClass;
                     break;
                 default:
                     console.error(`no option with the key ${a} exists`);
