@@ -56,16 +56,15 @@ This are the current options that can be pass to the component:
 * __maxStacks__ *[int] [Default: 8]* - Set the maximum number of notifications that can be on the screen at once.
 * __preventDuplicates__ *[boolean] [Default: false]* - If true prevents duplicates of open notifications.
 * __preventLastDuplicates__ *[boolean] [Default: false]* - If true prevents duplicates of the latest notification shown.
+* __theClass__ *[string] [Default: null]* - A class that should be attached to the notification. (It doesn't exactly get attached to the selector but to the first div of the template.)
 ```js
 ...
 template: '<simple-notifications [options]="options"></simple-notifications>'
 ...
 public options = {
     timeOut: 5000,
-    lastOnBottom: true,
-    clickToClose: true,
-    maxLength: 20,
-    maxStack: 5
+    lastOnBottom: true
+    ...
 }
 ```
 
@@ -75,6 +74,7 @@ The following options can be overridden by passing them to the override object:
 * pauseOnHover
 * clickToClose 
 * maxLength
+* theClass
 ```js
 this._notificationsService.success(
     title: 'example', 
