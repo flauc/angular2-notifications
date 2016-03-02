@@ -6,7 +6,7 @@ import {Notification} from "./notification";
 export class NotificationsService {
     public emiter : EventEmitter<any> = new EventEmitter();
 
-    set(notification: any, to: boolean) { this.emiter.emit({notification: notification, add: to}) };
+    private set(notification: any, to: boolean) { this.emiter.emit({notification: notification, add: to}) };
     getChangeEmitter() { return this.emiter }
 
     //// Access methods
@@ -14,6 +14,12 @@ export class NotificationsService {
     error(title: string, content: string, override?: any) { this.set({title: title, content: content, type: 'error', override: override}, true) }
     alert(title: string, content: string, override?: any) { this.set({title: title, content: content, type: 'alert', override: override}, true) }
     info(title: string, content: string, override?: any) { this.set({title: title, content: content, type: 'info', override: override}, true) }
+
+    // With type method
+    create(title: string, content: string, type: string, override?: any) { this.set({title: title, content: content, type: type, override: override}, true) }
+
+    // HTML Notification method
+    html(html: any, type: string, override?: any) { this.set({html: html, type: type, override: override, title: null, content: null}, true) }
 
     // Remove all notifications method
     removeAll() { this.emiter.emit('clean') }

@@ -4,5 +4,6 @@ export interface Notification {
     createdOn: Date,
     title?: string,
     content?: string,
-    override: any
+    override?: any,
+    html?: any
 }
