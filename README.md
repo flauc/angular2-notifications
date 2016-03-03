@@ -24,7 +24,7 @@ Add the NotificationComponent in to the component where you want to use the noti
 ```js
 ...
 directives: [NotificationComponent],
-template: '<simple-notifications [options]="options"></simple-notifications>'
+template: '<simple-notification [options]="options"></simple-notification>'
 ...
 ```
 
@@ -59,7 +59,7 @@ This are the current options that can be pass to the component:
 * __theClass__ *[string] [Default: null]* - A class that should be attached to the notification. (It doesn't exactly get attached to the selector but to the first div of the template.)
 ```js
 ...
-template: '<simple-notifications [options]="options"></simple-notifications>'
+template: '<simple-notification [options]="options"></simple-notification>'
 ...
 public options = {
     timeOut: 5000,
