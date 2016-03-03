@@ -86,6 +86,7 @@ this._notificationsService.success(
         clickToClose: false,
         maxLength: 10
     }
+)
 ```
 
 ## Planed Features
