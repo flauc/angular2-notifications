@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, OnInit, OnDestroy} from "angular2/core";
+import {Component, ViewEncapsulation, EventEmitter, OnInit, OnDestroy} from "angular2/core";
 import {Notification} from "./notification";
 import {NotificationsService} from "./notifications.service";
 import {NotificationComponent} from "./notification.component";
@@ -8,6 +8,7 @@ import {NotificationComponent} from "./notification.component";
     selector: 'simple-notifications',
     directives: [NotificationComponent],
     inputs: ['options'],
+    outputs: ['onCreate', 'onDestroy'],
     encapsulation: ViewEncapsulation.Native,
     template: `
         <div class="notification-wrapper">
@@ -60,6 +61,9 @@ export class NotificationsComponent {
     private pauseOnHover: boolean = true;
     private theClass: string;
 
+    // Outputs
+    private onCreate = new EventEmitter();
+    private onDestroy = new EventEmitter();
 
     ngOnInit() {
         // Listen for changes in the service
@@ -67,7 +71,10 @@ export class NotificationsComponent {
             .subscribe(item => {
                 if(item == 'clean') this.notifications = [];
                 else if(item.add) this.add(item.notification);
-                else this.notifications.splice(this.notifications.indexOf(item.notification), 1);
+                else {
+                    this.notifications.splice(this.notifications.indexOf(item.notification), 1);
+                    this.onDestroy.emit(this.buildEmit(item.notification, false));
+                }
             });
 
         this.attachChanges();
@@ -90,6 +97,8 @@ export class NotificationsComponent {
                 if(this.notifications.length >= this.maxStack) this.notifications.splice(this.notifications.length - 1, 1);
                 this.notifications.splice(0, 0, item);
             }
+
+            this.onCreate.emit(this.buildEmit(item, true));
         }
     }
 
@@ -142,6 +151,25 @@ export class NotificationsComponent {
                     break;
             }
         })
+    }
+
+    buildEmit(notification: Notification, to: boolean) {
+        let toEmit = {
+            createdOn: notification.createdOn,
+            type: notification.type,
+            id: notification.id
+        };
+
+        if(notification.html) toEmit.html = notification.html;
+
+        else {
+            toEmit.title = notification.title;
+            toEmit.content = notification.content;
+        }
+
+        if(!to) toEmit.closedOn = new Date();
+
+        return toEmit;
     }
 
     ngOnDestroy() { this.listener.unsubscribe() }

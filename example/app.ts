@@ -31,7 +31,7 @@ import {NotificationsService} from "angular2-notifications/components";
             <button type="submit">Create Notification</button>
         </form>
         <button (click)="removeAll()">Clean all notifications</button>
-        <simple-notifications [options]="options"></simple-notifications>
+        <simple-notifications [options]="options" (onCreate)="onCreate($event)" (onDestroy)="onDestroy($event)"></simple-notifications>
         <button (click)="withOverride()">with override</button>
         <button (click)="withHtml()">with html</button>
     `
@@ -84,6 +84,14 @@ export class AppComponent {
     withHtml() {this._service.html(this.html, 'success');}
 
     removeAll() { this._service.removeAll() }
+
+    onCreate(event) {
+        console.log(event);
+    }
+
+    onDestroy(event) {
+        console.log(event);
+    }
 }
 
 bootstrap(AppComponent);
