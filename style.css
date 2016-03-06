@@ -436,6 +436,7 @@ there.
 }
 
 .log {
+    box-sizing: border-box;
     float: left;
     width: 100%;
     padding: 10px;
@@ -444,6 +445,6 @@ there.
 }
 
 .log.destroyed {
-    color: #F44336;
+    background: #F44336;
 }
 
