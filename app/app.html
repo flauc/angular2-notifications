@@ -48,37 +48,49 @@
             </form>
         </div>
         <div class="columns six">
-            <h3>With overrides</h3>
-            <p class="sub">With this form you can create a notification with custom options.</p>
-            <form (ngSubmit)="override()">
-                <div class="row">
-                    <div class="six columns">
-                        <label for="timeOut">Time Out</label>
-                        <input type="number" id="timeOut" class="u-full-width" [(ngModel)]="over.timeOut">
+            <div class="row">
+                <h3>With overrides</h3>
+                <p class="sub">With this form you can create a notification with custom options.</p>
+                <form (ngSubmit)="override()">
+                    <div class="row">
+                        <div class="six columns">
+                            <label for="timeOut">Time Out</label>
+                            <input type="number" id="timeOut" class="u-full-width" [(ngModel)]="over.timeOut">
+                        </div>
+                        <div class="six columns">
+                            <label for="maxLength">Maximum Length</label>
+                            <input type="number" id="maxLength" class="u-full-width" [(ngModel)]="over.maxLength">
+                        </div>
                     </div>
-                    <div class="six columns">
-                        <label for="maxLength">Maximum Length</label>
-                        <input type="number" id="maxLength" class="u-full-width" [(ngModel)]="over.maxLength">
+                    <div class="row">
+                        <div class="columns four">
+                            <input type="checkbox" [(ngModel)]="over.showProgressBar">
+                            <span class="label-body">Show Progress Bar?</span>
+                        </div>
+                        <div class="columns four">
+                            <input type="checkbox" [(ngModel)]="over.clickToClose">
+                            <span class="label-body">Click To Close?</span>
+                        </div>
+                        <div class="columns four">
+                            <input type="checkbox" [(ngModel)]="over.pauseOnHover">
+                            <span class="label-body">Pause On Hover?</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button class="button-primary" type="submit">Create</button>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <h3>Logs</h3>
+                <p>Keeps Track of all created and destroyed notifications. It uses the onCreate and onDestroy Event Emitters.</p>
+                <div class="logs">
+                    <div *ngFor="log of logs" [ngClass]="{'destroyed': log.destroyedOn}">
+                        <span>{{log.title}}</span>
+                        <span>{{log.html}}</span>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="columns four">
-                        <input type="checkbox" [(ngModel)]="over.showProgressBar">
-                        <span class="label-body">Show Progress Bar?</span>
-                    </div>
-                    <div class="columns four">
-                        <input type="checkbox" [(ngModel)]="over.clickToClose">
-                        <span class="label-body">Click To Close?</span>
-                    </div>
-                    <div class="columns four">
-                        <input type="checkbox" [(ngModel)]="over.pauseOnHover">
-                        <span class="label-body">Pause On Hover?</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <button class="button-primary" type="submit">Create</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
     <div class="row">

@@ -42,6 +42,7 @@ System.register(['angular2/core', 'angular2/platform/browser', "./src/notificati
                     this.title = 'just a title';
                     this.content = 'just content';
                     this.type = 'success';
+                    this.logs = [];
                     this.over = {
                         timeOut: 5000,
                         clickToClose: true,
@@ -82,6 +83,9 @@ System.register(['angular2/core', 'angular2/platform/browser', "./src/notificati
                             pauseOnHover: this.over.pauseOnHover
                         }
                     }, true);
+                };
+                AppComponent.prototype.loger = function (event) {
+                    this.logs.push(event);
                 };
                 AppComponent = __decorate([
                     core_1.Component({

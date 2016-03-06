@@ -425,3 +425,25 @@ there.
     font-size: 1.2em;
 }
 
+.logs {
+    width: 100%;
+    float: left;
+    background: #F1F1F1;
+    border: 1px solid #E1E1E1;
+    border-radius: 4px;
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.log {
+    float: left;
+    width: 100%;
+    padding: 10px;
+    background: #8BC34A;
+    color: #fff;
+}
+
+.log.destroyed {
+    color: #F44336;
+}
+

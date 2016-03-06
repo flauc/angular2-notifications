@@ -29,6 +29,7 @@ class AppComponent {
     public title: string = 'just a title';
     public content: string = 'just content';
     public type: string = 'success';
+    public logs: any = [];
 
     create(){
         switch (this.type) {
@@ -72,6 +73,10 @@ class AppComponent {
                 pauseOnHover: this.over.pauseOnHover
             }
         }, true);
+    }
+
+    loger(event) {
+        this.logs.push(event);
     }
 }
 
