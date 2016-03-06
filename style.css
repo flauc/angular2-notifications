@@ -440,12 +440,11 @@ there.
     float: left;
     width: 100%;
     padding: 10px;
-    background: #8BC34A;
-    color: #fff;
+    color: #8BC34A;
     border-bottom: 1px solid #E1E1E1;
 }
 
 .log.destroyed {
-    background: #F44336;
+    color: #F44336;
 }
 
