@@ -35,6 +35,8 @@ System.register(["angular2/core", "./notifications.service", "./notification.com
                     this.clickToClose = true;
                     this.showProgressBar = false;
                     this.pauseOnHover = true;
+                    this.onCreate = new core_1.EventEmitter();
+                    this.onDestroy = new core_1.EventEmitter();
                 }
                 NotificationsComponent.prototype.ngOnInit = function () {
                     var _this = this;
@@ -44,8 +46,10 @@ System.register(["angular2/core", "./notifications.service", "./notification.com
                             _this.notifications = [];
                         else if (item.add)
                             _this.add(item.notification);
-                        else
+                        else {
                             _this.notifications.splice(_this.notifications.indexOf(item.notification), 1);
+                            _this.onDestroy.emit(_this.buildEmit(item.notification, false));
+                        }
                     });
                     this.attachChanges();
                 };
@@ -64,6 +68,7 @@ System.register(["angular2/core", "./notifications.service", "./notification.com
                                 this.notifications.splice(this.notifications.length - 1, 1);
                             this.notifications.splice(0, 0, item);
                         }
+                        this.onCreate.emit(this.buildEmit(item, true));
                     }
                 };
                 NotificationsComponent.prototype.block = function (item) {
@@ -111,8 +116,27 @@ System.register(["angular2/core", "./notifications.service", "./notification.com
                             case 'preventLastDuplicates':
                                 _this.preventLastDuplicates = _this.options.preventLastDuplicates;
                                 break;
+                            case 'theClass':
+                                _this.theClass = _this.options.theClass;
+                                break;
                         }
                     });
+                };
+                NotificationsComponent.prototype.buildEmit = function (notification, to) {
+                    var toEmit = {
+                        createdOn: notification.createdOn,
+                        type: notification.type,
+                        id: notification.id
+                    };
+                    if (notification.html)
+                        toEmit.html = notification.html;
+                    else {
+                        toEmit.title = notification.title;
+                        toEmit.content = notification.content;
+                    }
+                    if (!to)
+                        toEmit.destroyedOn = new Date();
+                    return toEmit;
                 };
                 NotificationsComponent.prototype.ngOnDestroy = function () { this.listener.unsubscribe(); };
                 NotificationsComponent = __decorate([
@@ -120,7 +144,9 @@ System.register(["angular2/core", "./notifications.service", "./notification.com
                         selector: 'simple-notifications',
                         directives: [notification_component_1.NotificationComponent],
                         inputs: ['options'],
-                        template: "\n        <div class=\"notification-wrapper\">\n            <simple-notification\n                *ngFor=\"#a of notifications; #i = index\"\n                [item]=\"a\"\n                [timeOut]=\"timeOut\"\n                [clickToClose]=\"clickToClose\"\n                [maxLength]=\"maxLength\"\n                [showProgressBar]=\"showProgressBar\"\n                [pauseOnHover]=\"pauseOnHover\"\n                [position]=\"i\">\n\n            </simple-notification>\n        </div>\n    ",
+                        outputs: ['onCreate', 'onDestroy'],
+                        encapsulation: core_1.ViewEncapsulation.Native,
+                        template: "\n        <div class=\"notification-wrapper\">\n            <simple-notification\n                *ngFor=\"#a of notifications; #i = index\"\n                [item]=\"a\"\n                [timeOut]=\"timeOut\"\n                [clickToClose]=\"clickToClose\"\n                [maxLength]=\"maxLength\"\n                [showProgressBar]=\"showProgressBar\"\n                [pauseOnHover]=\"pauseOnHover\"\n                [theClass]=\"theClass\"\n                [position]=\"i\">\n\n            </simple-notification>\n        </div>\n    ",
                         styles: ["\n        .notification-wrapper {\n            position: fixed;\n            bottom: 20px;\n            right: 20px;\n            width: 300px;\n            z-index: 1000;\n        }\n    "]
                     }), 
                     __metadata('design:paramtypes', [notifications_service_1.NotificationsService])

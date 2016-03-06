@@ -97,6 +97,9 @@ System.register(["angular2/core", "./notifications.service", "./icons/alert.icon
                             case 'pauseOnHover':
                                 _this.pauseOnHover = _this.item.override.pauseOnHover;
                                 break;
+                            case 'theClass':
+                                _this.theClass = _this.item.override.theClass;
+                                break;
                             default:
                                 console.error("no option with the key " + a + " exists");
                                 break;
@@ -114,11 +117,12 @@ System.register(["angular2/core", "./notifications.service", "./icons/alert.icon
                             'clickToClose',
                             'maxLength',
                             'showProgressBar',
-                            'pauseOnHover'
+                            'pauseOnHover',
+                            'theClass'
                         ],
                         directives: [alert_icon_1.AlertIcon, error_icon_1.ErrorIcon, success_icon_1.SuccessIcon, info_icon_1.InfoIcon],
                         pipes: [max_pipe_1.MaxPipe],
-                        template: "\n        <div class=\"notification\"\n            (click)=\"removeSelf()\"\n            [ngClass]=\"{alert: item.type == 'alert', error: item.type == 'error', success: item.type == 'success', info: item.type == 'info'}\"\n            (mouseenter)=\"onEnter()\"\n            (mouseleave)=\"onLeave()\">\n\n            <div *ngIf=\"!item.html\">\n                <div class=\"title\">{{item.title}}</div>\n                <div class=\"content\">{{item.content | max:maxLength}}</div>\n\n                <alertIcon *ngIf=\"item.type == 'alert'\"></alertIcon>\n                <errorIcon *ngIf=\"item.type == 'error'\"></errorIcon>\n                <successIcon *ngIf=\"item.type == 'success'\"></successIcon>\n                <infoIcon *ngIf=\"item.type == 'info'\"></infoIcon>\n            </div>\n            <div *ngIf=\"item.html\"[innerHTML]=\"item.html\"></div>\n\n            <div class=\"progress\" *ngIf=\"showProgressBar\">\n                <span [ngStyle]=\"{'width': progressWidth + '%'}\"></span>\n            </div>\n\n        </div>\n    ",
+                        template: "\n        <div class=\"notification\"\n            (click)=\"removeSelf()\"\n            [class]=\"theClass\"\n            [ngClass]=\"{alert: item.type == 'alert', error: item.type == 'error', success: item.type == 'success', info: item.type == 'info'}\"\n            (mouseenter)=\"onEnter()\"\n            (mouseleave)=\"onLeave()\">\n\n            <div *ngIf=\"!item.html\">\n                <div class=\"title\">{{item.title}}</div>\n                <div class=\"content\">{{item.content | max:maxLength}}</div>\n\n                <alertIcon *ngIf=\"item.type == 'alert'\"></alertIcon>\n                <errorIcon *ngIf=\"item.type == 'error'\"></errorIcon>\n                <successIcon *ngIf=\"item.type == 'success'\"></successIcon>\n                <infoIcon *ngIf=\"item.type == 'info'\"></infoIcon>\n            </div>\n            <div *ngIf=\"item.html\"[innerHTML]=\"item.html\"></div>\n\n            <div class=\"progress\" *ngIf=\"showProgressBar\">\n                <span [ngStyle]=\"{'width': progressWidth + '%'}\"></span>\n            </div>\n\n        </div>\n    ",
                         styles: ["\n        .notification {\n            width: 100%;\n            padding: 10px 20px;\n            box-sizing: border-box;\n            position: relative;\n            float: left;\n            margin-bottom: 10px;\n            color: #fff;\n            cursor: pointer;\n            transition: all 0.5s;\n        }\n\n        .title {\n            margin: 0;\n            padding: 0;\n            line-height: 30px;\n            font-size: 20px;\n        }\n\n        .content {\n            margin: 0;\n            font-size: 16px;\n            padding: 0 50px 0 0;\n            line-height: 20px;\n        }\n\n        .error { background: #F44336; }\n        .success { background: #8BC34A; }\n        .alert { background: #ffdb5b; }\n        .info { background: #03A9F4; }\n\n        .progress {\n            position: absolute;\n            top: 0;\n            left: 0;\n            width: 100%;\n            height: 5px;\n        }\n\n        .progress span {\n            float: left;\n            height: 100%;\n        }\n\n        .success .progress span { background: #689F38; }\n        .error .progress span { background: #D32F2F; }\n        .alert .progress span { background: #edc242; }\n        .info .progress span { background: #0288D1; }\n    "]
                     }), 
                     __metadata('design:paramtypes', [notifications_service_1.NotificationsService])
