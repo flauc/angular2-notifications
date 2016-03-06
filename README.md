@@ -28,6 +28,11 @@ template: '<simple-notifications [options]="options"></simple-notifications>'
 ...
 ```
 
+The onCreate and onDestroy Event Emitters emit the notification that was created or destroyed you can utilise this functionality like this:
+```js
+<simple-notifications [options]="options" (onCreate)="created($event)" (onDestroy)="destroyed($event)"></simple-notifications>
+```
+
 You will also need to use the NotificationsService in your component to create or remove the notifications.
 ```js
 ...
