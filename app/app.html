@@ -85,7 +85,7 @@
                 <h3>Logs</h3>
                 <p>Keeps Track of all created and destroyed notifications. It uses the onCreate and onDestroy Event Emitters.</p>
                 <div class="logs">
-                    <div *ngFor="log of logs" [ngClass]="{'destroyed': log.destroyedOn}">
+                    <div *ngFor="#log of logs" [ngClass]="{'destroyed': log.destroyedOn}">
                         <span>{{log.title}}</span>
                         <span>{{log.html}}</span>
                     </div>
