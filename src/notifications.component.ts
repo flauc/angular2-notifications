@@ -167,7 +167,7 @@ export class NotificationsComponent {
             toEmit.content = notification.content;
         }
 
-        if(!to) toEmit.closedOn = new Date();
+        if(!to) toEmit.destroyedOn = new Date();
 
         return toEmit;
     }
