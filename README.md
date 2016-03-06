@@ -98,5 +98,4 @@ this._notificationsService.success(
 * CSS Themes
 * Animation
 * Custom types
-* HTML insert
 
