@@ -6,10 +6,11 @@
     </div>
     <div class="row">
         <div class="columns six">
-            <h3>Create a Notification</h3>
-            <p class="sub">Notifications created using this form will use the standard settings set in the component.</p>
-            <pre><code>
-                public options = {
+            <div class="row">
+                <h3>Create a Notification</h3>
+                <p class="sub">Notifications created using this form will use the standard settings set in the component.</p>
+                <pre><code>
+                    public options = {
                     timeOut: 5000,
                     lastOnBottom: true,
                     clickToClose: true,
@@ -17,35 +18,49 @@
                     maxStack: 7,
                     showProgressBar: true,
                     pauseOnHover: true
-                };
-            </code></pre>
+                    };
+                </code></pre>
 
-            <form (ngSubmit)="create()">
-                <div class="row">
-                    <label for="type">Type</label>
-                    <select class="u-full-width" [(ngModel)]="type" id="type">
-                        <option value="success" selected>Success</option>
-                        <option value="error">Error</option>
-                        <option value="alert">Alert</option>
-                        <option value="info">Info</option>
-                        <option value="html">HTML</option>
-                    </select>
-                </div>
-                <div class="row" *ngIf="type != 'html'">
-                    <label for="title">Title</label>
-                    <input type="text" id="title" class="u-full-width" [(ngModel)]="title">
-                </div>
-                <div class="row">
-                    <label for="content" *ngIf="type == 'html'">HTML</label>
-                    <label for="content" *ngIf="type != 'html'">Message</label>
-                    <textarea class="u-full-width" id="content" [(ngModel)]="content"></textarea>
-                </div>
-                <div class="row">
+                <form (ngSubmit)="create()">
                     <div class="row">
-                        <button class="button-primary" type="submit">Create</button>
+                        <label for="type">Type</label>
+                        <select class="u-full-width" [(ngModel)]="type" id="type">
+                            <option value="success" selected>Success</option>
+                            <option value="error">Error</option>
+                            <option value="alert">Alert</option>
+                            <option value="info">Info</option>
+                            <option value="html">HTML</option>
+                        </select>
                     </div>
+                    <div class="row" *ngIf="type != 'html'">
+                        <label for="title">Title</label>
+                        <input type="text" id="title" class="u-full-width" [(ngModel)]="title">
+                    </div>
+                    <div class="row">
+                        <label for="content" *ngIf="type == 'html'">HTML</label>
+                        <label for="content" *ngIf="type != 'html'">Message</label>
+                        <textarea class="u-full-width" id="content" [(ngModel)]="content"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="row">
+                            <button class="button-primary" type="submit">Create</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="columns four">
+                    <p>You can also clear all notifications from with in the component by calling:</p>
                 </div>
-            </form>
+            </div>
+            <div class="row">
+                <div class="columns four">
+                    <pre><code>this._service.removeAll()</code></pre>
+                </div>
+            </div>
+            <div class="row">
+                <button (click)="removeAll()">Clear all notifications</button>
+            </div>
         </div>
         <div class="columns six">
             <div class="row">
@@ -85,25 +100,14 @@
                 <h3>Logs</h3>
                 <p>Keeps Track of all created and destroyed notifications. It uses the onCreate and onDestroy Event Emitters.</p>
                 <div class="logs">
-                    <div *ngFor="#log of logs" [ngClass]="{'destroyed': log.destroyedOn}">
+                    <div class="log" *ngFor="#log of logs" [ngClass]="{'destroyed': log.destroyedOn}">
                         <span>{{log.title}}</span>
                         <span>{{log.html}}</span>
+                        <span>{{log.createdOn | date}}</span>
+                        <span>{{log.destroyedOn | date}}</span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="columns four">
-            <p>You can also clear all notifications from with in the component by calling:</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="columns four">
-            <pre><code>this._service.removeAll()</code></pre>
-        </div>
-    </div>
-    <div class="row">
-        <button (click)="removeAll()">Clear all notifications</button>
     </div>
 </div>
