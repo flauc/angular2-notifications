@@ -1,4 +1,4 @@
-<simple-notifications [options]="options"></simple-notifications>
+<simple-notifications [options]="options" (onCreate)="loger($event)" (onDestroy)="loger($event)"></simple-notifications>
 <div class="container">
     <div class="row">
         <h1 class="center">Angular2 Notifications Library</h1>
