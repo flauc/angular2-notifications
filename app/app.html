@@ -49,9 +49,7 @@
                 </form>
             </div>
             <div class="row">
-                <div class="columns four">
-                    <p>You can also clear all notifications from with in the component by calling:</p>
-                </div>
+                <p>You can also clear all notifications from with in the component by calling:</p>
             </div>
             <div class="row">
                 <div class="columns four">
@@ -103,8 +101,8 @@
                     <div class="log" *ngFor="#log of logs" [ngClass]="{'destroyed': log.destroyedOn}">
                         <span>{{log.title}}</span>
                         <span>{{log.html}}</span>
-                        <span>{{log.createdOn | date}}</span>
-                        <span>{{log.destroyedOn | date}}</span>
+                        <span>{{log.createdOn | date:'mediumTime'}}</span>
+                        <span>{{log.destroyedOn | date:'mediumTime'}}</span>
                     </div>
                 </div>
             </div>

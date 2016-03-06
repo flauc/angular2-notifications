@@ -442,6 +442,7 @@ there.
     padding: 10px;
     background: #8BC34A;
     color: #fff;
+    border-bottom: 1px solid #E1E1E1;
 }
 
 .log.destroyed {
