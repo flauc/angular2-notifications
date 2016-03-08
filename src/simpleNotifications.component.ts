@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, EventEmitter, OnInit, OnDestroy} from "angular2/core";
+import {Component, EventEmitter, OnInit, OnDestroy} from "angular2/core";
 import {Notification} from "./notification";
 import {NotificationsService} from "./notifications.service";
 import {NotificationComponent} from "./notification.component";
@@ -9,7 +9,6 @@ import {NotificationComponent} from "./notification.component";
     directives: [NotificationComponent],
     inputs: ['options'],
     outputs: ['onCreate', 'onDestroy'],
-    encapsulation: ViewEncapsulation.Native,
     template: `
         <div class="notification-wrapper">
             <simple-notification
