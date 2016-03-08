@@ -59,11 +59,11 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app',
-            directives: [components_1.NotificationsComponent],
-            providers: [components_2.NotificationsService],
+            directives: [components_2.SimpleNotificationsComponent],
+            providers: [components_1.NotificationsService],
             template: "\n        <form (ngSubmit)=\"create()\">\n            <div>\n                <label>Title</label>\n                <p>The title of the notification.</p>\n                <input type=\"text\" [(ngModel)]=\"title\">\n            </div>\n            <div>\n                <label>Content</label>\n                <p>The content of the notification.</p>\n                <input type=\"text\" [(ngModel)]=\"content\">\n            </div>\n            <div>\n                <label>Type</label>\n                <p>The type of the notification.</p>\n                <select [(ngModel)]=\"type\">\n                    <option value=\"success\" selected>Success</option>\n                    <option value=\"error\">Error</option>\n                    <option value=\"alert\">Alert</option>\n                    <option value=\"info\">Info</option>\n                </select>\n            </div>\n            <button type=\"submit\">Create Notification</button>\n        </form>\n        <button (click)=\"removeAll()\">Clean all notifications</button>\n        <simple-notifications [options]=\"options\" (onCreate)=\"onCreate($event)\" (onDestroy)=\"onDestroy($event)\"></simple-notifications>\n        <button (click)=\"withOverride()\">with override</button>\n        <button (click)=\"withHtml()\">with html</button>\n    "
         }), 
-        __metadata('design:paramtypes', [components_2.NotificationsService])
+        __metadata('design:paramtypes', [components_1.NotificationsService])
     ], AppComponent);
     return AppComponent;
 })();

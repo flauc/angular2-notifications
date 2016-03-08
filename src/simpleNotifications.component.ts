@@ -37,7 +37,7 @@ import {NotificationComponent} from "./notification.component";
     `]
 })
 
-export class NotificationsComponent {
+export class SimpleNotificationsComponent {
     constructor(
         private _service: NotificationsService
     ) {}

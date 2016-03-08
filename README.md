@@ -20,10 +20,10 @@ System.config({
 });
 ```
 
-Add the NotificationComponent in to the component where you want to use the notifications.
+Add the SimpleNotificationsComponent in to the component where you want to use the notifications.
 ```js
 ...
-directives: [NotificationComponent],
+directives: [SimpleNotificationsComponent],
 template: '<simple-notifications [options]="options"></simple-notifications>'
 ...
 ```

@@ -1,10 +1,10 @@
 import {Component} from "angular2/core";
 import {bootstrap}    from 'angular2/platform/browser'
-import {NotificationsComponent} from "angular2-notifications/components";
 import {NotificationsService} from "angular2-notifications/components";
+import {SimpleNotificationsComponent} from "angular2-notifications/components";
 @Component({
     selector: 'app',
-    directives: [NotificationsComponent],
+    directives: [SimpleNotificationsComponent],
     providers: [NotificationsService],
     template: `
         <form (ngSubmit)="create()">
