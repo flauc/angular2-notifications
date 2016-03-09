@@ -52,16 +52,22 @@ This are the currently available access methods:
 
 ## Options
 This are the current options that can be pass to the component:
-* __timeOut__ *[int] [Default: 0]* - Determine how long a notification should wait before closing. If set to 0 a notification won't close it self.
-* __showProgressBar__ *[boolean] [Default: true]* - Determine if a progress bar should be shown or not.
-* __pauseOnHover__ *[boolean] [Default: true]* - Determines if the timeOut should be paused when the notification is hovered.
-* __lastOnBottom__ *[boolean] [Default: true]* - Determines if new notifications should appear at the bottom or top of the list.
-* __clickToClose__ *[boolean] [Default: true]* - Determines if notifications should close on click.
-* __maxLength__ *[int] [Default: 0]* - Set the maximum allowed length of the content string. If set to 0 or not defined there is no maximum length.
-* __maxStacks__ *[int] [Default: 8]* - Set the maximum number of notifications that can be on the screen at once.
-* __preventDuplicates__ *[boolean] [Default: false]* - If true prevents duplicates of open notifications.
-* __preventLastDuplicates__ *[boolean] [Default: false]* - If true prevents duplicates of the latest notification shown.
-* __theClass__ *[string] [Default: null]* - A class that should be attached to the notification. (It doesn't exactly get attached to the selector but to the first div of the template.)
+
+Option | Type | Default | Description | 
+------------ | ------------- | ------------- | -------------
+__timeOut__ | int | 0 | Determine how long a notification should wait before closing. If set to 0 a notification won't close it self.
+__showProgressBar__ | boolean | true | Determine if a progress bar should be shown or not.
+__pauseOnHover__ | boolean | true | Determines if the timeOut should be paused when the notification is hovered.
+__lastOnBottom__ | boolean | true | Determines if new notifications should appear at the bottom or top of the list.
+__clickToClose__ | boolean | true | Determines if notifications should close on click.
+__maxLength__ | int | 0 | Set the maximum allowed length of the content string. If set to 0 or not defined there is no maximum length.
+__maxStacks__ | int | 8 | Set the maximum number of notifications that can be on the screen at once.
+__preventDuplicates__ | boolean | false | If true prevents duplicates of open notifications.
+__preventLastDuplicates__ | boolean | false | If true prevents duplicates of the latest notification shown.
+__theClass__ | string | null | A class that should be attached to the notification. (It doesn't exactly get attached to the selector but to the first div of the template.)
+
+Here is an example of passing the options to the component. You only pass the options you want changed.
+
 ```js
 ...
 template: '<simple-notifications [options]="options"></simple-notifications>'
