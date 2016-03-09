@@ -10,7 +10,7 @@ import {NotificationComponent} from "./notification.component";
     inputs: ['options'],
     outputs: ['onCreate', 'onDestroy'],
     template: `
-        <div class="notification-wrapper">
+        <div class="simple-notification-wrapper">
             <simple-notification
                 *ngFor="#a of notifications; #i = index"
                 [item]="a"
@@ -26,7 +26,7 @@ import {NotificationComponent} from "./notification.component";
         </div>
     `,
     styles: [`
-        .notification-wrapper {
+        .simple-notification-wrapper {
             position: fixed;
             bottom: 20px;
             right: 20px;

@@ -24,7 +24,7 @@ import {InfoIcon} from "./icons/info.icon";
     directives: [AlertIcon, ErrorIcon, SuccessIcon, InfoIcon],
     pipes: [MaxPipe],
     template: `
-        <div class="notification"
+        <div class="simple-notification"
             (click)="removeSelf()"
             [class]="theClass"
             [ngClass]="{alert: item.type == 'alert', error: item.type == 'error', success: item.type == 'success', info: item.type == 'info'}"
@@ -49,7 +49,7 @@ import {InfoIcon} from "./icons/info.icon";
         </div>
     `,
     styles: [`
-        .notification {
+        .simple-notification {
             width: 100%;
             padding: 10px 20px;
             box-sizing: border-box;
@@ -61,26 +61,37 @@ import {InfoIcon} from "./icons/info.icon";
             transition: all 0.5s;
         }
 
-        .title {
+        .simple-notification .title {
             margin: 0;
             padding: 0;
             line-height: 30px;
             font-size: 20px;
         }
 
-        .content {
+        .simple-notification svg {
+            position: absolute;
+            box-sizing: border-box;
+            top: 0;
+            right: 0;
+            width: auto;
+            height: 70px;
+            padding: 10px;
+            fill: #fff;
+        }
+
+        .simple-notification .content {
             margin: 0;
             font-size: 16px;
             padding: 0 50px 0 0;
             line-height: 20px;
         }
 
-        .error { background: #F44336; }
-        .success { background: #8BC34A; }
-        .alert { background: #ffdb5b; }
-        .info { background: #03A9F4; }
+        .simple-notification.error { background: #F44336; }
+        .simple-notification.success { background: #8BC34A; }
+        .simple-notification.alert { background: #ffdb5b; }
+        .simple-notification.info { background: #03A9F4; }
 
-        .progress {
+        .simple-notification .progress {
             position: absolute;
             top: 0;
             left: 0;
@@ -88,15 +99,15 @@ import {InfoIcon} from "./icons/info.icon";
             height: 5px;
         }
 
-        .progress span {
+        .simple-notification .progress span {
             float: left;
             height: 100%;
         }
 
-        .success .progress span { background: #689F38; }
-        .error .progress span { background: #D32F2F; }
-        .alert .progress span { background: #edc242; }
-        .info .progress span { background: #0288D1; }
+        .simple-notification.success .progress span { background: #689F38; }
+        .simple-notification.error .progress span { background: #D32F2F; }
+        .simple-notification.alert .progress span { background: #edc242; }
+        .simple-notification.info .progress span { background: #0288D1; }
     `]
 })
 
