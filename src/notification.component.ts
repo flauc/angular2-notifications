@@ -1,13 +1,9 @@
 import {Component, OnInit, OnDestroy} from "angular2/core";
-
 import {Notification} from "./notification";
 import {NotificationsService} from "./notifications.service";
 import {NotificationType} from "./notificationType";
-import {AlertIcon} from "./icons/alert.icon";
-import {ErrorIcon} from "./icons/error.icon";
-import {SuccessIcon} from "./icons/success.icon";
 import {MaxPipe} from "./max.pipe";
-import {InfoIcon} from "./icons/info.icon";
+import {Icons} from "./icons";
 
 @Component({
     selector: 'simple-notification',
@@ -21,7 +17,6 @@ import {InfoIcon} from "./icons/info.icon";
         'pauseOnHover',
         'theClass'
     ],
-    directives: [AlertIcon, ErrorIcon, SuccessIcon, InfoIcon],
     pipes: [MaxPipe],
     template: `
         <div class="simple-notification"
@@ -35,10 +30,7 @@ import {InfoIcon} from "./icons/info.icon";
                 <div class="title">{{item.title}}</div>
                 <div class="content">{{item.content | max:maxLength}}</div>
 
-                <alertIcon *ngIf="item.type == 'alert'"></alertIcon>
-                <errorIcon *ngIf="item.type == 'error'"></errorIcon>
-                <successIcon *ngIf="item.type == 'success'"></successIcon>
-                <infoIcon *ngIf="item.type == 'info'"></infoIcon>
+                <div [innerHTML]="icons[item.type]"></div>
             </div>
             <div *ngIf="item.html"[innerHTML]="item.html"></div>
 
@@ -121,6 +113,7 @@ export class NotificationComponent {
         if(this.timeOut != 0) this.startTimeOut();
     }
 
+    public icons : any = Icons;
 
     ////// Inputs
     public item: Notification;
