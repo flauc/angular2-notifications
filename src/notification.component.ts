@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy} from "angular2/core";
+import {Component, OnInit, OnDestroy, ViewEncapsulation} from "angular2/core";
 import {Notification} from "./notification";
 import {NotificationsService} from "./notifications.service";
 import {NotificationType} from "./notificationType";
@@ -7,6 +7,7 @@ import {Icons} from "./icons";
 
 @Component({
     selector: 'simple-notification',
+
     inputs: [
         'item',
         'timeOut',
@@ -18,6 +19,7 @@ import {Icons} from "./icons";
         'theClass'
     ],
     pipes: [MaxPipe],
+    encapsulation: ViewEncapsulation.None,
     template: `
         <div class="simple-notification"
             (click)="removeSelf()"
