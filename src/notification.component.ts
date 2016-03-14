@@ -31,7 +31,6 @@ import {Icons} from "./icons";
             <div *ngIf="!item.html">
                 <div class="title">{{item.title}}</div>
                 <div class="content">{{item.content | max:maxLength}}</div>
-
                 <div [innerHTML]="icons[item.type]"></div>
             </div>
             <div *ngIf="item.html"[innerHTML]="item.html"></div>
