@@ -1,4 +1,6 @@
-System.register(['angular2/core', 'angular2/platform/browser', "./src/notifications.component", "./src/notifications.service"], function(exports_1) {
+System.register(['angular2/core', 'angular2/platform/browser', "./src/simpleNotifications.component", "./src/notifications.service"], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +10,7 @@ System.register(['angular2/core', 'angular2/platform/browser', "./src/notificati
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, browser_1, notifications_component_1, notifications_service_1;
+    var core_1, browser_1, simpleNotifications_component_1, notifications_service_1;
     var AppComponent;
     return {
         setters:[
@@ -18,8 +20,8 @@ System.register(['angular2/core', 'angular2/platform/browser', "./src/notificati
             function (browser_1_1) {
                 browser_1 = browser_1_1;
             },
-            function (notifications_component_1_1) {
-                notifications_component_1 = notifications_component_1_1;
+            function (simpleNotifications_component_1_1) {
+                simpleNotifications_component_1 = simpleNotifications_component_1_1;
             },
             function (notifications_service_1_1) {
                 notifications_service_1 = notifications_service_1_1;
@@ -91,13 +93,13 @@ System.register(['angular2/core', 'angular2/platform/browser', "./src/notificati
                     core_1.Component({
                         selector: 'app',
                         templateUrl: 'app/app.html',
-                        directives: [notifications_component_1.NotificationsComponent],
+                        directives: [simpleNotifications_component_1.SimpleNotificationsComponent],
                         providers: [notifications_service_1.NotificationsService]
                     }), 
                     __metadata('design:paramtypes', [notifications_service_1.NotificationsService])
                 ], AppComponent);
                 return AppComponent;
-            })();
+            }());
             browser_1.bootstrap(AppComponent);
         }
     }
