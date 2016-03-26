@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, EventEmitter, OnInit, OnDestroy} from "angular2/core";
+import {Component, EventEmitter, OnInit, OnDestroy} from "angular2/core";
 import {Notification} from "./notification";
 import {NotificationsService} from "./notifications.service";
 import {NotificationComponent} from "./notification.component";
@@ -9,9 +9,8 @@ import {NotificationComponent} from "./notification.component";
     directives: [NotificationComponent],
     inputs: ['options'],
     outputs: ['onCreate', 'onDestroy'],
-    encapsulation: ViewEncapsulation.Native,
     template: `
-        <div class="notification-wrapper">
+        <div class="simple-notification-wrapper">
             <simple-notification
                 *ngFor="#a of notifications; #i = index"
                 [item]="a"
@@ -27,7 +26,7 @@ import {NotificationComponent} from "./notification.component";
         </div>
     `,
     styles: [`
-        .notification-wrapper {
+        .simple-notification-wrapper {
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -37,7 +36,7 @@ import {NotificationComponent} from "./notification.component";
     `]
 })
 
-export class NotificationsComponent {
+export class SimpleNotificationsComponent {
     constructor(
         private _service: NotificationsService
     ) {}
