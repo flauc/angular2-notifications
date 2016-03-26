@@ -1,12 +1,12 @@
 import {Component, OnInit, OnDestroy} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
-import {SimpleNotificationsComponent} from "./src/simpleNotifications.component";
 import {NotificationsService} from "./src/notifications.service";
+import {NotificationComponent} from "./src/notification.component";
 
 @Component({
     selector: 'app',
     templateUrl: 'app/app.html',
-    directives: [SimpleNotificationsComponent],
+    directives: [NotificationComponent],
     providers: [NotificationsService]
 })
 
