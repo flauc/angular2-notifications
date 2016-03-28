@@ -34,6 +34,11 @@ import {SimpleNotificationsComponent} from "angular2-notifications/components";
         <simple-notifications [options]="options" (onCreate)="onCreate($event)" (onDestroy)="onDestroy($event)"></simple-notifications>
         <button (click)="withOverride()">with override</button>
         <button (click)="withHtml()">with html</button>
+        
+        <form (ngSubmit)="cleanSingle()">
+            <input type="text" [(ngModel)]="deleteId">
+            <button type="submit">Delete</button>
+        </form>
     `
 })
 
@@ -47,10 +52,12 @@ export class AppComponent {
     public content: string = 'just content';
     public type: string = 'success';
 
+    public deleteId: string;
+
     public temp: boolean[] = [true, false];
 
     public options = {
-        timeOut: 5000,
+        timeOut: 0,
         lastOnBottom: false,
         clickToClose: true,
         maxLength: 0,
@@ -83,7 +90,7 @@ export class AppComponent {
     private html = `<p>Test</p><p>A nother test</p>`;
     withHtml() {this._service.html(this.html, 'success');}
 
-    removeAll() { this._service.removeAll() }
+    removeAll() { this._service.remove() }
 
     onCreate(event) {
         console.log(event);
@@ -91,6 +98,11 @@ export class AppComponent {
 
     onDestroy(event) {
         console.log(event);
+    }
+    
+    cleanSingle() {
+        console.log(this.deleteId);
+        this._service.remove(this.deleteId);
     }
 }
 

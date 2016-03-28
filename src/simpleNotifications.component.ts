@@ -68,11 +68,24 @@ export class SimpleNotificationsComponent {
         // Listen for changes in the service
         this.listener = this._service.getChangeEmitter()
             .subscribe(item => {
-                if(item == 'clean') this.notifications = [];
-                else if(item.add) this.add(item.notification);
-                else {
-                    this.notifications.splice(this.notifications.indexOf(item.notification), 1);
-                    this.onDestroy.emit(this.buildEmit(item.notification, false));
+
+                switch (item.command) {
+                    case 'cleanAll':
+                        this.notifications = [];
+                        break;
+
+                    case 'clean':
+                        this.cleanSingle(item.id);
+                        break;
+
+                    case 'add':
+                        this.add(item.notification);
+                        break;
+
+                    default:
+                        this.notifications.splice(this.notifications.indexOf(item.notification), 1);
+                        this.onDestroy.emit(this.buildEmit(item.notification, false));
+                        break;
                 }
             });
 
@@ -169,6 +182,20 @@ export class SimpleNotificationsComponent {
         if(!to) toEmit.destroyedOn = new Date();
 
         return toEmit;
+    }
+
+    cleanSingle(id: string) {
+        let indexOfDelete: number,
+            doDelete: boolean = false;
+
+        this.notifications.forEach((a, idx) => {
+            if(a.id == id) {
+                indexOfDelete = idx;
+                doDelete = true;
+            }
+        });
+
+        if(doDelete) this.notifications.splice(indexOfDelete, 1);
     }
 
     ngOnDestroy() { this.listener.unsubscribe() }
