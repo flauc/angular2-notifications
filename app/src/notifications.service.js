@@ -23,7 +23,7 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 function NotificationsService() {
                     this.emiter = new core_2.EventEmitter();
                 }
-                NotificationsService.prototype.set = function (notification, to) { this.emiter.emit({ notification: notification, add: to }); };
+                NotificationsService.prototype.set = function (notification, to) { this.emiter.emit({ command: 'add', notification: notification }); };
                 ;
                 NotificationsService.prototype.getChangeEmitter = function () { return this.emiter; };
                 NotificationsService.prototype.success = function (title, content, override) { this.set({ title: title, content: content, type: 'success', override: override }, true); };
@@ -32,7 +32,12 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 NotificationsService.prototype.info = function (title, content, override) { this.set({ title: title, content: content, type: 'info', override: override }, true); };
                 NotificationsService.prototype.create = function (title, content, type, override) { this.set({ title: title, content: content, type: type, override: override }, true); };
                 NotificationsService.prototype.html = function (html, type, override) { this.set({ html: html, type: type, override: override, title: null, content: null }, true); };
-                NotificationsService.prototype.removeAll = function () { this.emiter.emit('clean'); };
+                NotificationsService.prototype.remove = function (id) {
+                    if (id)
+                        this.emiter.emit({ command: 'clean', id: id });
+                    else
+                        this.emiter.emit({ command: 'cleanAll' });
+                };
                 NotificationsService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [])

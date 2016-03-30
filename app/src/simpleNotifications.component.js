@@ -44,13 +44,20 @@ System.register(["angular2/core", "./notifications.service", "./notification.com
                     var _this = this;
                     this.listener = this._service.getChangeEmitter()
                         .subscribe(function (item) {
-                        if (item == 'clean')
-                            _this.notifications = [];
-                        else if (item.add)
-                            _this.add(item.notification);
-                        else {
-                            _this.notifications.splice(_this.notifications.indexOf(item.notification), 1);
-                            _this.onDestroy.emit(_this.buildEmit(item.notification, false));
+                        switch (item.command) {
+                            case 'cleanAll':
+                                _this.notifications = [];
+                                break;
+                            case 'clean':
+                                _this.cleanSingle(item.id);
+                                break;
+                            case 'add':
+                                _this.add(item.notification);
+                                break;
+                            default:
+                                _this.notifications.splice(_this.notifications.indexOf(item.notification), 1);
+                                _this.onDestroy.emit(_this.buildEmit(item.notification, false));
+                                break;
                         }
                     });
                     this.attachChanges();
@@ -139,6 +146,17 @@ System.register(["angular2/core", "./notifications.service", "./notification.com
                     if (!to)
                         toEmit.destroyedOn = new Date();
                     return toEmit;
+                };
+                SimpleNotificationsComponent.prototype.cleanSingle = function (id) {
+                    var indexOfDelete, doDelete = false;
+                    this.notifications.forEach(function (a, idx) {
+                        if (a.id == id) {
+                            indexOfDelete = idx;
+                            doDelete = true;
+                        }
+                    });
+                    if (doDelete)
+                        this.notifications.splice(indexOfDelete, 1);
                 };
                 SimpleNotificationsComponent.prototype.ngOnDestroy = function () { this.listener.unsubscribe(); };
                 SimpleNotificationsComponent = __decorate([
