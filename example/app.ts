@@ -57,7 +57,7 @@ export class AppComponent {
     public temp: boolean[] = [true, false];
 
     public options = {
-        timeOut: 0,
+        timeOut: 5000,
         lastOnBottom: false,
         clickToClose: true,
         maxLength: 0,

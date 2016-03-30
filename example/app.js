@@ -20,7 +20,7 @@ var AppComponent = (function () {
         this.type = 'success';
         this.temp = [true, false];
         this.options = {
-            timeOut: 0,
+            timeOut: 5000,
             lastOnBottom: false,
             clickToClose: true,
             maxLength: 0,

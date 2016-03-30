@@ -69,6 +69,7 @@ export class SimpleNotificationsComponent {
         this.listener = this._service.getChangeEmitter()
             .subscribe(item => {
 
+
                 switch (item.command) {
                     case 'cleanAll':
                         this.notifications = [];
@@ -78,18 +79,24 @@ export class SimpleNotificationsComponent {
                         this.cleanSingle(item.id);
                         break;
 
-                    case 'add':
-                        this.add(item.notification);
+                    case 'set':
+                        if(item.add) this.add(item.notification);
+                        else this.defaultBehavior(item);
                         break;
 
                     default:
-                        this.notifications.splice(this.notifications.indexOf(item.notification), 1);
-                        this.onDestroy.emit(this.buildEmit(item.notification, false));
+                        this.defaultBehavior(item);
                         break;
                 }
             });
 
         this.attachChanges();
+    }
+
+    // Default behavior on event
+    defaultBehavior(value) {
+        this.notifications.splice(this.notifications.indexOf(value.notification), 1);
+        this.onDestroy.emit(this.buildEmit(value.notification, false));
     }
 
 
