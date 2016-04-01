@@ -10,9 +10,17 @@
     "outDir": "./lib",
     "declaration": true
   },
+  "files": [
+    "src/icons.ts",
+    "src/max.pipe.ts",
+    "src/notification.component.ts",
+    "src/notification.ts",
+    "src/notifications.service.ts",
+    "src/notificationType.ts",
+    "src/simpleNotifications.component.ts"
+  ],
   "exclude": [
     "node_modules",
-    "example",
-    "components.d.ts"
+    "example"
   ]
 }
