@@ -26,6 +26,7 @@ import {SimpleNotificationsComponent} from "angular2-notifications/components";
                     <option value="error">Error</option>
                     <option value="alert">Alert</option>
                     <option value="info">Info</option>
+                    <option value="bare">Bare</option>
                 </select>
             </div>
             <button type="submit">Create Notification</button>
