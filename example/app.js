@@ -46,6 +46,9 @@ var AppComponent = (function () {
             case 'info':
                 this._service.info(this.title, this.content);
                 break;
+            case 'bare':
+                this._service.bare(this.title, this.content);
+                break;
         }
     };
     AppComponent.prototype.withOverride = function () { this._service.create('pero', 'peric', 'success', { timeOut: 0, clickToClose: false, maxLength: 3, showProgressBar: true, theClass: 'overrideTest' }); };

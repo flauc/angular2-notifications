@@ -82,6 +82,9 @@ export class AppComponent {
             case 'info':
                 this._service.info(this.title, this.content);
                 break;
+            case 'bare':
+                this._service.bare(this.title, this.content);
+                break;
         }
     }
 

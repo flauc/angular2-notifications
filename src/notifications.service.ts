@@ -14,6 +14,7 @@ export class NotificationsService {
     error(title: string, content: string, override?: any) { this.set({title: title, content: content, type: 'error', override: override}, true) }
     alert(title: string, content: string, override?: any) { this.set({title: title, content: content, type: 'alert', override: override}, true) }
     info(title: string, content: string, override?: any) { this.set({title: title, content: content, type: 'info', override: override}, true) }
+    bare(title: string, content: string, override?: any) { this.set({title: title, content: content, type: 'bare', override: override}, true) }
 
     // With type method
     create(title: string, content: string, type: string, override?: any) { this.set({title: title, content: content, type: type, override: override}, true) }

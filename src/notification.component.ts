@@ -24,16 +24,24 @@ import {Icons} from "./icons";
         <div class="simple-notification"
             (click)="removeSelf()"
             [class]="theClass"
-            [ngClass]="{alert: item.type == 'alert', error: item.type == 'error', success: item.type == 'success', info: item.type == 'info'}"
+            
+            [ngClass]="{
+                alert: item.type == 'alert', 
+                error: item.type == 'error', 
+                success: item.type == 'success', 
+                info: item.type == 'info',
+                bare: item.type == 'bare'
+                }"
+                
             (mouseenter)="onEnter()"
             (mouseleave)="onLeave()">
 
             <div *ngIf="!item.html">
                 <div class="title">{{item.title}}</div>
                 <div class="content">{{item.content | max:maxLength}}</div>
-                <div [innerHTML]="icons[item.type]"></div>
+                <div *ngIf="item.type != 'bare'" [innerHTML]="icons[item.type]"></div>
             </div>
-            <div *ngIf="item.html"[innerHTML]="item.html"></div>
+            <div *ngIf="item.html" [innerHTML]="item.html"></div>
 
             <div class="progress" *ngIf="showProgressBar">
                 <span [ngStyle]="{'width': progressWidth + '%'}"></span>
@@ -101,6 +109,7 @@ import {Icons} from "./icons";
         .simple-notification.error .progress span { background: #D32F2F; }
         .simple-notification.alert .progress span { background: #edc242; }
         .simple-notification.info .progress span { background: #0288D1; }
+        .simple-notification.bare .progress span { background: #ccc; }
     `]
 })
 
