@@ -71,7 +71,7 @@ System.register(['angular2/core', 'angular2/platform/browser', "./src/notificati
                             this._service.html(this.content, 'success');
                     }
                 };
-                AppComponent.prototype.removeAll = function () { this._service.removeAll(); };
+                AppComponent.prototype.removeAll = function () { this._service.remove(); };
                 AppComponent.prototype.override = function () {
                     this._service.set({
                         title: 'Override',

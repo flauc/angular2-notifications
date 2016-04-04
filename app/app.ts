@@ -50,7 +50,7 @@ class AppComponent {
         }
     }
 
-    removeAll() { this._service.removeAll() }
+    removeAll() { this._service.remove() }
 
     public over = {
         timeOut: 5000,
