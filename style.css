@@ -449,7 +449,7 @@ there.
 }
 
 .simple-notification {
-    background: #ccc;
+    background: #ccc !important;
 }
 
 /*.simple-notification-wrapper {*/
