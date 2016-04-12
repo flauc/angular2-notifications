@@ -205,5 +205,5 @@ export class SimpleNotificationsComponent {
         if(doDelete) this.notifications.splice(indexOfDelete, 1);
     }
 
-    ngOnDestroy() { this.listener.unsubscribe() }
+    ngOnDestroy() { if (this.listener) this.listener.unsubscribe() }
 }
