@@ -1,7 +1,8 @@
 import {Component} from "angular2/core";
-import {bootstrap}    from 'angular2/platform/browser'
-import {NotificationsService} from "angular2-notifications/components";
-import {SimpleNotificationsComponent} from "angular2-notifications/components";
+import {bootstrap} from 'angular2/platform/browser'
+import {NotificationsService} from "notSer"
+import {SimpleNotificationsComponent} from "notComp"
+
 @Component({
     selector: 'app',
     directives: [SimpleNotificationsComponent],
@@ -110,4 +111,4 @@ export class AppComponent {
     }
 }
 
-bootstrap(AppComponent);
+bootstrap(AppComponent, []);
