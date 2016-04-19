@@ -59,13 +59,13 @@ export class AppComponent {
 
     public options = {
         timeOut: 5000,
-        lastOnBottom: false,
+        lastOnBottom: true,
         clickToClose: true,
         maxLength: 0,
         maxStack: 7,
         showProgressBar: true,
         pauseOnHover: true,
-        preventDuplicates: true,
+        preventDuplicates: false,
         preventLastDuplicates: false
     };
 

@@ -184,31 +184,7 @@ export class NotificationComponent {
     // Attach all the overrides
     attachOverrides() {
         let keys = Object.keys(this.item.override);
-        keys.forEach(a=>{
-            switch (a) {
-                case 'timeOut':
-                    this.timeOut = this.item.override.timeOut;
-                    break;
-                case 'clickToClose':
-                    this.clickToClose = this.item.override.clickToClose;
-                    break;
-                case 'maxLength':
-                    this.maxLength = this.item.override.maxLength;
-                    break;
-                case 'showProgressBar':
-                    this.showProgressBar = this.item.override.showProgressBar;
-                    break;
-                case 'pauseOnHover':
-                    this.pauseOnHover = this.item.override.pauseOnHover;
-                    break;
-                case 'theClass':
-                    this.theClass = this.item.override.theClass;
-                    break;
-                default:
-                    console.error(`no option with the key ${a} exists`);
-                    break;
-            }
-        })
+        keys.forEach(a => this[a] = this.item.override[a])
     }
 
     ngOnDestroy() { clearTimeout(this.timer) }
