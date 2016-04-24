@@ -1,4 +1,4 @@
-System.register(["angular2/core", 'angular2/platform/browser', "notSer", "notComp"], function(exports_1, context_1) {
+System.register(["angular2/core", 'angular2/platform/browser', "angular2-notifications/components"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(["angular2/core", 'angular2/platform/browser', "notSer", "notCom
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, browser_1, notSer_1, notComp_1;
+    var core_1, browser_1, components_1;
     var AppComponent;
     return {
         setters:[
@@ -20,11 +20,8 @@ System.register(["angular2/core", 'angular2/platform/browser', "notSer", "notCom
             function (browser_1_1) {
                 browser_1 = browser_1_1;
             },
-            function (notSer_1_1) {
-                notSer_1 = notSer_1_1;
-            },
-            function (notComp_1_1) {
-                notComp_1 = notComp_1_1;
+            function (components_1_1) {
+                components_1 = components_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -82,14 +79,13 @@ System.register(["angular2/core", 'angular2/platform/browser', "notSer", "notCom
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'app',
-                        directives: [notComp_1.SimpleNotificationsComponent],
-                        providers: [notSer_1.NotificationsService],
-                        template: "\n        <form (ngSubmit)=\"create()\">\n            <div>\n                <label>Title</label>\n                <p>The title of the notification.</p>\n                <input type=\"text\" [(ngModel)]=\"title\">\n            </div>\n            <div>\n                <label>Content</label>\n                <p>The content of the notification.</p>\n                <input type=\"text\" [(ngModel)]=\"content\">\n            </div>\n            <div>\n                <label>Type</label>\n                <p>The type of the notification.</p>\n                <select [(ngModel)]=\"type\">\n                    <option value=\"success\" selected>Success</option>\n                    <option value=\"error\">Error</option>\n                    <option value=\"alert\">Alert</option>\n                    <option value=\"info\">Info</option>\n                    <option value=\"bare\">Bare</option>\n                </select>\n            </div>\n            <button type=\"submit\">Create Notification</button>\n        </form>\n        <button (click)=\"removeAll()\">Clean all notifications</button>\n        <simple-notifications [options]=\"options\" (onCreate)=\"onCreate($event)\" (onDestroy)=\"onDestroy($event)\"></simple-notifications>\n        <button (click)=\"withOverride()\">with override</button>\n        <button (click)=\"withHtml()\">with html</button>\n        \n        <form (ngSubmit)=\"cleanSingle()\">\n            <input type=\"text\" [(ngModel)]=\"deleteId\">\n            <button type=\"submit\">Delete</button>\n        </form>\n    "
+                        directives: [components_1.SimpleNotificationsComponent],
+                        providers: [components_1.NotificationsService],
+                        template: "a\n        <form (ngSubmit)=\"create()\">\n            <div>\n                <label>Title</label>\n                <p>The title of the notification.</p>\n                <input type=\"text\" [(ngModel)]=\"title\">\n            </div>\n            <div>\n                <label>Content</label>\n                <p>The content of the notification.</p>\n                <input type=\"text\" [(ngModel)]=\"content\">\n            </div>\n            <div>\n                <label>Type</label>\n                <p>The type of the notification.</p>\n                <select [(ngModel)]=\"type\">\n                    <option value=\"success\" selected>Success</option>\n                    <option value=\"error\">Error</option>\n                    <option value=\"alert\">Alert</option>\n                    <option value=\"info\">Info</option>\n                    <option value=\"bare\">Bare</option>\n                </select>\n            </div>\n            <button type=\"submit\">Create Notification</button>\n        </form>\n        <button (click)=\"removeAll()\">Clean all notifications</button>\n        <simple-notifications [options]=\"options\" (onCreate)=\"onCreate($event)\" (onDestroy)=\"onDestroy($event)\"></simple-notifications>\n        <button (click)=\"withOverride()\">with override</button>\n        <button (click)=\"withHtml()\">with html</button>\n        \n        <form (ngSubmit)=\"cleanSingle()\">\n            <input type=\"text\" [(ngModel)]=\"deleteId\">\n            <button type=\"submit\">Delete</button>\n        </form>\n    "
                     }), 
-                    __metadata('design:paramtypes', [(typeof (_a = typeof notSer_1.NotificationsService !== 'undefined' && notSer_1.NotificationsService) === 'function' && _a) || Object])
+                    __metadata('design:paramtypes', [components_1.NotificationsService])
                 ], AppComponent);
                 return AppComponent;
-                var _a;
             }());
             exports_1("AppComponent", AppComponent);
             browser_1.bootstrap(AppComponent, []);

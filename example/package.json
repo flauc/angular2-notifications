@@ -8,14 +8,15 @@
   },
   "dependencies": {
     "angular2": "2.0.0-beta.15",
-    "systemjs": "0.19.26",
+    "angular2-notifications": "^0.1.46",
     "es6-shim": "^0.35.0",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
+    "systemjs": "0.19.26",
     "zone.js": "0.6.10"
   },
   "devDependencies": {
-    "lite-server": "^2.1.0",
-    "typescript": "^1.7.5"
+    "lite-server": "^2.2.0",
+    "typescript": "^1.8.10"
   }
 }

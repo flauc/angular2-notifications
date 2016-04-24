@@ -9,7 +9,7 @@
     "removeComments": true,
     "noImplicitAny": false
   },
-  "exclude": [
-    "node_modules"
+  "files": [
+    "app/app.ts"
   ]
 }
