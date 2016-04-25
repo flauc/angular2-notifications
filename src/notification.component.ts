@@ -183,8 +183,7 @@ export class NotificationComponent {
 
     // Attach all the overrides
     attachOverrides() {
-        let keys = Object.keys(this.item.override);
-        keys.forEach(a => this[a] = this.item.override[a])
+        Object.keys(this.item.override).forEach(a => this[a] = this.item.override[a])
     }
 
     ngOnDestroy() { clearTimeout(this.timer) }
