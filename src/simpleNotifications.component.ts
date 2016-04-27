@@ -56,7 +56,7 @@ export class SimpleNotificationsComponent {
     private timeOut: number = 0;
     private maxLength: number = 0;
     private clickToClose: boolean = true;
-    private showProgressBar: boolean = false;
+    private showProgressBar: boolean = true;
     private pauseOnHover: boolean = true;
     private theClass: string;
     private expand: string;
