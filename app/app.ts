@@ -46,7 +46,11 @@ class AppComponent {
                 this._service.info(this.title, this.content);
                 break;
             case 'html':
-                this._service.html(this.content, 'bare')
+                this._service.html(this.content, 'bare');
+                break;
+            case 'bare':
+                this._service.bare(this.title, this.content);
+                break;
         }
     }
 
