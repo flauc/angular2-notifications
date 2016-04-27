@@ -11,23 +11,25 @@
         <script src="node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
         <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
         <script src="node_modules/systemjs/dist/system.src.js"></script>
+        <script src="node_modules/rxjs/bundles/Rx.js"></script>
+        <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+
+
         <script>
             System.config({
-                defaultJSExtensions: true,
                 packages: {
-                    "/angular2": {"defaultExtension": false}
-                },
-                map: {
-                    'angular2-notifications': 'node_modules/angular2-notifications'
+                    app: {
+                        format: 'register',
+                        defaultExtension: 'js'
+                    },
+                    "node_modules/angular2-notifications": {
+                        main: "components",
+                        defaultExtension: 'js'
+                    }
                 }
             });
-        </script>
-
-        <script src="node_modules/rxjs/bundles/Rx.js"></script>
-        <script src="node_modules/angular2/bundles/angular2.js"></script>
-
-        <script>
-            System.import('app/app').catch(console.log.bind(console));
+            System.import('app/app')
+                    .then(null, console.error.bind(console));
         </script>
     </head>
 

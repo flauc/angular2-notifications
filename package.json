@@ -1,6 +1,6 @@
 {
   "name": "angular2-notifications",
-  "version": "0.1.47",
+  "version": "0.1.5",
   "description": "An easy to use notification library for angular 2",
   "scripts": {
     "build": "tsc"
@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/flauc/angular2-notifications",
   "dependencies": {
-    "angular2": "^2.0.0-beta.15"
+    "angular2": "^2.0.0-beta.16"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

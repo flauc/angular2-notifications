@@ -1,4 +1,4 @@
-System.register(["angular2/core", 'angular2/platform/browser', "angular2-notifications/components"], function(exports_1, context_1) {
+System.register(["angular2/core", 'angular2/platform/browser', "node_modules/angular2-notifications"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(["angular2/core", 'angular2/platform/browser', "angular2-notific
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, browser_1, components_1;
+    var core_1, browser_1, angular2_notifications_1;
     var AppComponent;
     return {
         setters:[
@@ -20,8 +20,8 @@ System.register(["angular2/core", 'angular2/platform/browser', "angular2-notific
             function (browser_1_1) {
                 browser_1 = browser_1_1;
             },
-            function (components_1_1) {
-                components_1 = components_1_1;
+            function (angular2_notifications_1_1) {
+                angular2_notifications_1 = angular2_notifications_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -79,13 +79,14 @@ System.register(["angular2/core", 'angular2/platform/browser', "angular2-notific
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'app',
-                        directives: [components_1.SimpleNotificationsComponent],
-                        providers: [components_1.NotificationsService],
+                        directives: [angular2_notifications_1.SimpleNotificationsComponent],
+                        providers: [angular2_notifications_1.NotificationsService],
                         template: "a\n        <form (ngSubmit)=\"create()\">\n            <div>\n                <label>Title</label>\n                <p>The title of the notification.</p>\n                <input type=\"text\" [(ngModel)]=\"title\">\n            </div>\n            <div>\n                <label>Content</label>\n                <p>The content of the notification.</p>\n                <input type=\"text\" [(ngModel)]=\"content\">\n            </div>\n            <div>\n                <label>Type</label>\n                <p>The type of the notification.</p>\n                <select [(ngModel)]=\"type\">\n                    <option value=\"success\" selected>Success</option>\n                    <option value=\"error\">Error</option>\n                    <option value=\"alert\">Alert</option>\n                    <option value=\"info\">Info</option>\n                    <option value=\"bare\">Bare</option>\n                </select>\n            </div>\n            <button type=\"submit\">Create Notification</button>\n        </form>\n        <button (click)=\"removeAll()\">Clean all notifications</button>\n        <simple-notifications [options]=\"options\" (onCreate)=\"onCreate($event)\" (onDestroy)=\"onDestroy($event)\"></simple-notifications>\n        <button (click)=\"withOverride()\">with override</button>\n        <button (click)=\"withHtml()\">with html</button>\n        \n        <form (ngSubmit)=\"cleanSingle()\">\n            <input type=\"text\" [(ngModel)]=\"deleteId\">\n            <button type=\"submit\">Delete</button>\n        </form>\n    "
                     }), 
-                    __metadata('design:paramtypes', [components_1.NotificationsService])
+                    __metadata('design:paramtypes', [(typeof (_a = typeof angular2_notifications_1.NotificationsService !== 'undefined' && angular2_notifications_1.NotificationsService) === 'function' && _a) || Object])
                 ], AppComponent);
                 return AppComponent;
+                var _a;
             }());
             exports_1("AppComponent", AppComponent);
             browser_1.bootstrap(AppComponent, []);

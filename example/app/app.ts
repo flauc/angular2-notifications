@@ -1,6 +1,7 @@
 import {Component} from "angular2/core";
 import {bootstrap} from 'angular2/platform/browser'
-import {NotificationsService, SimpleNotificationsComponent} from "angular2-notifications/components"
+import {NotificationsService, SimpleNotificationsComponent} from "node_modules/angular2-notifications"
+
 @Component({
     selector: 'app',
     directives: [SimpleNotificationsComponent],
