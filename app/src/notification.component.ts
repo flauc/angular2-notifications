@@ -91,6 +91,7 @@ import {Icons} from "./icons";
         .simple-notification.success { background: #8BC34A; }
         .simple-notification.alert { background: #ffdb5b; }
         .simple-notification.info { background: #03A9F4; }
+        .simple-notification.bare { color: #000; }
 
         .simple-notification .progress {
             position: absolute;
