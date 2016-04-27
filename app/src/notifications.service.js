@@ -30,6 +30,7 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 NotificationsService.prototype.error = function (title, content, override) { this.set({ title: title, content: content, type: 'error', override: override }, true); };
                 NotificationsService.prototype.alert = function (title, content, override) { this.set({ title: title, content: content, type: 'alert', override: override }, true); };
                 NotificationsService.prototype.info = function (title, content, override) { this.set({ title: title, content: content, type: 'info', override: override }, true); };
+                NotificationsService.prototype.bare = function (title, content, override) { this.set({ title: title, content: content, type: 'bare', override: override }, true); };
                 NotificationsService.prototype.create = function (title, content, type, override) { this.set({ title: title, content: content, type: type, override: override }, true); };
                 NotificationsService.prototype.html = function (html, type, override) { this.set({ html: html, type: type, override: override, title: null, content: null }, true); };
                 NotificationsService.prototype.remove = function (id) {

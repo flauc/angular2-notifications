@@ -56,9 +56,10 @@ export class SimpleNotificationsComponent {
     private timeOut: number = 0;
     private maxLength: number = 0;
     private clickToClose: boolean = true;
-    private showProgressBar: boolean = false;
+    private showProgressBar: boolean = true;
     private pauseOnHover: boolean = true;
     private theClass: string;
+    private expand: string;
 
     // Outputs
     private onCreate = new EventEmitter();
@@ -135,41 +136,7 @@ export class SimpleNotificationsComponent {
 
     // Attach all the changes received in the options object
     attachChanges() {
-        let keys = Object.keys(this.options);
-        keys.forEach(a=>{
-            switch (a) {
-                case 'lastOnBottom':
-                    this.lastOnBottom = this.options.lastOnBottom;
-                    break;
-                case 'maxStack':
-                    this.maxStack = this.options.maxStack;
-                    break;
-                case 'timeOut':
-                    this.timeOut = this.options.timeOut;
-                    break;
-                case 'clickToClose':
-                    this.clickToClose = this.options.clickToClose;
-                    break;
-                case 'maxLength':
-                    this.maxLength = this.options.maxLength;
-                    break;
-                case 'showProgressBar':
-                    this.showProgressBar = this.options.showProgressBar;
-                    break;
-                case 'pauseOnHover':
-                    this.pauseOnHover = this.options.pauseOnHover;
-                    break;
-                case 'preventDuplicates':
-                    this.preventDuplicates = this.options.preventDuplicates;
-                    break;
-                case 'preventLastDuplicates':
-                    this.preventLastDuplicates = this.options.preventLastDuplicates;
-                    break;
-                case 'theClass':
-                    this.theClass = this.options.theClass;
-                    break;
-            }
-        })
+        Object.keys(this.options).forEach(a => this[a] = this.options[a])
     }
 
     buildEmit(notification: Notification, to: boolean) {
@@ -205,5 +172,5 @@ export class SimpleNotificationsComponent {
         if(doDelete) this.notifications.splice(indexOfDelete, 1);
     }
 
-    ngOnDestroy() { this.listener.unsubscribe() }
+    ngOnDestroy() { if (this.listener) this.listener.unsubscribe() }
 }

@@ -35,7 +35,7 @@ System.register(["angular2/core", "./notifications.service", "./notification.com
                     this.timeOut = 0;
                     this.maxLength = 0;
                     this.clickToClose = true;
-                    this.showProgressBar = false;
+                    this.showProgressBar = true;
                     this.pauseOnHover = true;
                     this.onCreate = new core_1.EventEmitter();
                     this.onDestroy = new core_1.EventEmitter();
@@ -101,41 +101,7 @@ System.register(["angular2/core", "./notifications.service", "./notification.com
                 };
                 SimpleNotificationsComponent.prototype.attachChanges = function () {
                     var _this = this;
-                    var keys = Object.keys(this.options);
-                    keys.forEach(function (a) {
-                        switch (a) {
-                            case 'lastOnBottom':
-                                _this.lastOnBottom = _this.options.lastOnBottom;
-                                break;
-                            case 'maxStack':
-                                _this.maxStack = _this.options.maxStack;
-                                break;
-                            case 'timeOut':
-                                _this.timeOut = _this.options.timeOut;
-                                break;
-                            case 'clickToClose':
-                                _this.clickToClose = _this.options.clickToClose;
-                                break;
-                            case 'maxLength':
-                                _this.maxLength = _this.options.maxLength;
-                                break;
-                            case 'showProgressBar':
-                                _this.showProgressBar = _this.options.showProgressBar;
-                                break;
-                            case 'pauseOnHover':
-                                _this.pauseOnHover = _this.options.pauseOnHover;
-                                break;
-                            case 'preventDuplicates':
-                                _this.preventDuplicates = _this.options.preventDuplicates;
-                                break;
-                            case 'preventLastDuplicates':
-                                _this.preventLastDuplicates = _this.options.preventLastDuplicates;
-                                break;
-                            case 'theClass':
-                                _this.theClass = _this.options.theClass;
-                                break;
-                        }
-                    });
+                    Object.keys(this.options).forEach(function (a) { return _this[a] = _this.options[a]; });
                 };
                 SimpleNotificationsComponent.prototype.buildEmit = function (notification, to) {
                     var toEmit = {
@@ -164,7 +130,8 @@ System.register(["angular2/core", "./notifications.service", "./notification.com
                     if (doDelete)
                         this.notifications.splice(indexOfDelete, 1);
                 };
-                SimpleNotificationsComponent.prototype.ngOnDestroy = function () { this.listener.unsubscribe(); };
+                SimpleNotificationsComponent.prototype.ngOnDestroy = function () { if (this.listener)
+                    this.listener.unsubscribe(); };
                 SimpleNotificationsComponent = __decorate([
                     core_1.Component({
                         selector: 'simple-notifications',

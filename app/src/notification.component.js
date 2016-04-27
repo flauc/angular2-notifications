@@ -73,32 +73,7 @@ System.register(["angular2/core", "./notifications.service", "./max.pipe", "./ic
                     this._service.set(this.item, false); };
                 NotificationComponent.prototype.attachOverrides = function () {
                     var _this = this;
-                    var keys = Object.keys(this.item.override);
-                    keys.forEach(function (a) {
-                        switch (a) {
-                            case 'timeOut':
-                                _this.timeOut = _this.item.override.timeOut;
-                                break;
-                            case 'clickToClose':
-                                _this.clickToClose = _this.item.override.clickToClose;
-                                break;
-                            case 'maxLength':
-                                _this.maxLength = _this.item.override.maxLength;
-                                break;
-                            case 'showProgressBar':
-                                _this.showProgressBar = _this.item.override.showProgressBar;
-                                break;
-                            case 'pauseOnHover':
-                                _this.pauseOnHover = _this.item.override.pauseOnHover;
-                                break;
-                            case 'theClass':
-                                _this.theClass = _this.item.override.theClass;
-                                break;
-                            default:
-                                console.error("no option with the key " + a + " exists");
-                                break;
-                        }
-                    });
+                    Object.keys(this.item.override).forEach(function (a) { return _this[a] = _this.item.override[a]; });
                 };
                 NotificationComponent.prototype.ngOnDestroy = function () { clearTimeout(this.timer); };
                 NotificationComponent = __decorate([
@@ -116,8 +91,8 @@ System.register(["angular2/core", "./notifications.service", "./max.pipe", "./ic
                         ],
                         pipes: [max_pipe_1.MaxPipe],
                         encapsulation: core_1.ViewEncapsulation.None,
-                        template: "\n        <div class=\"simple-notification\"\n            (click)=\"removeSelf()\"\n            [class]=\"theClass\"\n            [ngClass]=\"{alert: item.type == 'alert', error: item.type == 'error', success: item.type == 'success', info: item.type == 'info'}\"\n            (mouseenter)=\"onEnter()\"\n            (mouseleave)=\"onLeave()\">\n\n            <div *ngIf=\"!item.html\">\n                <div class=\"title\">{{item.title}}</div>\n                <div class=\"content\">{{item.content | max:maxLength}}</div>\n                <div [innerHTML]=\"icons[item.type]\"></div>\n            </div>\n            <div *ngIf=\"item.html\"[innerHTML]=\"item.html\"></div>\n\n            <div class=\"progress\" *ngIf=\"showProgressBar\">\n                <span [ngStyle]=\"{'width': progressWidth + '%'}\"></span>\n            </div>\n\n        </div>\n    ",
-                        styles: ["\n        .simple-notification {\n            width: 100%;\n            padding: 10px 20px;\n            box-sizing: border-box;\n            position: relative;\n            float: left;\n            margin-bottom: 10px;\n            color: #fff;\n            cursor: pointer;\n            transition: all 0.5s;\n        }\n\n        .simple-notification .title {\n            margin: 0;\n            padding: 0;\n            line-height: 30px;\n            font-size: 20px;\n        }\n\n        .simple-notification svg {\n            position: absolute;\n            box-sizing: border-box;\n            top: 0;\n            right: 0;\n            width: auto;\n            height: 70px;\n            padding: 10px;\n            fill: #fff;\n        }\n\n        .simple-notification .content {\n            margin: 0;\n            font-size: 16px;\n            padding: 0 50px 0 0;\n            line-height: 20px;\n        }\n\n        .simple-notification.error { background: #F44336; }\n        .simple-notification.success { background: #8BC34A; }\n        .simple-notification.alert { background: #ffdb5b; }\n        .simple-notification.info { background: #03A9F4; }\n\n        .simple-notification .progress {\n            position: absolute;\n            top: 0;\n            left: 0;\n            width: 100%;\n            height: 5px;\n        }\n\n        .simple-notification .progress span {\n            float: left;\n            height: 100%;\n        }\n\n        .simple-notification.success .progress span { background: #689F38; }\n        .simple-notification.error .progress span { background: #D32F2F; }\n        .simple-notification.alert .progress span { background: #edc242; }\n        .simple-notification.info .progress span { background: #0288D1; }\n    "]
+                        template: "\n        <div class=\"simple-notification\"\n            (click)=\"removeSelf()\"\n            [class]=\"theClass\"\n            \n            [ngClass]=\"{\n                alert: item.type == 'alert', \n                error: item.type == 'error', \n                success: item.type == 'success', \n                info: item.type == 'info',\n                bare: item.type == 'bare'\n                }\"\n                \n            (mouseenter)=\"onEnter()\"\n            (mouseleave)=\"onLeave()\">\n\n            <div *ngIf=\"!item.html\">\n                <div class=\"title\">{{item.title}}</div>\n                <div class=\"content\">{{item.content | max:maxLength}}</div>\n                <div *ngIf=\"item.type != 'bare'\" [innerHTML]=\"icons[item.type]\"></div>\n            </div>\n            <div *ngIf=\"item.html\" [innerHTML]=\"item.html\"></div>\n\n            <div class=\"progress\" *ngIf=\"showProgressBar\">\n                <span [ngStyle]=\"{'width': progressWidth + '%'}\"></span>\n            </div>\n\n        </div>\n    ",
+                        styles: ["\n        .simple-notification {\n            width: 100%;\n            padding: 10px 20px;\n            box-sizing: border-box;\n            position: relative;\n            float: left;\n            margin-bottom: 10px;\n            color: #fff;\n            cursor: pointer;\n            transition: all 0.5s;\n        }\n\n        .simple-notification .title {\n            margin: 0;\n            padding: 0;\n            line-height: 30px;\n            font-size: 20px;\n        }\n\n        .simple-notification svg {\n            position: absolute;\n            box-sizing: border-box;\n            top: 0;\n            right: 0;\n            width: auto;\n            height: 70px;\n            padding: 10px;\n            fill: #fff;\n        }\n\n        .simple-notification .content {\n            margin: 0;\n            font-size: 16px;\n            padding: 0 50px 0 0;\n            line-height: 20px;\n        }\n\n        .simple-notification.error { background: #F44336; }\n        .simple-notification.success { background: #8BC34A; }\n        .simple-notification.alert { background: #ffdb5b; }\n        .simple-notification.info { background: #03A9F4; }\n\n        .simple-notification .progress {\n            position: absolute;\n            top: 0;\n            left: 0;\n            width: 100%;\n            height: 5px;\n        }\n\n        .simple-notification .progress span {\n            float: left;\n            height: 100%;\n        }\n\n        .simple-notification.success .progress span { background: #689F38; }\n        .simple-notification.error .progress span { background: #D32F2F; }\n        .simple-notification.alert .progress span { background: #edc242; }\n        .simple-notification.info .progress span { background: #0288D1; }\n        .simple-notification.bare .progress span { background: #ccc; }\n    "]
                     }), 
                     __metadata('design:paramtypes', [notifications_service_1.NotificationsService])
                 ], NotificationComponent);
