@@ -40,7 +40,7 @@ System.register(["angular2/core", 'angular2/platform/browser', "node_modules/ang
                         showProgressBar: true,
                         pauseOnHover: true,
                         preventDuplicates: false,
-                        preventLastDuplicates: false
+                        preventLastDuplicates: "visible"
                     };
                     this.html = "<p>Test</p><p>A nother test</p>";
                 }

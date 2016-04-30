@@ -47,7 +47,7 @@ export class SimpleNotificationsComponent {
     // Received values
     private lastOnBottom: boolean = true;
     private maxStack: number = 8;
-    private preventLastDuplicates: boolean = false;
+    private preventLastDuplicates: any = false;
     private preventDuplicates: boolean = false;
 
     public options: any;
@@ -60,6 +60,8 @@ export class SimpleNotificationsComponent {
     private pauseOnHover: boolean = true;
     private theClass: string;
     private expand: string;
+
+    private lastNotificationCreated: Notification;
 
     // Outputs
     private onCreate = new EventEmitter();
@@ -108,6 +110,9 @@ export class SimpleNotificationsComponent {
 
         let toBlock = this.preventLastDuplicates || this.preventDuplicates ? this.block(item) : false;
 
+        // Save this as the last created notification
+        this.lastNotificationCreated = item;
+
         if(!toBlock) {
             // Check if the notification should be added at the start or the end of the array
             if(this.lastOnBottom) {
@@ -124,11 +129,37 @@ export class SimpleNotificationsComponent {
 
     // Check if notifications should be prevented
     block(item) {
-        if(this.preventDuplicates && this.notifications.length > 0) for(let i = 0; i < this.notifications.length; i++) if(this.notifications[i].type == item.type && this.notifications[i].title == item.title && this.notifications[i].content == item.content) return true;
 
-        if(this.preventLastDuplicates && this.notifications.length > 0) {
-            if(this.lastOnBottom) return this.notifications[this.notifications.length - 1].type == item.type && this.notifications[this.notifications.length - 1].title == item.title && this.notifications[this.notifications.length - 1].content == item.content;
-            else return this.notifications[0].type == item.type && this.notifications[0].title == item.title && this.notifications[0].content == item.content;
+        if(this.preventDuplicates && this.notifications.length > 0)
+            for(let i = 0; i < this.notifications.length; i++)
+                if(this.notifications[i].type == item.type && this.notifications[i].title == item.title && this.notifications[i].content == item.content) return true;
+
+        if(this.preventLastDuplicates) {
+
+            let comp1: any = item,
+                comp2: any;
+
+            if(this.preventLastDuplicates === "visible" && this.notifications.length > 0) {
+                if(this.lastOnBottom) comp2 = this.notifications[this.notifications.length - 1];
+                else comp2 = this.notifications[0];
+            }
+
+            else if (this.preventLastDuplicates === "all" && this.lastNotificationCreated) comp2 = this.lastNotificationCreated;
+
+
+            else return false;
+
+            // Remove creation dates and ids
+            delete comp1.createdOn;
+            delete comp1.id;
+            delete comp2.createdOn;
+            delete comp2.id;
+
+            comp1 = JSON.stringify(comp1);
+            comp2 = JSON.stringify(comp2);
+
+            return comp1 === comp2;
+
         }
 
         return false

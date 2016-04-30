@@ -66,7 +66,7 @@ export class AppComponent {
         showProgressBar: true,
         pauseOnHover: true,
         preventDuplicates: false,
-        preventLastDuplicates: false
+        preventLastDuplicates: "visible"
     };
 
     create(){
