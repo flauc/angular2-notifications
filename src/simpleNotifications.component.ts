@@ -12,7 +12,7 @@ import {NotificationComponent} from "./notification.component";
     template: `
         <div class="simple-notification-wrapper">
             <simple-notification
-                *ngFor="#a of notifications; #i = index"
+                *ngFor="let a of notifications; let i = index"
                 [item]="a"
                 [timeOut]="timeOut"
                 [clickToClose]="clickToClose"
