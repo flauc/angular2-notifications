@@ -1,6 +1,6 @@
-import {Component} from "angular2/core";
-import {bootstrap} from 'angular2/platform/browser'
-import {NotificationsService, SimpleNotificationsComponent} from "node_modules/angular2-notifications"
+import {Component} from "@angular/core";
+import {bootstrap} from '@angular/platform-browser-dynamic'
+import {NotificationsService, SimpleNotificationsComponent} from "notifications"
 
 @Component({
     selector: 'app',
