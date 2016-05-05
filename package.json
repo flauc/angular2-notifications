@@ -1,6 +1,6 @@
 {
   "name": "angular2-notifications",
-  "version": "0.1.51",
+  "version": "0.1.52",
   "description": "An easy to use notification library for angular 2",
   "scripts": {
     "build": "tsc"
