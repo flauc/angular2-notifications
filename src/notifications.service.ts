@@ -1,6 +1,4 @@
-import {Injectable} from "angular2/core";
-import {EventEmitter} from "angular2/core";
-import {Notification} from "./notification";
+import {Injectable, EventEmitter} from "@angular/core";
 
 @Injectable()
 export class NotificationsService {

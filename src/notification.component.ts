@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, ViewEncapsulation} from "angular2/core";
+import {Component, OnInit, OnDestroy, ViewEncapsulation} from "@angular/core";
 import {Notification} from "./notification";
 import {NotificationsService} from "./notifications.service";
 import {NotificationType} from "./notificationType";

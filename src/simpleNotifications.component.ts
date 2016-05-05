@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, OnDestroy} from "angular2/core";
+import {Component, EventEmitter, OnInit, OnDestroy} from "@angular/core";
 import {Notification} from "./notification";
 import {NotificationsService} from "./notifications.service";
 import {NotificationComponent} from "./notification.component";

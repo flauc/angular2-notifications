@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/flauc/angular2-notifications",
   "dependencies": {
-    "angular2": "^2.0.0-beta.16"
+    "@angular/core": "2.0.0-rc.1"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
