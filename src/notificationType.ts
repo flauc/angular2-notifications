@@ -1,4 +1,4 @@
 export interface NotificationType {
-    name: string,
+    name: string
     color: string
 }

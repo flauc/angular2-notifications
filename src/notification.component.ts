@@ -1,22 +1,21 @@
-import {Component, OnInit, OnDestroy, ViewEncapsulation} from "@angular/core";
-import {Notification} from "./notification";
-import {NotificationsService} from "./notifications.service";
-import {NotificationType} from "./notificationType";
-import {MaxPipe} from "./max.pipe";
-import {Icons} from "./icons";
+import {Component, OnInit, OnDestroy, ViewEncapsulation} from "@angular/core"
+import {Notification} from "./notification"
+import {NotificationsService} from "./notifications.service"
+import {MaxPipe} from "./max.pipe"
+import {Icons} from "./icons"
 
 @Component({
-    selector: 'simple-notification',
+    selector: "simple-notification",
 
     inputs: [
-        'item',
-        'timeOut',
-        'position',
-        'clickToClose',
-        'maxLength',
-        'showProgressBar',
-        'pauseOnHover',
-        'theClass'
+        "item",
+        "timeOut",
+        "position",
+        "clickToClose",
+        "maxLength",
+        "showProgressBar",
+        "pauseOnHover",
+        "theClass"
     ],
     pipes: [MaxPipe],
     encapsulation: ViewEncapsulation.None,
@@ -39,7 +38,7 @@ import {Icons} from "./icons";
             <div *ngIf="!item.html">
                 <div class="title">{{item.title}}</div>
                 <div class="content">{{item.content | max:maxLength}}</div>
-                <div *ngIf="item.type != 'bare'" [innerHTML]="icons[item.type]"></div>
+                <div *ngIf="item.type !== 'bare'" [innerHTML]="icons[item.type]"></div>
             </div>
             <div *ngIf="item.html" [innerHTML]="item.html"></div>
 
@@ -118,12 +117,7 @@ export class NotificationComponent {
         private _service: NotificationsService
     ) {}
 
-    ngOnInit() {
-        if(this.item.override) this.attachOverrides();
-        if(this.timeOut != 0) this.startTimeOut();
-    }
-
-    public icons : any = Icons;
+    public icons: any = Icons;
 
     ////// Inputs
     public item: Notification;
@@ -150,24 +144,29 @@ export class NotificationComponent {
     private start: any;
     private diff: any;
 
-    private instance = ()=> {
+    private instance = () => {
         this.diff = (new Date().getTime() - this.start) - (this.count * this.speed);
-        if (this.count++ == this.steps) this._service.set(this.item, false);
-        else if(!this.stopTime) {
-            if(this.showProgressBar) this.progressWidth += 100/this.steps;
+        if (this.count++ === this.steps) this._service.set(this.item, false);
+        else if (!this.stopTime) {
+            if (this.showProgressBar) this.progressWidth += 100 / this.steps;
             this.timer = setTimeout(this.instance, (this.speed - this.diff));
         }
     };
 
+    ngOnInit() {
+        if (this.item.override) this.attachOverrides();
+        if (this.timeOut !== 0) this.startTimeOut();
+    }
+
     startTimeOut() {
-        this.steps = this.timeOut/10;
-        this.speed = this.timeOut/this.steps;
+        this.steps = this.timeOut / 10;
+        this.speed = this.timeOut / this.steps;
         this.start = new Date().getTime();
         this.timer = setTimeout(this.instance, this.speed);
     }
 
     onEnter() {
-        if(this.pauseOnHover) this.stopTime = true
+        if (this.pauseOnHover) this.stopTime = true
     }
 
     onLeave() {
@@ -177,8 +176,8 @@ export class NotificationComponent {
         }
     }
 
-    setPosition() { return this.position != 0 ? this.position*90 : 0; }
-    removeSelf() { if(this.clickToClose) this._service.set(this.item, false); }
+    setPosition() { return this.position !== 0 ? this.position * 90 : 0; }
+    removeSelf() { if (this.clickToClose) this._service.set(this.item, false); }
 
 
     // Attach all the overrides
