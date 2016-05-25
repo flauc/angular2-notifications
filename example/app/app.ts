@@ -1,12 +1,12 @@
 import {Component} from "@angular/core";
-import {bootstrap} from '@angular/platform-browser-dynamic'
+import {bootstrap} from "@angular/platform-browser-dynamic"
 import {NotificationsService, SimpleNotificationsComponent} from "notifications"
 
 @Component({
-    selector: 'app',
+    selector: "app",
     directives: [SimpleNotificationsComponent],
     providers: [NotificationsService],
-    template: `a
+    template: `
         <form (ngSubmit)="create()">
             <div>
                 <label>Title</label>
@@ -49,9 +49,9 @@ export class AppComponent {
     ) {}
 
 
-    public title: string = 'just a title';
-    public content: string = 'just content';
-    public type: string = 'success';
+    public title: string = "just a title";
+    public content: string = "just content";
+    public type: string = "success";
 
     public deleteId: string;
 
@@ -69,30 +69,31 @@ export class AppComponent {
         preventLastDuplicates: "visible"
     };
 
-    create(){
+    private html = `<p>Test</p><p>A nother test</p>`;
+
+    create() {
         switch (this.type) {
-            case 'success':
+            case "success":
                 this._service.success(this.title, this.content);
                 break;
-            case 'alert':
+            case "alert":
                 this._service.alert(this.title, this.content);
                 break;
-            case 'error':
+            case "error":
                 this._service.error(this.title, this.content);
                 break;
-            case 'info':
+            case "info":
                 this._service.info(this.title, this.content);
                 break;
-            case 'bare':
+            case "bare":
                 this._service.bare(this.title, this.content);
                 break;
         }
     }
 
-    withOverride() { this._service.create('pero', 'peric', 'success', {timeOut: 0, clickToClose:false, maxLength: 3, showProgressBar: true, theClass: 'overrideTest'}); }
+    withOverride() { this._service.create("pero", "peric", "success", {timeOut: 0, clickToClose:false, maxLength: 3, showProgressBar: true, theClass: "overrideTest"}); }
 
-    private html = `<p>Test</p><p>A nother test</p>`;
-    withHtml() {this._service.html(this.html, 'success');}
+    withHtml() {this._service.html(this.html, "success");}
 
     removeAll() { this._service.remove() }
 
