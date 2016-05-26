@@ -17,6 +17,7 @@
     "src/notification.ts",
     "src/notifications.service.ts",
     "src/notificationType.ts",
-    "src/simpleNotifications.component.ts"
+    "src/simpleNotifications.component.ts",
+    "src/theme.provider.ts"
   ]
 }

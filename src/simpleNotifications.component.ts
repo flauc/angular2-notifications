@@ -152,30 +152,6 @@ export class SimpleNotificationsComponent {
             else return false;
             return toCheck(comp);
 
-            // let comp1: any = item,
-            //     comp2: any;
-            //
-            // if (this.preventLastDuplicates === "visible" && this.notifications.length > 0) {
-            //     if (this.lastOnBottom) comp2 = this.notifications[this.notifications.length - 1];
-            //     else comp2 = this.notifications[0];
-            // }
-            //
-            // else if (this.preventLastDuplicates === "all" && this.lastNotificationCreated) comp2 = this.lastNotificationCreated;
-            //
-            //
-            // else return false;
-            //
-            // // Remove creation dates and ids
-            // delete comp1.createdOn;
-            // delete comp1.id;
-            // delete comp2.createdOn;
-            // delete comp2.id;
-            //
-            // comp1 = JSON.stringify(comp1);
-            // comp2 = JSON.stringify(comp2);
-            //
-            // return comp1 === comp2;
-
         }
 
         return false;

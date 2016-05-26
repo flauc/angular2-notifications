@@ -1,8 +1,25 @@
-import {Injectable, EventEmitter} from "@angular/core";
+import {Injectable, EventEmitter} from "@angular/core"
 
 @Injectable()
 export class NotificationsService {
+    
     public emiter: EventEmitter<any> = new EventEmitter();
+
+    // Theme
+    private theme: string = "../themes/material/style.css";
+
+    getTheme() { return this.theme }
+
+    setTheme(name: string) {
+        switch (name) {
+            case "material":
+                this.theme = "../themes/material/style.css";
+                break;
+            case "flat":
+                this.theme = "../themes/flat/style.css";
+                break;
+        }
+    }
 
     set(notification: any, to: boolean) { this.emiter.emit({command: "set", notification: notification, add: to}) };
     getChangeEmitter() { return this.emiter }

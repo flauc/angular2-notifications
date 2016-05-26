@@ -3,6 +3,7 @@ import {Notification} from "./notification"
 import {NotificationsService} from "./notifications.service"
 import {MaxPipe} from "./max.pipe"
 import {Icons} from "./icons"
+import {themeProvider} from "./theme.provider"
 
 @Component({
     selector: "simple-notification",
@@ -20,6 +21,7 @@ import {Icons} from "./icons"
     pipes: [MaxPipe],
     encapsulation: ViewEncapsulation.None,
     template: `
+        <p class="test">Proba</p>
         <div class="simple-notification"
             (click)="removeSelf()"
             [class]="theClass"
@@ -48,6 +50,7 @@ import {Icons} from "./icons"
 
         </div>
     `,
+    styleUrls: [themeProvider()],
     styles: [`
         .simple-notification {
             width: 100%;
