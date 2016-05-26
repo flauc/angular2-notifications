@@ -131,39 +131,62 @@ export class SimpleNotificationsComponent {
     // Check if notifications should be prevented
     block(item) {
 
+        let toCheck = item.html ? checkHtml : checkStandard;
+
         if (this.preventDuplicates && this.notifications.length > 0)
             for (let i = 0; i < this.notifications.length; i++)
-                if (this.notifications[i].type === item.type && this.notifications[i].title === item.title && this.notifications[i].content === item.content) return true;
+                if (toCheck(this.notifications[i])) return true;
+
+
 
         if (this.preventLastDuplicates) {
 
-            let comp1: any = item,
-                comp2: any;
+            let comp: any;
 
             if (this.preventLastDuplicates === "visible" && this.notifications.length > 0) {
-                if (this.lastOnBottom) comp2 = this.notifications[this.notifications.length - 1];
-                else comp2 = this.notifications[0];
+                if (this.lastOnBottom) comp = this.notifications[this.notifications.length - 1];
+                else comp = this.notifications[0];
             }
 
-            else if (this.preventLastDuplicates === "all" && this.lastNotificationCreated) comp2 = this.lastNotificationCreated;
-
-
+            else if (this.preventLastDuplicates === "all" && this.lastNotificationCreated) comp = this.lastNotificationCreated;
             else return false;
+            return toCheck(comp);
 
-            // Remove creation dates and ids
-            delete comp1.createdOn;
-            delete comp1.id;
-            delete comp2.createdOn;
-            delete comp2.id;
-
-            comp1 = JSON.stringify(comp1);
-            comp2 = JSON.stringify(comp2);
-
-            return comp1 === comp2;
+            // let comp1: any = item,
+            //     comp2: any;
+            //
+            // if (this.preventLastDuplicates === "visible" && this.notifications.length > 0) {
+            //     if (this.lastOnBottom) comp2 = this.notifications[this.notifications.length - 1];
+            //     else comp2 = this.notifications[0];
+            // }
+            //
+            // else if (this.preventLastDuplicates === "all" && this.lastNotificationCreated) comp2 = this.lastNotificationCreated;
+            //
+            //
+            // else return false;
+            //
+            // // Remove creation dates and ids
+            // delete comp1.createdOn;
+            // delete comp1.id;
+            // delete comp2.createdOn;
+            // delete comp2.id;
+            //
+            // comp1 = JSON.stringify(comp1);
+            // comp2 = JSON.stringify(comp2);
+            //
+            // return comp1 === comp2;
 
         }
 
-        return false
+        return false;
+
+        function checkHtml(checker) {
+            return checker.html ? checker.type === item.type && checker.title === item.title && checker.content === item.content && checker.html === item.html : false;
+        }
+
+        function checkStandard(checker) {
+            return checker.type === item.type && checker.title === item.title && checker.content === item.content;
+        }
     }
 
     // Attach all the changes received in the options object
