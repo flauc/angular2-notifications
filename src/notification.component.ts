@@ -21,7 +21,6 @@ import {themeProvider} from "./theme.provider"
     pipes: [MaxPipe],
     encapsulation: ViewEncapsulation.None,
     template: `
-        <p class="test">Proba</p>
         <div class="simple-notification"
             (click)="removeSelf()"
             [class]="theClass"

@@ -6,17 +6,17 @@ export class NotificationsService {
     public emiter: EventEmitter<any> = new EventEmitter();
 
     // Theme
-    private theme: string = "../themes/material/style.css";
+    private theme: string = "node_modules/angular2-notifications/themes/material/style.css";
 
     getTheme() { return this.theme }
 
     setTheme(name: string) {
         switch (name) {
             case "material":
-                this.theme = "../themes/material/style.css";
+                this.theme = "node_modules/angular2-notifications/themes/material/style.css";
                 break;
             case "flat":
-                this.theme = "../themes/flat/style.css";
+                this.theme = "node_modules/angular2-notifications/themes/flat/style.css";
                 break;
         }
     }

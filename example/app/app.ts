@@ -46,7 +46,10 @@ import {NotificationsService, SimpleNotificationsComponent} from "notifications"
 export class AppComponent {
     constructor(
         private _service: NotificationsService
-    ) {}
+    ) {
+        _service.setTheme("flat");
+        console.log(_service.getTheme());
+    }
 
 
     public title: string = "just a title";
@@ -91,9 +94,9 @@ export class AppComponent {
         }
     }
 
-    withOverride() { this._service.create("pero", "peric", "success", {timeOut: 0, clickToClose:false, maxLength: 3, showProgressBar: true, theClass: "overrideTest"}); }
+    withOverride() { this._service.create("pero", "peric", "success", {timeOut: 0, clickToClose:false, maxLength: 3, showProgressBar: true, theClass: "overrideTest"}) }
 
-    withHtml() {this._service.html(this.html, "success");}
+    withHtml() {this._service.html(this.html, "success") }
 
     removeAll() { this._service.remove() }
 
