@@ -44,13 +44,6 @@ import {NotificationsService, SimpleNotificationsComponent} from "notifications"
 })
 
 export class AppComponent {
-    constructor(
-        private _service: NotificationsService
-    ) {
-        _service.setTheme("flat");
-        console.log(_service.getTheme());
-    }
-
 
     public title: string = "just a title";
     public content: string = "just content";

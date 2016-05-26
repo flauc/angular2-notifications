@@ -5,22 +5,6 @@ export class NotificationsService {
     
     public emiter: EventEmitter<any> = new EventEmitter();
 
-    // Theme
-    private theme: string = "node_modules/angular2-notifications/themes/material/style.css";
-
-    getTheme() { return this.theme }
-
-    setTheme(name: string) {
-        switch (name) {
-            case "material":
-                this.theme = "node_modules/angular2-notifications/themes/material/style.css";
-                break;
-            case "flat":
-                this.theme = "node_modules/angular2-notifications/themes/flat/style.css";
-                break;
-        }
-    }
-
     set(notification: any, to: boolean) { this.emiter.emit({command: "set", notification: notification, add: to}) };
     getChangeEmitter() { return this.emiter }
 

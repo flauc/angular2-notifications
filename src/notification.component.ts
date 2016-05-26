@@ -3,7 +3,6 @@ import {Notification} from "./notification"
 import {NotificationsService} from "./notifications.service"
 import {MaxPipe} from "./max.pipe"
 import {Icons} from "./icons"
-import {themeProvider} from "./theme.provider"
 
 @Component({
     selector: "simple-notification",
@@ -49,7 +48,6 @@ import {themeProvider} from "./theme.provider"
 
         </div>
     `,
-    styleUrls: [themeProvider()],
     styles: [`
         .simple-notification {
             width: 100%;

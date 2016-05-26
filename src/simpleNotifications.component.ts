@@ -21,7 +21,6 @@ import {NotificationComponent} from "./notification.component"
                 [pauseOnHover]="pauseOnHover"
                 [theClass]="theClass"
                 [position]="i">
-
             </simple-notification>
         </div>
     `,
