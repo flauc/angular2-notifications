@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {bootstrap} from "@angular/platform-browser-dynamic"
-import {NotificationsService, SimpleNotificationsComponent} from "notifications"
+import {NotificationsService, SimpleNotificationsComponent, PushNotificationsService} from "notifications"
 
 @Component({
     selector: "app",
@@ -44,6 +44,10 @@ import {NotificationsService, SimpleNotificationsComponent} from "notifications"
 })
 
 export class AppComponent {
+    constructor(
+        private _service: NotificationsService,
+        private _push: PushNotificationsService
+    ) {}
 
     public title: string = "just a title";
     public content: string = "just content";
@@ -66,6 +70,10 @@ export class AppComponent {
     };
 
     private html = `<p>Test</p><p>A nother test</p>`;
+
+    ngOnInit() {
+        this._push.create({title: "Test", body: "Bla Blu"})
+    }
 
     create() {
         switch (this.type) {
