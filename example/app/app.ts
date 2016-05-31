@@ -5,7 +5,7 @@ import {NotificationsService, SimpleNotificationsComponent, PushNotificationsSer
 @Component({
     selector: "app",
     directives: [SimpleNotificationsComponent],
-    providers: [NotificationsService],
+    providers: [NotificationsService, PushNotificationsService],
     template: `
         <form (ngSubmit)="create()">
             <div>
@@ -40,6 +40,8 @@ import {NotificationsService, SimpleNotificationsComponent, PushNotificationsSer
             <input type="text" [(ngModel)]="deleteId">
             <button type="submit">Delete</button>
         </form>
+        
+        <button (click)="createPush()">Create Push</button>
     `
 })
 
@@ -71,8 +73,8 @@ export class AppComponent {
 
     private html = `<p>Test</p><p>A nother test</p>`;
 
-    ngOnInit() {
-        this._push.create({title: "Test", body: "Bla Blu"})
+    createPush() {
+        this._push.create({title: "test", body: "bla"})
     }
 
     create() {

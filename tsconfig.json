@@ -18,6 +18,6 @@
     "src/notifications.service.ts",
     "src/notificationType.ts",
     "src/simpleNotifications.component.ts",
-    "src/theme.provider.ts"
+    "src/pushNotifications.service.ts"
   ]
 }
