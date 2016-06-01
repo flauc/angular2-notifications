@@ -22,7 +22,7 @@ export class PushNotificationsService {
         return notification;
     }
 
-    private getPermission(): void {
+    getPermission(): void {
         if (!("Notification" in window)) {
             console.log("This browser does not support desktop notification.");
             return;
