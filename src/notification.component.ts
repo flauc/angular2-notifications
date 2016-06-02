@@ -112,7 +112,7 @@ import {Icons} from "./icons"
     `]
 })
 
-export class NotificationComponent {
+export class NotificationComponent implements OnInit, OnDestroy {
     constructor(
         private _service: NotificationsService
     ) {}
@@ -127,10 +127,6 @@ export class NotificationComponent {
     public theHtml: any;
 
     public overrides: any;
-    private timeOut: number;
-    private position: number;
-    private clickToClose: boolean;
-    private pauseOnHover: boolean;
 
     ////// Locals
 
@@ -144,14 +140,10 @@ export class NotificationComponent {
     private start: any;
     private diff: any;
 
-    private instance = () => {
-        this.diff = (new Date().getTime() - this.start) - (this.count * this.speed);
-        if (this.count++ === this.steps) this._service.set(this.item, false);
-        else if (!this.stopTime) {
-            if (this.showProgressBar) this.progressWidth += 100 / this.steps;
-            this.timer = setTimeout(this.instance, (this.speed - this.diff));
-        }
-    };
+    private timeOut: number;
+    private position: number;
+    private clickToClose: boolean;
+    private pauseOnHover: boolean;
 
     ngOnInit() {
         if (this.item.override) this.attachOverrides();
@@ -186,4 +178,13 @@ export class NotificationComponent {
     }
 
     ngOnDestroy() { clearTimeout(this.timer) }
+
+    private instance = () => {
+        this.diff = (new Date().getTime() - this.start) - (this.count * this.speed);
+        if (this.count++ === this.steps) this._service.set(this.item, false);
+        else if (!this.stopTime) {
+            if (this.showProgressBar) this.progressWidth += 100 / this.steps;
+            this.timer = setTimeout(this.instance, (this.speed - this.diff));
+        }
+    };
 }

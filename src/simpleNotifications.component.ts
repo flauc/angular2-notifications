@@ -35,7 +35,7 @@ import {NotificationComponent} from "./notification.component"
     `]
 })
 
-export class SimpleNotificationsComponent {
+export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     constructor(
         private _service: NotificationsService
     ) {}
