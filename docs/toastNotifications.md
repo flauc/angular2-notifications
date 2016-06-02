@@ -1,4 +1,5 @@
-# Toast Notifications (regular "on-page" notifications) Documentation
+# Toast Notifications Documentation
+Toast notifications are regular on-page notifications. 
 
 ## Setup
 Download the library with npm
