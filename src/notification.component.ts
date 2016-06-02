@@ -15,7 +15,8 @@ import {Icons} from "./icons"
         "maxLength",
         "showProgressBar",
         "pauseOnHover",
-        "theClass"
+        "theClass",
+        "iconAlignLeft"
     ],
     pipes: [MaxPipe],
     encapsulation: ViewEncapsulation.None,

@@ -68,7 +68,8 @@ export class AppComponent {
         showProgressBar: true,
         pauseOnHover: true,
         preventDuplicates: false,
-        preventLastDuplicates: "visible"
+        preventLastDuplicates: "visible",
+        iconAlignLeft: true
     };
 
     private html = `<p>Test</p><p>A nother test</p>`;
