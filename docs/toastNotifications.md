@@ -2,21 +2,6 @@
 Toast notifications are regular on-page notifications. 
 
 ## Setup
-Download the library with npm
-```
-npm install --save angular2-notifications
-```
-
-Map the library in your `system.config.js` if you're using SystemJs.
-```js
-var map = {
-    'notifications': 'node_modules/angular2-notifications'
-}
-
-var packages = {
-    'notifications': { main: 'components.js', defaultExtension: 'js' }
-}
-```
 
 Add the SimpleNotificationsComponent in to the component where you want to use the notifications.
 ```js
