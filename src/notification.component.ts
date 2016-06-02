@@ -25,12 +25,13 @@ import {Icons} from "./icons"
             [class]="theClass"
             
             [ngClass]="{
-                alert: item.type == 'alert', 
-                error: item.type == 'error', 
-                success: item.type == 'success', 
-                info: item.type == 'info',
-                bare: item.type == 'bare'
-                }"
+                'alert': item.type === 'alert', 
+                'error': item.type === 'error', 
+                'success': item.type === 'success', 
+                'info': item.type === 'info',
+                'bare': item.type === 'bare',
+                'icon-left': iconAlignLeft
+            }"
                 
             (mouseenter)="onEnter()"
             (mouseleave)="onLeave()">
@@ -77,6 +78,11 @@ import {Icons} from "./icons"
             height: 70px;
             padding: 10px;
             fill: #fff;
+        }
+        
+        .simple-notification.icon-left svg {
+            left: 0;
+            right: auto;
         }
 
         .simple-notification .content {
@@ -125,6 +131,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     public showProgressBar: boolean;
     public theClass: string;
     public theHtml: any;
+    public iconAlignLeft: boolean;
 
     public overrides: any;
 
