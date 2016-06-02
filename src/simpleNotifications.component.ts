@@ -20,7 +20,7 @@ import {NotificationComponent} from "./notification.component"
                 [showProgressBar]="showProgressBar"
                 [pauseOnHover]="pauseOnHover"
                 [theClass]="theClass"
-                [iconAlignLeft]="iconAlignLeft"
+                [rtl]="rtl"
                 [position]="i">
             </simple-notification>
         </div>
@@ -60,7 +60,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     private showProgressBar: boolean = true;
     private pauseOnHover: boolean = true;
     private theClass: string;
-    private iconAlignLeft: boolean = false;
+    private rtl: boolean = false;
     private expand: string;
 
     private lastNotificationCreated: Notification;

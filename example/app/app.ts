@@ -69,7 +69,7 @@ export class AppComponent {
         pauseOnHover: true,
         preventDuplicates: false,
         preventLastDuplicates: "visible",
-        iconAlignLeft: true
+        rtl: true
     };
 
     private html = `<p>Test</p><p>A nother test</p>`;

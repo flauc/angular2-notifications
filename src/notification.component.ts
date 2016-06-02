@@ -16,7 +16,7 @@ import {Icons} from "./icons"
         "showProgressBar",
         "pauseOnHover",
         "theClass",
-        "iconAlignLeft"
+        "rtl"
     ],
     pipes: [MaxPipe],
     encapsulation: ViewEncapsulation.None,
@@ -31,7 +31,7 @@ import {Icons} from "./icons"
                 'success': item.type === 'success', 
                 'info': item.type === 'info',
                 'bare': item.type === 'bare',
-                'icon-left': iconAlignLeft
+                'rtl-mode': rtl
             }"
                 
             (mouseenter)="onEnter()"
@@ -70,6 +70,13 @@ import {Icons} from "./icons"
             font-size: 20px;
         }
 
+        .simple-notification .content {
+            margin: 0;
+            font-size: 16px;
+            padding: 0 50px 0 0;
+            line-height: 20px;
+        }
+
         .simple-notification svg {
             position: absolute;
             box-sizing: border-box;
@@ -81,16 +88,17 @@ import {Icons} from "./icons"
             fill: #fff;
         }
         
-        .simple-notification.icon-left svg {
+        .simple-notification.rtl-mode {
+            direction: rtl;
+        }
+        
+        .simple-notification.rtl-mode .content {
+            padding: 0 0 0 50px;
+        }
+        
+        .simple-notification.rtl-mode svg {
             left: 0;
             right: auto;
-        }
-
-        .simple-notification .content {
-            margin: 0;
-            font-size: 16px;
-            padding: 0 50px 0 0;
-            line-height: 20px;
         }
 
         .simple-notification.error { background: #F44336; }
@@ -132,7 +140,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     public showProgressBar: boolean;
     public theClass: string;
     public theHtml: any;
-    public iconAlignLeft: boolean;
+    public rtl: boolean;
 
     public overrides: any;
 
