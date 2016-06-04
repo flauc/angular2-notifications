@@ -11,6 +11,8 @@
     "declaration": true
   },
   "files": [
+    "typings/browser.d.ts",
+    "components.d.ts",
     "src/icons.ts",
     "src/max.pipe.ts",
     "src/notification.component.ts",
