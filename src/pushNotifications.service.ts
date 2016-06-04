@@ -8,7 +8,7 @@ export class PushNotificationsService {
     private notificationBuffer: PushNotification;
 
     create(data: PushNotification): any {
-        
+
         if (!this.canCreate) {
             this.notificationBuffer = data;
             this.getPermission();
@@ -49,7 +49,7 @@ export class PushNotificationsService {
     }
 }
 
-interface PushNotification {
+export interface PushNotification {
     title: string
     body: string
 }
