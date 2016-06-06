@@ -1,6 +1,8 @@
+import "rxjs/Rx";
 import {Component} from "@angular/core";
 import {bootstrap} from "@angular/platform-browser-dynamic"
-import {NotificationsService, SimpleNotificationsComponent, PushNotificationsService} from "notifications"
+import {NotificationsService, SimpleNotificationsComponent} from "notifications"
+import {PushNotificationsService} from "angular2-notifications/components"
 
 @Component({
     selector: "app",
