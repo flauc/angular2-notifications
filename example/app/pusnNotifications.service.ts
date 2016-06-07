@@ -1,4 +1,5 @@
 import {Injectable, EventEmitter} from "@angular/core"
+import {Observable} from "rxjs"
 
 declare var Notification;
 
@@ -7,9 +8,6 @@ export class PushNotificationsService {
     private _canCreate: boolean = false;
 
     create(data: PushNotification, options: PushNotificationOptions) {
-
-        let eve
-
         if (!this.canCreate) {
             this.notificationBuffer = data;
             this.getPermission();
@@ -19,8 +17,8 @@ export class PushNotificationsService {
         let notification = new Notification(data.title, {
             body: data.body
         });
-
-        options.events.forEach(event => )
+        //
+        // options.events.forEach(event => )
 
 
         return notification;
