@@ -8,11 +8,11 @@ export class PushNotificationsService {
     private _canCreate: boolean = false;
 
     create(data: PushNotification, options: PushNotificationOptions) {
-        if (!this.canCreate) {
-            this.notificationBuffer = data;
-            this.getPermission();
-            return;
-        }
+        // if (!this.canCreate) {
+        //     this.notificationBuffer = data;
+        //     this.getPermission();
+        //     return;
+        // }
 
         let notification = new Notification(data.title, {
             body: data.body

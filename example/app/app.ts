@@ -2,7 +2,7 @@ import "rxjs/Rx";
 import {Component} from "@angular/core";
 import {bootstrap} from "@angular/platform-browser-dynamic"
 import {NotificationsService, SimpleNotificationsComponent} from "notifications"
-import {PushNotificationsService} from "angular2-notifications/components"
+import {PushNotificationsService} from "./pusnNotifications.service"
 
 @Component({
     selector: "app",
@@ -71,7 +71,7 @@ export class AppComponent {
         pauseOnHover: true,
         preventDuplicates: false,
         preventLastDuplicates: "visible",
-        rtl: true
+        rtl: false
     };
 
     private html = `<p>Test</p><p>A nother test</p>`;
