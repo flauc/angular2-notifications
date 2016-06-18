@@ -44,7 +44,7 @@ import {Icons} from "./icons"
             </div>
             <div *ngIf="item.html" [innerHTML]="item.html"></div>
 
-            <div class="progress" *ngIf="showProgressBar">
+            <div class="progress-loader" *ngIf="showProgressBar">
                 <span [ngStyle]="{'width': progressWidth + '%'}"></span>
             </div>
 
@@ -106,7 +106,7 @@ import {Icons} from "./icons"
         .simple-notification.alert { background: #ffdb5b; }
         .simple-notification.info { background: #03A9F4; }
 
-        .simple-notification .progress {
+        .simple-notification .progress-loader {
             position: absolute;
             top: 0;
             left: 0;
@@ -114,16 +114,16 @@ import {Icons} from "./icons"
             height: 5px;
         }
 
-        .simple-notification .progress span {
+        .simple-notification .progress-loader span {
             float: left;
             height: 100%;
         }
 
-        .simple-notification.success .progress span { background: #689F38; }
-        .simple-notification.error .progress span { background: #D32F2F; }
-        .simple-notification.alert .progress span { background: #edc242; }
-        .simple-notification.info .progress span { background: #0288D1; }
-        .simple-notification.bare .progress span { background: #ccc; }
+        .simple-notification.success .progress-loader span { background: #689F38; }
+        .simple-notification.error .progress-loader span { background: #D32F2F; }
+        .simple-notification.alert .progress-loader span { background: #edc242; }
+        .simple-notification.info .progress-loader span { background: #0288D1; }
+        .simple-notification.bare .progress-loader span { background: #ccc; }
     `]
 })
 
