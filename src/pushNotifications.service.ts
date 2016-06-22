@@ -1,4 +1,4 @@
-import {Injectable, EventEmitter} from "@angular/core"
+import {Injectable} from "@angular/core";
 
 declare var Notification;
 
@@ -7,9 +7,22 @@ export class PushNotificationsService {
 
     canActivate: boolean = false;
 
-    activate(): boolean {
-        return true;
+    activate(): {success: boolean, message?: string} {
+        if (!("Notification" in window)) return {success: false, message: "This browser does not support desktop notification."};
+        if (Notification.permission === "granted") return {success: true, message: "Permission already granted."};
+
+        else if (Notification.permission !== "denied") {
+            Notification.requestPermission()
+                .then(a => {
+                    if (a === "denied") console.log("Permission wasn't granted");
+                    else if (a === "default") console.log("The permission request was dismissed.");
+                    else this.createBuffered();
+                })
+        }
+
     }
+
+
 
     // private canCreate: boolean = false;
     // private notificationBuffer: PushNotification;
