@@ -169,13 +169,9 @@ export class NotificationComponent implements OnInit, OnDestroy {
     private pauseOnHover: boolean;
 
     ngOnInit() {
-
         if (this.item.override) this.attachOverrides();
         if (this.timeOut !== 0) this.startTimeOut();
-
         this.safeSvg = this._sanitizer.bypassSecurityTrustHtml(this.icons[this.item.type]);
-
-        console.warn(this.safeSvg);
     }
 
     startTimeOut() {
