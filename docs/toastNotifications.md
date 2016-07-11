@@ -99,8 +99,3 @@ this._notificationsService.success(
     }
 )
 ```
-
-## Planed Features
-* CSS Themes
-* Animation
-* Custom types
