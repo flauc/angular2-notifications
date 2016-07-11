@@ -70,7 +70,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     private onCreate = new EventEmitter();
     private onDestroy = new EventEmitter();
 
-    ngOnInit() {
+    ngOnInit(): void {
         // Listen for changes in the service
         this.listener = this._service.getChangeEmitter()
             .subscribe(item => {
@@ -100,14 +100,14 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     }
 
     // Default behavior on event
-    defaultBehavior(value) {
+    defaultBehavior(value): void {
         this.notifications.splice(this.notifications.indexOf(value.notification), 1);
         this.onDestroy.emit(this.buildEmit(value.notification, false));
     }
 
 
     // Add the new notification to the notification array
-    add(item) {
+    add(item): void {
         item.createdOn = new Date();
         item.id = Math.random().toString(36).substring(3);
 
@@ -131,9 +131,11 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     }
 
     // Check if notifications should be prevented
-    block(item) {
+    block(item): boolean {
 
-        let toCheck = item.html ? checkHtml : checkStandard;
+        let checkHtml = (checker) => checker.html ? checker.type === item.type && checker.title === item.title && checker.content === item.content && checker.html === item.html : false,
+            checkStandard = (checker) => checker.type === item.type && checker.title === item.title && checker.content === item.content,
+            toCheck = item.html ? checkHtml : checkStandard;
 
         if (this.preventDuplicates && this.notifications.length > 0)
             for (let i = 0; i < this.notifications.length; i++)
@@ -157,18 +159,10 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
         }
 
         return false;
-
-        function checkHtml(checker) {
-            return checker.html ? checker.type === item.type && checker.title === item.title && checker.content === item.content && checker.html === item.html : false;
-        }
-
-        function checkStandard(checker) {
-            return checker.type === item.type && checker.title === item.title && checker.content === item.content;
-        }
     }
 
     // Attach all the changes received in the options object
-    attachChanges() {
+    attachChanges(): void {
         Object.keys(this.options).forEach(a => this[a] = this.options[a])
     }
 
@@ -191,7 +185,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
         return toEmit;
     }
 
-    cleanSingle(id: string) {
+    cleanSingle(id: string): void {
         let indexOfDelete: number,
             doDelete: boolean = false;
 
@@ -205,5 +199,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
         if (doDelete) this.notifications.splice(indexOfDelete, 1);
     }
 
-    ngOnDestroy() { if (this.listener) this.listener.unsubscribe() }
+    ngOnDestroy(): void {
+        if (this.listener) this.listener.unsubscribe()
+    }
 }

@@ -133,9 +133,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     constructor(
         private _service: NotificationsService,
         private _sanitizer: DomSanitizationService
-    ) {
-
-    }
+    ) {}
 
     public icons: any = Icons;
 
@@ -166,46 +164,46 @@ export class NotificationComponent implements OnInit, OnDestroy {
     private clickToClose: boolean;
     private pauseOnHover: boolean;
 
-    ngOnInit() {
+    ngOnInit(): void {
         if (this.item.override) this.attachOverrides();
         if (this.timeOut !== 0) this.startTimeOut();
         this.safeSvg = this._sanitizer.bypassSecurityTrustHtml(this.icons[this.item.type]);
     }
 
-    startTimeOut() {
+    startTimeOut(): void {
         this.steps = this.timeOut / 10;
         this.speed = this.timeOut / this.steps;
         this.start = new Date().getTime();
         this.timer = setTimeout(this.instance, this.speed);
     }
 
-    onEnter() {
+    onEnter(): void {
         if (this.pauseOnHover) this.stopTime = true
     }
 
-    onLeave() {
+    onLeave(): void {
         if (this.pauseOnHover) {
             this.stopTime = false;
             setTimeout(this.instance, (this.speed - this.diff));
         }
     }
 
-    setPosition() {
+    setPosition(): number {
         return this.position !== 0 ? this.position * 90 : 0;
     }
 
-    removeSelf() {
+    removeSelf(): void {
         if (this.clickToClose) {
             this._service.set(this.item, false);
         }
     }
 
     // Attach all the overrides
-    attachOverrides() {
+    attachOverrides(): void {
         Object.keys(this.item.override).forEach(a => this[a] = this.item.override[a])
     }
 
-    ngOnDestroy() { clearTimeout(this.timer) }
+    ngOnDestroy(): void { clearTimeout(this.timer) }
 
     private instance = () => {
         this.diff = (new Date().getTime() - this.start) - (this.count * this.speed);
