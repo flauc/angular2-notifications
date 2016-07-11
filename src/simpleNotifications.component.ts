@@ -22,6 +22,7 @@ import {NotificationComponent} from "./notification.component"
                 [pauseOnHover]="pauseOnHover"
                 [theClass]="theClass"
                 [rtl]="rtl"
+                [animate]="animate"
                 [position]="i">
             </simple-notification>
         </div>
@@ -62,6 +63,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     private pauseOnHover: boolean = true;
     private theClass: string;
     private rtl: boolean = false;
+    private animate: boolean = true;
     private expand: string;
 
     private lastNotificationCreated: Notification;
@@ -162,7 +164,9 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
 
     // Attach all the changes received in the options object
     attachChanges(): void {
-        Object.keys(this.options).forEach(a => this[a] = this.options[a])
+        Object.keys(this.options).forEach(a => {
+            if (this.hasOwnProperty(a)) this[a] = this.options[a]
+        })
     }
 
     buildEmit(notification: Notification, to: boolean) {

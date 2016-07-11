@@ -71,7 +71,8 @@ export class AppComponent {
         pauseOnHover: true,
         preventDuplicates: false,
         preventLastDuplicates: "visible",
-        rtl: true
+        rtl: true,
+        animate: false
     };
 
     private html = `<p>Test</p><p>A nother test</p>`;

@@ -1,5 +1,5 @@
 import {DomSanitizationService, SafeHtml} from '@angular/platform-browser';
-import {Component, OnInit, OnDestroy, ViewEncapsulation} from "@angular/core"
+import {Component, OnInit, OnDestroy, ViewEncapsulation, trigger, state, style, transition, animate} from "@angular/core"
 import {Notification} from "./notification"
 import {NotificationsService} from "./notifications.service"
 import {MaxPipe} from "./max.pipe"
@@ -17,13 +17,29 @@ import {Icons} from "./icons"
         "showProgressBar",
         "pauseOnHover",
         "theClass",
-        "rtl"
+        "rtl",
+        "animate"
     ],
     pipes: [MaxPipe],
     encapsulation: ViewEncapsulation.None,
+    animations: [
+        trigger("enterLeave", [
+            state("enter", style({opacity: 1, transform: "translateX(0)"})),
+            transition("* => enter", [
+                style({opacity: 0, transform: "translateX(5%)"}),
+                animate(200)
+            ]),
+            state("leave", style({opacity: 0, transform: "translateX(-5%)"})),
+            transition("* => leave", [
+                style({opacity: 1, transform: "translateX(0)"}),
+                animate(200)
+            ]),
+        ])
+    ],
     template: `
-        <div class="simple-notification"
-            (click)="removeSelf()"
+        <div class="simple-notification" 
+            @enterLeave="item.state" 
+            (click)="removeOnClick()"
             [class]="theClass"
             
             [ngClass]="{
@@ -144,6 +160,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     public showProgressBar: boolean;
     public theClass: string;
     public rtl: boolean;
+    public animate: boolean;
 
     public overrides: any;
 
@@ -165,6 +182,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     private pauseOnHover: boolean;
 
     ngOnInit(): void {
+        if (this.animate) this.item["state"] = "enter";
         if (this.item.override) this.attachOverrides();
         if (this.timeOut !== 0) this.startTimeOut();
         this.safeSvg = this._sanitizer.bypassSecurityTrustHtml(this.icons[this.item.type]);
@@ -192,10 +210,8 @@ export class NotificationComponent implements OnInit, OnDestroy {
         return this.position !== 0 ? this.position * 90 : 0;
     }
 
-    removeSelf(): void {
-        if (this.clickToClose) {
-            this._service.set(this.item, false);
-        }
+    removeOnClick(): void {
+        if (this.clickToClose) this._remove()
     }
 
     // Attach all the overrides
@@ -207,11 +223,19 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
     private instance = () => {
         this.diff = (new Date().getTime() - this.start) - (this.count * this.speed);
-        if (this.count++ === this.steps) {
-            this._service.set(this.item, false)
-        } else if (!this.stopTime) {
+        if (this.count++ === this.steps) this._remove();
+        else if (!this.stopTime) {
             if (this.showProgressBar) this.progressWidth += 100 / this.steps;
             this.timer = setTimeout(this.instance, (this.speed - this.diff));
         }
     };
+
+    private _remove() {
+        if (this.animate) {
+            this.item["state"] = "leave";
+            setTimeout(() => this._service.set(this.item, false), 200)
+        }
+
+        else this._service.set(this.item, false)
+    }
 }
