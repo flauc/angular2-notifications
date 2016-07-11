@@ -58,6 +58,7 @@ __preventDuplicates__ | boolean | false | If true prevents duplicates of open no
 __preventLastDuplicates__ | boolean or string | false | If set to "all" prevents duplicates of the latest notification shown ( even if it isn't on screen any more ). If set to "visible" only prevents duplicates of the last created notification if the notification is currently visible.
 __theClass__ | string | null | A class that should be attached to the notification. (It doesn't exactly get attached to the selector but to the first div of the template.)
 __rtl__ | boolean | false | Adds the class `.rtl-mode` to the notification aligning the icon to the left and adding `direction: rtl`
+__animate__ | boolean | true | Determines if the notifications should have entering and leaving animations.
 
 Here is an example of passing the options to the component. You only pass the options you want changed. 
 Options passed to the component are global. They apply to all of the notifications the get created. 
@@ -75,13 +76,14 @@ public options = {
 
 If you want a specific notification to have different options you can override them when calling any of the access methods by passing them to the override object.
 The following options can be overridden:
+* id
+* animate
 * timeOut
 * showProgressBar
 * pauseOnHover
 * clickToClose 
 * maxLength
 * theClass
-* id
 
 Here is an example of overriding global options:
 ```js
