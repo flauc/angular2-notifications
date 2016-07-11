@@ -109,7 +109,6 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     // Add the new notification to the notification array
     add(item): void {
         item.createdOn = new Date();
-        item.id = Math.random().toString(36).substring(3);
 
         let toBlock = this.preventLastDuplicates || this.preventDuplicates ? this.block(item) : false;
 

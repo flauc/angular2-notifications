@@ -9,7 +9,7 @@ import {PushNotificationsService} from "./pusnNotifications.service"
     directives: [SimpleNotificationsComponent],
     providers: [NotificationsService, PushNotificationsService],
     template: `
-        <form (ngSubmit)="create()">
+        <form>
             <div>
                 <label>Title</label>
                 <p>The title of the notification.</p>
@@ -31,7 +31,7 @@ import {PushNotificationsService} from "./pusnNotifications.service"
                     <option value="bare">Bare</option>
                 </select>
             </div>
-            <button type="submit">Create Notification</button>
+            <button (click)="create()">Create Notification</button>
         </form>
         <button (click)="removeAll()">Clean all notifications</button>
         <simple-notifications [options]="options" (onCreate)="onCreate($event)" (onDestroy)="onDestroy($event)"></simple-notifications>
@@ -83,7 +83,8 @@ export class AppComponent {
     create() {
         switch (this.type) {
             case "success":
-                this._service.success(this.title, this.content);
+                let a = this._service.success(this.title, this.content, {id: 123});
+                console.log('+asf: ', a);
                 break;
             case "alert":
                 this._service.alert(this.title, this.content);
