@@ -29,6 +29,8 @@ constructor( private _service: NotificationsService ) {}
 
 This are the currently available access methods:
 
+* The access methods return the constructed notification along with the created id.
+
 | Method | Description
 ---| --- 
 `success(title: string, content: string, override?: any)` | Creates a success notification with the provided title and content.
@@ -79,6 +81,7 @@ The following options can be overridden:
 * clickToClose 
 * maxLength
 * theClass
+* id
 
 Here is an example of overriding global options:
 ```js
