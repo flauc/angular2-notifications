@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {NotificationsService, SimpleNotificationsComponent} from 'notifications';
 import {bootstrap} from '@angular/platform-browser-dynamic';
+import {NotificationsService, SimpleNotificationsComponent} from 'notifications';
 
 
 @Component({

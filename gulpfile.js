@@ -47,7 +47,7 @@ gulp.task('prod-main', ['prod-base'], () => {
     vendorStream = gulp.src(config.buildDir + 'main.js', {read: false});
 
     return target
-        .pipe(inject(series(vendorStream, cssStream), {transform: (filepath, file, i, length) => filepath.split('.')[1] === 'css' ? `<link rel="stylesheet" href="${filepath}">` : `<script src="${filepath}" defer async></script>`}))
+        .pipe(inject(series(vendorStream, cssStream), {addRootSlash: false, transform: (filepath, file, i, length) => filepath.split('.')[1] === 'css' ? `<link rel="stylesheet" href="${filepath}">` : `<script src="${filepath}" defer async></script>`}))
         .pipe(gulp.dest('./'));
 });
 
