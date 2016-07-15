@@ -1,11 +1,12 @@
-import {Component, OnInit, OnDestroy} from 'angular2/core';
-import {bootstrap} from 'angular2/platform/browser';
-import {NotificationsService} from "./src/notifications.service";
-import {SimpleNotificationsComponent} from "./src/simpleNotifications.component";
+import {Component} from '@angular/core';
+import {NotificationsService, SimpleNotificationsComponent} from 'notifications';
+import {bootstrap} from '@angular/platform-browser-dynamic';
+
 
 @Component({
+    moduleId: module.id,
     selector: 'app',
-    templateUrl: 'app/app.html',
+    templateUrl: 'app.html',
     directives: [SimpleNotificationsComponent],
     providers: [NotificationsService]
 })
