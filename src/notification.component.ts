@@ -56,14 +56,14 @@ import {Icons} from "./icons"
             (mouseleave)="onLeave()">
 
             <div *ngIf="!item.html">
-                <div class="title">{{item.title}}</div>
-                <div class="content">{{item.content | max:maxLength}}</div>
+                <div class="sn-title">{{item.title}}</div>
+                <div class="sn-content">{{item.content | max:maxLength}}</div>
 
                 <div *ngIf="item.type !== 'bare'" [innerHTML]="safeSvg"></div>
             </div>
             <div *ngIf="item.html" [innerHTML]="item.html"></div>
 
-            <div class="progress-loader" *ngIf="showProgressBar">
+            <div class="sn-progress-loader" *ngIf="showProgressBar">
                 <span [ngStyle]="{'width': progressWidth + '%'}"></span>
             </div>
 
@@ -82,14 +82,14 @@ import {Icons} from "./icons"
             transition: all 0.5s;
         }
 
-        .simple-notification .title {
+        .simple-notification .sn-title {
             margin: 0;
             padding: 0;
             line-height: 30px;
             font-size: 20px;
         }
 
-        .simple-notification .content {
+        .simple-notification .sn-content {
             margin: 0;
             font-size: 16px;
             padding: 0 50px 0 0;
@@ -125,7 +125,7 @@ import {Icons} from "./icons"
         .simple-notification.alert { background: #ffdb5b; }
         .simple-notification.info { background: #03A9F4; }
 
-        .simple-notification .progress-loader {
+        .simple-notification .sn-progress-loader {
             position: absolute;
             top: 0;
             left: 0;
@@ -133,16 +133,16 @@ import {Icons} from "./icons"
             height: 5px;
         }
 
-        .simple-notification .progress-loader span {
+        .simple-notification .sn-progress-loader span {
             float: left;
             height: 100%;
         }
 
-        .simple-notification.success .progress-loader span { background: #689F38; }
-        .simple-notification.error .progress-loader span { background: #D32F2F; }
-        .simple-notification.alert .progress-loader span { background: #edc242; }
-        .simple-notification.info .progress-loader span { background: #0288D1; }
-        .simple-notification.bare .progress-loader span { background: #ccc; }
+        .simple-notification.success .sn-progress-loader span { background: #689F38; }
+        .simple-notification.error .sn-progress-loader span { background: #D32F2F; }
+        .simple-notification.alert .sn-progress-loader span { background: #edc242; }
+        .simple-notification.info .sn-progress-loader span { background: #0288D1; }
+        .simple-notification.bare .sn-progress-loader span { background: #ccc; }
     `]
 })
 
