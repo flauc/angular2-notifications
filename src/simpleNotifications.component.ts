@@ -2,7 +2,8 @@ import {Component, EventEmitter, OnInit, OnDestroy, ViewEncapsulation} from "@an
 import {Notification} from "./notification"
 import {NotificationsService} from "./notifications.service"
 import {NotificationComponent} from "./notification.component"
-
+import {defaultIcons, Icons} from "./icons"
+import {Options} from "./options";
 
 @Component({
     selector: "simple-notifications",
@@ -23,7 +24,9 @@ import {NotificationComponent} from "./notification.component"
                 [theClass]="theClass"
                 [rtl]="rtl"
                 [animate]="animate"
-                [position]="i">
+                [position]="i"
+                [icons]="icons"
+                >
             </simple-notification>
         </div>
     `,
@@ -45,7 +48,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
 
 
     public notifications: Notification[] = [];
-    public options: any;
+    public options: Options;
 
     private listener: any;
 
@@ -65,6 +68,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     private rtl: boolean = false;
     private animate: boolean = true;
     private expand: string;
+    private icons: Icons = defaultIcons;
 
     private lastNotificationCreated: Notification;
 

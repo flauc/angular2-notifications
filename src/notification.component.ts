@@ -18,7 +18,8 @@ import {Icons} from "./icons"
         "pauseOnHover",
         "theClass",
         "rtl",
-        "animate"
+        "animate",
+        "icons"
     ],
     pipes: [MaxPipe],
     encapsulation: ViewEncapsulation.None,
@@ -37,27 +38,27 @@ import {Icons} from "./icons"
         ])
     ],
     template: `
-        <div class="simple-notification" 
-            @enterLeave="item.state" 
+        <div class="simple-notification"
+            @enterLeave="item.state"
             (click)="removeOnClick()"
             [class]="theClass"
-            
+
             [ngClass]="{
-                'alert': item.type === 'alert', 
-                'error': item.type === 'error', 
-                'success': item.type === 'success', 
+                'alert': item.type === 'alert',
+                'error': item.type === 'error',
+                'success': item.type === 'success',
                 'info': item.type === 'info',
                 'bare': item.type === 'bare',
                 'rtl-mode': rtl
             }"
-                
+
             (mouseenter)="onEnter()"
             (mouseleave)="onLeave()">
 
             <div *ngIf="!item.html">
                 <div class="title">{{item.title}}</div>
                 <div class="content">{{item.content | max:maxLength}}</div>
-                
+
                 <div *ngIf="item.type !== 'bare'" [innerHTML]="safeSvg"></div>
             </div>
             <div *ngIf="item.html" [innerHTML]="item.html"></div>
@@ -105,15 +106,15 @@ import {Icons} from "./icons"
             padding: 10px;
             fill: #fff;
         }
-        
+
         .simple-notification.rtl-mode {
             direction: rtl;
         }
-        
+
         .simple-notification.rtl-mode .content {
             padding: 0 0 0 50px;
         }
-        
+
         .simple-notification.rtl-mode svg {
             left: 0;
             right: auto;
@@ -151,7 +152,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
         private _sanitizer: DomSanitizationService
     ) {}
 
-    public icons: any = Icons;
+    public icons: Icons;
 
     ////// Inputs
     public safeSvg: SafeHtml;
