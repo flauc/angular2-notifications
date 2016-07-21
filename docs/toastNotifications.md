@@ -1,5 +1,5 @@
 # Toast Notifications Documentation
-Toast notifications are regular on-page notifications. 
+Toast notifications are regular on-page notifications.
 
 ## Setup
 
@@ -32,7 +32,7 @@ This are the currently available access methods:
 * The access methods return the constructed notification along with the created id.
 
 | Method | Description
----| --- 
+---| ---
 `success(title: string, content: string, override?: any)` | Creates a success notification with the provided title and content.
 `error(title: string, content: string, override?: any)`  | Creates an error notification with the provided title and content.
 `alert(title: string, content: string, override?: any)` | Creates an alert notification with the provided title and content.
@@ -45,7 +45,7 @@ This are the currently available access methods:
 ## Options
 This are the current options that can be pass to the component:
 
-Option | Type | Default | Description | 
+Option | Type | Default | Description |
 ------------ | ------------- | ------------- | -------------
 __timeOut__ | int | 0 | Determine how long a notification should wait before closing. If set to 0 a notification won't close it self.
 __showProgressBar__ | boolean | true | Determine if a progress bar should be shown or not.
@@ -59,9 +59,21 @@ __preventLastDuplicates__ | boolean or string | false | If set to "all" prevents
 __theClass__ | string | null | A class that should be attached to the notification. (It doesn't exactly get attached to the selector but to the first div of the template.)
 __rtl__ | boolean | false | Adds the class `.rtl-mode` to the notification aligning the icon to the left and adding `direction: rtl`
 __animate__ | boolean | true | Determines if the notifications should have entering and leaving animations.
+__icons__ | Icons | DefaultIcons | Overrides the default icons
 
-Here is an example of passing the options to the component. You only pass the options you want changed. 
-Options passed to the component are global. They apply to all of the notifications the get created. 
+## Icons
+
+Option | Type | Default | Description |
+------------ | ------------- | ------------- | -------------
+__alert__ | string | Clock | html string for alert icon
+__error__ | string | Exclamation Point | html string for alert icon
+__info__ | string | Info | html string for alert icon
+__success__ | string | Check | html string for alert icon
+
+
+
+Here is an example of passing the options to the component. You only pass the options you want changed.
+Options passed to the component are global. They apply to all of the notifications the get created.
 
 ```js
 ...
@@ -81,15 +93,15 @@ The following options can be overridden:
 * timeOut
 * showProgressBar
 * pauseOnHover
-* clickToClose 
+* clickToClose
 * maxLength
 * theClass
 
 Here is an example of overriding global options:
 ```js
 this._notificationsService.success(
-    title: 'example', 
-    content:'example', 
+    title: 'example',
+    content:'example',
     override: {
         timeOut: 5000,
         showProgressBar: true,
