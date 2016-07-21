@@ -1,7 +1,7 @@
 export interface Notification {
-    id: string
+    id?: string
     type: string
-    createdOn: Date
+    createdOn?: Date
     title?: string
     content?: string
     override?: any
