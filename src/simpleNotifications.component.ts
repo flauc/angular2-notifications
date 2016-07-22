@@ -38,6 +38,13 @@ import {Options} from "./options";
             width: 300px;
             z-index: 1000;
         }
+        
+        @media (max-width: 340px) {
+            .simple-notification-wrapper {
+                width: auto;
+                left: 20px;
+            }
+        }
     `]
 })
 
