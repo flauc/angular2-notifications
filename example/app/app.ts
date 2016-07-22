@@ -72,7 +72,8 @@ export class AppComponent {
         preventDuplicates: false,
         preventLastDuplicates: "visible",
         rtl: true,
-        animate: false
+        animate: false,
+        position: ["right", "bottom"]
     };
 
     private html = `<p>Test</p><p>A nother test</p>`;

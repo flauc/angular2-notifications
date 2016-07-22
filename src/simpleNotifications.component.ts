@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, OnDestroy, ViewEncapsulation} from "@angular/core"
+import {Component, EventEmitter, OnInit, OnDestroy, ViewEncapsulation, Input} from "@angular/core"
 import {Notification} from "./notification"
 import {NotificationsService} from "./notifications.service"
 import {NotificationComponent} from "./notification.component"
@@ -12,7 +12,7 @@ import {Options} from "./options";
     outputs: ["onCreate", "onDestroy"],
     encapsulation: ViewEncapsulation.None,
     template: `
-        <div class="simple-notification-wrapper">
+        <div class="simple-notification-wrapper" [ngClass]="position">
             <simple-notification
                 *ngFor="let a of notifications; let i = index"
                 [item]="a"
@@ -33,16 +33,20 @@ import {Options} from "./options";
     styles: [`
         .simple-notification-wrapper {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
             width: 300px;
             z-index: 1000;
         }
+        
+        .simple-notification-wrapper.left { left: 20px; }
+        .simple-notification-wrapper.top { top: 20px; }
+        .simple-notification-wrapper.right { right: 20px; }
+        .simple-notification-wrapper.bottom { bottom: 20px; }
         
         @media (max-width: 340px) {
             .simple-notification-wrapper {
                 width: auto;
                 left: 20px;
+                right: 20px;
             }
         }
     `]
@@ -53,9 +57,12 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
         private _service: NotificationsService
     ) {}
 
+    @Input() set options(opt: Options) {
+        this.attachChanges(opt)
+    }
 
     public notifications: Notification[] = [];
-    public options: Options;
+    public position: string[] | string = ["right", "bottom"];
 
     private listener: any;
 
@@ -108,8 +115,6 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
                         break;
                 }
             });
-
-        this.attachChanges();
     }
 
     // Default behavior on event
@@ -174,9 +179,9 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     }
 
     // Attach all the changes received in the options object
-    attachChanges(): void {
-        Object.keys(this.options).forEach(a => {
-            if (this.hasOwnProperty(a)) this[a] = this.options[a]
+    attachChanges(options): void {
+        Object.keys(options).forEach(a => {
+            if (this.hasOwnProperty(a)) this[a] = options[a]
         })
     }
 
