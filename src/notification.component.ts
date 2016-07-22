@@ -92,7 +92,7 @@ import {Icons} from "./icons"
         .simple-notification .sn-content {
             margin: 0;
             font-size: 16px;
-            padding: 0 50px 0 0;
+            padding: 0 0 0 50px;
             line-height: 20px;
         }
 
