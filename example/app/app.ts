@@ -86,7 +86,6 @@ export class AppComponent {
         switch (this.type) {
             case "success":
                 let a = this._service.success(this.title, this.content, {id: 123});
-                console.log('+asf: ', a);
                 break;
             case "alert":
                 this._service.alert(this.title, this.content);

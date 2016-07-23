@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, OnDestroy, ViewEncapsulation, Input} from "@angular/core"
+import {Component, EventEmitter, OnInit, OnDestroy, ViewEncapsulation, Input, Output} from "@angular/core"
 import {Notification} from "./notification"
 import {NotificationsService} from "./notifications.service"
 import {NotificationComponent} from "./notification.component"
@@ -8,8 +8,6 @@ import {Options} from "./options";
 @Component({
     selector: "simple-notifications",
     directives: [NotificationComponent],
-    inputs: ["options"],
-    outputs: ["onCreate", "onDestroy"],
     encapsulation: ViewEncapsulation.None,
     template: `
         <div class="simple-notification-wrapper" [ngClass]="position">
@@ -61,6 +59,9 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
         this.attachChanges(opt)
     }
 
+    @Output() onCreate = new EventEmitter();
+    @Output() onDestroy = new EventEmitter();
+
     public notifications: Notification[] = [];
     public position: string[] | string = ["right", "bottom"];
 
@@ -86,9 +87,6 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
 
     private lastNotificationCreated: Notification;
 
-    // Outputs
-    private onCreate = new EventEmitter();
-    private onDestroy = new EventEmitter();
 
     ngOnInit(): void {
         // Listen for changes in the service
