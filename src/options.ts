@@ -14,4 +14,5 @@ export interface Options {
     rtl?: boolean;
     animate?: boolean;
     icons?: Icons;
+    position?: ["top" | "bottom", "right" | "left"];
 }

@@ -47,6 +47,7 @@ This are the current options that can be pass to the component:
 
 Option | Type | Default | Description |
 ------------ | ------------- | ------------- | -------------
+__position__ | ["top" or "bottom", "right" or "left"] | ["bottom", "right"] | Set the position on the screen where the notifications should display. Pass an array with two values example: ["top", "left"]. 
 __timeOut__ | int | 0 | Determine how long a notification should wait before closing. If set to 0 a notification won't close it self.
 __showProgressBar__ | boolean | true | Determine if a progress bar should be shown or not.
 __pauseOnHover__ | boolean | true | Determines if the timeOut should be paused when the notification is hovered.
@@ -70,8 +71,6 @@ __error__ | string | Exclamation Point | html string for alert icon
 __info__ | string | Info | html string for alert icon
 __success__ | string | Check | html string for alert icon
 
-
-
 Here is an example of passing the options to the component. You only pass the options you want changed.
 Options passed to the component are global. They apply to all of the notifications the get created.
 
@@ -80,6 +79,7 @@ Options passed to the component are global. They apply to all of the notificatio
 template: '<simple-notifications [options]="options"></simple-notifications>'
 ...
 public options = {
+    position: ["bottom", "left"],
     timeOut: 5000,
     lastOnBottom: true
     ...
@@ -98,7 +98,7 @@ The following options can be overridden:
 * theClass
 * icons
 
-Here is an example of overriding global options:
+This is an example of overriding global options:
 ```js
 this._notificationsService.success(
     title: 'example',

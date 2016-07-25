@@ -63,7 +63,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     @Output() onDestroy = new EventEmitter();
 
     public notifications: Notification[] = [];
-    public position: string[] | string = ["right", "bottom"];
+    public position: ["top" | "bottom", "right" | "left"] = ["bottom", "right"];
 
     private listener: any;
 
