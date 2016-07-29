@@ -28,12 +28,12 @@ import {Icons} from "./icons"
             state("enter", style({opacity: 1, transform: "translateX(0)"})),
             transition("* => enter", [
                 style({opacity: 0, transform: "translateX(5%)"}),
-                animate(200)
+                animate("200ms ease-in-out")
             ]),
             state("leave", style({opacity: 0, transform: "translateX(-5%)"})),
             transition("* => leave", [
                 style({opacity: 1, transform: "translateX(0)"}),
-                animate(200)
+                animate("200ms ease-in-out")
             ]),
         ])
     ],
