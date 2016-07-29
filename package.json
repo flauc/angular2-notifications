@@ -19,7 +19,7 @@
     "@angular/platform-browser": "2.0.0-rc.4",
     "@angular/platform-browser-dynamic": "2.0.0-rc.4",
     "@angular/upgrade": "2.0.0-rc.4",
-    "angular2-notifications": "^0.2.0",
+    "angular2-notifications": "^0.2.4",
     "compression": "^1.6.2",
     "core-js": "^2.4.0",
     "express": "^4.13.4",

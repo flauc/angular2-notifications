@@ -1,539 +1,9 @@
-!function(e){function r(e,r,o){return 4===arguments.length?t.apply(this,arguments):void n(e,{declarative:!0,deps:r,declare:o})}function t(e,r,t,o){n(e,{declarative:!1,deps:r,executingRequire:t,execute:o})}function n(e,r){r.name=e,e in v||(v[e]=r),r.normalizedDeps=r.deps}function o(e,r){if(r[e.groupIndex]=r[e.groupIndex]||[],-1==g.call(r[e.groupIndex],e)){r[e.groupIndex].push(e);for(var t=0,n=e.normalizedDeps.length;n>t;t++){var a=e.normalizedDeps[t],u=v[a];if(u&&!u.evaluated){var d=e.groupIndex+(u.declarative!=e.declarative);if(void 0===u.groupIndex||u.groupIndex<d){if(void 0!==u.groupIndex&&(r[u.groupIndex].splice(g.call(r[u.groupIndex],u),1),0==r[u.groupIndex].length))throw new TypeError("Mixed dependency cycle detected");u.groupIndex=d}o(u,r)}}}}function a(e){var r=v[e];r.groupIndex=0;var t=[];o(r,t);for(var n=!!r.declarative==t.length%2,a=t.length-1;a>=0;a--){for(var u=t[a],i=0;i<u.length;i++){var s=u[i];n?d(s):l(s)}n=!n}}function u(e){return y[e]||(y[e]={name:e,dependencies:[],exports:{},importers:[]})}function d(r){if(!r.module){var t=r.module=u(r.name),n=r.module.exports,o=r.declare.call(e,function(e,r){if(t.locked=!0,"object"==typeof e)for(var o in e)n[o]=e[o];else n[e]=r;for(var a=0,u=t.importers.length;u>a;a++){var d=t.importers[a];if(!d.locked)for(var i=0;i<d.dependencies.length;++i)d.dependencies[i]===t&&d.setters[i](n)}return t.locked=!1,r},r.name);t.setters=o.setters,t.execute=o.execute;for(var a=0,i=r.normalizedDeps.length;i>a;a++){var l,s=r.normalizedDeps[a],c=v[s],f=y[s];f?l=f.exports:c&&!c.declarative?l=c.esModule:c?(d(c),f=c.module,l=f.exports):l=p(s),f&&f.importers?(f.importers.push(t),t.dependencies.push(f)):t.dependencies.push(null),t.setters[a]&&t.setters[a](l)}}}function i(e){var r,t=v[e];if(t)t.declarative?f(e,[]):t.evaluated||l(t),r=t.module.exports;else if(r=p(e),!r)throw new Error("Unable to load dependency "+e+".");return(!t||t.declarative)&&r&&r.__useDefault?r["default"]:r}function l(r){if(!r.module){var t={},n=r.module={exports:t,id:r.name};if(!r.executingRequire)for(var o=0,a=r.normalizedDeps.length;a>o;o++){var u=r.normalizedDeps[o],d=v[u];d&&l(d)}r.evaluated=!0;var c=r.execute.call(e,function(e){for(var t=0,n=r.deps.length;n>t;t++)if(r.deps[t]==e)return i(r.normalizedDeps[t]);throw new TypeError("Module "+e+" not declared as a dependency.")},t,n);c&&(n.exports=c),t=n.exports,t&&t.__esModule?r.esModule=t:r.esModule=s(t)}}function s(r){var t={};if(("object"==typeof r||"function"==typeof r)&&r!==e)if(m)for(var n in r)"default"!==n&&c(t,r,n);else{var o=r&&r.hasOwnProperty;for(var n in r)"default"===n||o&&!r.hasOwnProperty(n)||(t[n]=r[n])}return t["default"]=r,x(t,"__useDefault",{value:!0}),t}function c(e,r,t){try{var n;(n=Object.getOwnPropertyDescriptor(r,t))&&x(e,t,n)}catch(o){return e[t]=r[t],!1}}function f(r,t){var n=v[r];if(n&&!n.evaluated&&n.declarative){t.push(r);for(var o=0,a=n.normalizedDeps.length;a>o;o++){var u=n.normalizedDeps[o];-1==g.call(t,u)&&(v[u]?f(u,t):p(u))}n.evaluated||(n.evaluated=!0,n.module.execute.call(e))}}function p(e){if(I[e])return I[e];if("@node/"==e.substr(0,6))return D(e.substr(6));var r=v[e];if(!r)throw"Module "+e+" not present.";return a(e),f(e,[]),v[e]=void 0,r.declarative&&x(r.module.exports,"__esModule",{value:!0}),I[e]=r.declarative?r.module.exports:r.esModule}var v={},g=Array.prototype.indexOf||function(e){for(var r=0,t=this.length;t>r;r++)if(this[r]===e)return r;return-1},m=!0;try{Object.getOwnPropertyDescriptor({a:0},"a")}catch(h){m=!1}var x;!function(){try{Object.defineProperty({},"a",{})&&(x=Object.defineProperty)}catch(e){x=function(e,r,t){try{e[r]=t.value||t.get.call(e)}catch(n){}}}}();var y={},D="undefined"!=typeof System&&System._nodeRequire||"undefined"!=typeof require&&require.resolve&&"undefined"!=typeof process&&require,I={"@empty":{}};return function(e,n,o,a){return function(u){u(function(u){for(var d={_nodeRequire:D,register:r,registerDynamic:t,get:p,set:function(e,r){I[e]=r},newModule:function(e){return e}},i=0;i<n.length;i++)(function(e,r){r&&r.__esModule?I[e]=r:I[e]=s(r)})(n[i],arguments[i]);a(d);var l=p(e[0]);if(e.length>1)for(var i=1;i<e.length;i++)p(e[i]);return o?l["default"]:l})}}}("undefined"!=typeof self?self:global)
+!function(e){function r(e,r,o){return 4===arguments.length?t.apply(this,arguments):void n(e,{declarative:!0,deps:r,declare:o})}function t(e,r,t,o){n(e,{declarative:!1,deps:r,executingRequire:t,execute:o})}function n(e,r){r.name=e,e in v||(v[e]=r),r.normalizedDeps=r.deps}function o(e,r){if(r[e.groupIndex]=r[e.groupIndex]||[],-1==g.call(r[e.groupIndex],e)){r[e.groupIndex].push(e);for(var t=0,n=e.normalizedDeps.length;n>t;t++){var a=e.normalizedDeps[t],u=v[a];if(u&&!u.evaluated){var d=e.groupIndex+(u.declarative!=e.declarative);if(void 0===u.groupIndex||u.groupIndex<d){if(void 0!==u.groupIndex&&(r[u.groupIndex].splice(g.call(r[u.groupIndex],u),1),0==r[u.groupIndex].length))throw new TypeError("Mixed dependency cycle detected");u.groupIndex=d}o(u,r)}}}}function a(e){var r=v[e];r.groupIndex=0;var t=[];o(r,t);for(var n=!!r.declarative==t.length%2,a=t.length-1;a>=0;a--){for(var u=t[a],i=0;i<u.length;i++){var s=u[i];n?d(s):l(s)}n=!n}}function u(e){return y[e]||(y[e]={name:e,dependencies:[],exports:{},importers:[]})}function d(r){if(!r.module){var t=r.module=u(r.name),n=r.module.exports,o=r.declare.call(e,function(e,r){if(t.locked=!0,"object"==typeof e)for(var o in e)n[o]=e[o];else n[e]=r;for(var a=0,u=t.importers.length;u>a;a++){var d=t.importers[a];if(!d.locked)for(var i=0;i<d.dependencies.length;++i)d.dependencies[i]===t&&d.setters[i](n)}return t.locked=!1,r},{id:r.name});t.setters=o.setters,t.execute=o.execute;for(var a=0,i=r.normalizedDeps.length;i>a;a++){var l,s=r.normalizedDeps[a],c=v[s],f=y[s];f?l=f.exports:c&&!c.declarative?l=c.esModule:c?(d(c),f=c.module,l=f.exports):l=p(s),f&&f.importers?(f.importers.push(t),t.dependencies.push(f)):t.dependencies.push(null),t.setters[a]&&t.setters[a](l)}}}function i(e){var r,t=v[e];if(t)t.declarative?f(e,[]):t.evaluated||l(t),r=t.module.exports;else if(r=p(e),!r)throw new Error("Unable to load dependency "+e+".");return(!t||t.declarative)&&r&&r.__useDefault?r["default"]:r}function l(r){if(!r.module){var t={},n=r.module={exports:t,id:r.name};if(!r.executingRequire)for(var o=0,a=r.normalizedDeps.length;a>o;o++){var u=r.normalizedDeps[o],d=v[u];d&&l(d)}r.evaluated=!0;var c=r.execute.call(e,function(e){for(var t=0,n=r.deps.length;n>t;t++)if(r.deps[t]==e)return i(r.normalizedDeps[t]);throw new TypeError("Module "+e+" not declared as a dependency.")},t,n);c&&(n.exports=c),t=n.exports,t&&t.__esModule?r.esModule=t:r.esModule=s(t)}}function s(r){var t={};if(("object"==typeof r||"function"==typeof r)&&r!==e)if(m)for(var n in r)"default"!==n&&c(t,r,n);else{var o=r&&r.hasOwnProperty;for(var n in r)"default"===n||o&&!r.hasOwnProperty(n)||(t[n]=r[n])}return t["default"]=r,x(t,"__useDefault",{value:!0}),t}function c(e,r,t){try{var n;(n=Object.getOwnPropertyDescriptor(r,t))&&x(e,t,n)}catch(o){return e[t]=r[t],!1}}function f(r,t){var n=v[r];if(n&&!n.evaluated&&n.declarative){t.push(r);for(var o=0,a=n.normalizedDeps.length;a>o;o++){var u=n.normalizedDeps[o];-1==g.call(t,u)&&(v[u]?f(u,t):p(u))}n.evaluated||(n.evaluated=!0,n.module.execute.call(e))}}function p(e){if(I[e])return I[e];if("@node/"==e.substr(0,6))return D(e.substr(6));var r=v[e];if(!r)throw"Module "+e+" not present.";return a(e),f(e,[]),v[e]=void 0,r.declarative&&x(r.module.exports,"__esModule",{value:!0}),I[e]=r.declarative?r.module.exports:r.esModule}var v={},g=Array.prototype.indexOf||function(e){for(var r=0,t=this.length;t>r;r++)if(this[r]===e)return r;return-1},m=!0;try{Object.getOwnPropertyDescriptor({a:0},"a")}catch(h){m=!1}var x;!function(){try{Object.defineProperty({},"a",{})&&(x=Object.defineProperty)}catch(e){x=function(e,r,t){try{e[r]=t.value||t.get.call(e)}catch(n){}}}}();var y={},D="undefined"!=typeof System&&System._nodeRequire||"undefined"!=typeof require&&require.resolve&&"undefined"!=typeof process&&require,I={"@empty":{}};return function(e,n,o,a){return function(u){u(function(u){for(var d={_nodeRequire:D,register:r,registerDynamic:t,get:p,set:function(e,r){I[e]=r},newModule:function(e){return e}},i=0;i<n.length;i++)(function(e,r){r&&r.__esModule?I[e]=r:I[e]=s(r)})(n[i],arguments[i]);a(d);var l=p(e[0]);if(e.length>1)for(var i=1;i<e.length;i++)p(e[i]);return o?l["default"]:l})}}}("undefined"!=typeof self?self:global)
 
-(["1"], [], false, function($__System) {
+(["1"], [], true, function($__System) {
 var require = this.require, exports = this.exports, module = this.module;
+!function(e){function r(e,r){for(var n=e.split(".");n.length;)r=r[n.shift()];return r}function n(n){if("string"==typeof n)return r(n,e);if(!(n instanceof Array))throw new Error("Global exports must be a string or array.");for(var t={},o=!0,f=0;f<n.length;f++){var i=r(n[f],e);o&&(t["default"]=i,o=!1),t[n[f].split(".").pop()]=i}return t}function t(r){if(Object.keys)Object.keys(e).forEach(r);else for(var n in e)a.call(e,n)&&r(n)}function o(r){t(function(n){if(-1==l.call(s,n)){try{var t=e[n]}catch(o){s.push(n)}r(n,t)}})}var f,i=$__System,a=Object.prototype.hasOwnProperty,l=Array.prototype.indexOf||function(e){for(var r=0,n=this.length;n>r;r++)if(this[r]===e)return r;return-1},s=["_g","sessionStorage","localStorage","clipboardData","frames","frameElement","external","mozAnimationStartTime","webkitStorageInfo","webkitIndexedDB","mozInnerScreenY","mozInnerScreenX"];i.set("@@global-helpers",i.newModule({prepareGlobal:function(r,t,i){var a=e.define;e.define=void 0;var l;if(i){l={};for(var s in i)l[s]=e[s],e[s]=i[s]}return t||(f={},o(function(e,r){f[e]=r})),function(){var r;if(t)r=n(t);else{r={};var i,s;o(function(e,n){f[e]!==n&&"undefined"!=typeof n&&(r[e]=n,"undefined"!=typeof i?s||i===n||(s=!0):i=n)}),r=s?r:i}if(l)for(var u in l)e[u]=l[u];return e.define=a,r}}}))}("undefined"!=typeof self?self:global);
 !function(e){function n(e,n){e=e.replace(l,"");var r=e.match(u),t=(r[1].split(",")[n]||"require").replace(s,""),i=p[t]||(p[t]=new RegExp(a+t+f,"g"));i.lastIndex=0;for(var o,c=[];o=i.exec(e);)c.push(o[2]||o[3]);return c}function r(e,n,t,o){if("object"==typeof e&&!(e instanceof Array))return r.apply(null,Array.prototype.splice.call(arguments,1,arguments.length-1));if("string"==typeof e&&"function"==typeof n&&(e=[e]),!(e instanceof Array)){if("string"==typeof e){var l=i.get(e);return l.__useDefault?l["default"]:l}throw new TypeError("Invalid require")}for(var a=[],f=0;f<e.length;f++)a.push(i["import"](e[f],o));Promise.all(a).then(function(e){n&&n.apply(null,e)},t)}function t(t,l,a){"string"!=typeof t&&(a=l,l=t,t=null),l instanceof Array||(a=l,l=["require","exports","module"].splice(0,a.length)),"function"!=typeof a&&(a=function(e){return function(){return e}}(a)),void 0===l[l.length-1]&&l.pop();var f,u,s;-1!=(f=o.call(l,"require"))&&(l.splice(f,1),t||(l=l.concat(n(a.toString(),f)))),-1!=(u=o.call(l,"exports"))&&l.splice(u,1),-1!=(s=o.call(l,"module"))&&l.splice(s,1);var p={name:t,deps:l,execute:function(n,t,o){for(var p=[],c=0;c<l.length;c++)p.push(n(l[c]));o.uri=o.id,o.config=function(){},-1!=s&&p.splice(s,0,o),-1!=u&&p.splice(u,0,t),-1!=f&&p.splice(f,0,function(e,t,l){return"string"==typeof e&&"function"!=typeof t?n(e):r.call(i,e,t,l,o.id)});var d=a.apply(-1==u?e:t,p);return"undefined"==typeof d&&o&&(d=o.exports),"undefined"!=typeof d?d:void 0}};if(t)c.anonDefine||c.isBundle?c.anonDefine&&c.anonDefine.name&&(c.anonDefine=null):c.anonDefine=p,c.isBundle=!0,i.registerDynamic(p.name,p.deps,!1,p.execute);else{if(c.anonDefine&&!c.anonDefine.name)throw new Error("Multiple anonymous defines in module "+t);c.anonDefine=p}}var i=$__System,o=Array.prototype.indexOf||function(e){for(var n=0,r=this.length;r>n;n++)if(this[n]===e)return n;return-1},l=/(\/\*([\s\S]*?)\*\/|([^:]|^)\/\/(.*)$)/gm,a="(?:^|[^$_a-zA-Z\\xA0-\\uFFFF.])",f="\\s*\\(\\s*(\"([^\"]+)\"|'([^']+)')\\s*\\)",u=/\(([^\)]*)\)/,s=/^\s+|\s+$/g,p={};t.amd={};var c={isBundle:!1,anonDefine:null};i.amdDefine=t,i.amdRequire=r}("undefined"!=typeof self?self:global);
-$__System.registerDynamic("2", ["3"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('3');
-  var MaxPipe = (function() {
-    function MaxPipe() {}
-    MaxPipe.prototype.transform = function(value, args) {
-      var allowed = args[0],
-          received = value.length;
-      if (received > allowed && allowed !== 0) {
-        var toCut = allowed - received;
-        return value.slice(0, toCut);
-      }
-      return value;
-    };
-    MaxPipe = __decorate([core_1.Pipe({name: "max"}), __metadata('design:paramtypes', [])], MaxPipe);
-    return MaxPipe;
-  }());
-  exports.MaxPipe = MaxPipe;
-  return module.exports;
-});
-
-$__System.registerDynamic("4", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  exports.Icons = {
-    alert: "\n        <svg class=\"simple-notification-svg\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\">\n            <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n            <path d=\"M22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86L22 5.72zM7.88 3.39L6.6 1.86 2 5.71l1.29 1.53 4.59-3.85zM12.5 8H11v6l4.75 2.85.75-1.23-4-2.37V8zM12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z\"/>\n        </svg>",
-    error: "\n        <svg class=\"simple-notification-svg\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\">\n            <path d=\"M0 0h24v24H0V0z\" fill=\"none\"/>\n            <path d=\"M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z\"/>\n        </svg>\n    ",
-    info: "\n        <svg class=\"simple-notification-svg\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\">\n            <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n            <path d=\"M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z\"/>\n        </svg>\n    ",
-    success: "\n        <svg class=\"simple-notification-svg\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\">\n            <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n            <path d=\"M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z\"/>\n        </svg>\n    "
-  };
-  return module.exports;
-});
-
-$__System.registerDynamic("5", ["6", "3", "7", "2", "4"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var platform_browser_1 = $__require('6');
-  var core_1 = $__require('3');
-  var notifications_service_1 = $__require('7');
-  var max_pipe_1 = $__require('2');
-  var icons_1 = $__require('4');
-  var NotificationComponent = (function() {
-    function NotificationComponent(_service, _sanitizer) {
-      var _this = this;
-      this._service = _service;
-      this._sanitizer = _sanitizer;
-      this.icons = icons_1.Icons;
-      this.progressWidth = 0;
-      this.stopTime = false;
-      this.count = 0;
-      this.instance = function() {
-        _this.diff = (new Date().getTime() - _this.start) - (_this.count * _this.speed);
-        if (_this.count++ === _this.steps)
-          _this._remove();
-        else if (!_this.stopTime) {
-          if (_this.showProgressBar)
-            _this.progressWidth += 100 / _this.steps;
-          _this.timer = setTimeout(_this.instance, (_this.speed - _this.diff));
-        }
-      };
-    }
-    NotificationComponent.prototype.ngOnInit = function() {
-      if (this.animate)
-        this.item["state"] = "enter";
-      if (this.item.override)
-        this.attachOverrides();
-      if (this.timeOut !== 0)
-        this.startTimeOut();
-      this.safeSvg = this._sanitizer.bypassSecurityTrustHtml(this.icons[this.item.type]);
-    };
-    NotificationComponent.prototype.startTimeOut = function() {
-      this.steps = this.timeOut / 10;
-      this.speed = this.timeOut / this.steps;
-      this.start = new Date().getTime();
-      this.timer = setTimeout(this.instance, this.speed);
-    };
-    NotificationComponent.prototype.onEnter = function() {
-      if (this.pauseOnHover)
-        this.stopTime = true;
-    };
-    NotificationComponent.prototype.onLeave = function() {
-      if (this.pauseOnHover) {
-        this.stopTime = false;
-        setTimeout(this.instance, (this.speed - this.diff));
-      }
-    };
-    NotificationComponent.prototype.setPosition = function() {
-      return this.position !== 0 ? this.position * 90 : 0;
-    };
-    NotificationComponent.prototype.removeOnClick = function() {
-      if (this.clickToClose)
-        this._remove();
-    };
-    NotificationComponent.prototype.attachOverrides = function() {
-      var _this = this;
-      Object.keys(this.item.override).forEach(function(a) {
-        return _this[a] = _this.item.override[a];
-      });
-    };
-    NotificationComponent.prototype.ngOnDestroy = function() {
-      clearTimeout(this.timer);
-    };
-    NotificationComponent.prototype._remove = function() {
-      var _this = this;
-      if (this.animate) {
-        this.item["state"] = "leave";
-        setTimeout(function() {
-          return _this._service.set(_this.item, false);
-        }, 200);
-      } else
-        this._service.set(this.item, false);
-    };
-    NotificationComponent = __decorate([core_1.Component({
-      selector: "simple-notification",
-      inputs: ["item", "timeOut", "position", "clickToClose", "maxLength", "showProgressBar", "pauseOnHover", "theClass", "rtl", "animate"],
-      pipes: [max_pipe_1.MaxPipe],
-      encapsulation: core_1.ViewEncapsulation.None,
-      animations: [core_1.trigger("enterLeave", [core_1.state("enter", core_1.style({
-        opacity: 1,
-        transform: "translateX(0)"
-      })), core_1.transition("* => enter", [core_1.style({
-        opacity: 0,
-        transform: "translateX(5%)"
-      }), core_1.animate(200)]), core_1.state("leave", core_1.style({
-        opacity: 0,
-        transform: "translateX(-5%)"
-      })), core_1.transition("* => leave", [core_1.style({
-        opacity: 1,
-        transform: "translateX(0)"
-      }), core_1.animate(200)])])],
-      template: "\n        <div class=\"simple-notification\" \n            @enterLeave=\"item.state\" \n            (click)=\"removeOnClick()\"\n            [class]=\"theClass\"\n            \n            [ngClass]=\"{\n                'alert': item.type === 'alert', \n                'error': item.type === 'error', \n                'success': item.type === 'success', \n                'info': item.type === 'info',\n                'bare': item.type === 'bare',\n                'rtl-mode': rtl\n            }\"\n                \n            (mouseenter)=\"onEnter()\"\n            (mouseleave)=\"onLeave()\">\n\n            <div *ngIf=\"!item.html\">\n                <div class=\"title\">{{item.title}}</div>\n                <div class=\"content\">{{item.content | max:maxLength}}</div>\n                \n                <div *ngIf=\"item.type !== 'bare'\" [innerHTML]=\"safeSvg\"></div>\n            </div>\n            <div *ngIf=\"item.html\" [innerHTML]=\"item.html\"></div>\n\n            <div class=\"progress-loader\" *ngIf=\"showProgressBar\">\n                <span [ngStyle]=\"{'width': progressWidth + '%'}\"></span>\n            </div>\n\n        </div>\n    ",
-      styles: ["\n        .simple-notification {\n            width: 100%;\n            padding: 10px 20px;\n            box-sizing: border-box;\n            position: relative;\n            float: left;\n            margin-bottom: 10px;\n            color: #fff;\n            cursor: pointer;\n            transition: all 0.5s;\n        }\n\n        .simple-notification .title {\n            margin: 0;\n            padding: 0;\n            line-height: 30px;\n            font-size: 20px;\n        }\n\n        .simple-notification .content {\n            margin: 0;\n            font-size: 16px;\n            padding: 0 50px 0 0;\n            line-height: 20px;\n        }\n\n        .simple-notification svg {\n            position: absolute;\n            box-sizing: border-box;\n            top: 0;\n            right: 0;\n            width: auto;\n            height: 70px;\n            padding: 10px;\n            fill: #fff;\n        }\n        \n        .simple-notification.rtl-mode {\n            direction: rtl;\n        }\n        \n        .simple-notification.rtl-mode .content {\n            padding: 0 0 0 50px;\n        }\n        \n        .simple-notification.rtl-mode svg {\n            left: 0;\n            right: auto;\n        }\n\n        .simple-notification.error { background: #F44336; }\n        .simple-notification.success { background: #8BC34A; }\n        .simple-notification.alert { background: #ffdb5b; }\n        .simple-notification.info { background: #03A9F4; }\n\n        .simple-notification .progress-loader {\n            position: absolute;\n            top: 0;\n            left: 0;\n            width: 100%;\n            height: 5px;\n        }\n\n        .simple-notification .progress-loader span {\n            float: left;\n            height: 100%;\n        }\n\n        .simple-notification.success .progress-loader span { background: #689F38; }\n        .simple-notification.error .progress-loader span { background: #D32F2F; }\n        .simple-notification.alert .progress-loader span { background: #edc242; }\n        .simple-notification.info .progress-loader span { background: #0288D1; }\n        .simple-notification.bare .progress-loader span { background: #ccc; }\n    "]
-    }), __metadata('design:paramtypes', [notifications_service_1.NotificationsService, (typeof(_a = typeof platform_browser_1.DomSanitizationService !== 'undefined' && platform_browser_1.DomSanitizationService) === 'function' && _a) || Object])], NotificationComponent);
-    return NotificationComponent;
-    var _a;
-  }());
-  exports.NotificationComponent = NotificationComponent;
-  return module.exports;
-});
-
-$__System.registerDynamic("8", ["3", "7", "5"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('3');
-  var notifications_service_1 = $__require('7');
-  var notification_component_1 = $__require('5');
-  var SimpleNotificationsComponent = (function() {
-    function SimpleNotificationsComponent(_service) {
-      this._service = _service;
-      this.notifications = [];
-      this.lastOnBottom = true;
-      this.maxStack = 8;
-      this.preventLastDuplicates = false;
-      this.preventDuplicates = false;
-      this.timeOut = 0;
-      this.maxLength = 0;
-      this.clickToClose = true;
-      this.showProgressBar = true;
-      this.pauseOnHover = true;
-      this.rtl = false;
-      this.animate = true;
-      this.onCreate = new core_1.EventEmitter();
-      this.onDestroy = new core_1.EventEmitter();
-    }
-    SimpleNotificationsComponent.prototype.ngOnInit = function() {
-      var _this = this;
-      this.listener = this._service.getChangeEmitter().subscribe(function(item) {
-        switch (item.command) {
-          case "cleanAll":
-            _this.notifications = [];
-            break;
-          case "clean":
-            _this.cleanSingle(item.id);
-            break;
-          case "set":
-            if (item.add)
-              _this.add(item.notification);
-            else
-              _this.defaultBehavior(item);
-            break;
-          default:
-            _this.defaultBehavior(item);
-            break;
-        }
-      });
-      this.attachChanges();
-    };
-    SimpleNotificationsComponent.prototype.defaultBehavior = function(value) {
-      this.notifications.splice(this.notifications.indexOf(value.notification), 1);
-      this.onDestroy.emit(this.buildEmit(value.notification, false));
-    };
-    SimpleNotificationsComponent.prototype.add = function(item) {
-      item.createdOn = new Date();
-      var toBlock = this.preventLastDuplicates || this.preventDuplicates ? this.block(item) : false;
-      this.lastNotificationCreated = item;
-      if (!toBlock) {
-        if (this.lastOnBottom) {
-          if (this.notifications.length >= this.maxStack)
-            this.notifications.splice(0, 1);
-          this.notifications.push(item);
-        } else {
-          if (this.notifications.length >= this.maxStack)
-            this.notifications.splice(this.notifications.length - 1, 1);
-          this.notifications.splice(0, 0, item);
-        }
-        this.onCreate.emit(this.buildEmit(item, true));
-      }
-    };
-    SimpleNotificationsComponent.prototype.block = function(item) {
-      var checkHtml = function(checker) {
-        return checker.html ? checker.type === item.type && checker.title === item.title && checker.content === item.content && checker.html === item.html : false;
-      },
-          checkStandard = function(checker) {
-            return checker.type === item.type && checker.title === item.title && checker.content === item.content;
-          },
-          toCheck = item.html ? checkHtml : checkStandard;
-      if (this.preventDuplicates && this.notifications.length > 0)
-        for (var i = 0; i < this.notifications.length; i++)
-          if (toCheck(this.notifications[i]))
-            return true;
-      if (this.preventLastDuplicates) {
-        var comp = void 0;
-        if (this.preventLastDuplicates === "visible" && this.notifications.length > 0) {
-          if (this.lastOnBottom)
-            comp = this.notifications[this.notifications.length - 1];
-          else
-            comp = this.notifications[0];
-        } else if (this.preventLastDuplicates === "all" && this.lastNotificationCreated)
-          comp = this.lastNotificationCreated;
-        else
-          return false;
-        return toCheck(comp);
-      }
-      return false;
-    };
-    SimpleNotificationsComponent.prototype.attachChanges = function() {
-      var _this = this;
-      Object.keys(this.options).forEach(function(a) {
-        if (_this.hasOwnProperty(a))
-          _this[a] = _this.options[a];
-      });
-    };
-    SimpleNotificationsComponent.prototype.buildEmit = function(notification, to) {
-      var toEmit = {
-        createdOn: notification.createdOn,
-        type: notification.type,
-        id: notification.id
-      };
-      if (notification.html)
-        toEmit["html"] = notification.html;
-      else {
-        toEmit["title"] = notification.title;
-        toEmit["content"] = notification.content;
-      }
-      if (!to)
-        toEmit["destroyedOn"] = new Date();
-      return toEmit;
-    };
-    SimpleNotificationsComponent.prototype.cleanSingle = function(id) {
-      var indexOfDelete,
-          doDelete = false;
-      this.notifications.forEach(function(a, idx) {
-        if (a.id === id) {
-          indexOfDelete = idx;
-          doDelete = true;
-        }
-      });
-      if (doDelete)
-        this.notifications.splice(indexOfDelete, 1);
-    };
-    SimpleNotificationsComponent.prototype.ngOnDestroy = function() {
-      if (this.listener)
-        this.listener.unsubscribe();
-    };
-    SimpleNotificationsComponent = __decorate([core_1.Component({
-      selector: "simple-notifications",
-      directives: [notification_component_1.NotificationComponent],
-      inputs: ["options"],
-      outputs: ["onCreate", "onDestroy"],
-      encapsulation: core_1.ViewEncapsulation.None,
-      template: "\n        <div class=\"simple-notification-wrapper\">\n            <simple-notification\n                *ngFor=\"let a of notifications; let i = index\"\n                [item]=\"a\"\n                [timeOut]=\"timeOut\"\n                [clickToClose]=\"clickToClose\"\n                [maxLength]=\"maxLength\"\n                [showProgressBar]=\"showProgressBar\"\n                [pauseOnHover]=\"pauseOnHover\"\n                [theClass]=\"theClass\"\n                [rtl]=\"rtl\"\n                [animate]=\"animate\"\n                [position]=\"i\">\n            </simple-notification>\n        </div>\n    ",
-      styles: ["\n        .simple-notification-wrapper {\n            position: fixed;\n            bottom: 20px;\n            right: 20px;\n            width: 300px;\n            z-index: 1000;\n        }\n    "]
-    }), __metadata('design:paramtypes', [notifications_service_1.NotificationsService])], SimpleNotificationsComponent);
-    return SimpleNotificationsComponent;
-  }());
-  exports.SimpleNotificationsComponent = SimpleNotificationsComponent;
-  return module.exports;
-});
-
-$__System.registerDynamic("7", ["3"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('3');
-  var NotificationsService = (function() {
-    function NotificationsService() {
-      this.emiter = new core_1.EventEmitter();
-    }
-    NotificationsService.prototype.set = function(notification, to) {
-      notification.id = notification.override && notification.override.id ? notification.override.id : Math.random().toString(36).substring(3);
-      this.emiter.emit({
-        command: "set",
-        notification: notification,
-        add: to
-      });
-      return notification;
-    };
-    ;
-    NotificationsService.prototype.getChangeEmitter = function() {
-      return this.emiter;
-    };
-    NotificationsService.prototype.success = function(title, content, override) {
-      return this.set({
-        title: title,
-        content: content,
-        type: "success",
-        override: override
-      }, true);
-    };
-    NotificationsService.prototype.error = function(title, content, override) {
-      return this.set({
-        title: title,
-        content: content,
-        type: "error",
-        override: override
-      }, true);
-    };
-    NotificationsService.prototype.alert = function(title, content, override) {
-      return this.set({
-        title: title,
-        content: content,
-        type: "alert",
-        override: override
-      }, true);
-    };
-    NotificationsService.prototype.info = function(title, content, override) {
-      return this.set({
-        title: title,
-        content: content,
-        type: "info",
-        override: override
-      }, true);
-    };
-    NotificationsService.prototype.bare = function(title, content, override) {
-      return this.set({
-        title: title,
-        content: content,
-        type: "bare",
-        override: override
-      }, true);
-    };
-    NotificationsService.prototype.create = function(title, content, type, override) {
-      return this.set({
-        title: title,
-        content: content,
-        type: type,
-        override: override
-      }, true);
-    };
-    NotificationsService.prototype.html = function(html, type, override) {
-      return this.set({
-        html: html,
-        type: type,
-        override: override,
-        title: null,
-        content: null
-      }, true);
-    };
-    NotificationsService.prototype.remove = function(id) {
-      if (id)
-        this.emiter.emit({
-          command: "clean",
-          id: id
-        });
-      else
-        this.emiter.emit({command: "cleanAll"});
-    };
-    NotificationsService = __decorate([core_1.Injectable(), __metadata('design:paramtypes', [])], NotificationsService);
-    return NotificationsService;
-  }());
-  exports.NotificationsService = NotificationsService;
-  return module.exports;
-});
-
-$__System.registerDynamic("9", ["3"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var __metadata = (this && this.__metadata) || function(k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(k, v);
-  };
-  var core_1 = $__require('3');
-  var PushNotificationsService = (function() {
-    function PushNotificationsService() {
-      this.canActivate = false;
-    }
-    PushNotificationsService.prototype.activate = function() {
-      var _this = this;
-      if (!("Notification" in window))
-        return {
-          success: false,
-          message: "This browser does not support desktop notification."
-        };
-      if (Notification.permission === "granted")
-        return {
-          success: true,
-          message: "Permission already granted."
-        };
-      else if (Notification.permission !== "denied") {
-        Notification.requestPermission().then(function(a) {
-          if (a === "denied")
-            console.log("Permission wasn't granted");
-          else if (a === "default")
-            console.log("The permission request was dismissed.");
-          else
-            _this.createBuffered();
-        });
-      }
-    };
-    PushNotificationsService = __decorate([core_1.Injectable(), __metadata('design:paramtypes', [])], PushNotificationsService);
-    return PushNotificationsService;
-  }());
-  exports.PushNotificationsService = PushNotificationsService;
-  return module.exports;
-});
-
-$__System.registerDynamic("a", ["8", "7", "9"], true, function($__require, exports, module) {
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  exports.SimpleNotificationsComponent = $__require('8').SimpleNotificationsComponent;
-  exports.NotificationsService = $__require('7').NotificationsService;
-  exports.PushNotificationsService = $__require('9').PushNotificationsService;
-  return module.exports;
-});
-
 (function() {
 var define = $__System.amdDefine;
 var __extends = this && this.__extends || function(d, b) {
@@ -545,7 +15,7 @@ var __extends = this && this.__extends || function(d, b) {
   d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, new __);
 };
 !function(global, factory) {
-  "object" == typeof exports && "undefined" != typeof module ? factory(exports, require("@angular/core"), require("rxjs/Subject"), require("rxjs/observable/PromiseObservable"), require("rxjs/operator/toPromise"), require("rxjs/Observable")) : "function" == typeof define && define.amd ? define("b", ["exports", "3", "c", "d", "e", "f"], factory) : factory((global.ng = global.ng || {}, global.ng.compiler = global.ng.compiler || {}), global.ng.core, global.Rx, global.Rx, global.Rx.Observable.prototype, global.Rx);
+  "object" == typeof exports && "undefined" != typeof module ? factory(exports, require("@angular/core"), require("rxjs/Subject"), require("rxjs/observable/PromiseObservable"), require("rxjs/operator/toPromise"), require("rxjs/Observable")) : "function" == typeof define && define.amd ? define("2", ["exports", "3", "4", "5", "6", "7"], factory) : factory((global.ng = global.ng || {}, global.ng.compiler = global.ng.compiler || {}), global.ng.core, global.Rx, global.Rx, global.Rx.Observable.prototype, global.Rx);
 }(this, function(exports, _angular_core, rxjs_Subject, rxjs_observable_PromiseObservable, rxjs_operator_toPromise, rxjs_Observable) {
   "use strict";
   function isPresent(obj) {
@@ -10552,7 +10022,325 @@ var __extends = this && this.__extends || function(d, b) {
   d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, new __);
 };
 !function(global, factory) {
-  "object" == typeof exports && "undefined" != typeof module ? factory(exports, require("@angular/core"), require("rxjs/Subject"), require("rxjs/observable/PromiseObservable"), require("rxjs/operator/toPromise"), require("rxjs/Observable")) : "function" == typeof define && define.amd ? define("10", ["exports", "3", "c", "d", "e", "f"], factory) : factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}), global.ng.core, global.Rx, global.Rx, global.Rx.Observable.prototype, global.Rx);
+  "object" == typeof exports && "undefined" != typeof module ? factory(exports, require("@angular/common"), require("@angular/compiler"), require("@angular/core"), require("@angular/platform-browser"), require("rxjs/Subject"), require("rxjs/observable/PromiseObservable"), require("rxjs/operator/toPromise"), require("rxjs/Observable")) : "function" == typeof define && define.amd ? define("8", ["exports", "9", "2", "3", "a", "4", "5", "6", "7"], factory) : factory((global.ng = global.ng || {}, global.ng.platformBrowserDynamic = global.ng.platformBrowserDynamic || {}), global.ng.common, global.ng.compiler, global.ng.core, global.ng.platformBrowser, global.Rx, global.Rx, global.Rx.Observable.prototype, global.Rx);
+}(this, function(exports, _angular_common, _angular_compiler, _angular_core, _angular_platformBrowser, rxjs_Subject, rxjs_observable_PromiseObservable, rxjs_operator_toPromise, rxjs_Observable) {
+  "use strict";
+  function isPresent(obj) {
+    return void 0 !== obj && null !== obj;
+  }
+  function isBlank(obj) {
+    return void 0 === obj || null === obj;
+  }
+  function isArray(obj) {
+    return Array.isArray(obj);
+  }
+  function _flattenArray(source, target) {
+    if (isPresent(source))
+      for (var i = 0; i < source.length; i++) {
+        var item = source[i];
+        isArray(item) ? _flattenArray(item, target) : target.push(item);
+      }
+    return target;
+  }
+  function bootstrap(appComponentType, customProviders) {
+    reflector.reflectionCapabilities = new ReflectionCapabilities;
+    var providers = [_angular_platformBrowser.BROWSER_APP_PROVIDERS, BROWSER_APP_COMPILER_PROVIDERS, isPresent(customProviders) ? customProviders : []],
+        appInjector = _angular_core.ReflectiveInjector.resolveAndCreate(providers, _angular_platformBrowser.browserPlatform().injector);
+    return _angular_core.coreLoadAndBootstrap(appComponentType, appInjector);
+  }
+  function bootstrapWorkerUi(workerScriptUri, customProviders) {
+    var app = _angular_core.ReflectiveInjector.resolveAndCreate([_angular_platformBrowser.WORKER_UI_APPLICATION_PROVIDERS, BROWSER_APP_COMPILER_PROVIDERS, {
+      provide: _angular_platformBrowser.WORKER_SCRIPT,
+      useValue: workerScriptUri
+    }, isPresent(customProviders) ? customProviders : []], _angular_platformBrowser.workerUiPlatform().injector);
+    return PromiseWrapper.resolve(app.get(_angular_core.ApplicationRef));
+  }
+  function bootstrapWorkerApp(appComponentType, customProviders) {
+    var appInjector = _angular_core.ReflectiveInjector.resolveAndCreate([_angular_platformBrowser.WORKER_APP_APPLICATION_PROVIDERS, WORKER_APP_COMPILER_PROVIDERS, isPresent(customProviders) ? customProviders : []], _angular_platformBrowser.workerAppPlatform().injector);
+    return _angular_core.coreLoadAndBootstrap(appComponentType, appInjector);
+  }
+  var globalScope,
+      ReflectionCapabilities = _angular_core.__core_private__.ReflectionCapabilities,
+      reflector = _angular_core.__core_private__.reflector;
+  globalScope = "undefined" == typeof window ? "undefined" != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope ? self : global : window;
+  var global$1 = globalScope;
+  global$1.assert = function(condition) {};
+  var PromiseCompleter = function() {
+    function PromiseCompleter() {
+      var _this = this;
+      this.promise = new Promise(function(res, rej) {
+        _this.resolve = res, _this.reject = rej;
+      });
+    }
+    return PromiseCompleter;
+  }(),
+      PromiseWrapper = function() {
+        function PromiseWrapper() {}
+        return PromiseWrapper.resolve = function(obj) {
+          return Promise.resolve(obj);
+        }, PromiseWrapper.reject = function(obj, _) {
+          return Promise.reject(obj);
+        }, PromiseWrapper.catchError = function(promise, onError) {
+          return promise.catch(onError);
+        }, PromiseWrapper.all = function(promises) {
+          return 0 == promises.length ? Promise.resolve([]) : Promise.all(promises);
+        }, PromiseWrapper.then = function(promise, success, rejection) {
+          return promise.then(success, rejection);
+        }, PromiseWrapper.wrap = function(computation) {
+          return new Promise(function(res, rej) {
+            try {
+              res(computation());
+            } catch (e) {
+              rej(e);
+            }
+          });
+        }, PromiseWrapper.scheduleMicrotask = function(computation) {
+          PromiseWrapper.then(PromiseWrapper.resolve(null), computation, function(_) {});
+        }, PromiseWrapper.completer = function() {
+          return new PromiseCompleter;
+        }, PromiseWrapper;
+      }(),
+      Map$1 = global$1.Map,
+      Set = global$1.Set,
+      ListWrapper = (function() {
+        try {
+          if (1 === new Map$1([[1, 2]]).size)
+            return function(pairs) {
+              return new Map$1(pairs);
+            };
+        } catch (e) {}
+        return function(pairs) {
+          for (var map = new Map$1,
+              i = 0; i < pairs.length; i++) {
+            var pair = pairs[i];
+            map.set(pair[0], pair[1]);
+          }
+          return map;
+        };
+      }(), function() {
+        try {
+          if (new Map$1(new Map$1))
+            return function(m) {
+              return new Map$1(m);
+            };
+        } catch (e) {}
+        return function(m) {
+          var map = new Map$1;
+          return m.forEach(function(v, k) {
+            map.set(k, v);
+          }), map;
+        };
+      }(), function() {
+        return (new Map$1).keys().next ? function(m) {
+          for (var k,
+              keyIterator = m.keys(); !(k = keyIterator.next()).done; )
+            m.set(k.value, null);
+        } : function(m) {
+          m.forEach(function(v, k) {
+            m.set(k, null);
+          });
+        };
+      }(), function() {
+        try {
+          if ((new Map$1).values().next)
+            return function(m, getValues) {
+              return getValues ? Array.from(m.values()) : Array.from(m.keys());
+            };
+        } catch (e) {}
+        return function(m, getValues) {
+          var res = ListWrapper.createFixedSize(m.size),
+              i = 0;
+          return m.forEach(function(v, k) {
+            res[i] = getValues ? v : k, i++;
+          }), res;
+        };
+      }(), function() {
+        function ListWrapper() {}
+        return ListWrapper.createFixedSize = function(size) {
+          return new Array(size);
+        }, ListWrapper.createGrowableSize = function(size) {
+          return new Array(size);
+        }, ListWrapper.clone = function(array) {
+          return array.slice(0);
+        }, ListWrapper.forEachWithIndex = function(array, fn) {
+          for (var i = 0; i < array.length; i++)
+            fn(array[i], i);
+        }, ListWrapper.first = function(array) {
+          return array ? array[0] : null;
+        }, ListWrapper.last = function(array) {
+          return array && 0 != array.length ? array[array.length - 1] : null;
+        }, ListWrapper.indexOf = function(array, value, startIndex) {
+          return void 0 === startIndex && (startIndex = 0), array.indexOf(value, startIndex);
+        }, ListWrapper.contains = function(list, el) {
+          return list.indexOf(el) !== -1;
+        }, ListWrapper.reversed = function(array) {
+          var a = ListWrapper.clone(array);
+          return a.reverse();
+        }, ListWrapper.concat = function(a, b) {
+          return a.concat(b);
+        }, ListWrapper.insert = function(list, index, value) {
+          list.splice(index, 0, value);
+        }, ListWrapper.removeAt = function(list, index) {
+          var res = list[index];
+          return list.splice(index, 1), res;
+        }, ListWrapper.removeAll = function(list, items) {
+          for (var i = 0; i < items.length; ++i) {
+            var index = list.indexOf(items[i]);
+            list.splice(index, 1);
+          }
+        }, ListWrapper.remove = function(list, el) {
+          var index = list.indexOf(el);
+          return index > -1 && (list.splice(index, 1), !0);
+        }, ListWrapper.clear = function(list) {
+          list.length = 0;
+        }, ListWrapper.isEmpty = function(list) {
+          return 0 == list.length;
+        }, ListWrapper.fill = function(list, value, start, end) {
+          void 0 === start && (start = 0), void 0 === end && (end = null), list.fill(value, start, null === end ? list.length : end);
+        }, ListWrapper.equals = function(a, b) {
+          if (a.length != b.length)
+            return !1;
+          for (var i = 0; i < a.length; ++i)
+            if (a[i] !== b[i])
+              return !1;
+          return !0;
+        }, ListWrapper.slice = function(l, from, to) {
+          return void 0 === from && (from = 0), void 0 === to && (to = null), l.slice(from, null === to ? void 0 : to);
+        }, ListWrapper.splice = function(l, from, length) {
+          return l.splice(from, length);
+        }, ListWrapper.sort = function(l, compareFn) {
+          isPresent(compareFn) ? l.sort(compareFn) : l.sort();
+        }, ListWrapper.toString = function(l) {
+          return l.toString();
+        }, ListWrapper.toJSON = function(l) {
+          return JSON.stringify(l);
+        }, ListWrapper.maximum = function(list, predicate) {
+          if (0 == list.length)
+            return null;
+          for (var solution = null,
+              maxValue = -(1 / 0),
+              index = 0; index < list.length; index++) {
+            var candidate = list[index];
+            if (!isBlank(candidate)) {
+              var candidateValue = predicate(candidate);
+              candidateValue > maxValue && (solution = candidate, maxValue = candidateValue);
+            }
+          }
+          return solution;
+        }, ListWrapper.flatten = function(list) {
+          var target = [];
+          return _flattenArray(list, target), target;
+        }, ListWrapper.addAll = function(list, source) {
+          for (var i = 0; i < source.length; i++)
+            list.push(source[i]);
+        }, ListWrapper;
+      }()),
+      BaseException = (function() {
+        var test = new Set([1, 2, 3]);
+        return 3 === test.size ? function(lst) {
+          return new Set(lst);
+        } : function(lst) {
+          var res = new Set(lst);
+          if (res.size !== lst.length)
+            for (var i = 0; i < lst.length; i++)
+              res.add(lst[i]);
+          return res;
+        };
+      }(), function(_super) {
+        function BaseException(message) {
+          void 0 === message && (message = "--"), _super.call(this, message), this.message = message, this.stack = new Error(message).stack;
+        }
+        return __extends(BaseException, _super), BaseException.prototype.toString = function() {
+          return this.message;
+        }, BaseException;
+      }(Error)),
+      CachedXHR = function(_super) {
+        function CachedXHR() {
+          if (_super.call(this), this._cache = global$1.$templateCache, null == this._cache)
+            throw new BaseException("CachedXHR: Template cache was not found in $templateCache.");
+        }
+        return __extends(CachedXHR, _super), CachedXHR.prototype.get = function(url) {
+          return this._cache.hasOwnProperty(url) ? PromiseWrapper.resolve(this._cache[url]) : PromiseWrapper.reject("CachedXHR: Did not find cached template for " + url, null);
+        }, CachedXHR;
+      }(_angular_compiler.XHR),
+      XHRImpl = function(_super) {
+        function XHRImpl() {
+          _super.apply(this, arguments);
+        }
+        return __extends(XHRImpl, _super), XHRImpl.prototype.get = function(url) {
+          var completer = PromiseWrapper.completer(),
+              xhr = new XMLHttpRequest;
+          return xhr.open("GET", url, !0), xhr.responseType = "text", xhr.onload = function() {
+            var response = isPresent(xhr.response) ? xhr.response : xhr.responseText,
+                status = 1223 === xhr.status ? 204 : xhr.status;
+            0 === status && (status = response ? 200 : 0), 200 <= status && status <= 300 ? completer.resolve(response) : completer.reject("Failed to load " + url, null);
+          }, xhr.onerror = function() {
+            completer.reject("Failed to load " + url, null);
+          }, xhr.send(), completer.promise;
+        }, XHRImpl;
+      }(_angular_compiler.XHR),
+      BROWSER_APP_COMPILER_PROVIDERS = [_angular_compiler.COMPILER_PROVIDERS, {
+        provide: _angular_compiler.CompilerConfig,
+        useFactory: function(platformDirectives, platformPipes) {
+          return new _angular_compiler.CompilerConfig({
+            platformDirectives: platformDirectives,
+            platformPipes: platformPipes
+          });
+        },
+        deps: [_angular_core.PLATFORM_DIRECTIVES, _angular_core.PLATFORM_PIPES]
+      }, {
+        provide: _angular_compiler.XHR,
+        useClass: XHRImpl
+      }, {
+        provide: _angular_core.PLATFORM_DIRECTIVES,
+        useValue: _angular_common.COMMON_DIRECTIVES,
+        multi: !0
+      }, {
+        provide: _angular_core.PLATFORM_PIPES,
+        useValue: _angular_common.COMMON_PIPES,
+        multi: !0
+      }],
+      CACHED_TEMPLATE_PROVIDER = [{
+        provide: _angular_compiler.XHR,
+        useClass: CachedXHR
+      }],
+      WORKER_APP_COMPILER_PROVIDERS = [_angular_compiler.COMPILER_PROVIDERS, {
+        provide: _angular_compiler.CompilerConfig,
+        useFactory: function(platformDirectives, platformPipes) {
+          return new _angular_compiler.CompilerConfig({
+            platformDirectives: platformDirectives,
+            platformPipes: platformPipes
+          });
+        },
+        deps: [_angular_core.PLATFORM_DIRECTIVES, _angular_core.PLATFORM_PIPES]
+      }, {
+        provide: _angular_compiler.XHR,
+        useClass: XHRImpl
+      }, {
+        provide: _angular_core.PLATFORM_DIRECTIVES,
+        useValue: _angular_common.COMMON_DIRECTIVES,
+        multi: !0
+      }, {
+        provide: _angular_core.PLATFORM_PIPES,
+        useValue: _angular_common.COMMON_PIPES,
+        multi: !0
+      }];
+  exports.BROWSER_APP_COMPILER_PROVIDERS = BROWSER_APP_COMPILER_PROVIDERS, exports.CACHED_TEMPLATE_PROVIDER = CACHED_TEMPLATE_PROVIDER, exports.bootstrap = bootstrap, exports.bootstrapWorkerUi = bootstrapWorkerUi, exports.bootstrapWorkerApp = bootstrapWorkerApp;
+});
+
+})();
+(function() {
+var define = $__System.amdDefine;
+var __extends = this && this.__extends || function(d, b) {
+  function __() {
+    this.constructor = d;
+  }
+  for (var p in b)
+    b.hasOwnProperty(p) && (d[p] = b[p]);
+  d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, new __);
+};
+!function(global, factory) {
+  "object" == typeof exports && "undefined" != typeof module ? factory(exports, require("@angular/core"), require("rxjs/Subject"), require("rxjs/observable/PromiseObservable"), require("rxjs/operator/toPromise"), require("rxjs/Observable")) : "function" == typeof define && define.amd ? define("9", ["exports", "3", "4", "5", "6", "7"], factory) : factory((global.ng = global.ng || {}, global.ng.common = global.ng.common || {}), global.ng.core, global.Rx, global.Rx, global.Rx.Observable.prototype, global.Rx);
 }(this, function(exports, _angular_core, rxjs_Subject, rxjs_observable_PromiseObservable, rxjs_operator_toPromise, rxjs_Observable) {
   "use strict";
   function getTypeNameForDebugging(type) {
@@ -13682,7 +13470,15200 @@ var __extends = this && this.__extends || function(d, b) {
   d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, new __);
 };
 !function(global, factory) {
-  "object" == typeof exports && "undefined" != typeof module ? factory(exports, require("rxjs/Subject"), require("rxjs/observable/PromiseObservable"), require("rxjs/operator/toPromise"), require("rxjs/Observable")) : "function" == typeof define && define.amd ? define("3", ["exports", "c", "d", "e", "f"], factory) : factory((global.ng = global.ng || {}, global.ng.core = global.ng.core || {}), global.Rx, global.Rx, global.Rx.Observable.prototype, global.Rx);
+  "object" == typeof exports && "undefined" != typeof module ? factory(exports, require("@angular/common"), require("@angular/core"), require("rxjs/Subject"), require("rxjs/observable/PromiseObservable"), require("rxjs/operator/toPromise"), require("rxjs/Observable")) : "function" == typeof define && define.amd ? define("a", ["exports", "9", "3", "4", "5", "6", "7"], factory) : factory((global.ng = global.ng || {}, global.ng.platformBrowser = global.ng.platformBrowser || {}), global.ng.common, global.ng.core, global.Rx, global.Rx, global.Rx.Observable.prototype, global.Rx);
+}(this, function(exports, _angular_common, _angular_core, rxjs_Subject, rxjs_observable_PromiseObservable, rxjs_operator_toPromise, rxjs_Observable) {
+  "use strict";
+  function isPresent(obj) {
+    return void 0 !== obj && null !== obj;
+  }
+  function isBlank(obj) {
+    return void 0 === obj || null === obj;
+  }
+  function isNumber(obj) {
+    return "number" == typeof obj;
+  }
+  function isString(obj) {
+    return "string" == typeof obj;
+  }
+  function isFunction(obj) {
+    return "function" == typeof obj;
+  }
+  function isArray(obj) {
+    return Array.isArray(obj);
+  }
+  function noop() {}
+  function stringify(token) {
+    if ("string" == typeof token)
+      return token;
+    if (void 0 === token || null === token)
+      return "" + token;
+    if (token.name)
+      return token.name;
+    if (token.overriddenName)
+      return token.overriddenName;
+    var res = token.toString(),
+        newLineIndex = res.indexOf("\n");
+    return newLineIndex === -1 ? res : res.substring(0, newLineIndex);
+  }
+  function serializeEnum(val) {
+    return val;
+  }
+  function print(obj) {
+    console.log(obj);
+  }
+  function setValueOnPath(global, path, value) {
+    for (var parts = path.split("."),
+        obj = global; parts.length > 1; ) {
+      var name = parts.shift();
+      obj = obj.hasOwnProperty(name) && isPresent(obj[name]) ? obj[name] : obj[name] = {};
+    }
+    void 0 !== obj && null !== obj || (obj = {}), obj[parts.shift()] = value;
+  }
+  function getDOM() {
+    return _DOM;
+  }
+  function setRootDomAdapter(adapter) {
+    isBlank(_DOM) && (_DOM = adapter);
+  }
+  function supportsState() {
+    return !!window.history.pushState;
+  }
+  function enableDebugTools(ref) {
+    return context.ng = new AngularTools(ref), ref;
+  }
+  function disableDebugTools() {
+    delete context.ng;
+  }
+  function _flattenArray(source, target) {
+    if (isPresent(source))
+      for (var i = 0; i < source.length; i++) {
+        var item = source[i];
+        isArray(item) ? _flattenArray(item, target) : target.push(item);
+      }
+    return target;
+  }
+  function sanitizeUrl(url) {
+    return url = String(url), url.match(SAFE_URL_PATTERN) || url.match(DATA_URL_PATTERN) ? url : (_angular_core.isDevMode() && getDOM().log("WARNING: sanitizing unsafe URL value " + url + " (see http://g.co/ng/security#xss)"), "unsafe:" + url);
+  }
+  function sanitizeSrcset(srcset) {
+    return srcset = String(srcset), srcset.split(",").map(function(srcset) {
+      return sanitizeUrl(srcset.trim());
+    }).join(", ");
+  }
+  function getInertElement() {
+    if (inertElement)
+      return inertElement;
+    DOM = getDOM();
+    var templateEl = DOM.createElement("template");
+    if ("content" in templateEl)
+      return templateEl;
+    var doc = DOM.createHtmlDocument();
+    if (inertElement = DOM.querySelector(doc, "body"), null == inertElement) {
+      var html = DOM.createElement("html", doc);
+      inertElement = DOM.createElement("body", doc), DOM.appendChild(html, inertElement), DOM.appendChild(doc, html);
+    }
+    return inertElement;
+  }
+  function tagSet(tags) {
+    for (var res = {},
+        _i = 0,
+        _a = tags.split(","); _i < _a.length; _i++) {
+      var t = _a[_i];
+      res[t.toLowerCase()] = !0;
+    }
+    return res;
+  }
+  function merge() {
+    for (var sets = [],
+        _i = 0; _i < arguments.length; _i++)
+      sets[_i - 0] = arguments[_i];
+    for (var res = {},
+        _a = 0,
+        sets_1 = sets; _a < sets_1.length; _a++) {
+      var s = sets_1[_a];
+      for (var v in s)
+        s.hasOwnProperty(v) && (res[v] = !0);
+    }
+    return res;
+  }
+  function encodeEntities(value) {
+    return value.replace(/&/g, "&amp;").replace(SURROGATE_PAIR_REGEXP, function(match) {
+      var hi = match.charCodeAt(0),
+          low = match.charCodeAt(1);
+      return "&#" + (1024 * (hi - 55296) + (low - 56320) + 65536) + ";";
+    }).replace(NON_ALPHANUMERIC_REGEXP, function(match) {
+      return "&#" + match.charCodeAt(0) + ";";
+    }).replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function stripCustomNsAttrs(el) {
+    DOM.attributeMap(el).forEach(function(_, attrName) {
+      "xmlns:ns1" !== attrName && 0 !== attrName.indexOf("ns1:") || DOM.removeAttribute(el, attrName);
+    });
+    for (var _i = 0,
+        _a = DOM.childNodesAsList(el); _i < _a.length; _i++) {
+      var n = _a[_i];
+      DOM.isElementNode(n) && stripCustomNsAttrs(n);
+    }
+  }
+  function sanitizeHtml(unsafeHtmlInput) {
+    try {
+      var containerEl = getInertElement(),
+          unsafeHtml = unsafeHtmlInput ? String(unsafeHtmlInput) : "",
+          mXSSAttempts = 5,
+          parsedHtml = unsafeHtml;
+      do {
+        if (0 === mXSSAttempts)
+          throw new Error("Failed to sanitize html because the input is unstable");
+        mXSSAttempts--, unsafeHtml = parsedHtml, DOM.setInnerHTML(containerEl, unsafeHtml), DOM.defaultDoc().documentMode && stripCustomNsAttrs(containerEl), parsedHtml = DOM.getInnerHTML(containerEl);
+      } while (unsafeHtml !== parsedHtml);
+      for (var sanitizer = new SanitizingHtmlSerializer,
+          safeHtml = sanitizer.sanitizeChildren(DOM.getTemplateContent(containerEl) || containerEl),
+          parent_1 = DOM.getTemplateContent(containerEl) || containerEl,
+          _i = 0,
+          _a = DOM.childNodesAsList(parent_1); _i < _a.length; _i++) {
+        var child = _a[_i];
+        DOM.removeChild(parent_1, child);
+      }
+      return _angular_core.isDevMode() && safeHtml !== unsafeHtmlInput && DOM.log("WARNING: sanitizing HTML stripped some content (see http://g.co/ng/security#xss)."), safeHtml;
+    } catch (e) {
+      throw inertElement = null, e;
+    }
+  }
+  function hasBalancedQuotes(value) {
+    for (var outsideSingle = !0,
+        outsideDouble = !0,
+        i = 0; i < value.length; i++) {
+      var c = value.charAt(i);
+      "'" === c && outsideDouble ? outsideSingle = !outsideSingle : '"' === c && outsideSingle && (outsideDouble = !outsideDouble);
+    }
+    return outsideSingle && outsideDouble;
+  }
+  function sanitizeStyle(value) {
+    if (value = String(value).trim(), !value)
+      return "";
+    var urlMatch = URL_RE.exec(value);
+    return urlMatch && sanitizeUrl(urlMatch[1]) === urlMatch[1] || value.match(SAFE_STYLE_VALUE) && hasBalancedQuotes(value) ? value : (_angular_core.isDevMode() && getDOM().log("WARNING: sanitizing unsafe style value " + value + " (see http://g.co/ng/security#xss)."), "unsafe");
+  }
+  function camelCaseToDashCase(input) {
+    return StringWrapper.replaceAllMapped(input, CAMEL_CASE_REGEXP, function(m) {
+      return "-" + m[1].toLowerCase();
+    });
+  }
+  function dashCaseToCamelCase(input) {
+    return StringWrapper.replaceAllMapped(input, DASH_CASE_REGEXP, function(m) {
+      return m[1].toUpperCase();
+    });
+  }
+  function _populateStyles(element, styles, defaultStyles) {
+    var data = {};
+    return styles.styles.forEach(function(entry) {
+      StringMapWrapper.forEach(entry, function(val, prop) {
+        var formattedProp = dashCaseToCamelCase(prop);
+        data[formattedProp] = val == _angular_core.AUTO_STYLE ? _computeStyle(element, formattedProp) : val.toString() + _resolveStyleUnit(val, prop, formattedProp);
+      });
+    }), StringMapWrapper.forEach(defaultStyles, function(value, prop) {
+      isPresent(data[prop]) || (data[prop] = value);
+    }), data;
+  }
+  function _resolveStyleUnit(val, userProvidedProp, formattedProp) {
+    var unit = "";
+    if (_isPixelDimensionStyle(formattedProp) && 0 != val && "0" != val)
+      if (isNumber(val))
+        unit = "px";
+      else if (0 == _findDimensionalSuffix(val.toString()).length)
+        throw new _angular_core.BaseException("Please provide a CSS unit value for " + userProvidedProp + ":" + val);
+    return unit;
+  }
+  function _findDimensionalSuffix(value) {
+    for (var i = 0; i < value.length; i++) {
+      var c = StringWrapper.charCodeAt(value, i);
+      if (!(c >= _$0 && c <= _$9 || c == _$PERIOD))
+        return value.substring(i, value.length);
+    }
+    return "";
+  }
+  function _isPixelDimensionStyle(prop) {
+    switch (prop) {
+      case "width":
+      case "height":
+      case "minWidth":
+      case "minHeight":
+      case "maxWidth":
+      case "maxHeight":
+      case "left":
+      case "top":
+      case "bottom":
+      case "right":
+      case "fontSize":
+      case "outlineWidth":
+      case "outlineOffset":
+      case "paddingTop":
+      case "paddingLeft":
+      case "paddingBottom":
+      case "paddingRight":
+      case "marginTop":
+      case "marginLeft":
+      case "marginBottom":
+      case "marginRight":
+      case "borderRadius":
+      case "borderWidth":
+      case "borderTopWidth":
+      case "borderLeftWidth":
+      case "borderRightWidth":
+      case "borderBottomWidth":
+      case "textIndent":
+        return !0;
+      default:
+        return !1;
+    }
+  }
+  function _computeStyle(element, prop) {
+    return getDOM().getComputedStyle(element)[prop];
+  }
+  function getBaseElementHref() {
+    return isBlank(baseElement) && (baseElement = document.querySelector("base"), isBlank(baseElement)) ? null : baseElement.getAttribute("href");
+  }
+  function relativePath(url) {
+    return isBlank(urlParsingNode) && (urlParsingNode = document.createElement("a")), urlParsingNode.setAttribute("href", url), "/" === urlParsingNode.pathname.charAt(0) ? urlParsingNode.pathname : "/" + urlParsingNode.pathname;
+  }
+  function parseCookieValue(cookie, name) {
+    name = encodeURIComponent(name);
+    for (var cookies = cookie.split(";"),
+        _i = 0,
+        cookies_1 = cookies; _i < cookies_1.length; _i++) {
+      var cookie_1 = cookies_1[_i],
+          _a = cookie_1.split("=", 2),
+          key = _a[0],
+          value = _a[1];
+      if (key.trim() === name)
+        return decodeURIComponent(value);
+    }
+    return null;
+  }
+  function moveNodesAfterSibling(sibling, nodes) {
+    var parent = getDOM().parentElement(sibling);
+    if (nodes.length > 0 && isPresent(parent)) {
+      var nextSibling = getDOM().nextSibling(sibling);
+      if (isPresent(nextSibling))
+        for (var i = 0; i < nodes.length; i++)
+          getDOM().insertBefore(nextSibling, nodes[i]);
+      else
+        for (var i = 0; i < nodes.length; i++)
+          getDOM().appendChild(parent, nodes[i]);
+    }
+  }
+  function appendNodes(parent, nodes) {
+    for (var i = 0; i < nodes.length; i++)
+      getDOM().appendChild(parent, nodes[i]);
+  }
+  function decoratePreventDefault(eventHandler) {
+    return function(event) {
+      var allowDefaultBehavior = eventHandler(event);
+      allowDefaultBehavior === !1 && getDOM().preventDefault(event);
+    };
+  }
+  function _shimContentAttribute(componentShortId) {
+    return StringWrapper.replaceAll(CONTENT_ATTR, COMPONENT_REGEX, componentShortId);
+  }
+  function _shimHostAttribute(componentShortId) {
+    return StringWrapper.replaceAll(HOST_ATTR, COMPONENT_REGEX, componentShortId);
+  }
+  function _flattenStyles(compId, styles, target) {
+    for (var i = 0; i < styles.length; i++) {
+      var style = styles[i];
+      isArray(style) ? _flattenStyles(compId, style, target) : (style = StringWrapper.replaceAll(style, COMPONENT_REGEX, compId), target.push(style));
+    }
+    return target;
+  }
+  function splitNamespace(name) {
+    if (":" != name[0])
+      return [null, name];
+    var match = RegExpWrapper.firstMatch(NS_PREFIX_RE, name);
+    return [match[1], match[2]];
+  }
+  function inspectNativeElement(element) {
+    return _angular_core.getDebugNode(element);
+  }
+  function _createConditionalRootRenderer(rootRenderer) {
+    return _angular_core.isDevMode() ? _createRootRenderer(rootRenderer) : rootRenderer;
+  }
+  function _createRootRenderer(rootRenderer) {
+    return getDOM().setGlobalVar(INSPECT_GLOBAL_NAME, inspectNativeElement), getDOM().setGlobalVar(CORE_TOKENS_GLOBAL_NAME, CORE_TOKENS), new DebugDomRootRenderer(rootRenderer);
+  }
+  function browserPlatform() {
+    return isBlank(_angular_core.getPlatform()) && _angular_core.createPlatform(_angular_core.ReflectiveInjector.resolveAndCreate(BROWSER_PLATFORM_PROVIDERS)), _angular_core.assertPlatform(BROWSER_PLATFORM_MARKER);
+  }
+  function initDomAdapter() {
+    BrowserDomAdapter.makeCurrent(), wtfInit(), BrowserGetTestability.init();
+  }
+  function _exceptionHandler() {
+    return new _angular_core.ExceptionHandler(getDOM());
+  }
+  function _document() {
+    return getDOM().defaultDoc();
+  }
+  function _resolveDefaultAnimationDriver() {
+    return getDOM().supportsWebAnimation() ? new WebAnimationsDriver : new NoOpAnimationDriver;
+  }
+  function deserializeGenericEvent(serializedEvent) {
+    return serializedEvent;
+  }
+  function appInitFnFactory(platformLocation, zone) {
+    return function() {
+      return zone.runGuarded(function() {
+        return platformLocation.init();
+      });
+    };
+  }
+  function initUiLocation(injector) {
+    return function() {
+      var zone = injector.get(_angular_core.NgZone);
+      zone.runGuarded(function() {
+        return injector.get(MessageBasedPlatformLocation).start();
+      });
+    };
+  }
+  function serializeGenericEvent(e) {
+    return serializeEvent(e, EVENT_PROPERTIES);
+  }
+  function serializeEventWithTarget(e) {
+    var serializedEvent = serializeEvent(e, EVENT_PROPERTIES);
+    return addTarget(e, serializedEvent);
+  }
+  function serializeMouseEvent(e) {
+    return serializeEvent(e, MOUSE_EVENT_PROPERTIES);
+  }
+  function serializeKeyboardEvent(e) {
+    var serializedEvent = serializeEvent(e, KEYBOARD_EVENT_PROPERTIES);
+    return addTarget(e, serializedEvent);
+  }
+  function serializeTransitionEvent(e) {
+    var serializedEvent = serializeEvent(e, TRANSITION_EVENT_PROPERTIES);
+    return addTarget(e, serializedEvent);
+  }
+  function addTarget(e, serializedEvent) {
+    if (NODES_WITH_VALUE.has(e.target.tagName.toLowerCase())) {
+      var target = e.target;
+      serializedEvent.target = {value: target.value}, isPresent(target.files) && (serializedEvent.target.files = target.files);
+    }
+    return serializedEvent;
+  }
+  function serializeEvent(e, properties) {
+    for (var serialized = {},
+        i = 0; i < properties.length; i++) {
+      var prop = properties[i];
+      serialized[prop] = e[prop];
+    }
+    return serialized;
+  }
+  function initializeGenericWorkerRenderer(injector) {
+    var bus = injector.get(MessageBus),
+        zone = injector.get(_angular_core.NgZone);
+    bus.attachToZone(zone);
+    var services = injector.get(WORKER_UI_STARTABLE_MESSAGING_SERVICE);
+    zone.runGuarded(function() {
+      services.forEach(function(svc) {
+        svc.start();
+      });
+    });
+  }
+  function messageBusFactory(instance) {
+    return instance.bus;
+  }
+  function initWebWorkerRenderPlatform() {
+    BrowserDomAdapter.makeCurrent(), wtfInit(), BrowserGetTestability.init();
+  }
+  function workerUiPlatform() {
+    return isBlank(_angular_core.getPlatform()) && _angular_core.createPlatform(_angular_core.ReflectiveInjector.resolveAndCreate(WORKER_UI_PLATFORM_PROVIDERS)), _angular_core.assertPlatform(WORKER_RENDER_PLATFORM_MARKER);
+  }
+  function _exceptionHandler$1() {
+    return new _angular_core.ExceptionHandler(getDOM());
+  }
+  function _document$1() {
+    return getDOM().defaultDoc();
+  }
+  function initWebWorkerAppFn(injector) {
+    return function() {
+      var scriptUri;
+      try {
+        scriptUri = injector.get(WORKER_SCRIPT);
+      } catch (e) {
+        throw new BaseException$1("You must provide your WebWorker's initialization script with the WORKER_SCRIPT token");
+      }
+      var instance = injector.get(WebWorkerInstance);
+      spawnWebWorker(scriptUri, instance), initializeGenericWorkerRenderer(injector);
+    };
+  }
+  function spawnWebWorker(uri, instance) {
+    var webWorker = new Worker(uri),
+        sink = new PostMessageBusSink(webWorker),
+        source = new PostMessageBusSource(webWorker),
+        bus = new PostMessageBus(sink, source);
+    instance.init(webWorker, bus);
+  }
+  function _resolveDefaultAnimationDriver$1() {
+    return new NoOpAnimationDriver;
+  }
+  function eventNameWithTarget(target, eventName) {
+    return target + ":" + eventName;
+  }
+  function workerAppPlatform() {
+    return isBlank(_angular_core.getPlatform()) && _angular_core.createPlatform(_angular_core.ReflectiveInjector.resolveAndCreate(WORKER_APP_PLATFORM_PROVIDERS)), _angular_core.assertPlatform(WORKER_APP_PLATFORM_MARKER);
+  }
+  function _exceptionHandler$2() {
+    return new _angular_core.ExceptionHandler(new PrintLogger);
+  }
+  function createMessageBus(zone) {
+    var sink = new PostMessageBusSink(_postMessage),
+        source = new PostMessageBusSource,
+        bus = new PostMessageBus(sink, source);
+    return bus.attachToZone(zone), bus;
+  }
+  function setupWebWorker() {
+    WorkerDomAdapter.makeCurrent();
+  }
+  var globalScope;
+  globalScope = "undefined" == typeof window ? "undefined" != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope ? self : global : window;
+  var global$1 = globalScope,
+      Date = global$1.Date;
+  global$1.assert = function(condition) {};
+  var StringWrapper = function() {
+    function StringWrapper() {}
+    return StringWrapper.fromCharCode = function(code) {
+      return String.fromCharCode(code);
+    }, StringWrapper.charCodeAt = function(s, index) {
+      return s.charCodeAt(index);
+    }, StringWrapper.split = function(s, regExp) {
+      return s.split(regExp);
+    }, StringWrapper.equals = function(s, s2) {
+      return s === s2;
+    }, StringWrapper.stripLeft = function(s, charVal) {
+      if (s && s.length) {
+        for (var pos = 0,
+            i = 0; i < s.length && s[i] == charVal; i++)
+          pos++;
+        s = s.substring(pos);
+      }
+      return s;
+    }, StringWrapper.stripRight = function(s, charVal) {
+      if (s && s.length) {
+        for (var pos = s.length,
+            i = s.length - 1; i >= 0 && s[i] == charVal; i--)
+          pos--;
+        s = s.substring(0, pos);
+      }
+      return s;
+    }, StringWrapper.replace = function(s, from, replace) {
+      return s.replace(from, replace);
+    }, StringWrapper.replaceAll = function(s, from, replace) {
+      return s.replace(from, replace);
+    }, StringWrapper.slice = function(s, from, to) {
+      return void 0 === from && (from = 0), void 0 === to && (to = null), s.slice(from, null === to ? void 0 : to);
+    }, StringWrapper.replaceAllMapped = function(s, from, cb) {
+      return s.replace(from, function() {
+        for (var matches = [],
+            _i = 0; _i < arguments.length; _i++)
+          matches[_i - 0] = arguments[_i];
+        return matches.splice(-2, 2), cb(matches);
+      });
+    }, StringWrapper.contains = function(s, substr) {
+      return s.indexOf(substr) != -1;
+    }, StringWrapper.compare = function(a, b) {
+      return a < b ? -1 : a > b ? 1 : 0;
+    }, StringWrapper;
+  }(),
+      NumberParseError = function(_super) {
+        function NumberParseError(message) {
+          _super.call(this), this.message = message;
+        }
+        return __extends(NumberParseError, _super), NumberParseError.prototype.toString = function() {
+          return this.message;
+        }, NumberParseError;
+      }(Error),
+      NumberWrapper = function() {
+        function NumberWrapper() {}
+        return NumberWrapper.toFixed = function(n, fractionDigits) {
+          return n.toFixed(fractionDigits);
+        }, NumberWrapper.equal = function(a, b) {
+          return a === b;
+        }, NumberWrapper.parseIntAutoRadix = function(text) {
+          var result = parseInt(text);
+          if (isNaN(result))
+            throw new NumberParseError("Invalid integer literal when parsing " + text);
+          return result;
+        }, NumberWrapper.parseInt = function(text, radix) {
+          if (10 == radix) {
+            if (/^(\-|\+)?[0-9]+$/.test(text))
+              return parseInt(text, radix);
+          } else if (16 == radix) {
+            if (/^(\-|\+)?[0-9ABCDEFabcdef]+$/.test(text))
+              return parseInt(text, radix);
+          } else {
+            var result = parseInt(text, radix);
+            if (!isNaN(result))
+              return result;
+          }
+          throw new NumberParseError("Invalid integer literal when parsing " + text + " in base " + radix);
+        }, NumberWrapper.parseFloat = function(text) {
+          return parseFloat(text);
+        }, Object.defineProperty(NumberWrapper, "NaN", {
+          get: function() {
+            return NaN;
+          },
+          enumerable: !0,
+          configurable: !0
+        }), NumberWrapper.isNumeric = function(value) {
+          return !isNaN(value - parseFloat(value));
+        }, NumberWrapper.isNaN = function(value) {
+          return isNaN(value);
+        }, NumberWrapper.isInteger = function(value) {
+          return Number.isInteger(value);
+        }, NumberWrapper;
+      }(),
+      RegExpWrapper = function() {
+        function RegExpWrapper() {}
+        return RegExpWrapper.create = function(regExpStr, flags) {
+          return void 0 === flags && (flags = ""), flags = flags.replace(/g/g, ""), new global$1.RegExp(regExpStr, flags + "g");
+        }, RegExpWrapper.firstMatch = function(regExp, input) {
+          return regExp.lastIndex = 0, regExp.exec(input);
+        }, RegExpWrapper.test = function(regExp, input) {
+          return regExp.lastIndex = 0, regExp.test(input);
+        }, RegExpWrapper.matcher = function(regExp, input) {
+          return regExp.lastIndex = 0, {
+            re: regExp,
+            input: input
+          };
+        }, RegExpWrapper.replaceAll = function(regExp, input, replace) {
+          var c = regExp.exec(input),
+              res = "";
+          regExp.lastIndex = 0;
+          for (var prev = 0; c; )
+            res += input.substring(prev, c.index), res += replace(c), prev = c.index + c[0].length, regExp.lastIndex = prev, c = regExp.exec(input);
+          return res += input.substring(prev);
+        }, RegExpWrapper;
+      }(),
+      FunctionWrapper = function() {
+        function FunctionWrapper() {}
+        return FunctionWrapper.apply = function(fn, posArgs) {
+          return fn.apply(null, posArgs);
+        }, FunctionWrapper.bind = function(fn, scope) {
+          return fn.bind(scope);
+        }, FunctionWrapper;
+      }(),
+      Json = function() {
+        function Json() {}
+        return Json.parse = function(s) {
+          return global$1.JSON.parse(s);
+        }, Json.stringify = function(data) {
+          return global$1.JSON.stringify(data, null, 2);
+        }, Json;
+      }(),
+      DateWrapper = function() {
+        function DateWrapper() {}
+        return DateWrapper.create = function(year, month, day, hour, minutes, seconds, milliseconds) {
+          return void 0 === month && (month = 1), void 0 === day && (day = 1), void 0 === hour && (hour = 0), void 0 === minutes && (minutes = 0), void 0 === seconds && (seconds = 0), void 0 === milliseconds && (milliseconds = 0), new Date(year, month - 1, day, hour, minutes, seconds, milliseconds);
+        }, DateWrapper.fromISOString = function(str) {
+          return new Date(str);
+        }, DateWrapper.fromMillis = function(ms) {
+          return new Date(ms);
+        }, DateWrapper.toMillis = function(date) {
+          return date.getTime();
+        }, DateWrapper.now = function() {
+          return new Date;
+        }, DateWrapper.toJson = function(date) {
+          return date.toJSON();
+        }, DateWrapper;
+      }(),
+      _DOM = null,
+      DomAdapter = function() {
+        function DomAdapter() {
+          this.xhrType = null;
+        }
+        return DomAdapter.prototype.getXHR = function() {
+          return this.xhrType;
+        }, Object.defineProperty(DomAdapter.prototype, "attrToPropMap", {
+          get: function() {
+            return this._attrToPropMap;
+          },
+          set: function(value) {
+            this._attrToPropMap = value;
+          },
+          enumerable: !0,
+          configurable: !0
+        }), DomAdapter;
+      }(),
+      BrowserPlatformLocation = function(_super) {
+        function BrowserPlatformLocation() {
+          _super.call(this), this._init();
+        }
+        return __extends(BrowserPlatformLocation, _super), BrowserPlatformLocation.prototype._init = function() {
+          this._location = getDOM().getLocation(), this._history = getDOM().getHistory();
+        }, Object.defineProperty(BrowserPlatformLocation.prototype, "location", {
+          get: function() {
+            return this._location;
+          },
+          enumerable: !0,
+          configurable: !0
+        }), BrowserPlatformLocation.prototype.getBaseHrefFromDOM = function() {
+          return getDOM().getBaseHref();
+        }, BrowserPlatformLocation.prototype.onPopState = function(fn) {
+          getDOM().getGlobalEventTarget("window").addEventListener("popstate", fn, !1);
+        }, BrowserPlatformLocation.prototype.onHashChange = function(fn) {
+          getDOM().getGlobalEventTarget("window").addEventListener("hashchange", fn, !1);
+        }, Object.defineProperty(BrowserPlatformLocation.prototype, "pathname", {
+          get: function() {
+            return this._location.pathname;
+          },
+          set: function(newPath) {
+            this._location.pathname = newPath;
+          },
+          enumerable: !0,
+          configurable: !0
+        }), Object.defineProperty(BrowserPlatformLocation.prototype, "search", {
+          get: function() {
+            return this._location.search;
+          },
+          enumerable: !0,
+          configurable: !0
+        }), Object.defineProperty(BrowserPlatformLocation.prototype, "hash", {
+          get: function() {
+            return this._location.hash;
+          },
+          enumerable: !0,
+          configurable: !0
+        }), BrowserPlatformLocation.prototype.pushState = function(state, title, url) {
+          supportsState() ? this._history.pushState(state, title, url) : this._location.hash = url;
+        }, BrowserPlatformLocation.prototype.replaceState = function(state, title, url) {
+          supportsState() ? this._history.replaceState(state, title, url) : this._location.hash = url;
+        }, BrowserPlatformLocation.prototype.forward = function() {
+          this._history.forward();
+        }, BrowserPlatformLocation.prototype.back = function() {
+          this._history.back();
+        }, BrowserPlatformLocation;
+      }(_angular_common.PlatformLocation);
+  BrowserPlatformLocation.decorators = [{type: _angular_core.Injectable}], BrowserPlatformLocation.ctorParameters = [];
+  var Title = function() {
+    function Title() {}
+    return Title.prototype.getTitle = function() {
+      return getDOM().getTitle();
+    }, Title.prototype.setTitle = function(newTitle) {
+      getDOM().setTitle(newTitle);
+    }, Title;
+  }(),
+      win = "undefined" != typeof window && window || {},
+      ChangeDetectionPerfRecord = function() {
+        function ChangeDetectionPerfRecord(msPerTick, numTicks) {
+          this.msPerTick = msPerTick, this.numTicks = numTicks;
+        }
+        return ChangeDetectionPerfRecord;
+      }(),
+      AngularTools = function() {
+        function AngularTools(ref) {
+          this.profiler = new AngularProfiler(ref);
+        }
+        return AngularTools;
+      }(),
+      AngularProfiler = function() {
+        function AngularProfiler(ref) {
+          this.appRef = ref.injector.get(_angular_core.ApplicationRef);
+        }
+        return AngularProfiler.prototype.timeChangeDetection = function(config) {
+          var record = isPresent(config) && config.record,
+              profileName = "Change Detection",
+              isProfilerAvailable = isPresent(win.console.profile);
+          record && isProfilerAvailable && win.console.profile(profileName);
+          for (var start = getDOM().performanceNow(),
+              numTicks = 0; numTicks < 5 || getDOM().performanceNow() - start < 500; )
+            this.appRef.tick(), numTicks++;
+          var end = getDOM().performanceNow();
+          record && isProfilerAvailable && win.console.profileEnd(profileName);
+          var msPerTick = (end - start) / numTicks;
+          return win.console.log("ran " + numTicks + " change detection cycles"), win.console.log(NumberWrapper.toFixed(msPerTick, 2) + " ms per check"), new ChangeDetectionPerfRecord(msPerTick, numTicks);
+        }, AngularProfiler;
+      }(),
+      context = global$1,
+      By = function() {
+        function By() {}
+        return By.all = function() {
+          return function(debugElement) {
+            return !0;
+          };
+        }, By.css = function(selector) {
+          return function(debugElement) {
+            return !!isPresent(debugElement.nativeElement) && getDOM().elementMatches(debugElement.nativeElement, selector);
+          };
+        }, By.directive = function(type) {
+          return function(debugElement) {
+            return debugElement.providerTokens.indexOf(type) !== -1;
+          };
+        }, By;
+      }(),
+      DOCUMENT = new _angular_core.OpaqueToken("DocumentToken"),
+      Map$1 = global$1.Map,
+      Set$1 = global$1.Set,
+      StringMapWrapper = (function() {
+        try {
+          if (1 === new Map$1([[1, 2]]).size)
+            return function(pairs) {
+              return new Map$1(pairs);
+            };
+        } catch (e) {}
+        return function(pairs) {
+          for (var map = new Map$1,
+              i = 0; i < pairs.length; i++) {
+            var pair = pairs[i];
+            map.set(pair[0], pair[1]);
+          }
+          return map;
+        };
+      }(), function() {
+        try {
+          if (new Map$1(new Map$1))
+            return function(m) {
+              return new Map$1(m);
+            };
+        } catch (e) {}
+        return function(m) {
+          var map = new Map$1;
+          return m.forEach(function(v, k) {
+            map.set(k, v);
+          }), map;
+        };
+      }(), function() {
+        return (new Map$1).keys().next ? function(m) {
+          for (var k,
+              keyIterator = m.keys(); !(k = keyIterator.next()).done; )
+            m.set(k.value, null);
+        } : function(m) {
+          m.forEach(function(v, k) {
+            m.set(k, null);
+          });
+        };
+      }(), function() {
+        try {
+          if ((new Map$1).values().next)
+            return function(m, getValues) {
+              return getValues ? Array.from(m.values()) : Array.from(m.keys());
+            };
+        } catch (e) {}
+        return function(m, getValues) {
+          var res = ListWrapper.createFixedSize(m.size),
+              i = 0;
+          return m.forEach(function(v, k) {
+            res[i] = getValues ? v : k, i++;
+          }), res;
+        };
+      }(), function() {
+        function StringMapWrapper() {}
+        return StringMapWrapper.create = function() {
+          return {};
+        }, StringMapWrapper.contains = function(map, key) {
+          return map.hasOwnProperty(key);
+        }, StringMapWrapper.get = function(map, key) {
+          return map.hasOwnProperty(key) ? map[key] : void 0;
+        }, StringMapWrapper.set = function(map, key, value) {
+          map[key] = value;
+        }, StringMapWrapper.keys = function(map) {
+          return Object.keys(map);
+        }, StringMapWrapper.values = function(map) {
+          return Object.keys(map).reduce(function(r, a) {
+            return r.push(map[a]), r;
+          }, []);
+        }, StringMapWrapper.isEmpty = function(map) {
+          for (var prop in map)
+            return !1;
+          return !0;
+        }, StringMapWrapper.delete = function(map, key) {
+          delete map[key];
+        }, StringMapWrapper.forEach = function(map, callback) {
+          for (var prop in map)
+            map.hasOwnProperty(prop) && callback(map[prop], prop);
+        }, StringMapWrapper.merge = function(m1, m2) {
+          var m = {};
+          for (var attr in m1)
+            m1.hasOwnProperty(attr) && (m[attr] = m1[attr]);
+          for (var attr in m2)
+            m2.hasOwnProperty(attr) && (m[attr] = m2[attr]);
+          return m;
+        }, StringMapWrapper.equals = function(m1, m2) {
+          var k1 = Object.keys(m1),
+              k2 = Object.keys(m2);
+          if (k1.length != k2.length)
+            return !1;
+          for (var key,
+              i = 0; i < k1.length; i++)
+            if (key = k1[i], m1[key] !== m2[key])
+              return !1;
+          return !0;
+        }, StringMapWrapper;
+      }()),
+      ListWrapper = function() {
+        function ListWrapper() {}
+        return ListWrapper.createFixedSize = function(size) {
+          return new Array(size);
+        }, ListWrapper.createGrowableSize = function(size) {
+          return new Array(size);
+        }, ListWrapper.clone = function(array) {
+          return array.slice(0);
+        }, ListWrapper.forEachWithIndex = function(array, fn) {
+          for (var i = 0; i < array.length; i++)
+            fn(array[i], i);
+        }, ListWrapper.first = function(array) {
+          return array ? array[0] : null;
+        }, ListWrapper.last = function(array) {
+          return array && 0 != array.length ? array[array.length - 1] : null;
+        }, ListWrapper.indexOf = function(array, value, startIndex) {
+          return void 0 === startIndex && (startIndex = 0), array.indexOf(value, startIndex);
+        }, ListWrapper.contains = function(list, el) {
+          return list.indexOf(el) !== -1;
+        }, ListWrapper.reversed = function(array) {
+          var a = ListWrapper.clone(array);
+          return a.reverse();
+        }, ListWrapper.concat = function(a, b) {
+          return a.concat(b);
+        }, ListWrapper.insert = function(list, index, value) {
+          list.splice(index, 0, value);
+        }, ListWrapper.removeAt = function(list, index) {
+          var res = list[index];
+          return list.splice(index, 1), res;
+        }, ListWrapper.removeAll = function(list, items) {
+          for (var i = 0; i < items.length; ++i) {
+            var index = list.indexOf(items[i]);
+            list.splice(index, 1);
+          }
+        }, ListWrapper.remove = function(list, el) {
+          var index = list.indexOf(el);
+          return index > -1 && (list.splice(index, 1), !0);
+        }, ListWrapper.clear = function(list) {
+          list.length = 0;
+        }, ListWrapper.isEmpty = function(list) {
+          return 0 == list.length;
+        }, ListWrapper.fill = function(list, value, start, end) {
+          void 0 === start && (start = 0), void 0 === end && (end = null), list.fill(value, start, null === end ? list.length : end);
+        }, ListWrapper.equals = function(a, b) {
+          if (a.length != b.length)
+            return !1;
+          for (var i = 0; i < a.length; ++i)
+            if (a[i] !== b[i])
+              return !1;
+          return !0;
+        }, ListWrapper.slice = function(l, from, to) {
+          return void 0 === from && (from = 0), void 0 === to && (to = null), l.slice(from, null === to ? void 0 : to);
+        }, ListWrapper.splice = function(l, from, length) {
+          return l.splice(from, length);
+        }, ListWrapper.sort = function(l, compareFn) {
+          isPresent(compareFn) ? l.sort(compareFn) : l.sort();
+        }, ListWrapper.toString = function(l) {
+          return l.toString();
+        }, ListWrapper.toJSON = function(l) {
+          return JSON.stringify(l);
+        }, ListWrapper.maximum = function(list, predicate) {
+          if (0 == list.length)
+            return null;
+          for (var solution = null,
+              maxValue = -(1 / 0),
+              index = 0; index < list.length; index++) {
+            var candidate = list[index];
+            if (!isBlank(candidate)) {
+              var candidateValue = predicate(candidate);
+              candidateValue > maxValue && (solution = candidate, maxValue = candidateValue);
+            }
+          }
+          return solution;
+        }, ListWrapper.flatten = function(list) {
+          var target = [];
+          return _flattenArray(list, target), target;
+        }, ListWrapper.addAll = function(list, source) {
+          for (var i = 0; i < source.length; i++)
+            list.push(source[i]);
+        }, ListWrapper;
+      }(),
+      createSetFromList = function() {
+        var test = new Set$1([1, 2, 3]);
+        return 3 === test.size ? function(lst) {
+          return new Set$1(lst);
+        } : function(lst) {
+          var res = new Set$1(lst);
+          if (res.size !== lst.length)
+            for (var i = 0; i < lst.length; i++)
+              res.add(lst[i]);
+          return res;
+        };
+      }(),
+      SetWrapper = function() {
+        function SetWrapper() {}
+        return SetWrapper.createFromList = function(lst) {
+          return createSetFromList(lst);
+        }, SetWrapper.has = function(s, key) {
+          return s.has(key);
+        }, SetWrapper.delete = function(m, k) {
+          m.delete(k);
+        }, SetWrapper;
+      }(),
+      BaseException$1 = function(_super) {
+        function BaseException$1(message) {
+          void 0 === message && (message = "--"), _super.call(this, message), this.message = message, this.stack = new Error(message).stack;
+        }
+        return __extends(BaseException$1, _super), BaseException$1.prototype.toString = function() {
+          return this.message;
+        }, BaseException$1;
+      }(Error),
+      EVENT_MANAGER_PLUGINS = new _angular_core.OpaqueToken("EventManagerPlugins"),
+      EventManager = function() {
+        function EventManager(plugins, _zone) {
+          var _this = this;
+          this._zone = _zone, plugins.forEach(function(p) {
+            return p.manager = _this;
+          }), this._plugins = ListWrapper.reversed(plugins);
+        }
+        return EventManager.prototype.addEventListener = function(element, eventName, handler) {
+          var plugin = this._findPluginFor(eventName);
+          return plugin.addEventListener(element, eventName, handler);
+        }, EventManager.prototype.addGlobalEventListener = function(target, eventName, handler) {
+          var plugin = this._findPluginFor(eventName);
+          return plugin.addGlobalEventListener(target, eventName, handler);
+        }, EventManager.prototype.getZone = function() {
+          return this._zone;
+        }, EventManager.prototype._findPluginFor = function(eventName) {
+          for (var plugins = this._plugins,
+              i = 0; i < plugins.length; i++) {
+            var plugin = plugins[i];
+            if (plugin.supports(eventName))
+              return plugin;
+          }
+          throw new BaseException$1("No event manager plugin found for event " + eventName);
+        }, EventManager;
+      }();
+  EventManager.decorators = [{type: _angular_core.Injectable}], EventManager.ctorParameters = [{
+    type: Array,
+    decorators: [{
+      type: _angular_core.Inject,
+      args: [EVENT_MANAGER_PLUGINS]
+    }]
+  }, {type: _angular_core.NgZone}];
+  var EventManagerPlugin = function() {
+    function EventManagerPlugin() {}
+    return EventManagerPlugin.prototype.supports = function(eventName) {
+      return !1;
+    }, EventManagerPlugin.prototype.addEventListener = function(element, eventName, handler) {
+      throw "not implemented";
+    }, EventManagerPlugin.prototype.addGlobalEventListener = function(element, eventName, handler) {
+      throw "not implemented";
+    }, EventManagerPlugin;
+  }(),
+      _eventNames = {
+        pan: !0,
+        panstart: !0,
+        panmove: !0,
+        panend: !0,
+        pancancel: !0,
+        panleft: !0,
+        panright: !0,
+        panup: !0,
+        pandown: !0,
+        pinch: !0,
+        pinchstart: !0,
+        pinchmove: !0,
+        pinchend: !0,
+        pinchcancel: !0,
+        pinchin: !0,
+        pinchout: !0,
+        press: !0,
+        pressup: !0,
+        rotate: !0,
+        rotatestart: !0,
+        rotatemove: !0,
+        rotateend: !0,
+        rotatecancel: !0,
+        swipe: !0,
+        swipeleft: !0,
+        swiperight: !0,
+        swipeup: !0,
+        swipedown: !0,
+        tap: !0
+      },
+      HammerGesturesPluginCommon = function(_super) {
+        function HammerGesturesPluginCommon() {
+          _super.call(this);
+        }
+        return __extends(HammerGesturesPluginCommon, _super), HammerGesturesPluginCommon.prototype.supports = function(eventName) {
+          return eventName = eventName.toLowerCase(), StringMapWrapper.contains(_eventNames, eventName);
+        }, HammerGesturesPluginCommon;
+      }(EventManagerPlugin),
+      HAMMER_GESTURE_CONFIG = new _angular_core.OpaqueToken("HammerGestureConfig"),
+      HammerGestureConfig = function() {
+        function HammerGestureConfig() {
+          this.events = [], this.overrides = {};
+        }
+        return HammerGestureConfig.prototype.buildHammer = function(element) {
+          var mc = new Hammer(element);
+          mc.get("pinch").set({enable: !0}), mc.get("rotate").set({enable: !0});
+          for (var eventName in this.overrides)
+            mc.get(eventName).set(this.overrides[eventName]);
+          return mc;
+        }, HammerGestureConfig;
+      }();
+  HammerGestureConfig.decorators = [{type: _angular_core.Injectable}];
+  var HammerGesturesPlugin = function(_super) {
+    function HammerGesturesPlugin(_config) {
+      _super.call(this), this._config = _config;
+    }
+    return __extends(HammerGesturesPlugin, _super), HammerGesturesPlugin.prototype.supports = function(eventName) {
+      if (!_super.prototype.supports.call(this, eventName) && !this.isCustomEvent(eventName))
+        return !1;
+      if (!isPresent(window.Hammer))
+        throw new BaseException$1("Hammer.js is not loaded, can not bind " + eventName + " event");
+      return !0;
+    }, HammerGesturesPlugin.prototype.addEventListener = function(element, eventName, handler) {
+      var _this = this,
+          zone = this.manager.getZone();
+      return eventName = eventName.toLowerCase(), zone.runOutsideAngular(function() {
+        var mc = _this._config.buildHammer(element),
+            callback = function(eventObj) {
+              zone.runGuarded(function() {
+                handler(eventObj);
+              });
+            };
+        return mc.on(eventName, callback), function() {
+          mc.off(eventName, callback);
+        };
+      });
+    }, HammerGesturesPlugin.prototype.isCustomEvent = function(eventName) {
+      return this._config.events.indexOf(eventName) > -1;
+    }, HammerGesturesPlugin;
+  }(HammerGesturesPluginCommon);
+  HammerGesturesPlugin.decorators = [{type: _angular_core.Injectable}], HammerGesturesPlugin.ctorParameters = [{
+    type: HammerGestureConfig,
+    decorators: [{
+      type: _angular_core.Inject,
+      args: [HAMMER_GESTURE_CONFIG]
+    }]
+  }];
+  var wtfInit = _angular_core.__core_private__.wtfInit,
+      VIEW_ENCAPSULATION_VALUES = _angular_core.__core_private__.VIEW_ENCAPSULATION_VALUES,
+      DebugDomRootRenderer = _angular_core.__core_private__.DebugDomRootRenderer,
+      SecurityContext = _angular_core.__core_private__.SecurityContext,
+      SanitizationService = _angular_core.__core_private__.SanitizationService,
+      NoOpAnimationDriver = _angular_core.__core_private__.NoOpAnimationDriver,
+      AnimationDriver = _angular_core.__core_private__.AnimationDriver,
+      SAFE_URL_PATTERN = /^(?:(?:https?|mailto|ftp|tel|file):|[^&:\/?#]*(?:[\/?#]|$))/gi,
+      DATA_URL_PATTERN = /^data:(?:image\/(?:bmp|gif|jpeg|jpg|png|tiff|webp)|video\/(?:mpeg|mp4|ogg|webm)|audio\/(?:mp3|oga|ogg|opus));base64,[a-z0-9+\/]+=*$/i,
+      inertElement = null,
+      DOM = null,
+      VOID_ELEMENTS = tagSet("area,br,col,hr,img,wbr"),
+      OPTIONAL_END_TAG_BLOCK_ELEMENTS = tagSet("colgroup,dd,dt,li,p,tbody,td,tfoot,th,thead,tr"),
+      OPTIONAL_END_TAG_INLINE_ELEMENTS = tagSet("rp,rt"),
+      OPTIONAL_END_TAG_ELEMENTS = merge(OPTIONAL_END_TAG_INLINE_ELEMENTS, OPTIONAL_END_TAG_BLOCK_ELEMENTS),
+      BLOCK_ELEMENTS = merge(OPTIONAL_END_TAG_BLOCK_ELEMENTS, tagSet("address,article,aside,blockquote,caption,center,del,details,dialog,dir,div,dl,figure,figcaption,footer,h1,h2,h3,h4,h5,h6,header,hgroup,hr,ins,main,map,menu,nav,ol,pre,section,summary,table,ul")),
+      INLINE_ELEMENTS = merge(OPTIONAL_END_TAG_INLINE_ELEMENTS, tagSet("a,abbr,acronym,audio,b,bdi,bdo,big,br,cite,code,del,dfn,em,font,i,img,ins,kbd,label,map,mark,picture,q,ruby,rp,rt,s,samp,small,source,span,strike,strong,sub,sup,time,track,tt,u,var,video")),
+      VALID_ELEMENTS = merge(VOID_ELEMENTS, BLOCK_ELEMENTS, INLINE_ELEMENTS, OPTIONAL_END_TAG_ELEMENTS),
+      URI_ATTRS = tagSet("background,cite,href,itemtype,longdesc,poster,src,xlink:href"),
+      SRCSET_ATTRS = tagSet("srcset"),
+      HTML_ATTRS = tagSet("abbr,accesskey,align,alt,autoplay,axis,bgcolor,border,cellpadding,cellspacing,class,clear,color,cols,colspan,compact,controls,coords,datetime,default,dir,download,face,headers,height,hidden,hreflang,hspace,ismap,itemscope,itemprop,kind,label,lang,language,loop,media,muted,nohref,nowrap,open,preload,rel,rev,role,rows,rowspan,rules,scope,scrolling,shape,size,sizes,span,srclang,start,summary,tabindex,target,title,translate,type,usemap,valign,value,vspace,width"),
+      VALID_ATTRS = merge(URI_ATTRS, SRCSET_ATTRS, HTML_ATTRS),
+      SanitizingHtmlSerializer = function() {
+        function SanitizingHtmlSerializer() {
+          this.buf = [];
+        }
+        return SanitizingHtmlSerializer.prototype.sanitizeChildren = function(el) {
+          for (var current = el.firstChild; current; )
+            if (DOM.isElementNode(current) ? this.startElement(current) : DOM.isTextNode(current) && this.chars(DOM.nodeValue(current)), DOM.firstChild(current))
+              current = DOM.firstChild(current);
+            else
+              for (; current; ) {
+                if (DOM.isElementNode(current) && this.endElement(DOM.nodeName(current).toLowerCase()), DOM.nextSibling(current)) {
+                  current = DOM.nextSibling(current);
+                  break;
+                }
+                current = DOM.parentElement(current);
+              }
+          return this.buf.join("");
+        }, SanitizingHtmlSerializer.prototype.startElement = function(element) {
+          var _this = this,
+              tagName = DOM.nodeName(element).toLowerCase();
+          tagName = tagName.toLowerCase(), VALID_ELEMENTS.hasOwnProperty(tagName) && (this.buf.push("<"), this.buf.push(tagName), DOM.attributeMap(element).forEach(function(value, attrName) {
+            var lower = attrName.toLowerCase();
+            VALID_ATTRS.hasOwnProperty(lower) && (URI_ATTRS[lower] && (value = sanitizeUrl(value)), SRCSET_ATTRS[lower] && (value = sanitizeSrcset(value)), _this.buf.push(" "), _this.buf.push(attrName), _this.buf.push('="'), _this.buf.push(encodeEntities(value)), _this.buf.push('"'));
+          }), this.buf.push(">"));
+        }, SanitizingHtmlSerializer.prototype.endElement = function(tagName) {
+          tagName = tagName.toLowerCase(), VALID_ELEMENTS.hasOwnProperty(tagName) && !VOID_ELEMENTS.hasOwnProperty(tagName) && (this.buf.push("</"), this.buf.push(tagName), this.buf.push(">"));
+        }, SanitizingHtmlSerializer.prototype.chars = function(chars) {
+          this.buf.push(encodeEntities(chars));
+        }, SanitizingHtmlSerializer;
+      }(),
+      SURROGATE_PAIR_REGEXP = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g,
+      NON_ALPHANUMERIC_REGEXP = /([^\#-~ |!])/g,
+      VALUES = "[-,.\"'%_!# a-zA-Z0-9]+",
+      TRANSFORMATION_FNS = "(?:matrix|translate|scale|rotate|skew|perspective)(?:X|Y|3d)?",
+      COLOR_FNS = "(?:rgb|hsl)a?",
+      FN_ARGS = "\\([-0-9.%, a-zA-Z]+\\)",
+      SAFE_STYLE_VALUE = new RegExp("^(" + VALUES + "|(?:" + TRANSFORMATION_FNS + "|" + COLOR_FNS + ")" + FN_ARGS + ")$", "g"),
+      URL_RE = /^url\(([^)]+)\)$/,
+      DomSanitizationService = function() {
+        function DomSanitizationService() {}
+        return DomSanitizationService;
+      }(),
+      DomSanitizationServiceImpl = function(_super) {
+        function DomSanitizationServiceImpl() {
+          _super.apply(this, arguments);
+        }
+        return __extends(DomSanitizationServiceImpl, _super), DomSanitizationServiceImpl.prototype.sanitize = function(ctx, value) {
+          if (null == value)
+            return null;
+          switch (ctx) {
+            case SecurityContext.NONE:
+              return value;
+            case SecurityContext.HTML:
+              return value instanceof SafeHtmlImpl ? value.changingThisBreaksApplicationSecurity : (this.checkNotSafeValue(value, "HTML"), sanitizeHtml(String(value)));
+            case SecurityContext.STYLE:
+              return value instanceof SafeStyleImpl ? value.changingThisBreaksApplicationSecurity : (this.checkNotSafeValue(value, "Style"), sanitizeStyle(value));
+            case SecurityContext.SCRIPT:
+              if (value instanceof SafeScriptImpl)
+                return value.changingThisBreaksApplicationSecurity;
+              throw this.checkNotSafeValue(value, "Script"), new Error("unsafe value used in a script context");
+            case SecurityContext.URL:
+              return value instanceof SafeUrlImpl ? value.changingThisBreaksApplicationSecurity : (this.checkNotSafeValue(value, "URL"), sanitizeUrl(String(value)));
+            case SecurityContext.RESOURCE_URL:
+              if (value instanceof SafeResourceUrlImpl)
+                return value.changingThisBreaksApplicationSecurity;
+              throw this.checkNotSafeValue(value, "ResourceURL"), new Error("unsafe value used in a resource URL context (see http://g.co/ng/security#xss)");
+            default:
+              throw new Error("Unexpected SecurityContext " + ctx + " (see http://g.co/ng/security#xss)");
+          }
+        }, DomSanitizationServiceImpl.prototype.checkNotSafeValue = function(value, expectedType) {
+          if (value instanceof SafeValueImpl)
+            throw new Error("Required a safe " + expectedType + ", got a " + value.getTypeName() + " (see http://g.co/ng/security#xss)");
+        }, DomSanitizationServiceImpl.prototype.bypassSecurityTrustHtml = function(value) {
+          return new SafeHtmlImpl(value);
+        }, DomSanitizationServiceImpl.prototype.bypassSecurityTrustStyle = function(value) {
+          return new SafeStyleImpl(value);
+        }, DomSanitizationServiceImpl.prototype.bypassSecurityTrustScript = function(value) {
+          return new SafeScriptImpl(value);
+        }, DomSanitizationServiceImpl.prototype.bypassSecurityTrustUrl = function(value) {
+          return new SafeUrlImpl(value);
+        }, DomSanitizationServiceImpl.prototype.bypassSecurityTrustResourceUrl = function(value) {
+          return new SafeResourceUrlImpl(value);
+        }, DomSanitizationServiceImpl;
+      }(DomSanitizationService);
+  DomSanitizationServiceImpl.decorators = [{type: _angular_core.Injectable}];
+  var SafeValueImpl = function() {
+    function SafeValueImpl(changingThisBreaksApplicationSecurity) {
+      this.changingThisBreaksApplicationSecurity = changingThisBreaksApplicationSecurity;
+    }
+    return SafeValueImpl.prototype.toString = function() {
+      return "SafeValue must use [property]=binding: " + this.changingThisBreaksApplicationSecurity + " (see http://g.co/ng/security#xss)";
+    }, SafeValueImpl;
+  }(),
+      SafeHtmlImpl = function(_super) {
+        function SafeHtmlImpl() {
+          _super.apply(this, arguments);
+        }
+        return __extends(SafeHtmlImpl, _super), SafeHtmlImpl.prototype.getTypeName = function() {
+          return "HTML";
+        }, SafeHtmlImpl;
+      }(SafeValueImpl),
+      SafeStyleImpl = function(_super) {
+        function SafeStyleImpl() {
+          _super.apply(this, arguments);
+        }
+        return __extends(SafeStyleImpl, _super), SafeStyleImpl.prototype.getTypeName = function() {
+          return "Style";
+        }, SafeStyleImpl;
+      }(SafeValueImpl),
+      SafeScriptImpl = function(_super) {
+        function SafeScriptImpl() {
+          _super.apply(this, arguments);
+        }
+        return __extends(SafeScriptImpl, _super), SafeScriptImpl.prototype.getTypeName = function() {
+          return "Script";
+        }, SafeScriptImpl;
+      }(SafeValueImpl),
+      SafeUrlImpl = function(_super) {
+        function SafeUrlImpl() {
+          _super.apply(this, arguments);
+        }
+        return __extends(SafeUrlImpl, _super), SafeUrlImpl.prototype.getTypeName = function() {
+          return "URL";
+        }, SafeUrlImpl;
+      }(SafeValueImpl),
+      SafeResourceUrlImpl = function(_super) {
+        function SafeResourceUrlImpl() {
+          _super.apply(this, arguments);
+        }
+        return __extends(SafeResourceUrlImpl, _super), SafeResourceUrlImpl.prototype.getTypeName = function() {
+          return "ResourceURL";
+        }, SafeResourceUrlImpl;
+      }(SafeValueImpl),
+      CAMEL_CASE_REGEXP = /([A-Z])/g,
+      DASH_CASE_REGEXP = /-([a-z])/g,
+      WebAnimationsPlayer = function() {
+        function WebAnimationsPlayer(_player, totalTime) {
+          var _this = this;
+          this._player = _player, this.totalTime = totalTime, this._subscriptions = [], this._finished = !1, this.parentPlayer = null, this.reset(), this._player.onfinish = function() {
+            return _this._onFinish();
+          };
+        }
+        return WebAnimationsPlayer.prototype._onFinish = function() {
+          this._finished || (this._finished = !0, isPresent(this.parentPlayer) || this.destroy(), this._subscriptions.forEach(function(fn) {
+            return fn();
+          }), this._subscriptions = []);
+        }, WebAnimationsPlayer.prototype.onDone = function(fn) {
+          this._subscriptions.push(fn);
+        }, WebAnimationsPlayer.prototype.play = function() {
+          this._player.play();
+        }, WebAnimationsPlayer.prototype.pause = function() {
+          this._player.pause();
+        }, WebAnimationsPlayer.prototype.finish = function() {
+          this._onFinish(), this._player.finish();
+        }, WebAnimationsPlayer.prototype.reset = function() {
+          this._player.cancel();
+        }, WebAnimationsPlayer.prototype.restart = function() {
+          this.reset(), this.play();
+        }, WebAnimationsPlayer.prototype.destroy = function() {
+          this.reset(), this._onFinish();
+        }, WebAnimationsPlayer.prototype.setPosition = function(p) {
+          this._player.currentTime = p * this.totalTime;
+        }, WebAnimationsPlayer.prototype.getPosition = function() {
+          return this._player.currentTime / this.totalTime;
+        }, WebAnimationsPlayer;
+      }(),
+      WebAnimationsDriver = function() {
+        function WebAnimationsDriver() {}
+        return WebAnimationsDriver.prototype.animate = function(element, startingStyles, keyframes, duration, delay, easing) {
+          var anyElm = element,
+              formattedSteps = [],
+              startingStyleLookup = {};
+          if (isPresent(startingStyles) && startingStyles.styles.length > 0 && (startingStyleLookup = _populateStyles(anyElm, startingStyles, {}), startingStyleLookup.offset = 0, formattedSteps.push(startingStyleLookup)), keyframes.forEach(function(keyframe) {
+            var data = _populateStyles(anyElm, keyframe.styles, startingStyleLookup);
+            data.offset = keyframe.offset, formattedSteps.push(data);
+          }), 1 == formattedSteps.length) {
+            var start = formattedSteps[0];
+            start.offset = null, formattedSteps = [start, start];
+          }
+          var playerOptions = {
+            duration: duration,
+            delay: delay,
+            easing: easing,
+            fill: "both"
+          },
+              player = this._triggerWebAnimation(anyElm, formattedSteps, playerOptions);
+          return new WebAnimationsPlayer(player, duration);
+        }, WebAnimationsDriver.prototype._triggerWebAnimation = function(elm, keyframes, options) {
+          return elm.animate(keyframes, options);
+        }, WebAnimationsDriver;
+      }(),
+      _$0 = 48,
+      _$9 = 57,
+      _$PERIOD = 46,
+      GenericBrowserDomAdapter = function(_super) {
+        function GenericBrowserDomAdapter() {
+          var _this = this;
+          _super.call(this), this._animationPrefix = null, this._transitionEnd = null;
+          try {
+            var element = this.createElement("div", this.defaultDoc());
+            if (isPresent(this.getStyle(element, "animationName")))
+              this._animationPrefix = "";
+            else
+              for (var domPrefixes = ["Webkit", "Moz", "O", "ms"],
+                  i = 0; i < domPrefixes.length; i++)
+                if (isPresent(this.getStyle(element, domPrefixes[i] + "AnimationName"))) {
+                  this._animationPrefix = "-" + domPrefixes[i].toLowerCase() + "-";
+                  break;
+                }
+            var transEndEventNames = {
+              WebkitTransition: "webkitTransitionEnd",
+              MozTransition: "transitionend",
+              OTransition: "oTransitionEnd otransitionend",
+              transition: "transitionend"
+            };
+            StringMapWrapper.forEach(transEndEventNames, function(value, key) {
+              isPresent(_this.getStyle(element, key)) && (_this._transitionEnd = value);
+            });
+          } catch (e) {
+            this._animationPrefix = null, this._transitionEnd = null;
+          }
+        }
+        return __extends(GenericBrowserDomAdapter, _super), GenericBrowserDomAdapter.prototype.getDistributedNodes = function(el) {
+          return el.getDistributedNodes();
+        }, GenericBrowserDomAdapter.prototype.resolveAndSetHref = function(el, baseUrl, href) {
+          el.href = null == href ? baseUrl : baseUrl + "/../" + href;
+        }, GenericBrowserDomAdapter.prototype.supportsDOMEvents = function() {
+          return !0;
+        }, GenericBrowserDomAdapter.prototype.supportsNativeShadowDOM = function() {
+          return isFunction(this.defaultDoc().body.createShadowRoot);
+        }, GenericBrowserDomAdapter.prototype.getAnimationPrefix = function() {
+          return isPresent(this._animationPrefix) ? this._animationPrefix : "";
+        }, GenericBrowserDomAdapter.prototype.getTransitionEnd = function() {
+          return isPresent(this._transitionEnd) ? this._transitionEnd : "";
+        }, GenericBrowserDomAdapter.prototype.supportsAnimation = function() {
+          return isPresent(this._animationPrefix) && isPresent(this._transitionEnd);
+        }, GenericBrowserDomAdapter;
+      }(DomAdapter),
+      _attrToPropMap = {
+        class: "className",
+        innerHtml: "innerHTML",
+        readonly: "readOnly",
+        tabindex: "tabIndex"
+      },
+      DOM_KEY_LOCATION_NUMPAD = 3,
+      _keyMap = {
+        "\b": "Backspace",
+        "\t": "Tab",
+        "": "Delete",
+        "": "Escape",
+        Del: "Delete",
+        Esc: "Escape",
+        Left: "ArrowLeft",
+        Right: "ArrowRight",
+        Up: "ArrowUp",
+        Down: "ArrowDown",
+        Menu: "ContextMenu",
+        Scroll: "ScrollLock",
+        Win: "OS"
+      },
+      _chromeNumKeyPadMap = {
+        A: "1",
+        B: "2",
+        C: "3",
+        D: "4",
+        E: "5",
+        F: "6",
+        G: "7",
+        H: "8",
+        I: "9",
+        J: "*",
+        K: "+",
+        M: "-",
+        N: ".",
+        O: "/",
+        "`": "0",
+        "": "NumLock"
+      },
+      BrowserDomAdapter = function(_super) {
+        function BrowserDomAdapter() {
+          _super.apply(this, arguments);
+        }
+        return __extends(BrowserDomAdapter, _super), BrowserDomAdapter.prototype.parse = function(templateHtml) {
+          throw new Error("parse not implemented");
+        }, BrowserDomAdapter.makeCurrent = function() {
+          setRootDomAdapter(new BrowserDomAdapter);
+        }, BrowserDomAdapter.prototype.hasProperty = function(element, name) {
+          return name in element;
+        }, BrowserDomAdapter.prototype.setProperty = function(el, name, value) {
+          el[name] = value;
+        }, BrowserDomAdapter.prototype.getProperty = function(el, name) {
+          return el[name];
+        }, BrowserDomAdapter.prototype.invoke = function(el, methodName, args) {
+          el[methodName].apply(el, args);
+        }, BrowserDomAdapter.prototype.logError = function(error) {
+          window.console.error ? window.console.error(error) : window.console.log(error);
+        }, BrowserDomAdapter.prototype.log = function(error) {
+          window.console.log(error);
+        }, BrowserDomAdapter.prototype.logGroup = function(error) {
+          window.console.group ? (window.console.group(error), this.logError(error)) : window.console.log(error);
+        }, BrowserDomAdapter.prototype.logGroupEnd = function() {
+          window.console.groupEnd && window.console.groupEnd();
+        }, Object.defineProperty(BrowserDomAdapter.prototype, "attrToPropMap", {
+          get: function() {
+            return _attrToPropMap;
+          },
+          enumerable: !0,
+          configurable: !0
+        }), BrowserDomAdapter.prototype.query = function(selector) {
+          return document.querySelector(selector);
+        }, BrowserDomAdapter.prototype.querySelector = function(el, selector) {
+          return el.querySelector(selector);
+        }, BrowserDomAdapter.prototype.querySelectorAll = function(el, selector) {
+          return el.querySelectorAll(selector);
+        }, BrowserDomAdapter.prototype.on = function(el, evt, listener) {
+          el.addEventListener(evt, listener, !1);
+        }, BrowserDomAdapter.prototype.onAndCancel = function(el, evt, listener) {
+          return el.addEventListener(evt, listener, !1), function() {
+            el.removeEventListener(evt, listener, !1);
+          };
+        }, BrowserDomAdapter.prototype.dispatchEvent = function(el, evt) {
+          el.dispatchEvent(evt);
+        }, BrowserDomAdapter.prototype.createMouseEvent = function(eventType) {
+          var evt = document.createEvent("MouseEvent");
+          return evt.initEvent(eventType, !0, !0), evt;
+        }, BrowserDomAdapter.prototype.createEvent = function(eventType) {
+          var evt = document.createEvent("Event");
+          return evt.initEvent(eventType, !0, !0), evt;
+        }, BrowserDomAdapter.prototype.preventDefault = function(evt) {
+          evt.preventDefault(), evt.returnValue = !1;
+        }, BrowserDomAdapter.prototype.isPrevented = function(evt) {
+          return evt.defaultPrevented || isPresent(evt.returnValue) && !evt.returnValue;
+        }, BrowserDomAdapter.prototype.getInnerHTML = function(el) {
+          return el.innerHTML;
+        }, BrowserDomAdapter.prototype.getTemplateContent = function(el) {
+          return "content" in el && el instanceof HTMLTemplateElement ? el.content : null;
+        }, BrowserDomAdapter.prototype.getOuterHTML = function(el) {
+          return el.outerHTML;
+        }, BrowserDomAdapter.prototype.nodeName = function(node) {
+          return node.nodeName;
+        }, BrowserDomAdapter.prototype.nodeValue = function(node) {
+          return node.nodeValue;
+        }, BrowserDomAdapter.prototype.type = function(node) {
+          return node.type;
+        }, BrowserDomAdapter.prototype.content = function(node) {
+          return this.hasProperty(node, "content") ? node.content : node;
+        }, BrowserDomAdapter.prototype.firstChild = function(el) {
+          return el.firstChild;
+        }, BrowserDomAdapter.prototype.nextSibling = function(el) {
+          return el.nextSibling;
+        }, BrowserDomAdapter.prototype.parentElement = function(el) {
+          return el.parentNode;
+        }, BrowserDomAdapter.prototype.childNodes = function(el) {
+          return el.childNodes;
+        }, BrowserDomAdapter.prototype.childNodesAsList = function(el) {
+          for (var childNodes = el.childNodes,
+              res = ListWrapper.createFixedSize(childNodes.length),
+              i = 0; i < childNodes.length; i++)
+            res[i] = childNodes[i];
+          return res;
+        }, BrowserDomAdapter.prototype.clearNodes = function(el) {
+          for (; el.firstChild; )
+            el.removeChild(el.firstChild);
+        }, BrowserDomAdapter.prototype.appendChild = function(el, node) {
+          el.appendChild(node);
+        }, BrowserDomAdapter.prototype.removeChild = function(el, node) {
+          el.removeChild(node);
+        }, BrowserDomAdapter.prototype.replaceChild = function(el, newChild, oldChild) {
+          el.replaceChild(newChild, oldChild);
+        }, BrowserDomAdapter.prototype.remove = function(node) {
+          return node.parentNode && node.parentNode.removeChild(node), node;
+        }, BrowserDomAdapter.prototype.insertBefore = function(el, node) {
+          el.parentNode.insertBefore(node, el);
+        }, BrowserDomAdapter.prototype.insertAllBefore = function(el, nodes) {
+          nodes.forEach(function(n) {
+            return el.parentNode.insertBefore(n, el);
+          });
+        }, BrowserDomAdapter.prototype.insertAfter = function(el, node) {
+          el.parentNode.insertBefore(node, el.nextSibling);
+        }, BrowserDomAdapter.prototype.setInnerHTML = function(el, value) {
+          el.innerHTML = value;
+        }, BrowserDomAdapter.prototype.getText = function(el) {
+          return el.textContent;
+        }, BrowserDomAdapter.prototype.setText = function(el, value) {
+          el.textContent = value;
+        }, BrowserDomAdapter.prototype.getValue = function(el) {
+          return el.value;
+        }, BrowserDomAdapter.prototype.setValue = function(el, value) {
+          el.value = value;
+        }, BrowserDomAdapter.prototype.getChecked = function(el) {
+          return el.checked;
+        }, BrowserDomAdapter.prototype.setChecked = function(el, value) {
+          el.checked = value;
+        }, BrowserDomAdapter.prototype.createComment = function(text) {
+          return document.createComment(text);
+        }, BrowserDomAdapter.prototype.createTemplate = function(html) {
+          var t = document.createElement("template");
+          return t.innerHTML = html, t;
+        }, BrowserDomAdapter.prototype.createElement = function(tagName, doc) {
+          return void 0 === doc && (doc = document), doc.createElement(tagName);
+        }, BrowserDomAdapter.prototype.createElementNS = function(ns, tagName, doc) {
+          return void 0 === doc && (doc = document), doc.createElementNS(ns, tagName);
+        }, BrowserDomAdapter.prototype.createTextNode = function(text, doc) {
+          return void 0 === doc && (doc = document), doc.createTextNode(text);
+        }, BrowserDomAdapter.prototype.createScriptTag = function(attrName, attrValue, doc) {
+          void 0 === doc && (doc = document);
+          var el = doc.createElement("SCRIPT");
+          return el.setAttribute(attrName, attrValue), el;
+        }, BrowserDomAdapter.prototype.createStyleElement = function(css, doc) {
+          void 0 === doc && (doc = document);
+          var style = doc.createElement("style");
+          return this.appendChild(style, this.createTextNode(css)), style;
+        }, BrowserDomAdapter.prototype.createShadowRoot = function(el) {
+          return el.createShadowRoot();
+        }, BrowserDomAdapter.prototype.getShadowRoot = function(el) {
+          return el.shadowRoot;
+        }, BrowserDomAdapter.prototype.getHost = function(el) {
+          return el.host;
+        }, BrowserDomAdapter.prototype.clone = function(node) {
+          return node.cloneNode(!0);
+        }, BrowserDomAdapter.prototype.getElementsByClassName = function(element, name) {
+          return element.getElementsByClassName(name);
+        }, BrowserDomAdapter.prototype.getElementsByTagName = function(element, name) {
+          return element.getElementsByTagName(name);
+        }, BrowserDomAdapter.prototype.classList = function(element) {
+          return Array.prototype.slice.call(element.classList, 0);
+        }, BrowserDomAdapter.prototype.addClass = function(element, className) {
+          element.classList.add(className);
+        }, BrowserDomAdapter.prototype.removeClass = function(element, className) {
+          element.classList.remove(className);
+        }, BrowserDomAdapter.prototype.hasClass = function(element, className) {
+          return element.classList.contains(className);
+        }, BrowserDomAdapter.prototype.setStyle = function(element, styleName, styleValue) {
+          element.style[styleName] = styleValue;
+        }, BrowserDomAdapter.prototype.removeStyle = function(element, stylename) {
+          element.style[stylename] = null;
+        }, BrowserDomAdapter.prototype.getStyle = function(element, stylename) {
+          return element.style[stylename];
+        }, BrowserDomAdapter.prototype.hasStyle = function(element, styleName, styleValue) {
+          void 0 === styleValue && (styleValue = null);
+          var value = this.getStyle(element, styleName) || "";
+          return styleValue ? value == styleValue : value.length > 0;
+        }, BrowserDomAdapter.prototype.tagName = function(element) {
+          return element.tagName;
+        }, BrowserDomAdapter.prototype.attributeMap = function(element) {
+          for (var res = new Map,
+              elAttrs = element.attributes,
+              i = 0; i < elAttrs.length; i++) {
+            var attrib = elAttrs[i];
+            res.set(attrib.name, attrib.value);
+          }
+          return res;
+        }, BrowserDomAdapter.prototype.hasAttribute = function(element, attribute) {
+          return element.hasAttribute(attribute);
+        }, BrowserDomAdapter.prototype.hasAttributeNS = function(element, ns, attribute) {
+          return element.hasAttributeNS(ns, attribute);
+        }, BrowserDomAdapter.prototype.getAttribute = function(element, attribute) {
+          return element.getAttribute(attribute);
+        }, BrowserDomAdapter.prototype.getAttributeNS = function(element, ns, name) {
+          return element.getAttributeNS(ns, name);
+        }, BrowserDomAdapter.prototype.setAttribute = function(element, name, value) {
+          element.setAttribute(name, value);
+        }, BrowserDomAdapter.prototype.setAttributeNS = function(element, ns, name, value) {
+          element.setAttributeNS(ns, name, value);
+        }, BrowserDomAdapter.prototype.removeAttribute = function(element, attribute) {
+          element.removeAttribute(attribute);
+        }, BrowserDomAdapter.prototype.removeAttributeNS = function(element, ns, name) {
+          element.removeAttributeNS(ns, name);
+        }, BrowserDomAdapter.prototype.templateAwareRoot = function(el) {
+          return this.isTemplateElement(el) ? this.content(el) : el;
+        }, BrowserDomAdapter.prototype.createHtmlDocument = function() {
+          return document.implementation.createHTMLDocument("fakeTitle");
+        }, BrowserDomAdapter.prototype.defaultDoc = function() {
+          return document;
+        }, BrowserDomAdapter.prototype.getBoundingClientRect = function(el) {
+          try {
+            return el.getBoundingClientRect();
+          } catch (e) {
+            return {
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              width: 0,
+              height: 0
+            };
+          }
+        }, BrowserDomAdapter.prototype.getTitle = function() {
+          return document.title;
+        }, BrowserDomAdapter.prototype.setTitle = function(newTitle) {
+          document.title = newTitle || "";
+        }, BrowserDomAdapter.prototype.elementMatches = function(n, selector) {
+          var matches = !1;
+          return n instanceof HTMLElement && (n.matches ? matches = n.matches(selector) : n.msMatchesSelector ? matches = n.msMatchesSelector(selector) : n.webkitMatchesSelector && (matches = n.webkitMatchesSelector(selector))), matches;
+        }, BrowserDomAdapter.prototype.isTemplateElement = function(el) {
+          return el instanceof HTMLElement && "TEMPLATE" == el.nodeName;
+        }, BrowserDomAdapter.prototype.isTextNode = function(node) {
+          return node.nodeType === Node.TEXT_NODE;
+        }, BrowserDomAdapter.prototype.isCommentNode = function(node) {
+          return node.nodeType === Node.COMMENT_NODE;
+        }, BrowserDomAdapter.prototype.isElementNode = function(node) {
+          return node.nodeType === Node.ELEMENT_NODE;
+        }, BrowserDomAdapter.prototype.hasShadowRoot = function(node) {
+          return node instanceof HTMLElement && isPresent(node.shadowRoot);
+        }, BrowserDomAdapter.prototype.isShadowRoot = function(node) {
+          return node instanceof DocumentFragment;
+        }, BrowserDomAdapter.prototype.importIntoDoc = function(node) {
+          var toImport = node;
+          return this.isTemplateElement(node) && (toImport = this.content(node)), document.importNode(toImport, !0);
+        }, BrowserDomAdapter.prototype.adoptNode = function(node) {
+          return document.adoptNode(node);
+        }, BrowserDomAdapter.prototype.getHref = function(el) {
+          return el.href;
+        }, BrowserDomAdapter.prototype.getEventKey = function(event) {
+          var key = event.key;
+          if (isBlank(key)) {
+            if (key = event.keyIdentifier, isBlank(key))
+              return "Unidentified";
+            key.startsWith("U+") && (key = String.fromCharCode(parseInt(key.substring(2), 16)), event.location === DOM_KEY_LOCATION_NUMPAD && _chromeNumKeyPadMap.hasOwnProperty(key) && (key = _chromeNumKeyPadMap[key]));
+          }
+          return _keyMap.hasOwnProperty(key) && (key = _keyMap[key]), key;
+        }, BrowserDomAdapter.prototype.getGlobalEventTarget = function(target) {
+          return "window" == target ? window : "document" == target ? document : "body" == target ? document.body : void 0;
+        }, BrowserDomAdapter.prototype.getHistory = function() {
+          return window.history;
+        }, BrowserDomAdapter.prototype.getLocation = function() {
+          return window.location;
+        }, BrowserDomAdapter.prototype.getBaseHref = function() {
+          var href = getBaseElementHref();
+          return isBlank(href) ? null : relativePath(href);
+        }, BrowserDomAdapter.prototype.resetBaseElement = function() {
+          baseElement = null;
+        }, BrowserDomAdapter.prototype.getUserAgent = function() {
+          return window.navigator.userAgent;
+        }, BrowserDomAdapter.prototype.setData = function(element, name, value) {
+          this.setAttribute(element, "data-" + name, value);
+        }, BrowserDomAdapter.prototype.getData = function(element, name) {
+          return this.getAttribute(element, "data-" + name);
+        }, BrowserDomAdapter.prototype.getComputedStyle = function(element) {
+          return getComputedStyle(element);
+        }, BrowserDomAdapter.prototype.setGlobalVar = function(path, value) {
+          setValueOnPath(global$1, path, value);
+        }, BrowserDomAdapter.prototype.requestAnimationFrame = function(callback) {
+          return window.requestAnimationFrame(callback);
+        }, BrowserDomAdapter.prototype.cancelAnimationFrame = function(id) {
+          window.cancelAnimationFrame(id);
+        }, BrowserDomAdapter.prototype.supportsWebAnimation = function() {
+          return isFunction(document.body.animate);
+        }, BrowserDomAdapter.prototype.performanceNow = function() {
+          return isPresent(window.performance) && isPresent(window.performance.now) ? window.performance.now() : DateWrapper.toMillis(DateWrapper.now());
+        }, BrowserDomAdapter.prototype.supportsCookies = function() {
+          return !0;
+        }, BrowserDomAdapter.prototype.getCookie = function(name) {
+          return parseCookieValue(document.cookie, name);
+        }, BrowserDomAdapter.prototype.setCookie = function(name, value) {
+          document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+        }, BrowserDomAdapter;
+      }(GenericBrowserDomAdapter),
+      baseElement = null,
+      urlParsingNode = null,
+      PublicTestability = function() {
+        function PublicTestability(testability) {
+          this._testability = testability;
+        }
+        return PublicTestability.prototype.isStable = function() {
+          return this._testability.isStable();
+        }, PublicTestability.prototype.whenStable = function(callback) {
+          this._testability.whenStable(callback);
+        }, PublicTestability.prototype.findBindings = function(using, provider, exactMatch) {
+          return this.findProviders(using, provider, exactMatch);
+        }, PublicTestability.prototype.findProviders = function(using, provider, exactMatch) {
+          return this._testability.findBindings(using, provider, exactMatch);
+        }, PublicTestability;
+      }(),
+      BrowserGetTestability = function() {
+        function BrowserGetTestability() {}
+        return BrowserGetTestability.init = function() {
+          _angular_core.setTestabilityGetter(new BrowserGetTestability);
+        }, BrowserGetTestability.prototype.addToWindow = function(registry) {
+          global$1.getAngularTestability = function(elem, findInAncestors) {
+            void 0 === findInAncestors && (findInAncestors = !0);
+            var testability = registry.findTestabilityInTree(elem, findInAncestors);
+            if (null == testability)
+              throw new Error("Could not find testability for element.");
+            return new PublicTestability(testability);
+          }, global$1.getAllAngularTestabilities = function() {
+            var testabilities = registry.getAllTestabilities();
+            return testabilities.map(function(testability) {
+              return new PublicTestability(testability);
+            });
+          }, global$1.getAllAngularRootElements = function() {
+            return registry.getAllRootElements();
+          };
+          var whenAllStable = function(callback) {
+            var testabilities = global$1.getAllAngularTestabilities(),
+                count = testabilities.length,
+                didWork = !1,
+                decrement = function(didWork_) {
+                  didWork = didWork || didWork_, count--, 0 == count && callback(didWork);
+                };
+            testabilities.forEach(function(testability) {
+              testability.whenStable(decrement);
+            });
+          };
+          global$1.frameworkStabilizers || (global$1.frameworkStabilizers = ListWrapper.createGrowableSize(0)), global$1.frameworkStabilizers.push(whenAllStable);
+        }, BrowserGetTestability.prototype.findTestabilityInTree = function(registry, elem, findInAncestors) {
+          if (null == elem)
+            return null;
+          var t = registry.getTestability(elem);
+          return isPresent(t) ? t : findInAncestors ? getDOM().isShadowRoot(elem) ? this.findTestabilityInTree(registry, getDOM().getHost(elem), !0) : this.findTestabilityInTree(registry, getDOM().parentElement(elem), !0) : null;
+        }, BrowserGetTestability;
+      }(),
+      SharedStylesHost = function() {
+        function SharedStylesHost() {
+          this._styles = [], this._stylesSet = new Set;
+        }
+        return SharedStylesHost.prototype.addStyles = function(styles) {
+          var _this = this,
+              additions = [];
+          styles.forEach(function(style) {
+            SetWrapper.has(_this._stylesSet, style) || (_this._stylesSet.add(style), _this._styles.push(style), additions.push(style));
+          }), this.onStylesAdded(additions);
+        }, SharedStylesHost.prototype.onStylesAdded = function(additions) {}, SharedStylesHost.prototype.getAllStyles = function() {
+          return this._styles;
+        }, SharedStylesHost;
+      }();
+  SharedStylesHost.decorators = [{type: _angular_core.Injectable}], SharedStylesHost.ctorParameters = [];
+  var DomSharedStylesHost = function(_super) {
+    function DomSharedStylesHost(doc) {
+      _super.call(this), this._hostNodes = new Set, this._hostNodes.add(doc.head);
+    }
+    return __extends(DomSharedStylesHost, _super), DomSharedStylesHost.prototype._addStylesToHost = function(styles, host) {
+      for (var i = 0; i < styles.length; i++) {
+        var style = styles[i];
+        getDOM().appendChild(host, getDOM().createStyleElement(style));
+      }
+    }, DomSharedStylesHost.prototype.addHost = function(hostNode) {
+      this._addStylesToHost(this._styles, hostNode), this._hostNodes.add(hostNode);
+    }, DomSharedStylesHost.prototype.removeHost = function(hostNode) {
+      SetWrapper.delete(this._hostNodes, hostNode);
+    }, DomSharedStylesHost.prototype.onStylesAdded = function(additions) {
+      var _this = this;
+      this._hostNodes.forEach(function(hostNode) {
+        _this._addStylesToHost(additions, hostNode);
+      });
+    }, DomSharedStylesHost;
+  }(SharedStylesHost);
+  DomSharedStylesHost.decorators = [{type: _angular_core.Injectable}], DomSharedStylesHost.ctorParameters = [{
+    type: void 0,
+    decorators: [{
+      type: _angular_core.Inject,
+      args: [DOCUMENT]
+    }]
+  }];
+  var NAMESPACE_URIS = {
+    xlink: "http://www.w3.org/1999/xlink",
+    svg: "http://www.w3.org/2000/svg",
+    xhtml: "http://www.w3.org/1999/xhtml"
+  },
+      TEMPLATE_COMMENT_TEXT = "template bindings={}",
+      TEMPLATE_BINDINGS_EXP = /^template bindings=(.*)$/g,
+      DomRootRenderer = function() {
+        function DomRootRenderer(document, eventManager, sharedStylesHost, animationDriver) {
+          this.document = document, this.eventManager = eventManager, this.sharedStylesHost = sharedStylesHost, this.animationDriver = animationDriver, this.registeredComponents = new Map;
+        }
+        return DomRootRenderer.prototype.renderComponent = function(componentProto) {
+          var renderer = this.registeredComponents.get(componentProto.id);
+          return isBlank(renderer) && (renderer = new DomRenderer(this, componentProto, this.animationDriver), this.registeredComponents.set(componentProto.id, renderer)), renderer;
+        }, DomRootRenderer;
+      }(),
+      DomRootRenderer_ = function(_super) {
+        function DomRootRenderer_(_document, _eventManager, sharedStylesHost, animationDriver) {
+          _super.call(this, _document, _eventManager, sharedStylesHost, animationDriver);
+        }
+        return __extends(DomRootRenderer_, _super), DomRootRenderer_;
+      }(DomRootRenderer);
+  DomRootRenderer_.decorators = [{type: _angular_core.Injectable}], DomRootRenderer_.ctorParameters = [{
+    type: void 0,
+    decorators: [{
+      type: _angular_core.Inject,
+      args: [DOCUMENT]
+    }]
+  }, {type: EventManager}, {type: DomSharedStylesHost}, {type: AnimationDriver}];
+  var DomRenderer = function() {
+    function DomRenderer(_rootRenderer, componentProto, _animationDriver) {
+      this._rootRenderer = _rootRenderer, this.componentProto = componentProto, this._animationDriver = _animationDriver, this._styles = _flattenStyles(componentProto.id, componentProto.styles, []), componentProto.encapsulation !== _angular_core.ViewEncapsulation.Native && this._rootRenderer.sharedStylesHost.addStyles(this._styles), this.componentProto.encapsulation === _angular_core.ViewEncapsulation.Emulated ? (this._contentAttr = _shimContentAttribute(componentProto.id), this._hostAttr = _shimHostAttribute(componentProto.id)) : (this._contentAttr = null, this._hostAttr = null);
+    }
+    return DomRenderer.prototype.selectRootElement = function(selectorOrNode, debugInfo) {
+      var el;
+      if (isString(selectorOrNode)) {
+        if (el = getDOM().querySelector(this._rootRenderer.document, selectorOrNode), isBlank(el))
+          throw new BaseException$1('The selector "' + selectorOrNode + '" did not match any elements');
+      } else
+        el = selectorOrNode;
+      return getDOM().clearNodes(el), el;
+    }, DomRenderer.prototype.createElement = function(parent, name, debugInfo) {
+      var nsAndName = splitNamespace(name),
+          el = isPresent(nsAndName[0]) ? getDOM().createElementNS(NAMESPACE_URIS[nsAndName[0]], nsAndName[1]) : getDOM().createElement(nsAndName[1]);
+      return isPresent(this._contentAttr) && getDOM().setAttribute(el, this._contentAttr, ""), isPresent(parent) && getDOM().appendChild(parent, el), el;
+    }, DomRenderer.prototype.createViewRoot = function(hostElement) {
+      var nodesParent;
+      if (this.componentProto.encapsulation === _angular_core.ViewEncapsulation.Native) {
+        nodesParent = getDOM().createShadowRoot(hostElement), this._rootRenderer.sharedStylesHost.addHost(nodesParent);
+        for (var i = 0; i < this._styles.length; i++)
+          getDOM().appendChild(nodesParent, getDOM().createStyleElement(this._styles[i]));
+      } else
+        isPresent(this._hostAttr) && getDOM().setAttribute(hostElement, this._hostAttr, ""), nodesParent = hostElement;
+      return nodesParent;
+    }, DomRenderer.prototype.createTemplateAnchor = function(parentElement, debugInfo) {
+      var comment = getDOM().createComment(TEMPLATE_COMMENT_TEXT);
+      return isPresent(parentElement) && getDOM().appendChild(parentElement, comment), comment;
+    }, DomRenderer.prototype.createText = function(parentElement, value, debugInfo) {
+      var node = getDOM().createTextNode(value);
+      return isPresent(parentElement) && getDOM().appendChild(parentElement, node), node;
+    }, DomRenderer.prototype.projectNodes = function(parentElement, nodes) {
+      isBlank(parentElement) || appendNodes(parentElement, nodes);
+    }, DomRenderer.prototype.attachViewAfter = function(node, viewRootNodes) {
+      moveNodesAfterSibling(node, viewRootNodes);
+    }, DomRenderer.prototype.detachView = function(viewRootNodes) {
+      for (var i = 0; i < viewRootNodes.length; i++)
+        getDOM().remove(viewRootNodes[i]);
+    }, DomRenderer.prototype.destroyView = function(hostElement, viewAllNodes) {
+      this.componentProto.encapsulation === _angular_core.ViewEncapsulation.Native && isPresent(hostElement) && this._rootRenderer.sharedStylesHost.removeHost(getDOM().getShadowRoot(hostElement));
+    }, DomRenderer.prototype.listen = function(renderElement, name, callback) {
+      return this._rootRenderer.eventManager.addEventListener(renderElement, name, decoratePreventDefault(callback));
+    }, DomRenderer.prototype.listenGlobal = function(target, name, callback) {
+      return this._rootRenderer.eventManager.addGlobalEventListener(target, name, decoratePreventDefault(callback));
+    }, DomRenderer.prototype.setElementProperty = function(renderElement, propertyName, propertyValue) {
+      getDOM().setProperty(renderElement, propertyName, propertyValue);
+    }, DomRenderer.prototype.setElementAttribute = function(renderElement, attributeName, attributeValue) {
+      var attrNs,
+          nsAndName = splitNamespace(attributeName);
+      isPresent(nsAndName[0]) && (attributeName = nsAndName[0] + ":" + nsAndName[1], attrNs = NAMESPACE_URIS[nsAndName[0]]), isPresent(attributeValue) ? isPresent(attrNs) ? getDOM().setAttributeNS(renderElement, attrNs, attributeName, attributeValue) : getDOM().setAttribute(renderElement, attributeName, attributeValue) : isPresent(attrNs) ? getDOM().removeAttributeNS(renderElement, attrNs, nsAndName[1]) : getDOM().removeAttribute(renderElement, attributeName);
+    }, DomRenderer.prototype.setBindingDebugInfo = function(renderElement, propertyName, propertyValue) {
+      var dashCasedPropertyName = camelCaseToDashCase(propertyName);
+      if (getDOM().isCommentNode(renderElement)) {
+        var existingBindings = RegExpWrapper.firstMatch(TEMPLATE_BINDINGS_EXP, StringWrapper.replaceAll(getDOM().getText(renderElement), /\n/g, "")),
+            parsedBindings = Json.parse(existingBindings[1]);
+        parsedBindings[dashCasedPropertyName] = propertyValue, getDOM().setText(renderElement, StringWrapper.replace(TEMPLATE_COMMENT_TEXT, "{}", Json.stringify(parsedBindings)));
+      } else
+        this.setElementAttribute(renderElement, propertyName, propertyValue);
+    }, DomRenderer.prototype.setElementClass = function(renderElement, className, isAdd) {
+      isAdd ? getDOM().addClass(renderElement, className) : getDOM().removeClass(renderElement, className);
+    }, DomRenderer.prototype.setElementStyle = function(renderElement, styleName, styleValue) {
+      isPresent(styleValue) ? getDOM().setStyle(renderElement, styleName, stringify(styleValue)) : getDOM().removeStyle(renderElement, styleName);
+    }, DomRenderer.prototype.invokeElementMethod = function(renderElement, methodName, args) {
+      getDOM().invoke(renderElement, methodName, args);
+    }, DomRenderer.prototype.setText = function(renderNode, text) {
+      getDOM().setText(renderNode, text);
+    }, DomRenderer.prototype.animate = function(element, startingStyles, keyframes, duration, delay, easing) {
+      return this._animationDriver.animate(element, startingStyles, keyframes, duration, delay, easing);
+    }, DomRenderer;
+  }(),
+      COMPONENT_REGEX = /%COMP%/g,
+      COMPONENT_VARIABLE = "%COMP%",
+      HOST_ATTR = "_nghost-" + COMPONENT_VARIABLE,
+      CONTENT_ATTR = "_ngcontent-" + COMPONENT_VARIABLE,
+      NS_PREFIX_RE = /^:([^:]+):(.+)/g,
+      CORE_TOKENS = {
+        ApplicationRef: _angular_core.ApplicationRef,
+        NgZone: _angular_core.NgZone
+      },
+      INSPECT_GLOBAL_NAME = "ng.probe",
+      CORE_TOKENS_GLOBAL_NAME = "ng.coreTokens",
+      ELEMENT_PROBE_PROVIDERS = [{
+        provide: _angular_core.RootRenderer,
+        useFactory: _createConditionalRootRenderer,
+        deps: [DomRootRenderer]
+      }],
+      DomEventsPlugin = function(_super) {
+        function DomEventsPlugin() {
+          _super.apply(this, arguments);
+        }
+        return __extends(DomEventsPlugin, _super), DomEventsPlugin.prototype.supports = function(eventName) {
+          return !0;
+        }, DomEventsPlugin.prototype.addEventListener = function(element, eventName, handler) {
+          var zone = this.manager.getZone(),
+              outsideHandler = function(event) {
+                return zone.runGuarded(function() {
+                  return handler(event);
+                });
+              };
+          return this.manager.getZone().runOutsideAngular(function() {
+            return getDOM().onAndCancel(element, eventName, outsideHandler);
+          });
+        }, DomEventsPlugin.prototype.addGlobalEventListener = function(target, eventName, handler) {
+          var element = getDOM().getGlobalEventTarget(target),
+              zone = this.manager.getZone(),
+              outsideHandler = function(event) {
+                return zone.runGuarded(function() {
+                  return handler(event);
+                });
+              };
+          return this.manager.getZone().runOutsideAngular(function() {
+            return getDOM().onAndCancel(element, eventName, outsideHandler);
+          });
+        }, DomEventsPlugin;
+      }(EventManagerPlugin);
+  DomEventsPlugin.decorators = [{type: _angular_core.Injectable}];
+  var modifierKeys = ["alt", "control", "meta", "shift"],
+      modifierKeyGetters = {
+        alt: function(event) {
+          return event.altKey;
+        },
+        control: function(event) {
+          return event.ctrlKey;
+        },
+        meta: function(event) {
+          return event.metaKey;
+        },
+        shift: function(event) {
+          return event.shiftKey;
+        }
+      },
+      KeyEventsPlugin = function(_super) {
+        function KeyEventsPlugin() {
+          _super.call(this);
+        }
+        return __extends(KeyEventsPlugin, _super), KeyEventsPlugin.prototype.supports = function(eventName) {
+          return isPresent(KeyEventsPlugin.parseEventName(eventName));
+        }, KeyEventsPlugin.prototype.addEventListener = function(element, eventName, handler) {
+          var parsedEvent = KeyEventsPlugin.parseEventName(eventName),
+              outsideHandler = KeyEventsPlugin.eventCallback(element, StringMapWrapper.get(parsedEvent, "fullKey"), handler, this.manager.getZone());
+          return this.manager.getZone().runOutsideAngular(function() {
+            return getDOM().onAndCancel(element, StringMapWrapper.get(parsedEvent, "domEventName"), outsideHandler);
+          });
+        }, KeyEventsPlugin.parseEventName = function(eventName) {
+          var parts = eventName.toLowerCase().split("."),
+              domEventName = parts.shift();
+          if (0 === parts.length || !StringWrapper.equals(domEventName, "keydown") && !StringWrapper.equals(domEventName, "keyup"))
+            return null;
+          var key = KeyEventsPlugin._normalizeKey(parts.pop()),
+              fullKey = "";
+          if (modifierKeys.forEach(function(modifierName) {
+            ListWrapper.contains(parts, modifierName) && (ListWrapper.remove(parts, modifierName), fullKey += modifierName + ".");
+          }), fullKey += key, 0 != parts.length || 0 === key.length)
+            return null;
+          var result = StringMapWrapper.create();
+          return StringMapWrapper.set(result, "domEventName", domEventName), StringMapWrapper.set(result, "fullKey", fullKey), result;
+        }, KeyEventsPlugin.getEventFullKey = function(event) {
+          var fullKey = "",
+              key = getDOM().getEventKey(event);
+          return key = key.toLowerCase(), StringWrapper.equals(key, " ") ? key = "space" : StringWrapper.equals(key, ".") && (key = "dot"), modifierKeys.forEach(function(modifierName) {
+            if (modifierName != key) {
+              var modifierGetter = StringMapWrapper.get(modifierKeyGetters, modifierName);
+              modifierGetter(event) && (fullKey += modifierName + ".");
+            }
+          }), fullKey += key;
+        }, KeyEventsPlugin.eventCallback = function(element, fullKey, handler, zone) {
+          return function(event) {
+            StringWrapper.equals(KeyEventsPlugin.getEventFullKey(event), fullKey) && zone.runGuarded(function() {
+              return handler(event);
+            });
+          };
+        }, KeyEventsPlugin._normalizeKey = function(keyName) {
+          switch (keyName) {
+            case "esc":
+              return "escape";
+            default:
+              return keyName;
+          }
+        }, KeyEventsPlugin;
+      }(EventManagerPlugin);
+  KeyEventsPlugin.decorators = [{type: _angular_core.Injectable}], KeyEventsPlugin.ctorParameters = [];
+  var BROWSER_PLATFORM_MARKER = new _angular_core.OpaqueToken("BrowserPlatformMarker"),
+      BROWSER_PLATFORM_PROVIDERS = [{
+        provide: BROWSER_PLATFORM_MARKER,
+        useValue: !0
+      }, _angular_core.PLATFORM_COMMON_PROVIDERS, {
+        provide: _angular_core.PLATFORM_INITIALIZER,
+        useValue: initDomAdapter,
+        multi: !0
+      }, {
+        provide: _angular_common.PlatformLocation,
+        useClass: BrowserPlatformLocation
+      }],
+      BROWSER_SANITIZATION_PROVIDERS = [{
+        provide: SanitizationService,
+        useExisting: DomSanitizationService
+      }, {
+        provide: DomSanitizationService,
+        useClass: DomSanitizationServiceImpl
+      }],
+      BROWSER_APP_PROVIDERS = [_angular_core.APPLICATION_COMMON_PROVIDERS, _angular_common.FORM_PROVIDERS, BROWSER_SANITIZATION_PROVIDERS, {
+        provide: _angular_core.ExceptionHandler,
+        useFactory: _exceptionHandler,
+        deps: []
+      }, {
+        provide: DOCUMENT,
+        useFactory: _document,
+        deps: []
+      }, {
+        provide: EVENT_MANAGER_PLUGINS,
+        useClass: DomEventsPlugin,
+        multi: !0
+      }, {
+        provide: EVENT_MANAGER_PLUGINS,
+        useClass: KeyEventsPlugin,
+        multi: !0
+      }, {
+        provide: EVENT_MANAGER_PLUGINS,
+        useClass: HammerGesturesPlugin,
+        multi: !0
+      }, {
+        provide: HAMMER_GESTURE_CONFIG,
+        useClass: HammerGestureConfig
+      }, {
+        provide: DomRootRenderer,
+        useClass: DomRootRenderer_
+      }, {
+        provide: _angular_core.RootRenderer,
+        useExisting: DomRootRenderer
+      }, {
+        provide: SharedStylesHost,
+        useExisting: DomSharedStylesHost
+      }, {
+        provide: AnimationDriver,
+        useFactory: _resolveDefaultAnimationDriver
+      }, DomSharedStylesHost, _angular_core.Testability, EventManager, ELEMENT_PROBE_PROVIDERS],
+      PromiseCompleter = function() {
+        function PromiseCompleter() {
+          var _this = this;
+          this.promise = new Promise(function(res, rej) {
+            _this.resolve = res, _this.reject = rej;
+          });
+        }
+        return PromiseCompleter;
+      }(),
+      PromiseWrapper = function() {
+        function PromiseWrapper() {}
+        return PromiseWrapper.resolve = function(obj) {
+          return Promise.resolve(obj);
+        }, PromiseWrapper.reject = function(obj, _) {
+          return Promise.reject(obj);
+        }, PromiseWrapper.catchError = function(promise, onError) {
+          return promise.catch(onError);
+        }, PromiseWrapper.all = function(promises) {
+          return 0 == promises.length ? Promise.resolve([]) : Promise.all(promises);
+        }, PromiseWrapper.then = function(promise, success, rejection) {
+          return promise.then(success, rejection);
+        }, PromiseWrapper.wrap = function(computation) {
+          return new Promise(function(res, rej) {
+            try {
+              res(computation());
+            } catch (e) {
+              rej(e);
+            }
+          });
+        }, PromiseWrapper.scheduleMicrotask = function(computation) {
+          PromiseWrapper.then(PromiseWrapper.resolve(null), computation, function(_) {});
+        }, PromiseWrapper.completer = function() {
+          return new PromiseCompleter;
+        }, PromiseWrapper;
+      }(),
+      ObservableWrapper = function() {
+        function ObservableWrapper() {}
+        return ObservableWrapper.subscribe = function(emitter, onNext, onError, onComplete) {
+          return void 0 === onComplete && (onComplete = function() {}), onError = "function" == typeof onError && onError || noop, onComplete = "function" == typeof onComplete && onComplete || noop, emitter.subscribe({
+            next: onNext,
+            error: onError,
+            complete: onComplete
+          });
+        }, ObservableWrapper.isObservable = function(obs) {
+          return !!obs.subscribe;
+        }, ObservableWrapper.hasSubscribers = function(obs) {
+          return obs.observers.length > 0;
+        }, ObservableWrapper.dispose = function(subscription) {
+          subscription.unsubscribe();
+        }, ObservableWrapper.callNext = function(emitter, value) {
+          emitter.emit(value);
+        }, ObservableWrapper.callEmit = function(emitter, value) {
+          emitter.emit(value);
+        }, ObservableWrapper.callError = function(emitter, error) {
+          emitter.error(error);
+        }, ObservableWrapper.callComplete = function(emitter) {
+          emitter.complete();
+        }, ObservableWrapper.fromPromise = function(promise) {
+          return rxjs_observable_PromiseObservable.PromiseObservable.create(promise);
+        }, ObservableWrapper.toPromise = function(obj) {
+          return rxjs_operator_toPromise.toPromise.call(obj);
+        }, ObservableWrapper;
+      }(),
+      EventEmitter = function(_super) {
+        function EventEmitter(isAsync) {
+          void 0 === isAsync && (isAsync = !1), _super.call(this), this.__isAsync = isAsync;
+        }
+        return __extends(EventEmitter, _super), EventEmitter.prototype.emit = function(value) {
+          _super.prototype.next.call(this, value);
+        }, EventEmitter.prototype.next = function(value) {
+          _super.prototype.next.call(this, value);
+        }, EventEmitter.prototype.subscribe = function(generatorOrNext, error, complete) {
+          var schedulerFn,
+              errorFn = function(err) {
+                return null;
+              },
+              completeFn = function() {
+                return null;
+              };
+          return generatorOrNext && "object" == typeof generatorOrNext ? (schedulerFn = this.__isAsync ? function(value) {
+            setTimeout(function() {
+              return generatorOrNext.next(value);
+            });
+          } : function(value) {
+            generatorOrNext.next(value);
+          }, generatorOrNext.error && (errorFn = this.__isAsync ? function(err) {
+            setTimeout(function() {
+              return generatorOrNext.error(err);
+            });
+          } : function(err) {
+            generatorOrNext.error(err);
+          }), generatorOrNext.complete && (completeFn = this.__isAsync ? function() {
+            setTimeout(function() {
+              return generatorOrNext.complete();
+            });
+          } : function() {
+            generatorOrNext.complete();
+          })) : (schedulerFn = this.__isAsync ? function(value) {
+            setTimeout(function() {
+              return generatorOrNext(value);
+            });
+          } : function(value) {
+            generatorOrNext(value);
+          }, error && (errorFn = this.__isAsync ? function(err) {
+            setTimeout(function() {
+              return error(err);
+            });
+          } : function(err) {
+            error(err);
+          }), complete && (completeFn = this.__isAsync ? function() {
+            setTimeout(function() {
+              return complete();
+            });
+          } : function() {
+            complete();
+          })), _super.prototype.subscribe.call(this, schedulerFn, errorFn, completeFn);
+        }, EventEmitter;
+      }(rxjs_Subject.Subject),
+      MessageBus = function() {
+        function MessageBus() {}
+        return MessageBus;
+      }(),
+      RenderStore = function() {
+        function RenderStore() {
+          this._nextIndex = 0, this._lookupById = new Map, this._lookupByObject = new Map;
+        }
+        return RenderStore.prototype.allocateId = function() {
+          return this._nextIndex++;
+        }, RenderStore.prototype.store = function(obj, id) {
+          this._lookupById.set(id, obj), this._lookupByObject.set(obj, id);
+        }, RenderStore.prototype.remove = function(obj) {
+          var index = this._lookupByObject.get(obj);
+          this._lookupByObject.delete(obj), this._lookupById.delete(index);
+        }, RenderStore.prototype.deserialize = function(id) {
+          return null == id ? null : this._lookupById.has(id) ? this._lookupById.get(id) : null;
+        }, RenderStore.prototype.serialize = function(obj) {
+          return null == obj ? null : this._lookupByObject.get(obj);
+        }, RenderStore;
+      }();
+  RenderStore.decorators = [{type: _angular_core.Injectable}], RenderStore.ctorParameters = [];
+  var LocationType = function() {
+    function LocationType(href, protocol, host, hostname, port, pathname, search, hash, origin) {
+      this.href = href, this.protocol = protocol, this.host = host, this.hostname = hostname, this.port = port, this.pathname = pathname, this.search = search, this.hash = hash, this.origin = origin;
+    }
+    return LocationType;
+  }(),
+      PRIMITIVE = String,
+      Serializer = function() {
+        function Serializer(_renderStore) {
+          this._renderStore = _renderStore;
+        }
+        return Serializer.prototype.serialize = function(obj, type) {
+          var _this = this;
+          if (!isPresent(obj))
+            return null;
+          if (isArray(obj))
+            return obj.map(function(v) {
+              return _this.serialize(v, type);
+            });
+          if (type == PRIMITIVE)
+            return obj;
+          if (type == RenderStoreObject)
+            return this._renderStore.serialize(obj);
+          if (type === _angular_core.RenderComponentType)
+            return this._serializeRenderComponentType(obj);
+          if (type === _angular_core.ViewEncapsulation)
+            return serializeEnum(obj);
+          if (type === LocationType)
+            return this._serializeLocation(obj);
+          throw new BaseException$1("No serializer for " + type.toString());
+        }, Serializer.prototype.deserialize = function(map, type, data) {
+          var _this = this;
+          if (!isPresent(map))
+            return null;
+          if (isArray(map)) {
+            var obj = [];
+            return map.forEach(function(val) {
+              return obj.push(_this.deserialize(val, type, data));
+            }), obj;
+          }
+          if (type == PRIMITIVE)
+            return map;
+          if (type == RenderStoreObject)
+            return this._renderStore.deserialize(map);
+          if (type === _angular_core.RenderComponentType)
+            return this._deserializeRenderComponentType(map);
+          if (type === _angular_core.ViewEncapsulation)
+            return VIEW_ENCAPSULATION_VALUES[map];
+          if (type === LocationType)
+            return this._deserializeLocation(map);
+          throw new BaseException$1("No deserializer for " + type.toString());
+        }, Serializer.prototype._serializeLocation = function(loc) {
+          return {
+            href: loc.href,
+            protocol: loc.protocol,
+            host: loc.host,
+            hostname: loc.hostname,
+            port: loc.port,
+            pathname: loc.pathname,
+            search: loc.search,
+            hash: loc.hash,
+            origin: loc.origin
+          };
+        }, Serializer.prototype._deserializeLocation = function(loc) {
+          return new LocationType(loc.href, loc.protocol, loc.host, loc.hostname, loc.port, loc.pathname, loc.search, loc.hash, loc.origin);
+        }, Serializer.prototype._serializeRenderComponentType = function(obj) {
+          return {
+            id: obj.id,
+            templateUrl: obj.templateUrl,
+            slotCount: obj.slotCount,
+            encapsulation: this.serialize(obj.encapsulation, _angular_core.ViewEncapsulation),
+            styles: this.serialize(obj.styles, PRIMITIVE)
+          };
+        }, Serializer.prototype._deserializeRenderComponentType = function(map) {
+          return new _angular_core.RenderComponentType(map.id, map.templateUrl, map.slotCount, this.deserialize(map.encapsulation, _angular_core.ViewEncapsulation), this.deserialize(map.styles, PRIMITIVE));
+        }, Serializer;
+      }();
+  Serializer.decorators = [{type: _angular_core.Injectable}], Serializer.ctorParameters = [{type: RenderStore}];
+  var RenderStoreObject = function() {
+    function RenderStoreObject() {}
+    return RenderStoreObject;
+  }(),
+      ClientMessageBrokerFactory = function() {
+        function ClientMessageBrokerFactory() {}
+        return ClientMessageBrokerFactory;
+      }(),
+      ClientMessageBrokerFactory_ = function(_super) {
+        function ClientMessageBrokerFactory_(_messageBus, _serializer) {
+          _super.call(this), this._messageBus = _messageBus, this._serializer = _serializer;
+        }
+        return __extends(ClientMessageBrokerFactory_, _super), ClientMessageBrokerFactory_.prototype.createMessageBroker = function(channel, runInZone) {
+          return void 0 === runInZone && (runInZone = !0), this._messageBus.initChannel(channel, runInZone), new ClientMessageBroker_(this._messageBus, this._serializer, channel);
+        }, ClientMessageBrokerFactory_;
+      }(ClientMessageBrokerFactory);
+  ClientMessageBrokerFactory_.decorators = [{type: _angular_core.Injectable}], ClientMessageBrokerFactory_.ctorParameters = [{type: MessageBus}, {type: Serializer}];
+  var ClientMessageBroker = function() {
+    function ClientMessageBroker() {}
+    return ClientMessageBroker;
+  }(),
+      ClientMessageBroker_ = function(_super) {
+        function ClientMessageBroker_(messageBus, _serializer, channel) {
+          var _this = this;
+          _super.call(this), this.channel = channel, this._pending = new Map, this._sink = messageBus.to(channel), this._serializer = _serializer;
+          var source = messageBus.from(channel);
+          ObservableWrapper.subscribe(source, function(message) {
+            return _this._handleMessage(message);
+          });
+        }
+        return __extends(ClientMessageBroker_, _super), ClientMessageBroker_.prototype._generateMessageId = function(name) {
+          for (var time = stringify(DateWrapper.toMillis(DateWrapper.now())),
+              iteration = 0,
+              id = name + time + stringify(iteration); isPresent(this._pending[id]); )
+            id = "" + name + time + iteration, iteration++;
+          return id;
+        }, ClientMessageBroker_.prototype.runOnService = function(args, returnType) {
+          var _this = this,
+              fnArgs = [];
+          isPresent(args.args) && args.args.forEach(function(argument) {
+            null != argument.type ? fnArgs.push(_this._serializer.serialize(argument.value, argument.type)) : fnArgs.push(argument.value);
+          });
+          var promise,
+              id = null;
+          if (null != returnType) {
+            var completer = PromiseWrapper.completer();
+            id = this._generateMessageId(args.method), this._pending.set(id, completer), PromiseWrapper.catchError(completer.promise, function(err, stack) {
+              print(err), completer.reject(err, stack);
+            }), promise = PromiseWrapper.then(completer.promise, function(value) {
+              return null == _this._serializer ? value : _this._serializer.deserialize(value, returnType);
+            });
+          } else
+            promise = null;
+          var message = {
+            method: args.method,
+            args: fnArgs
+          };
+          return null != id && (message.id = id), ObservableWrapper.callEmit(this._sink, message), promise;
+        }, ClientMessageBroker_.prototype._handleMessage = function(message) {
+          var data = new MessageData(message);
+          if (StringWrapper.equals(data.type, "result") || StringWrapper.equals(data.type, "error")) {
+            var id = data.id;
+            this._pending.has(id) && (StringWrapper.equals(data.type, "result") ? this._pending.get(id).resolve(data.value) : this._pending.get(id).reject(data.value, null), this._pending.delete(id));
+          }
+        }, ClientMessageBroker_;
+      }(ClientMessageBroker),
+      MessageData = function() {
+        function MessageData(data) {
+          this.type = StringMapWrapper.get(data, "type"), this.id = this._getValueIfPresent(data, "id"), this.value = this._getValueIfPresent(data, "value");
+        }
+        return MessageData.prototype._getValueIfPresent = function(data, key) {
+          return StringMapWrapper.contains(data, key) ? StringMapWrapper.get(data, key) : null;
+        }, MessageData;
+      }(),
+      FnArg = function() {
+        function FnArg(value, type) {
+          this.value = value, this.type = type;
+        }
+        return FnArg;
+      }(),
+      UiArguments = function() {
+        function UiArguments(method, args) {
+          this.method = method, this.args = args;
+        }
+        return UiArguments;
+      }(),
+      ServiceMessageBrokerFactory = function() {
+        function ServiceMessageBrokerFactory() {}
+        return ServiceMessageBrokerFactory;
+      }(),
+      ServiceMessageBrokerFactory_ = function(_super) {
+        function ServiceMessageBrokerFactory_(_messageBus, _serializer) {
+          _super.call(this), this._messageBus = _messageBus, this._serializer = _serializer;
+        }
+        return __extends(ServiceMessageBrokerFactory_, _super), ServiceMessageBrokerFactory_.prototype.createMessageBroker = function(channel, runInZone) {
+          return void 0 === runInZone && (runInZone = !0), this._messageBus.initChannel(channel, runInZone), new ServiceMessageBroker_(this._messageBus, this._serializer, channel);
+        }, ServiceMessageBrokerFactory_;
+      }(ServiceMessageBrokerFactory);
+  ServiceMessageBrokerFactory_.decorators = [{type: _angular_core.Injectable}], ServiceMessageBrokerFactory_.ctorParameters = [{type: MessageBus}, {type: Serializer}];
+  var ServiceMessageBroker = function() {
+    function ServiceMessageBroker() {}
+    return ServiceMessageBroker;
+  }(),
+      ServiceMessageBroker_ = function(_super) {
+        function ServiceMessageBroker_(messageBus, _serializer, channel) {
+          var _this = this;
+          _super.call(this), this._serializer = _serializer, this.channel = channel, this._methods = new Map$1, this._sink = messageBus.to(channel);
+          var source = messageBus.from(channel);
+          ObservableWrapper.subscribe(source, function(message) {
+            return _this._handleMessage(message);
+          });
+        }
+        return __extends(ServiceMessageBroker_, _super), ServiceMessageBroker_.prototype.registerMethod = function(methodName, signature, method, returnType) {
+          var _this = this;
+          this._methods.set(methodName, function(message) {
+            for (var serializedArgs = message.args,
+                numArgs = null === signature ? 0 : signature.length,
+                deserializedArgs = ListWrapper.createFixedSize(numArgs),
+                i = 0; i < numArgs; i++) {
+              var serializedArg = serializedArgs[i];
+              deserializedArgs[i] = _this._serializer.deserialize(serializedArg, signature[i]);
+            }
+            var promise = FunctionWrapper.apply(method, deserializedArgs);
+            isPresent(returnType) && isPresent(promise) && _this._wrapWebWorkerPromise(message.id, promise, returnType);
+          });
+        }, ServiceMessageBroker_.prototype._handleMessage = function(map) {
+          var message = new ReceivedMessage(map);
+          this._methods.has(message.method) && this._methods.get(message.method)(message);
+        }, ServiceMessageBroker_.prototype._wrapWebWorkerPromise = function(id, promise, type) {
+          var _this = this;
+          PromiseWrapper.then(promise, function(result) {
+            ObservableWrapper.callEmit(_this._sink, {
+              type: "result",
+              value: _this._serializer.serialize(result, type),
+              id: id
+            });
+          });
+        }, ServiceMessageBroker_;
+      }(ServiceMessageBroker),
+      ReceivedMessage = function() {
+        function ReceivedMessage(data) {
+          this.method = data.method, this.args = data.args, this.id = data.id, this.type = data.type;
+        }
+        return ReceivedMessage;
+      }(),
+      RENDERER_CHANNEL = "ng-Renderer",
+      EVENT_CHANNEL = "ng-Events",
+      ROUTER_CHANNEL = "ng-Router",
+      WebWorkerPlatformLocation = function(_super) {
+        function WebWorkerPlatformLocation(brokerFactory, bus, _serializer) {
+          var _this = this;
+          _super.call(this), this._serializer = _serializer, this._popStateListeners = [], this._hashChangeListeners = [], this._location = null, this._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL), this._channelSource = bus.from(ROUTER_CHANNEL), ObservableWrapper.subscribe(this._channelSource, function(msg) {
+            var listeners = null;
+            if (StringMapWrapper.contains(msg, "event")) {
+              var type = msg.event.type;
+              if (StringWrapper.equals(type, "popstate") ? listeners = _this._popStateListeners : StringWrapper.equals(type, "hashchange") && (listeners = _this._hashChangeListeners), null !== listeners) {
+                var e_1 = deserializeGenericEvent(msg.event);
+                _this._location = _this._serializer.deserialize(msg.location, LocationType), listeners.forEach(function(fn) {
+                  return fn(e_1);
+                });
+              }
+            }
+          });
+        }
+        return __extends(WebWorkerPlatformLocation, _super), WebWorkerPlatformLocation.prototype.init = function() {
+          var _this = this,
+              args = new UiArguments("getLocation"),
+              locationPromise = this._broker.runOnService(args, LocationType);
+          return PromiseWrapper.then(locationPromise, function(val) {
+            return _this._location = val, !0;
+          }, function(err) {
+            throw new BaseException$1(err);
+          });
+        }, WebWorkerPlatformLocation.prototype.getBaseHrefFromDOM = function() {
+          throw new BaseException$1("Attempt to get base href from DOM from WebWorker. You must either provide a value for the APP_BASE_HREF token through DI or use the hash location strategy.");
+        }, WebWorkerPlatformLocation.prototype.onPopState = function(fn) {
+          this._popStateListeners.push(fn);
+        }, WebWorkerPlatformLocation.prototype.onHashChange = function(fn) {
+          this._hashChangeListeners.push(fn);
+        }, Object.defineProperty(WebWorkerPlatformLocation.prototype, "pathname", {
+          get: function() {
+            return null === this._location ? null : this._location.pathname;
+          },
+          set: function(newPath) {
+            if (null === this._location)
+              throw new BaseException$1("Attempt to set pathname before value is obtained from UI");
+            this._location.pathname = newPath;
+            var fnArgs = [new FnArg(newPath, PRIMITIVE)],
+                args = new UiArguments("setPathname", fnArgs);
+            this._broker.runOnService(args, null);
+          },
+          enumerable: !0,
+          configurable: !0
+        }), Object.defineProperty(WebWorkerPlatformLocation.prototype, "search", {
+          get: function() {
+            return null === this._location ? null : this._location.search;
+          },
+          enumerable: !0,
+          configurable: !0
+        }), Object.defineProperty(WebWorkerPlatformLocation.prototype, "hash", {
+          get: function() {
+            return null === this._location ? null : this._location.hash;
+          },
+          enumerable: !0,
+          configurable: !0
+        }), WebWorkerPlatformLocation.prototype.pushState = function(state, title, url) {
+          var fnArgs = [new FnArg(state, PRIMITIVE), new FnArg(title, PRIMITIVE), new FnArg(url, PRIMITIVE)],
+              args = new UiArguments("pushState", fnArgs);
+          this._broker.runOnService(args, null);
+        }, WebWorkerPlatformLocation.prototype.replaceState = function(state, title, url) {
+          var fnArgs = [new FnArg(state, PRIMITIVE), new FnArg(title, PRIMITIVE), new FnArg(url, PRIMITIVE)],
+              args = new UiArguments("replaceState", fnArgs);
+          this._broker.runOnService(args, null);
+        }, WebWorkerPlatformLocation.prototype.forward = function() {
+          var args = new UiArguments("forward");
+          this._broker.runOnService(args, null);
+        }, WebWorkerPlatformLocation.prototype.back = function() {
+          var args = new UiArguments("back");
+          this._broker.runOnService(args, null);
+        }, WebWorkerPlatformLocation;
+      }(_angular_common.PlatformLocation);
+  WebWorkerPlatformLocation.decorators = [{type: _angular_core.Injectable}], WebWorkerPlatformLocation.ctorParameters = [{type: ClientMessageBrokerFactory}, {type: MessageBus}, {type: Serializer}];
+  var WORKER_APP_LOCATION_PROVIDERS = [{
+    provide: _angular_common.PlatformLocation,
+    useClass: WebWorkerPlatformLocation
+  }, {
+    provide: _angular_core.APP_INITIALIZER,
+    useFactory: appInitFnFactory,
+    multi: !0,
+    deps: [_angular_common.PlatformLocation, _angular_core.NgZone]
+  }],
+      MessageBasedPlatformLocation = function() {
+        function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
+          this._brokerFactory = _brokerFactory, this._platformLocation = _platformLocation, this._serializer = _serializer, this._platformLocation.onPopState(FunctionWrapper.bind(this._sendUrlChangeEvent, this)), this._platformLocation.onHashChange(FunctionWrapper.bind(this._sendUrlChangeEvent, this)), this._broker = this._brokerFactory.createMessageBroker(ROUTER_CHANNEL), this._channelSink = bus.to(ROUTER_CHANNEL);
+        }
+        return MessageBasedPlatformLocation.prototype.start = function() {
+          this._broker.registerMethod("getLocation", null, FunctionWrapper.bind(this._getLocation, this), LocationType), this._broker.registerMethod("setPathname", [PRIMITIVE], FunctionWrapper.bind(this._setPathname, this)), this._broker.registerMethod("pushState", [PRIMITIVE, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._platformLocation.pushState, this._platformLocation)), this._broker.registerMethod("replaceState", [PRIMITIVE, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._platformLocation.replaceState, this._platformLocation)), this._broker.registerMethod("forward", null, FunctionWrapper.bind(this._platformLocation.forward, this._platformLocation)), this._broker.registerMethod("back", null, FunctionWrapper.bind(this._platformLocation.back, this._platformLocation));
+        }, MessageBasedPlatformLocation.prototype._getLocation = function() {
+          return PromiseWrapper.resolve(this._platformLocation.location);
+        }, MessageBasedPlatformLocation.prototype._sendUrlChangeEvent = function(e) {
+          var loc = this._serializer.serialize(this._platformLocation.location, LocationType),
+              serializedEvent = {type: e.type};
+          ObservableWrapper.callEmit(this._channelSink, {
+            event: serializedEvent,
+            location: loc
+          });
+        }, MessageBasedPlatformLocation.prototype._setPathname = function(pathname) {
+          this._platformLocation.pathname = pathname;
+        }, MessageBasedPlatformLocation;
+      }();
+  MessageBasedPlatformLocation.decorators = [{type: _angular_core.Injectable}], MessageBasedPlatformLocation.ctorParameters = [{type: ServiceMessageBrokerFactory}, {type: BrowserPlatformLocation}, {type: MessageBus}, {type: Serializer}];
+  var WORKER_UI_LOCATION_PROVIDERS = [MessageBasedPlatformLocation, BrowserPlatformLocation, {
+    provide: _angular_core.APP_INITIALIZER,
+    useFactory: initUiLocation,
+    multi: !0,
+    deps: [_angular_core.Injector]
+  }],
+      ON_WEB_WORKER = new _angular_core.OpaqueToken("WebWorker.onWebWorker"),
+      PostMessageBusSink = function() {
+        function PostMessageBusSink(_postMessageTarget) {
+          this._postMessageTarget = _postMessageTarget, this._channels = StringMapWrapper.create(), this._messageBuffer = [];
+        }
+        return PostMessageBusSink.prototype.attachToZone = function(zone) {
+          var _this = this;
+          this._zone = zone, this._zone.runOutsideAngular(function() {
+            ObservableWrapper.subscribe(_this._zone.onStable, function(_) {
+              _this._handleOnEventDone();
+            });
+          });
+        }, PostMessageBusSink.prototype.initChannel = function(channel, runInZone) {
+          var _this = this;
+          if (void 0 === runInZone && (runInZone = !0), StringMapWrapper.contains(this._channels, channel))
+            throw new BaseException$1(channel + " has already been initialized");
+          var emitter = new EventEmitter((!1)),
+              channelInfo = new _Channel(emitter, runInZone);
+          this._channels[channel] = channelInfo, emitter.subscribe(function(data) {
+            var message = {
+              channel: channel,
+              message: data
+            };
+            runInZone ? _this._messageBuffer.push(message) : _this._sendMessages([message]);
+          });
+        }, PostMessageBusSink.prototype.to = function(channel) {
+          if (StringMapWrapper.contains(this._channels, channel))
+            return this._channels[channel].emitter;
+          throw new BaseException$1(channel + " is not set up. Did you forget to call initChannel?");
+        }, PostMessageBusSink.prototype._handleOnEventDone = function() {
+          this._messageBuffer.length > 0 && (this._sendMessages(this._messageBuffer), this._messageBuffer = []);
+        }, PostMessageBusSink.prototype._sendMessages = function(messages) {
+          this._postMessageTarget.postMessage(messages);
+        }, PostMessageBusSink;
+      }(),
+      PostMessageBusSource = function() {
+        function PostMessageBusSource(eventTarget) {
+          var _this = this;
+          if (this._channels = StringMapWrapper.create(), eventTarget)
+            eventTarget.addEventListener("message", function(ev) {
+              return _this._handleMessages(ev);
+            });
+          else {
+            var workerScope = self;
+            workerScope.addEventListener("message", function(ev) {
+              return _this._handleMessages(ev);
+            });
+          }
+        }
+        return PostMessageBusSource.prototype.attachToZone = function(zone) {
+          this._zone = zone;
+        }, PostMessageBusSource.prototype.initChannel = function(channel, runInZone) {
+          if (void 0 === runInZone && (runInZone = !0), StringMapWrapper.contains(this._channels, channel))
+            throw new BaseException$1(channel + " has already been initialized");
+          var emitter = new EventEmitter((!1)),
+              channelInfo = new _Channel(emitter, runInZone);
+          this._channels[channel] = channelInfo;
+        }, PostMessageBusSource.prototype.from = function(channel) {
+          if (StringMapWrapper.contains(this._channels, channel))
+            return this._channels[channel].emitter;
+          throw new BaseException$1(channel + " is not set up. Did you forget to call initChannel?");
+        }, PostMessageBusSource.prototype._handleMessages = function(ev) {
+          for (var messages = ev.data,
+              i = 0; i < messages.length; i++)
+            this._handleMessage(messages[i]);
+        }, PostMessageBusSource.prototype._handleMessage = function(data) {
+          var channel = data.channel;
+          if (StringMapWrapper.contains(this._channels, channel)) {
+            var channelInfo = this._channels[channel];
+            channelInfo.runInZone ? this._zone.run(function() {
+              channelInfo.emitter.emit(data.message);
+            }) : channelInfo.emitter.emit(data.message);
+          }
+        }, PostMessageBusSource;
+      }(),
+      PostMessageBus = function() {
+        function PostMessageBus(sink, source) {
+          this.sink = sink, this.source = source;
+        }
+        return PostMessageBus.prototype.attachToZone = function(zone) {
+          this.source.attachToZone(zone), this.sink.attachToZone(zone);
+        }, PostMessageBus.prototype.initChannel = function(channel, runInZone) {
+          void 0 === runInZone && (runInZone = !0), this.source.initChannel(channel, runInZone), this.sink.initChannel(channel, runInZone);
+        }, PostMessageBus.prototype.from = function(channel) {
+          return this.source.from(channel);
+        }, PostMessageBus.prototype.to = function(channel) {
+          return this.sink.to(channel);
+        }, PostMessageBus;
+      }();
+  PostMessageBus.decorators = [{type: _angular_core.Injectable}], PostMessageBus.ctorParameters = [{type: PostMessageBusSink}, {type: PostMessageBusSource}];
+  var _Channel = function() {
+    function _Channel(emitter, runInZone) {
+      this.emitter = emitter, this.runInZone = runInZone;
+    }
+    return _Channel;
+  }(),
+      MOUSE_EVENT_PROPERTIES = ["altKey", "button", "clientX", "clientY", "metaKey", "movementX", "movementY", "offsetX", "offsetY", "region", "screenX", "screenY", "shiftKey"],
+      KEYBOARD_EVENT_PROPERTIES = ["altkey", "charCode", "code", "ctrlKey", "isComposing", "key", "keyCode", "location", "metaKey", "repeat", "shiftKey", "which"],
+      TRANSITION_EVENT_PROPERTIES = ["propertyName", "elapsedTime", "pseudoElement"],
+      EVENT_PROPERTIES = ["type", "bubbles", "cancelable"],
+      NODES_WITH_VALUE = new Set$1(["input", "select", "option", "button", "li", "meter", "progress", "param", "textarea"]),
+      EventDispatcher = function() {
+        function EventDispatcher(_sink, _serializer) {
+          this._sink = _sink, this._serializer = _serializer;
+        }
+        return EventDispatcher.prototype.dispatchRenderEvent = function(element, eventTarget, eventName, event) {
+          var serializedEvent;
+          switch (event.type) {
+            case "click":
+            case "mouseup":
+            case "mousedown":
+            case "dblclick":
+            case "contextmenu":
+            case "mouseenter":
+            case "mouseleave":
+            case "mousemove":
+            case "mouseout":
+            case "mouseover":
+            case "show":
+              serializedEvent = serializeMouseEvent(event);
+              break;
+            case "keydown":
+            case "keypress":
+            case "keyup":
+              serializedEvent = serializeKeyboardEvent(event);
+              break;
+            case "input":
+            case "change":
+            case "blur":
+              serializedEvent = serializeEventWithTarget(event);
+              break;
+            case "abort":
+            case "afterprint":
+            case "beforeprint":
+            case "cached":
+            case "canplay":
+            case "canplaythrough":
+            case "chargingchange":
+            case "chargingtimechange":
+            case "close":
+            case "dischargingtimechange":
+            case "DOMContentLoaded":
+            case "downloading":
+            case "durationchange":
+            case "emptied":
+            case "ended":
+            case "error":
+            case "fullscreenchange":
+            case "fullscreenerror":
+            case "invalid":
+            case "languagechange":
+            case "levelfchange":
+            case "loadeddata":
+            case "loadedmetadata":
+            case "obsolete":
+            case "offline":
+            case "online":
+            case "open":
+            case "orientatoinchange":
+            case "pause":
+            case "pointerlockchange":
+            case "pointerlockerror":
+            case "play":
+            case "playing":
+            case "ratechange":
+            case "readystatechange":
+            case "reset":
+            case "scroll":
+            case "seeked":
+            case "seeking":
+            case "stalled":
+            case "submit":
+            case "success":
+            case "suspend":
+            case "timeupdate":
+            case "updateready":
+            case "visibilitychange":
+            case "volumechange":
+            case "waiting":
+              serializedEvent = serializeGenericEvent(event);
+              break;
+            case "transitionend":
+              serializedEvent = serializeTransitionEvent(event);
+              break;
+            default:
+              throw new BaseException$1(eventName + " not supported on WebWorkers");
+          }
+          return ObservableWrapper.callEmit(this._sink, {
+            element: this._serializer.serialize(element, RenderStoreObject),
+            eventName: eventName,
+            eventTarget: eventTarget,
+            event: serializedEvent
+          }), !1;
+        }, EventDispatcher;
+      }(),
+      MessageBasedRenderer = function() {
+        function MessageBasedRenderer(_brokerFactory, _bus, _serializer, _renderStore, _rootRenderer) {
+          this._brokerFactory = _brokerFactory, this._bus = _bus, this._serializer = _serializer, this._renderStore = _renderStore, this._rootRenderer = _rootRenderer;
+        }
+        return MessageBasedRenderer.prototype.start = function() {
+          var broker = this._brokerFactory.createMessageBroker(RENDERER_CHANNEL);
+          this._bus.initChannel(EVENT_CHANNEL), this._eventDispatcher = new EventDispatcher(this._bus.to(EVENT_CHANNEL), this._serializer), broker.registerMethod("renderComponent", [_angular_core.RenderComponentType, PRIMITIVE], FunctionWrapper.bind(this._renderComponent, this)), broker.registerMethod("selectRootElement", [RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._selectRootElement, this)), broker.registerMethod("createElement", [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._createElement, this)), broker.registerMethod("createViewRoot", [RenderStoreObject, RenderStoreObject, PRIMITIVE], FunctionWrapper.bind(this._createViewRoot, this)), broker.registerMethod("createTemplateAnchor", [RenderStoreObject, RenderStoreObject, PRIMITIVE], FunctionWrapper.bind(this._createTemplateAnchor, this)), broker.registerMethod("createText", [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._createText, this)), broker.registerMethod("projectNodes", [RenderStoreObject, RenderStoreObject, RenderStoreObject], FunctionWrapper.bind(this._projectNodes, this)), broker.registerMethod("attachViewAfter", [RenderStoreObject, RenderStoreObject, RenderStoreObject], FunctionWrapper.bind(this._attachViewAfter, this)), broker.registerMethod("detachView", [RenderStoreObject, RenderStoreObject], FunctionWrapper.bind(this._detachView, this)), broker.registerMethod("destroyView", [RenderStoreObject, RenderStoreObject, RenderStoreObject], FunctionWrapper.bind(this._destroyView, this)), broker.registerMethod("setElementProperty", [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._setElementProperty, this)), broker.registerMethod("setElementAttribute", [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._setElementAttribute, this)), broker.registerMethod("setBindingDebugInfo", [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._setBindingDebugInfo, this)), broker.registerMethod("setElementClass", [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._setElementClass, this)), broker.registerMethod("setElementStyle", [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._setElementStyle, this)), broker.registerMethod("invokeElementMethod", [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._invokeElementMethod, this)), broker.registerMethod("setText", [RenderStoreObject, RenderStoreObject, PRIMITIVE], FunctionWrapper.bind(this._setText, this)), broker.registerMethod("listen", [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._listen, this)), broker.registerMethod("listenGlobal", [RenderStoreObject, PRIMITIVE, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._listenGlobal, this)), broker.registerMethod("listenDone", [RenderStoreObject, RenderStoreObject], FunctionWrapper.bind(this._listenDone, this));
+        }, MessageBasedRenderer.prototype._renderComponent = function(renderComponentType, rendererId) {
+          var renderer = this._rootRenderer.renderComponent(renderComponentType);
+          this._renderStore.store(renderer, rendererId);
+        }, MessageBasedRenderer.prototype._selectRootElement = function(renderer, selector, elId) {
+          this._renderStore.store(renderer.selectRootElement(selector, null), elId);
+        }, MessageBasedRenderer.prototype._createElement = function(renderer, parentElement, name, elId) {
+          this._renderStore.store(renderer.createElement(parentElement, name, null), elId);
+        }, MessageBasedRenderer.prototype._createViewRoot = function(renderer, hostElement, elId) {
+          var viewRoot = renderer.createViewRoot(hostElement);
+          this._renderStore.serialize(hostElement) !== elId && this._renderStore.store(viewRoot, elId);
+        }, MessageBasedRenderer.prototype._createTemplateAnchor = function(renderer, parentElement, elId) {
+          this._renderStore.store(renderer.createTemplateAnchor(parentElement, null), elId);
+        }, MessageBasedRenderer.prototype._createText = function(renderer, parentElement, value, elId) {
+          this._renderStore.store(renderer.createText(parentElement, value, null), elId);
+        }, MessageBasedRenderer.prototype._projectNodes = function(renderer, parentElement, nodes) {
+          renderer.projectNodes(parentElement, nodes);
+        }, MessageBasedRenderer.prototype._attachViewAfter = function(renderer, node, viewRootNodes) {
+          renderer.attachViewAfter(node, viewRootNodes);
+        }, MessageBasedRenderer.prototype._detachView = function(renderer, viewRootNodes) {
+          renderer.detachView(viewRootNodes);
+        }, MessageBasedRenderer.prototype._destroyView = function(renderer, hostElement, viewAllNodes) {
+          renderer.destroyView(hostElement, viewAllNodes);
+          for (var i = 0; i < viewAllNodes.length; i++)
+            this._renderStore.remove(viewAllNodes[i]);
+        }, MessageBasedRenderer.prototype._setElementProperty = function(renderer, renderElement, propertyName, propertyValue) {
+          renderer.setElementProperty(renderElement, propertyName, propertyValue);
+        }, MessageBasedRenderer.prototype._setElementAttribute = function(renderer, renderElement, attributeName, attributeValue) {
+          renderer.setElementAttribute(renderElement, attributeName, attributeValue);
+        }, MessageBasedRenderer.prototype._setBindingDebugInfo = function(renderer, renderElement, propertyName, propertyValue) {
+          renderer.setBindingDebugInfo(renderElement, propertyName, propertyValue);
+        }, MessageBasedRenderer.prototype._setElementClass = function(renderer, renderElement, className, isAdd) {
+          renderer.setElementClass(renderElement, className, isAdd);
+        }, MessageBasedRenderer.prototype._setElementStyle = function(renderer, renderElement, styleName, styleValue) {
+          renderer.setElementStyle(renderElement, styleName, styleValue);
+        }, MessageBasedRenderer.prototype._invokeElementMethod = function(renderer, renderElement, methodName, args) {
+          renderer.invokeElementMethod(renderElement, methodName, args);
+        }, MessageBasedRenderer.prototype._setText = function(renderer, renderNode, text) {
+          renderer.setText(renderNode, text);
+        }, MessageBasedRenderer.prototype._listen = function(renderer, renderElement, eventName, unlistenId) {
+          var _this = this,
+              unregisterCallback = renderer.listen(renderElement, eventName, function(event) {
+                return _this._eventDispatcher.dispatchRenderEvent(renderElement, null, eventName, event);
+              });
+          this._renderStore.store(unregisterCallback, unlistenId);
+        }, MessageBasedRenderer.prototype._listenGlobal = function(renderer, eventTarget, eventName, unlistenId) {
+          var _this = this,
+              unregisterCallback = renderer.listenGlobal(eventTarget, eventName, function(event) {
+                return _this._eventDispatcher.dispatchRenderEvent(null, eventTarget, eventName, event);
+              });
+          this._renderStore.store(unregisterCallback, unlistenId);
+        }, MessageBasedRenderer.prototype._listenDone = function(renderer, unlistenCallback) {
+          unlistenCallback();
+        }, MessageBasedRenderer;
+      }();
+  MessageBasedRenderer.decorators = [{type: _angular_core.Injectable}], MessageBasedRenderer.ctorParameters = [{type: ServiceMessageBrokerFactory}, {type: MessageBus}, {type: Serializer}, {type: RenderStore}, {type: _angular_core.RootRenderer}];
+  var WORKER_RENDER_PLATFORM_MARKER = new _angular_core.OpaqueToken("WorkerRenderPlatformMarker"),
+      WebWorkerInstance = function() {
+        function WebWorkerInstance() {}
+        return WebWorkerInstance.prototype.init = function(worker, bus) {
+          this.worker = worker, this.bus = bus;
+        }, WebWorkerInstance;
+      }();
+  WebWorkerInstance.decorators = [{type: _angular_core.Injectable}];
+  var WORKER_SCRIPT = new _angular_core.OpaqueToken("WebWorkerScript"),
+      WORKER_UI_STARTABLE_MESSAGING_SERVICE = new _angular_core.OpaqueToken("WorkerRenderStartableMsgService"),
+      WORKER_UI_PLATFORM_PROVIDERS = [_angular_core.PLATFORM_COMMON_PROVIDERS, {
+        provide: WORKER_RENDER_PLATFORM_MARKER,
+        useValue: !0
+      }, {
+        provide: _angular_core.PLATFORM_INITIALIZER,
+        useValue: initWebWorkerRenderPlatform,
+        multi: !0
+      }],
+      WORKER_UI_APPLICATION_PROVIDERS = [_angular_core.APPLICATION_COMMON_PROVIDERS, MessageBasedRenderer, {
+        provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE,
+        useExisting: MessageBasedRenderer,
+        multi: !0
+      }, BROWSER_SANITIZATION_PROVIDERS, {
+        provide: _angular_core.ExceptionHandler,
+        useFactory: _exceptionHandler$1,
+        deps: []
+      }, {
+        provide: DOCUMENT,
+        useFactory: _document$1,
+        deps: []
+      }, {
+        provide: EVENT_MANAGER_PLUGINS,
+        useClass: DomEventsPlugin,
+        multi: !0
+      }, {
+        provide: EVENT_MANAGER_PLUGINS,
+        useClass: KeyEventsPlugin,
+        multi: !0
+      }, {
+        provide: EVENT_MANAGER_PLUGINS,
+        useClass: HammerGesturesPlugin,
+        multi: !0
+      }, {
+        provide: HAMMER_GESTURE_CONFIG,
+        useClass: HammerGestureConfig
+      }, {
+        provide: DomRootRenderer,
+        useClass: DomRootRenderer_
+      }, {
+        provide: _angular_core.RootRenderer,
+        useExisting: DomRootRenderer
+      }, {
+        provide: SharedStylesHost,
+        useExisting: DomSharedStylesHost
+      }, {
+        provide: ServiceMessageBrokerFactory,
+        useClass: ServiceMessageBrokerFactory_
+      }, {
+        provide: ClientMessageBrokerFactory,
+        useClass: ClientMessageBrokerFactory_
+      }, {
+        provide: AnimationDriver,
+        useFactory: _resolveDefaultAnimationDriver$1
+      }, Serializer, {
+        provide: ON_WEB_WORKER,
+        useValue: !1
+      }, RenderStore, DomSharedStylesHost, _angular_core.Testability, EventManager, WebWorkerInstance, {
+        provide: _angular_core.APP_INITIALIZER,
+        useFactory: initWebWorkerAppFn,
+        multi: !0,
+        deps: [_angular_core.Injector]
+      }, {
+        provide: MessageBus,
+        useFactory: messageBusFactory,
+        deps: [WebWorkerInstance]
+      }],
+      WebWorkerRootRenderer = function() {
+        function WebWorkerRootRenderer(messageBrokerFactory, bus, _serializer, _renderStore) {
+          var _this = this;
+          this._serializer = _serializer, this._renderStore = _renderStore, this.globalEvents = new NamedEventEmitter, this._componentRenderers = new Map, this._messageBroker = messageBrokerFactory.createMessageBroker(RENDERER_CHANNEL), bus.initChannel(EVENT_CHANNEL);
+          var source = bus.from(EVENT_CHANNEL);
+          ObservableWrapper.subscribe(source, function(message) {
+            return _this._dispatchEvent(message);
+          });
+        }
+        return WebWorkerRootRenderer.prototype._dispatchEvent = function(message) {
+          var eventName = message.eventName,
+              target = message.eventTarget,
+              event = deserializeGenericEvent(message.event);
+          if (isPresent(target))
+            this.globalEvents.dispatchEvent(eventNameWithTarget(target, eventName), event);
+          else {
+            var element = this._serializer.deserialize(message.element, RenderStoreObject);
+            element.events.dispatchEvent(eventName, event);
+          }
+        }, WebWorkerRootRenderer.prototype.renderComponent = function(componentType) {
+          var result = this._componentRenderers.get(componentType.id);
+          if (isBlank(result)) {
+            result = new WebWorkerRenderer(this, componentType), this._componentRenderers.set(componentType.id, result);
+            var id = this._renderStore.allocateId();
+            this._renderStore.store(result, id), this.runOnService("renderComponent", [new FnArg(componentType, _angular_core.RenderComponentType), new FnArg(result, RenderStoreObject)]);
+          }
+          return result;
+        }, WebWorkerRootRenderer.prototype.runOnService = function(fnName, fnArgs) {
+          var args = new UiArguments(fnName, fnArgs);
+          this._messageBroker.runOnService(args, null);
+        }, WebWorkerRootRenderer.prototype.allocateNode = function() {
+          var result = new WebWorkerRenderNode,
+              id = this._renderStore.allocateId();
+          return this._renderStore.store(result, id), result;
+        }, WebWorkerRootRenderer.prototype.allocateId = function() {
+          return this._renderStore.allocateId();
+        }, WebWorkerRootRenderer.prototype.destroyNodes = function(nodes) {
+          for (var i = 0; i < nodes.length; i++)
+            this._renderStore.remove(nodes[i]);
+        }, WebWorkerRootRenderer;
+      }();
+  WebWorkerRootRenderer.decorators = [{type: _angular_core.Injectable}], WebWorkerRootRenderer.ctorParameters = [{type: ClientMessageBrokerFactory}, {type: MessageBus}, {type: Serializer}, {type: RenderStore}];
+  var WebWorkerRenderer = function() {
+    function WebWorkerRenderer(_rootRenderer, _componentType) {
+      this._rootRenderer = _rootRenderer, this._componentType = _componentType;
+    }
+    return WebWorkerRenderer.prototype._runOnService = function(fnName, fnArgs) {
+      var fnArgsWithRenderer = [new FnArg(this, RenderStoreObject)].concat(fnArgs);
+      this._rootRenderer.runOnService(fnName, fnArgsWithRenderer);
+    }, WebWorkerRenderer.prototype.selectRootElement = function(selectorOrNode, debugInfo) {
+      var node = this._rootRenderer.allocateNode();
+      return this._runOnService("selectRootElement", [new FnArg(selectorOrNode, null), new FnArg(node, RenderStoreObject)]), node;
+    }, WebWorkerRenderer.prototype.createElement = function(parentElement, name, debugInfo) {
+      var node = this._rootRenderer.allocateNode();
+      return this._runOnService("createElement", [new FnArg(parentElement, RenderStoreObject), new FnArg(name, null), new FnArg(node, RenderStoreObject)]), node;
+    }, WebWorkerRenderer.prototype.createViewRoot = function(hostElement) {
+      var viewRoot = this._componentType.encapsulation === _angular_core.ViewEncapsulation.Native ? this._rootRenderer.allocateNode() : hostElement;
+      return this._runOnService("createViewRoot", [new FnArg(hostElement, RenderStoreObject), new FnArg(viewRoot, RenderStoreObject)]), viewRoot;
+    }, WebWorkerRenderer.prototype.createTemplateAnchor = function(parentElement, debugInfo) {
+      var node = this._rootRenderer.allocateNode();
+      return this._runOnService("createTemplateAnchor", [new FnArg(parentElement, RenderStoreObject), new FnArg(node, RenderStoreObject)]), node;
+    }, WebWorkerRenderer.prototype.createText = function(parentElement, value, debugInfo) {
+      var node = this._rootRenderer.allocateNode();
+      return this._runOnService("createText", [new FnArg(parentElement, RenderStoreObject), new FnArg(value, null), new FnArg(node, RenderStoreObject)]), node;
+    }, WebWorkerRenderer.prototype.projectNodes = function(parentElement, nodes) {
+      this._runOnService("projectNodes", [new FnArg(parentElement, RenderStoreObject), new FnArg(nodes, RenderStoreObject)]);
+    }, WebWorkerRenderer.prototype.attachViewAfter = function(node, viewRootNodes) {
+      this._runOnService("attachViewAfter", [new FnArg(node, RenderStoreObject), new FnArg(viewRootNodes, RenderStoreObject)]);
+    }, WebWorkerRenderer.prototype.detachView = function(viewRootNodes) {
+      this._runOnService("detachView", [new FnArg(viewRootNodes, RenderStoreObject)]);
+    }, WebWorkerRenderer.prototype.destroyView = function(hostElement, viewAllNodes) {
+      this._runOnService("destroyView", [new FnArg(hostElement, RenderStoreObject), new FnArg(viewAllNodes, RenderStoreObject)]), this._rootRenderer.destroyNodes(viewAllNodes);
+    }, WebWorkerRenderer.prototype.setElementProperty = function(renderElement, propertyName, propertyValue) {
+      this._runOnService("setElementProperty", [new FnArg(renderElement, RenderStoreObject), new FnArg(propertyName, null), new FnArg(propertyValue, null)]);
+    }, WebWorkerRenderer.prototype.setElementAttribute = function(renderElement, attributeName, attributeValue) {
+      this._runOnService("setElementAttribute", [new FnArg(renderElement, RenderStoreObject), new FnArg(attributeName, null), new FnArg(attributeValue, null)]);
+    }, WebWorkerRenderer.prototype.setBindingDebugInfo = function(renderElement, propertyName, propertyValue) {
+      this._runOnService("setBindingDebugInfo", [new FnArg(renderElement, RenderStoreObject), new FnArg(propertyName, null), new FnArg(propertyValue, null)]);
+    }, WebWorkerRenderer.prototype.setElementClass = function(renderElement, className, isAdd) {
+      this._runOnService("setElementClass", [new FnArg(renderElement, RenderStoreObject), new FnArg(className, null), new FnArg(isAdd, null)]);
+    }, WebWorkerRenderer.prototype.setElementStyle = function(renderElement, styleName, styleValue) {
+      this._runOnService("setElementStyle", [new FnArg(renderElement, RenderStoreObject), new FnArg(styleName, null), new FnArg(styleValue, null)]);
+    }, WebWorkerRenderer.prototype.invokeElementMethod = function(renderElement, methodName, args) {
+      this._runOnService("invokeElementMethod", [new FnArg(renderElement, RenderStoreObject), new FnArg(methodName, null), new FnArg(args, null)]);
+    }, WebWorkerRenderer.prototype.setText = function(renderNode, text) {
+      this._runOnService("setText", [new FnArg(renderNode, RenderStoreObject), new FnArg(text, null)]);
+    }, WebWorkerRenderer.prototype.listen = function(renderElement, name, callback) {
+      var _this = this;
+      renderElement.events.listen(name, callback);
+      var unlistenCallbackId = this._rootRenderer.allocateId();
+      return this._runOnService("listen", [new FnArg(renderElement, RenderStoreObject), new FnArg(name, null), new FnArg(unlistenCallbackId, null)]), function() {
+        renderElement.events.unlisten(name, callback), _this._runOnService("listenDone", [new FnArg(unlistenCallbackId, null)]);
+      };
+    }, WebWorkerRenderer.prototype.listenGlobal = function(target, name, callback) {
+      var _this = this;
+      this._rootRenderer.globalEvents.listen(eventNameWithTarget(target, name), callback);
+      var unlistenCallbackId = this._rootRenderer.allocateId();
+      return this._runOnService("listenGlobal", [new FnArg(target, null), new FnArg(name, null), new FnArg(unlistenCallbackId, null)]), function() {
+        _this._rootRenderer.globalEvents.unlisten(eventNameWithTarget(target, name), callback), _this._runOnService("listenDone", [new FnArg(unlistenCallbackId, null)]);
+      };
+    }, WebWorkerRenderer.prototype.animate = function(element, startingStyles, keyframes, duration, delay, easing) {
+      return null;
+    }, WebWorkerRenderer;
+  }(),
+      NamedEventEmitter = function() {
+        function NamedEventEmitter() {}
+        return NamedEventEmitter.prototype._getListeners = function(eventName) {
+          isBlank(this._listeners) && (this._listeners = new Map);
+          var listeners = this._listeners.get(eventName);
+          return isBlank(listeners) && (listeners = [], this._listeners.set(eventName, listeners)), listeners;
+        }, NamedEventEmitter.prototype.listen = function(eventName, callback) {
+          this._getListeners(eventName).push(callback);
+        }, NamedEventEmitter.prototype.unlisten = function(eventName, callback) {
+          ListWrapper.remove(this._getListeners(eventName), callback);
+        }, NamedEventEmitter.prototype.dispatchEvent = function(eventName, event) {
+          for (var listeners = this._getListeners(eventName),
+              i = 0; i < listeners.length; i++)
+            listeners[i](event);
+        }, NamedEventEmitter;
+      }(),
+      WebWorkerRenderNode = function() {
+        function WebWorkerRenderNode() {
+          this.events = new NamedEventEmitter;
+        }
+        return WebWorkerRenderNode;
+      }(),
+      WorkerDomAdapter = function(_super) {
+        function WorkerDomAdapter() {
+          _super.apply(this, arguments);
+        }
+        return __extends(WorkerDomAdapter, _super), WorkerDomAdapter.makeCurrent = function() {
+          setRootDomAdapter(new WorkerDomAdapter);
+        }, WorkerDomAdapter.prototype.logError = function(error) {
+          console.error ? console.error(error) : console.log(error);
+        }, WorkerDomAdapter.prototype.log = function(error) {
+          console.log(error);
+        }, WorkerDomAdapter.prototype.logGroup = function(error) {
+          console.group ? (console.group(error), this.logError(error)) : console.log(error);
+        }, WorkerDomAdapter.prototype.logGroupEnd = function() {
+          console.groupEnd && console.groupEnd();
+        }, WorkerDomAdapter.prototype.hasProperty = function(element, name) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.setProperty = function(el, name, value) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getProperty = function(el, name) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.invoke = function(el, methodName, args) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getXHR = function() {
+          throw "not implemented";
+        }, Object.defineProperty(WorkerDomAdapter.prototype, "attrToPropMap", {
+          get: function() {
+            throw "not implemented";
+          },
+          set: function(value) {
+            throw "not implemented";
+          },
+          enumerable: !0,
+          configurable: !0
+        }), WorkerDomAdapter.prototype.parse = function(templateHtml) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.query = function(selector) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.querySelector = function(el, selector) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.querySelectorAll = function(el, selector) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.on = function(el, evt, listener) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.onAndCancel = function(el, evt, listener) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.dispatchEvent = function(el, evt) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.createMouseEvent = function(eventType) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.createEvent = function(eventType) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.preventDefault = function(evt) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.isPrevented = function(evt) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getInnerHTML = function(el) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getTemplateContent = function(el) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getOuterHTML = function(el) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.nodeName = function(node) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.nodeValue = function(node) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.type = function(node) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.content = function(node) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.firstChild = function(el) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.nextSibling = function(el) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.parentElement = function(el) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.childNodes = function(el) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.childNodesAsList = function(el) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.clearNodes = function(el) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.appendChild = function(el, node) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.removeChild = function(el, node) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.replaceChild = function(el, newNode, oldNode) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.remove = function(el) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.insertBefore = function(el, node) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.insertAllBefore = function(el, nodes) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.insertAfter = function(el, node) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.setInnerHTML = function(el, value) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getText = function(el) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.setText = function(el, value) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getValue = function(el) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.setValue = function(el, value) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getChecked = function(el) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.setChecked = function(el, value) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.createComment = function(text) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.createTemplate = function(html) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.createElement = function(tagName, doc) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.createElementNS = function(ns, tagName, doc) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.createTextNode = function(text, doc) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.createScriptTag = function(attrName, attrValue, doc) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.createStyleElement = function(css, doc) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.createShadowRoot = function(el) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getShadowRoot = function(el) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getHost = function(el) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getDistributedNodes = function(el) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.clone = function(node) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getElementsByClassName = function(element, name) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getElementsByTagName = function(element, name) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.classList = function(element) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.addClass = function(element, className) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.removeClass = function(element, className) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.hasClass = function(element, className) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.setStyle = function(element, styleName, styleValue) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.removeStyle = function(element, styleName) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getStyle = function(element, styleName) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.hasStyle = function(element, styleName, styleValue) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.tagName = function(element) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.attributeMap = function(element) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.hasAttribute = function(element, attribute) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.hasAttributeNS = function(element, ns, attribute) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getAttribute = function(element, attribute) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getAttributeNS = function(element, ns, attribute) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.setAttribute = function(element, name, value) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.setAttributeNS = function(element, ns, name, value) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.removeAttribute = function(element, attribute) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.removeAttributeNS = function(element, ns, attribute) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.templateAwareRoot = function(el) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.createHtmlDocument = function() {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.defaultDoc = function() {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getBoundingClientRect = function(el) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getTitle = function() {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.setTitle = function(newTitle) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.elementMatches = function(n, selector) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.isTemplateElement = function(el) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.isTextNode = function(node) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.isCommentNode = function(node) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.isElementNode = function(node) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.hasShadowRoot = function(node) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.isShadowRoot = function(node) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.importIntoDoc = function(node) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.adoptNode = function(node) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getHref = function(element) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getEventKey = function(event) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.resolveAndSetHref = function(element, baseUrl, href) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.supportsDOMEvents = function() {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.supportsNativeShadowDOM = function() {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getGlobalEventTarget = function(target) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getHistory = function() {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getLocation = function() {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getBaseHref = function() {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.resetBaseElement = function() {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getUserAgent = function() {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.setData = function(element, name, value) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getComputedStyle = function(element) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getData = function(element, name) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.setGlobalVar = function(name, value) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.requestAnimationFrame = function(callback) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.cancelAnimationFrame = function(id) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.performanceNow = function() {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getAnimationPrefix = function() {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.getTransitionEnd = function() {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.supportsAnimation = function() {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.supportsWebAnimation = function() {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.supportsCookies = function() {
+          return !1;
+        }, WorkerDomAdapter.prototype.getCookie = function(name) {
+          throw "not implemented";
+        }, WorkerDomAdapter.prototype.setCookie = function(name, value) {
+          throw "not implemented";
+        }, WorkerDomAdapter;
+      }(DomAdapter),
+      PrintLogger = function() {
+        function PrintLogger() {
+          this.log = print, this.logError = print, this.logGroup = print;
+        }
+        return PrintLogger.prototype.logGroupEnd = function() {}, PrintLogger;
+      }(),
+      WORKER_APP_PLATFORM_MARKER = new _angular_core.OpaqueToken("WorkerAppPlatformMarker"),
+      WORKER_APP_PLATFORM_PROVIDERS = [_angular_core.PLATFORM_COMMON_PROVIDERS, {
+        provide: WORKER_APP_PLATFORM_MARKER,
+        useValue: !0
+      }],
+      WORKER_APP_APPLICATION_PROVIDERS = [_angular_core.APPLICATION_COMMON_PROVIDERS, _angular_common.FORM_PROVIDERS, BROWSER_SANITIZATION_PROVIDERS, Serializer, {
+        provide: ClientMessageBrokerFactory,
+        useClass: ClientMessageBrokerFactory_
+      }, {
+        provide: ServiceMessageBrokerFactory,
+        useClass: ServiceMessageBrokerFactory_
+      }, WebWorkerRootRenderer, {
+        provide: _angular_core.RootRenderer,
+        useExisting: WebWorkerRootRenderer
+      }, {
+        provide: ON_WEB_WORKER,
+        useValue: !0
+      }, RenderStore, {
+        provide: _angular_core.ExceptionHandler,
+        useFactory: _exceptionHandler$2,
+        deps: []
+      }, {
+        provide: MessageBus,
+        useFactory: createMessageBus,
+        deps: [_angular_core.NgZone]
+      }, {
+        provide: _angular_core.APP_INITIALIZER,
+        useValue: setupWebWorker,
+        multi: !0
+      }],
+      _postMessage = {postMessage: function(message, transferrables) {
+          postMessage(message, transferrables);
+        }},
+      __platform_browser_private__ = {
+        DomAdapter: DomAdapter,
+        getDOM: getDOM,
+        setRootDomAdapter: setRootDomAdapter,
+        DomRootRenderer: DomRootRenderer,
+        DomRootRenderer_: DomRootRenderer_,
+        DomSharedStylesHost: DomSharedStylesHost,
+        SharedStylesHost: SharedStylesHost,
+        ELEMENT_PROBE_PROVIDERS: ELEMENT_PROBE_PROVIDERS,
+        DomEventsPlugin: DomEventsPlugin
+      };
+  exports.BrowserPlatformLocation = BrowserPlatformLocation, exports.Title = Title, exports.disableDebugTools = disableDebugTools, exports.enableDebugTools = enableDebugTools, exports.By = By, exports.DOCUMENT = DOCUMENT, exports.EVENT_MANAGER_PLUGINS = EVENT_MANAGER_PLUGINS, exports.EventManager = EventManager, exports.HAMMER_GESTURE_CONFIG = HAMMER_GESTURE_CONFIG, exports.HammerGestureConfig = HammerGestureConfig, exports.DomSanitizationService = DomSanitizationService, exports.SecurityContext = SecurityContext, exports.ClientMessageBroker = ClientMessageBroker, exports.ClientMessageBrokerFactory = ClientMessageBrokerFactory, exports.FnArg = FnArg, exports.UiArguments = UiArguments, exports.ReceivedMessage = ReceivedMessage, exports.ServiceMessageBroker = ServiceMessageBroker, exports.ServiceMessageBrokerFactory = ServiceMessageBrokerFactory, exports.PRIMITIVE = PRIMITIVE, exports.WORKER_APP_LOCATION_PROVIDERS = WORKER_APP_LOCATION_PROVIDERS, exports.WORKER_UI_LOCATION_PROVIDERS = WORKER_UI_LOCATION_PROVIDERS, exports.BROWSER_PLATFORM_PROVIDERS = BROWSER_PLATFORM_PROVIDERS, exports.BROWSER_SANITIZATION_PROVIDERS = BROWSER_SANITIZATION_PROVIDERS, exports.BROWSER_APP_PROVIDERS = BROWSER_APP_PROVIDERS, exports.browserPlatform = browserPlatform, exports.MessageBus = MessageBus, exports.WebWorkerInstance = WebWorkerInstance, exports.WORKER_SCRIPT = WORKER_SCRIPT, exports.WORKER_UI_STARTABLE_MESSAGING_SERVICE = WORKER_UI_STARTABLE_MESSAGING_SERVICE, exports.WORKER_UI_PLATFORM_PROVIDERS = WORKER_UI_PLATFORM_PROVIDERS, exports.WORKER_UI_APPLICATION_PROVIDERS = WORKER_UI_APPLICATION_PROVIDERS, exports.workerUiPlatform = workerUiPlatform, exports.WORKER_APP_PLATFORM_PROVIDERS = WORKER_APP_PLATFORM_PROVIDERS, exports.WORKER_APP_APPLICATION_PROVIDERS = WORKER_APP_APPLICATION_PROVIDERS, exports.workerAppPlatform = workerAppPlatform, exports.__platform_browser_private__ = __platform_browser_private__;
+});
+
+})();
+$__System.registerDynamic("b", ["3"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('3');
+  var MaxPipe = (function() {
+    function MaxPipe() {}
+    MaxPipe.prototype.transform = function(value, args) {
+      var allowed = args[0],
+          received = value.length;
+      if (received > allowed && allowed !== 0) {
+        var toCut = allowed - received;
+        return value.slice(0, toCut);
+      }
+      return value;
+    };
+    MaxPipe = __decorate([core_1.Pipe({name: "max"}), __metadata('design:paramtypes', [])], MaxPipe);
+    return MaxPipe;
+  }());
+  exports.MaxPipe = MaxPipe;
+  return module.exports;
+});
+
+$__System.registerDynamic("c", ["3", "a", "d", "b"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('3');
+  var platform_browser_1 = $__require('a');
+  var notifications_service_1 = $__require('d');
+  var max_pipe_1 = $__require('b');
+  var NotificationComponent = (function() {
+    function NotificationComponent(_service, _sanitizer) {
+      var _this = this;
+      this._service = _service;
+      this._sanitizer = _sanitizer;
+      this.progressWidth = 0;
+      this.stopTime = false;
+      this.count = 0;
+      this.instance = function() {
+        _this.diff = (new Date().getTime() - _this.start) - (_this.count * _this.speed);
+        if (_this.count++ === _this.steps)
+          _this._remove();
+        else if (!_this.stopTime) {
+          if (_this.showProgressBar)
+            _this.progressWidth += 100 / _this.steps;
+          _this.timer = setTimeout(_this.instance, (_this.speed - _this.diff));
+        }
+      };
+    }
+    NotificationComponent.prototype.ngOnInit = function() {
+      if (this.animate)
+        this.item["state"] = "enter";
+      if (this.item.override)
+        this.attachOverrides();
+      if (this.timeOut !== 0)
+        this.startTimeOut();
+      this.safeSvg = this._sanitizer.bypassSecurityTrustHtml(this.icons[this.item.type]);
+    };
+    NotificationComponent.prototype.startTimeOut = function() {
+      this.steps = this.timeOut / 10;
+      this.speed = this.timeOut / this.steps;
+      this.start = new Date().getTime();
+      this.timer = setTimeout(this.instance, this.speed);
+    };
+    NotificationComponent.prototype.onEnter = function() {
+      if (this.pauseOnHover)
+        this.stopTime = true;
+    };
+    NotificationComponent.prototype.onLeave = function() {
+      if (this.pauseOnHover) {
+        this.stopTime = false;
+        setTimeout(this.instance, (this.speed - this.diff));
+      }
+    };
+    NotificationComponent.prototype.setPosition = function() {
+      return this.position !== 0 ? this.position * 90 : 0;
+    };
+    NotificationComponent.prototype.removeOnClick = function() {
+      if (this.clickToClose)
+        this._remove();
+    };
+    NotificationComponent.prototype.attachOverrides = function() {
+      var _this = this;
+      Object.keys(this.item.override).forEach(function(a) {
+        return _this[a] = _this.item.override[a];
+      });
+    };
+    NotificationComponent.prototype.ngOnDestroy = function() {
+      clearTimeout(this.timer);
+    };
+    NotificationComponent.prototype._remove = function() {
+      var _this = this;
+      if (this.animate) {
+        this.item["state"] = "leave";
+        setTimeout(function() {
+          return _this._service.set(_this.item, false);
+        }, 310);
+      } else
+        this._service.set(this.item, false);
+    };
+    NotificationComponent = __decorate([core_1.Component({
+      selector: "simple-notification",
+      inputs: ["item", "timeOut", "position", "clickToClose", "maxLength", "showProgressBar", "pauseOnHover", "theClass", "rtl", "animate", "icons"],
+      pipes: [max_pipe_1.MaxPipe],
+      encapsulation: core_1.ViewEncapsulation.None,
+      animations: [core_1.trigger("enterLeave", [core_1.state("enter", core_1.style({
+        opacity: 1,
+        transform: "translateX(0)"
+      })), core_1.transition("* => enter", [core_1.style({
+        opacity: 0,
+        transform: "translateX(5%)"
+      }), core_1.animate("400ms ease-in-out")]), core_1.state("leave", core_1.style({
+        opacity: 0,
+        transform: "translateX(-5%)"
+      })), core_1.transition("* => leave", [core_1.style({
+        opacity: 1,
+        transform: "translateX(0)"
+      }), core_1.animate("300ms ease-in-out")])])],
+      template: "\n        <div class=\"simple-notification\"\n            @enterLeave=\"item.state\"\n            (click)=\"removeOnClick()\"\n            [class]=\"theClass\"\n\n            [ngClass]=\"{\n                'alert': item.type === 'alert',\n                'error': item.type === 'error',\n                'success': item.type === 'success',\n                'info': item.type === 'info',\n                'bare': item.type === 'bare',\n                'rtl-mode': rtl\n            }\"\n\n            (mouseenter)=\"onEnter()\"\n            (mouseleave)=\"onLeave()\">\n\n            <div *ngIf=\"!item.html\">\n                <div class=\"sn-title\">{{item.title}}</div>\n                <div class=\"sn-content\">{{item.content | max:maxLength}}</div>\n\n                <div *ngIf=\"item.type !== 'bare'\" [innerHTML]=\"safeSvg\"></div>\n            </div>\n            <div *ngIf=\"item.html\" [innerHTML]=\"item.html\"></div>\n\n            <div class=\"sn-progress-loader\" *ngIf=\"showProgressBar\">\n                <span [ngStyle]=\"{'width': progressWidth + '%'}\"></span>\n            </div>\n\n        </div>\n    ",
+      styles: ["\n        .simple-notification {\n            width: 100%;\n            padding: 10px 20px;\n            box-sizing: border-box;\n            position: relative;\n            float: left;\n            margin-bottom: 10px;\n            color: #fff;\n            cursor: pointer;\n            transition: all 0.5s;\n        }\n\n        .simple-notification .sn-title {\n            margin: 0;\n            padding: 0;\n            line-height: 30px;\n            font-size: 20px;\n        }\n\n        .simple-notification .sn-content {\n            margin: 0;\n            font-size: 16px;\n            padding: 0 50px 0 0;\n            line-height: 20px;\n        }\n\n        .simple-notification svg {\n            position: absolute;\n            box-sizing: border-box;\n            top: 0;\n            right: 0;\n            width: auto;\n            height: 70px;\n            padding: 10px;\n            fill: #fff;\n        }\n\n        .simple-notification.rtl-mode {\n            direction: rtl;\n        }\n\n        .simple-notification.rtl-mode .content {\n            padding: 0 0 0 50px;\n        }\n\n        .simple-notification.rtl-mode svg {\n            left: 0;\n            right: auto;\n        }\n\n        .simple-notification.error { background: #F44336; }\n        .simple-notification.success { background: #8BC34A; }\n        .simple-notification.alert { background: #ffdb5b; }\n        .simple-notification.info { background: #03A9F4; }\n\n        .simple-notification .sn-progress-loader {\n            position: absolute;\n            top: 0;\n            left: 0;\n            width: 100%;\n            height: 5px;\n        }\n\n        .simple-notification .sn-progress-loader span {\n            float: left;\n            height: 100%;\n        }\n\n        .simple-notification.success .sn-progress-loader span { background: #689F38; }\n        .simple-notification.error .sn-progress-loader span { background: #D32F2F; }\n        .simple-notification.alert .sn-progress-loader span { background: #edc242; }\n        .simple-notification.info .sn-progress-loader span { background: #0288D1; }\n        .simple-notification.bare .sn-progress-loader span { background: #ccc; }\n    "]
+    }), __metadata('design:paramtypes', [notifications_service_1.NotificationsService, (typeof(_a = typeof platform_browser_1.DomSanitizationService !== 'undefined' && platform_browser_1.DomSanitizationService) === 'function' && _a) || Object])], NotificationComponent);
+    return NotificationComponent;
+    var _a;
+  }());
+  exports.NotificationComponent = NotificationComponent;
+  return module.exports;
+});
+
+$__System.registerDynamic("e", ["3", "d", "c", "f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('3');
+  var notifications_service_1 = $__require('d');
+  var notification_component_1 = $__require('c');
+  var icons_1 = $__require('f');
+  var SimpleNotificationsComponent = (function() {
+    function SimpleNotificationsComponent(_service) {
+      this._service = _service;
+      this.onCreate = new core_1.EventEmitter();
+      this.onDestroy = new core_1.EventEmitter();
+      this.notifications = [];
+      this.position = ["bottom", "right"];
+      this.lastOnBottom = true;
+      this.maxStack = 8;
+      this.preventLastDuplicates = false;
+      this.preventDuplicates = false;
+      this.timeOut = 0;
+      this.maxLength = 0;
+      this.clickToClose = true;
+      this.showProgressBar = true;
+      this.pauseOnHover = true;
+      this.rtl = false;
+      this.animate = true;
+      this.icons = icons_1.defaultIcons;
+    }
+    Object.defineProperty(SimpleNotificationsComponent.prototype, "options", {
+      set: function(opt) {
+        this.attachChanges(opt);
+      },
+      enumerable: true,
+      configurable: true
+    });
+    SimpleNotificationsComponent.prototype.ngOnInit = function() {
+      var _this = this;
+      this.listener = this._service.getChangeEmitter().subscribe(function(item) {
+        switch (item.command) {
+          case "cleanAll":
+            _this.notifications = [];
+            break;
+          case "clean":
+            _this.cleanSingle(item.id);
+            break;
+          case "set":
+            if (item.add)
+              _this.add(item.notification);
+            else
+              _this.defaultBehavior(item);
+            break;
+          default:
+            _this.defaultBehavior(item);
+            break;
+        }
+      });
+    };
+    SimpleNotificationsComponent.prototype.defaultBehavior = function(value) {
+      this.notifications.splice(this.notifications.indexOf(value.notification), 1);
+      this.onDestroy.emit(this.buildEmit(value.notification, false));
+    };
+    SimpleNotificationsComponent.prototype.add = function(item) {
+      item.createdOn = new Date();
+      var toBlock = this.preventLastDuplicates || this.preventDuplicates ? this.block(item) : false;
+      this.lastNotificationCreated = item;
+      if (!toBlock) {
+        if (this.lastOnBottom) {
+          if (this.notifications.length >= this.maxStack)
+            this.notifications.splice(0, 1);
+          this.notifications.push(item);
+        } else {
+          if (this.notifications.length >= this.maxStack)
+            this.notifications.splice(this.notifications.length - 1, 1);
+          this.notifications.splice(0, 0, item);
+        }
+        this.onCreate.emit(this.buildEmit(item, true));
+      }
+    };
+    SimpleNotificationsComponent.prototype.block = function(item) {
+      var checkHtml = function(checker) {
+        return checker.html ? checker.type === item.type && checker.title === item.title && checker.content === item.content && checker.html === item.html : false;
+      },
+          checkStandard = function(checker) {
+            return checker.type === item.type && checker.title === item.title && checker.content === item.content;
+          },
+          toCheck = item.html ? checkHtml : checkStandard;
+      if (this.preventDuplicates && this.notifications.length > 0)
+        for (var i = 0; i < this.notifications.length; i++)
+          if (toCheck(this.notifications[i]))
+            return true;
+      if (this.preventLastDuplicates) {
+        var comp = void 0;
+        if (this.preventLastDuplicates === "visible" && this.notifications.length > 0) {
+          if (this.lastOnBottom)
+            comp = this.notifications[this.notifications.length - 1];
+          else
+            comp = this.notifications[0];
+        } else if (this.preventLastDuplicates === "all" && this.lastNotificationCreated)
+          comp = this.lastNotificationCreated;
+        else
+          return false;
+        return toCheck(comp);
+      }
+      return false;
+    };
+    SimpleNotificationsComponent.prototype.attachChanges = function(options) {
+      var _this = this;
+      Object.keys(options).forEach(function(a) {
+        if (_this.hasOwnProperty(a))
+          _this[a] = options[a];
+      });
+    };
+    SimpleNotificationsComponent.prototype.buildEmit = function(notification, to) {
+      var toEmit = {
+        createdOn: notification.createdOn,
+        type: notification.type,
+        id: notification.id
+      };
+      if (notification.html)
+        toEmit["html"] = notification.html;
+      else {
+        toEmit["title"] = notification.title;
+        toEmit["content"] = notification.content;
+      }
+      if (!to)
+        toEmit["destroyedOn"] = new Date();
+      return toEmit;
+    };
+    SimpleNotificationsComponent.prototype.cleanSingle = function(id) {
+      var indexOfDelete,
+          doDelete = false;
+      this.notifications.forEach(function(a, idx) {
+        if (a.id === id) {
+          indexOfDelete = idx;
+          doDelete = true;
+        }
+      });
+      if (doDelete)
+        this.notifications.splice(indexOfDelete, 1);
+    };
+    SimpleNotificationsComponent.prototype.ngOnDestroy = function() {
+      if (this.listener)
+        this.listener.unsubscribe();
+    };
+    __decorate([core_1.Input(), __metadata('design:type', Object), __metadata('design:paramtypes', [Object])], SimpleNotificationsComponent.prototype, "options", null);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], SimpleNotificationsComponent.prototype, "onCreate", void 0);
+    __decorate([core_1.Output(), __metadata('design:type', Object)], SimpleNotificationsComponent.prototype, "onDestroy", void 0);
+    SimpleNotificationsComponent = __decorate([core_1.Component({
+      selector: "simple-notifications",
+      directives: [notification_component_1.NotificationComponent],
+      encapsulation: core_1.ViewEncapsulation.None,
+      template: "\n        <div class=\"simple-notification-wrapper\" [ngClass]=\"position\">\n            <simple-notification\n                *ngFor=\"let a of notifications; let i = index\"\n                [item]=\"a\"\n                [timeOut]=\"timeOut\"\n                [clickToClose]=\"clickToClose\"\n                [maxLength]=\"maxLength\"\n                [showProgressBar]=\"showProgressBar\"\n                [pauseOnHover]=\"pauseOnHover\"\n                [theClass]=\"theClass\"\n                [rtl]=\"rtl\"\n                [animate]=\"animate\"\n                [position]=\"i\"\n                [icons]=\"icons\"\n                >\n            </simple-notification>\n        </div>\n    ",
+      styles: ["\n        .simple-notification-wrapper {\n            position: fixed;\n            width: 300px;\n            z-index: 1000;\n        }\n        \n        .simple-notification-wrapper.left { left: 20px; }\n        .simple-notification-wrapper.top { top: 20px; }\n        .simple-notification-wrapper.right { right: 20px; }\n        .simple-notification-wrapper.bottom { bottom: 20px; }\n        \n        @media (max-width: 340px) {\n            .simple-notification-wrapper {\n                width: auto;\n                left: 20px;\n                right: 20px;\n            }\n        }\n    "]
+    }), __metadata('design:paramtypes', [notifications_service_1.NotificationsService])], SimpleNotificationsComponent);
+    return SimpleNotificationsComponent;
+  }());
+  exports.SimpleNotificationsComponent = SimpleNotificationsComponent;
+  return module.exports;
+});
+
+$__System.registerDynamic("10", ["7", "11", "12", "13"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Observable_1 = $__require('7');
+  var tryCatch_1 = $__require('11');
+  var errorObject_1 = $__require('12');
+  var AsyncSubject_1 = $__require('13');
+  var BoundCallbackObservable = (function(_super) {
+    __extends(BoundCallbackObservable, _super);
+    function BoundCallbackObservable(callbackFunc, selector, args, scheduler) {
+      _super.call(this);
+      this.callbackFunc = callbackFunc;
+      this.selector = selector;
+      this.args = args;
+      this.scheduler = scheduler;
+    }
+    BoundCallbackObservable.create = function(callbackFunc, selector, scheduler) {
+      if (selector === void 0) {
+        selector = undefined;
+      }
+      return function() {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+          args[_i - 0] = arguments[_i];
+        }
+        return new BoundCallbackObservable(callbackFunc, selector, args, scheduler);
+      };
+    };
+    BoundCallbackObservable.prototype._subscribe = function(subscriber) {
+      var callbackFunc = this.callbackFunc;
+      var args = this.args;
+      var scheduler = this.scheduler;
+      var subject = this.subject;
+      if (!scheduler) {
+        if (!subject) {
+          subject = this.subject = new AsyncSubject_1.AsyncSubject();
+          var handler = function handlerFn() {
+            var innerArgs = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+              innerArgs[_i - 0] = arguments[_i];
+            }
+            var source = handlerFn.source;
+            var selector = source.selector,
+                subject = source.subject;
+            if (selector) {
+              var result_1 = tryCatch_1.tryCatch(selector).apply(this, innerArgs);
+              if (result_1 === errorObject_1.errorObject) {
+                subject.error(errorObject_1.errorObject.e);
+              } else {
+                subject.next(result_1);
+                subject.complete();
+              }
+            } else {
+              subject.next(innerArgs.length === 1 ? innerArgs[0] : innerArgs);
+              subject.complete();
+            }
+          };
+          handler.source = this;
+          var result = tryCatch_1.tryCatch(callbackFunc).apply(this, args.concat(handler));
+          if (result === errorObject_1.errorObject) {
+            subject.error(errorObject_1.errorObject.e);
+          }
+        }
+        return subject.subscribe(subscriber);
+      } else {
+        return scheduler.schedule(dispatch, 0, {
+          source: this,
+          subscriber: subscriber
+        });
+      }
+    };
+    return BoundCallbackObservable;
+  }(Observable_1.Observable));
+  exports.BoundCallbackObservable = BoundCallbackObservable;
+  function dispatch(state) {
+    var self = this;
+    var source = state.source,
+        subscriber = state.subscriber;
+    var callbackFunc = source.callbackFunc,
+        args = source.args,
+        scheduler = source.scheduler;
+    var subject = source.subject;
+    if (!subject) {
+      subject = source.subject = new AsyncSubject_1.AsyncSubject();
+      var handler = function handlerFn() {
+        var innerArgs = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+          innerArgs[_i - 0] = arguments[_i];
+        }
+        var source = handlerFn.source;
+        var selector = source.selector,
+            subject = source.subject;
+        if (selector) {
+          var result_2 = tryCatch_1.tryCatch(selector).apply(this, innerArgs);
+          if (result_2 === errorObject_1.errorObject) {
+            self.add(scheduler.schedule(dispatchError, 0, {
+              err: errorObject_1.errorObject.e,
+              subject: subject
+            }));
+          } else {
+            self.add(scheduler.schedule(dispatchNext, 0, {
+              value: result_2,
+              subject: subject
+            }));
+          }
+        } else {
+          var value = innerArgs.length === 1 ? innerArgs[0] : innerArgs;
+          self.add(scheduler.schedule(dispatchNext, 0, {
+            value: value,
+            subject: subject
+          }));
+        }
+      };
+      handler.source = source;
+      var result = tryCatch_1.tryCatch(callbackFunc).apply(this, args.concat(handler));
+      if (result === errorObject_1.errorObject) {
+        subject.error(errorObject_1.errorObject.e);
+      }
+    }
+    self.add(subject.subscribe(subscriber));
+  }
+  function dispatchNext(arg) {
+    var value = arg.value,
+        subject = arg.subject;
+    subject.next(value);
+    subject.complete();
+  }
+  function dispatchError(arg) {
+    var err = arg.err,
+        subject = arg.subject;
+    subject.error(err);
+  }
+  return module.exports;
+});
+
+$__System.registerDynamic("14", ["10"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var BoundCallbackObservable_1 = $__require('10');
+  exports.bindCallback = BoundCallbackObservable_1.BoundCallbackObservable.create;
+  return module.exports;
+});
+
+$__System.registerDynamic("15", ["7", "14"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var bindCallback_1 = $__require('14');
+  Observable_1.Observable.bindCallback = bindCallback_1.bindCallback;
+  return module.exports;
+});
+
+$__System.registerDynamic("16", ["7", "11", "12", "13"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Observable_1 = $__require('7');
+  var tryCatch_1 = $__require('11');
+  var errorObject_1 = $__require('12');
+  var AsyncSubject_1 = $__require('13');
+  var BoundNodeCallbackObservable = (function(_super) {
+    __extends(BoundNodeCallbackObservable, _super);
+    function BoundNodeCallbackObservable(callbackFunc, selector, args, scheduler) {
+      _super.call(this);
+      this.callbackFunc = callbackFunc;
+      this.selector = selector;
+      this.args = args;
+      this.scheduler = scheduler;
+    }
+    BoundNodeCallbackObservable.create = function(callbackFunc, selector, scheduler) {
+      if (selector === void 0) {
+        selector = undefined;
+      }
+      return function() {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+          args[_i - 0] = arguments[_i];
+        }
+        return new BoundNodeCallbackObservable(callbackFunc, selector, args, scheduler);
+      };
+    };
+    BoundNodeCallbackObservable.prototype._subscribe = function(subscriber) {
+      var callbackFunc = this.callbackFunc;
+      var args = this.args;
+      var scheduler = this.scheduler;
+      var subject = this.subject;
+      if (!scheduler) {
+        if (!subject) {
+          subject = this.subject = new AsyncSubject_1.AsyncSubject();
+          var handler = function handlerFn() {
+            var innerArgs = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+              innerArgs[_i - 0] = arguments[_i];
+            }
+            var source = handlerFn.source;
+            var selector = source.selector,
+                subject = source.subject;
+            var err = innerArgs.shift();
+            if (err) {
+              subject.error(err);
+            } else if (selector) {
+              var result_1 = tryCatch_1.tryCatch(selector).apply(this, innerArgs);
+              if (result_1 === errorObject_1.errorObject) {
+                subject.error(errorObject_1.errorObject.e);
+              } else {
+                subject.next(result_1);
+                subject.complete();
+              }
+            } else {
+              subject.next(innerArgs.length === 1 ? innerArgs[0] : innerArgs);
+              subject.complete();
+            }
+          };
+          handler.source = this;
+          var result = tryCatch_1.tryCatch(callbackFunc).apply(this, args.concat(handler));
+          if (result === errorObject_1.errorObject) {
+            subject.error(errorObject_1.errorObject.e);
+          }
+        }
+        return subject.subscribe(subscriber);
+      } else {
+        return scheduler.schedule(dispatch, 0, {
+          source: this,
+          subscriber: subscriber
+        });
+      }
+    };
+    return BoundNodeCallbackObservable;
+  }(Observable_1.Observable));
+  exports.BoundNodeCallbackObservable = BoundNodeCallbackObservable;
+  function dispatch(state) {
+    var self = this;
+    var source = state.source,
+        subscriber = state.subscriber;
+    var callbackFunc = source.callbackFunc,
+        args = source.args,
+        scheduler = source.scheduler;
+    var subject = source.subject;
+    if (!subject) {
+      subject = source.subject = new AsyncSubject_1.AsyncSubject();
+      var handler = function handlerFn() {
+        var innerArgs = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+          innerArgs[_i - 0] = arguments[_i];
+        }
+        var source = handlerFn.source;
+        var selector = source.selector,
+            subject = source.subject;
+        var err = innerArgs.shift();
+        if (err) {
+          subject.error(err);
+        } else if (selector) {
+          var result_2 = tryCatch_1.tryCatch(selector).apply(this, innerArgs);
+          if (result_2 === errorObject_1.errorObject) {
+            self.add(scheduler.schedule(dispatchError, 0, {
+              err: errorObject_1.errorObject.e,
+              subject: subject
+            }));
+          } else {
+            self.add(scheduler.schedule(dispatchNext, 0, {
+              value: result_2,
+              subject: subject
+            }));
+          }
+        } else {
+          var value = innerArgs.length === 1 ? innerArgs[0] : innerArgs;
+          self.add(scheduler.schedule(dispatchNext, 0, {
+            value: value,
+            subject: subject
+          }));
+        }
+      };
+      handler.source = source;
+      var result = tryCatch_1.tryCatch(callbackFunc).apply(this, args.concat(handler));
+      if (result === errorObject_1.errorObject) {
+        subject.error(errorObject_1.errorObject.e);
+      }
+    }
+    self.add(subject.subscribe(subscriber));
+  }
+  function dispatchNext(arg) {
+    var value = arg.value,
+        subject = arg.subject;
+    subject.next(value);
+    subject.complete();
+  }
+  function dispatchError(arg) {
+    var err = arg.err,
+        subject = arg.subject;
+    subject.error(err);
+  }
+  return module.exports;
+});
+
+$__System.registerDynamic("17", ["16"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var BoundNodeCallbackObservable_1 = $__require('16');
+  exports.bindNodeCallback = BoundNodeCallbackObservable_1.BoundNodeCallbackObservable.create;
+  return module.exports;
+});
+
+$__System.registerDynamic("18", ["7", "17"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var bindNodeCallback_1 = $__require('17');
+  Observable_1.Observable.bindNodeCallback = bindNodeCallback_1.bindNodeCallback;
+  return module.exports;
+});
+
+$__System.registerDynamic("19", ["7", "1a"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var combineLatest_1 = $__require('1a');
+  Observable_1.Observable.combineLatest = combineLatest_1.combineLatestStatic;
+  return module.exports;
+});
+
+$__System.registerDynamic("1b", ["1c"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var concat_1 = $__require('1c');
+  exports.concat = concat_1.concatStatic;
+  return module.exports;
+});
+
+$__System.registerDynamic("1d", ["7", "1b"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var concat_1 = $__require('1b');
+  Observable_1.Observable.concat = concat_1.concat;
+  return module.exports;
+});
+
+$__System.registerDynamic("1e", ["7", "1f", "20"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Observable_1 = $__require('7');
+  var subscribeToResult_1 = $__require('1f');
+  var OuterSubscriber_1 = $__require('20');
+  var DeferObservable = (function(_super) {
+    __extends(DeferObservable, _super);
+    function DeferObservable(observableFactory) {
+      _super.call(this);
+      this.observableFactory = observableFactory;
+    }
+    DeferObservable.create = function(observableFactory) {
+      return new DeferObservable(observableFactory);
+    };
+    DeferObservable.prototype._subscribe = function(subscriber) {
+      return new DeferSubscriber(subscriber, this.observableFactory);
+    };
+    return DeferObservable;
+  }(Observable_1.Observable));
+  exports.DeferObservable = DeferObservable;
+  var DeferSubscriber = (function(_super) {
+    __extends(DeferSubscriber, _super);
+    function DeferSubscriber(destination, factory) {
+      _super.call(this, destination);
+      this.factory = factory;
+      this.tryDefer();
+    }
+    DeferSubscriber.prototype.tryDefer = function() {
+      try {
+        this._callFactory();
+      } catch (err) {
+        this._error(err);
+      }
+    };
+    DeferSubscriber.prototype._callFactory = function() {
+      var result = this.factory();
+      if (result) {
+        this.add(subscribeToResult_1.subscribeToResult(this, result));
+      }
+    };
+    return DeferSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("21", ["1e"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var DeferObservable_1 = $__require('1e');
+  exports.defer = DeferObservable_1.DeferObservable.create;
+  return module.exports;
+});
+
+$__System.registerDynamic("22", ["7", "21"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var defer_1 = $__require('21');
+  Observable_1.Observable.defer = defer_1.defer;
+  return module.exports;
+});
+
+$__System.registerDynamic("23", ["24"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var EmptyObservable_1 = $__require('24');
+  exports.empty = EmptyObservable_1.EmptyObservable.create;
+  return module.exports;
+});
+
+$__System.registerDynamic("25", ["7", "23"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var empty_1 = $__require('23');
+  Observable_1.Observable.empty = empty_1.empty;
+  return module.exports;
+});
+
+$__System.registerDynamic("26", ["7", "24", "27", "1f", "20"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Observable_1 = $__require('7');
+  var EmptyObservable_1 = $__require('24');
+  var isArray_1 = $__require('27');
+  var subscribeToResult_1 = $__require('1f');
+  var OuterSubscriber_1 = $__require('20');
+  var ForkJoinObservable = (function(_super) {
+    __extends(ForkJoinObservable, _super);
+    function ForkJoinObservable(sources, resultSelector) {
+      _super.call(this);
+      this.sources = sources;
+      this.resultSelector = resultSelector;
+    }
+    ForkJoinObservable.create = function() {
+      var sources = [];
+      for (var _i = 0; _i < arguments.length; _i++) {
+        sources[_i - 0] = arguments[_i];
+      }
+      if (sources === null || arguments.length === 0) {
+        return new EmptyObservable_1.EmptyObservable();
+      }
+      var resultSelector = null;
+      if (typeof sources[sources.length - 1] === 'function') {
+        resultSelector = sources.pop();
+      }
+      if (sources.length === 1 && isArray_1.isArray(sources[0])) {
+        sources = sources[0];
+      }
+      if (sources.length === 0) {
+        return new EmptyObservable_1.EmptyObservable();
+      }
+      return new ForkJoinObservable(sources, resultSelector);
+    };
+    ForkJoinObservable.prototype._subscribe = function(subscriber) {
+      return new ForkJoinSubscriber(subscriber, this.sources, this.resultSelector);
+    };
+    return ForkJoinObservable;
+  }(Observable_1.Observable));
+  exports.ForkJoinObservable = ForkJoinObservable;
+  var ForkJoinSubscriber = (function(_super) {
+    __extends(ForkJoinSubscriber, _super);
+    function ForkJoinSubscriber(destination, sources, resultSelector) {
+      _super.call(this, destination);
+      this.sources = sources;
+      this.resultSelector = resultSelector;
+      this.completed = 0;
+      this.haveValues = 0;
+      var len = sources.length;
+      this.total = len;
+      this.values = new Array(len);
+      for (var i = 0; i < len; i++) {
+        var source = sources[i];
+        var innerSubscription = subscribeToResult_1.subscribeToResult(this, source, null, i);
+        if (innerSubscription) {
+          innerSubscription.outerIndex = i;
+          this.add(innerSubscription);
+        }
+      }
+    }
+    ForkJoinSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      this.values[outerIndex] = innerValue;
+      if (!innerSub._hasValue) {
+        innerSub._hasValue = true;
+        this.haveValues++;
+      }
+    };
+    ForkJoinSubscriber.prototype.notifyComplete = function(innerSub) {
+      var destination = this.destination;
+      var _a = this,
+          haveValues = _a.haveValues,
+          resultSelector = _a.resultSelector,
+          values = _a.values;
+      var len = values.length;
+      if (!innerSub._hasValue) {
+        destination.complete();
+        return;
+      }
+      this.completed++;
+      if (this.completed !== len) {
+        return;
+      }
+      if (haveValues === len) {
+        var value = resultSelector ? resultSelector.apply(this, values) : values;
+        destination.next(value);
+      }
+      destination.complete();
+    };
+    return ForkJoinSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("28", ["26"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var ForkJoinObservable_1 = $__require('26');
+  exports.forkJoin = ForkJoinObservable_1.ForkJoinObservable.create;
+  return module.exports;
+});
+
+$__System.registerDynamic("29", ["7", "28"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var forkJoin_1 = $__require('28');
+  Observable_1.Observable.forkJoin = forkJoin_1.forkJoin;
+  return module.exports;
+});
+
+$__System.registerDynamic("2a", ["2b", "2c", "11", "7", "2d", "2e", "12"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var root_1 = $__require('2b');
+  var isObject_1 = $__require('2c');
+  var tryCatch_1 = $__require('11');
+  var Observable_1 = $__require('7');
+  var isFunction_1 = $__require('2d');
+  var iterator_1 = $__require('2e');
+  var errorObject_1 = $__require('12');
+  var IteratorObservable = (function(_super) {
+    __extends(IteratorObservable, _super);
+    function IteratorObservable(iterator, project, thisArg, scheduler) {
+      _super.call(this);
+      if (iterator == null) {
+        throw new Error('iterator cannot be null.');
+      }
+      if (isObject_1.isObject(project)) {
+        this.thisArg = project;
+        this.scheduler = thisArg;
+      } else if (isFunction_1.isFunction(project)) {
+        this.project = project;
+        this.thisArg = thisArg;
+        this.scheduler = scheduler;
+      } else if (project != null) {
+        throw new Error('When provided, `project` must be a function.');
+      }
+      this.iterator = getIterator(iterator);
+    }
+    IteratorObservable.create = function(iterator, project, thisArg, scheduler) {
+      return new IteratorObservable(iterator, project, thisArg, scheduler);
+    };
+    IteratorObservable.dispatch = function(state) {
+      var index = state.index,
+          hasError = state.hasError,
+          thisArg = state.thisArg,
+          project = state.project,
+          iterator = state.iterator,
+          subscriber = state.subscriber;
+      if (hasError) {
+        subscriber.error(state.error);
+        return;
+      }
+      var result = iterator.next();
+      if (result.done) {
+        subscriber.complete();
+        return;
+      }
+      if (project) {
+        result = tryCatch_1.tryCatch(project).call(thisArg, result.value, index);
+        if (result === errorObject_1.errorObject) {
+          state.error = errorObject_1.errorObject.e;
+          state.hasError = true;
+        } else {
+          subscriber.next(result);
+          state.index = index + 1;
+        }
+      } else {
+        subscriber.next(result.value);
+        state.index = index + 1;
+      }
+      if (subscriber.isUnsubscribed) {
+        return;
+      }
+      this.schedule(state);
+    };
+    IteratorObservable.prototype._subscribe = function(subscriber) {
+      var index = 0;
+      var _a = this,
+          iterator = _a.iterator,
+          project = _a.project,
+          thisArg = _a.thisArg,
+          scheduler = _a.scheduler;
+      if (scheduler) {
+        return scheduler.schedule(IteratorObservable.dispatch, 0, {
+          index: index,
+          thisArg: thisArg,
+          project: project,
+          iterator: iterator,
+          subscriber: subscriber
+        });
+      } else {
+        do {
+          var result = iterator.next();
+          if (result.done) {
+            subscriber.complete();
+            break;
+          } else if (project) {
+            result = tryCatch_1.tryCatch(project).call(thisArg, result.value, index++);
+            if (result === errorObject_1.errorObject) {
+              subscriber.error(errorObject_1.errorObject.e);
+              break;
+            }
+            subscriber.next(result);
+          } else {
+            subscriber.next(result.value);
+          }
+          if (subscriber.isUnsubscribed) {
+            break;
+          }
+        } while (true);
+      }
+    };
+    return IteratorObservable;
+  }(Observable_1.Observable));
+  exports.IteratorObservable = IteratorObservable;
+  var StringIterator = (function() {
+    function StringIterator(str, idx, len) {
+      if (idx === void 0) {
+        idx = 0;
+      }
+      if (len === void 0) {
+        len = str.length;
+      }
+      this.str = str;
+      this.idx = idx;
+      this.len = len;
+    }
+    StringIterator.prototype[iterator_1.$$iterator] = function() {
+      return (this);
+    };
+    StringIterator.prototype.next = function() {
+      return this.idx < this.len ? {
+        done: false,
+        value: this.str.charAt(this.idx++)
+      } : {
+        done: true,
+        value: undefined
+      };
+    };
+    return StringIterator;
+  }());
+  var ArrayIterator = (function() {
+    function ArrayIterator(arr, idx, len) {
+      if (idx === void 0) {
+        idx = 0;
+      }
+      if (len === void 0) {
+        len = toLength(arr);
+      }
+      this.arr = arr;
+      this.idx = idx;
+      this.len = len;
+    }
+    ArrayIterator.prototype[iterator_1.$$iterator] = function() {
+      return this;
+    };
+    ArrayIterator.prototype.next = function() {
+      return this.idx < this.len ? {
+        done: false,
+        value: this.arr[this.idx++]
+      } : {
+        done: true,
+        value: undefined
+      };
+    };
+    return ArrayIterator;
+  }());
+  function getIterator(obj) {
+    var i = obj[iterator_1.$$iterator];
+    if (!i && typeof obj === 'string') {
+      return new StringIterator(obj);
+    }
+    if (!i && obj.length !== undefined) {
+      return new ArrayIterator(obj);
+    }
+    if (!i) {
+      throw new TypeError('Object is not iterable');
+    }
+    return obj[iterator_1.$$iterator]();
+  }
+  var maxSafeInteger = Math.pow(2, 53) - 1;
+  function toLength(o) {
+    var len = +o.length;
+    if (isNaN(len)) {
+      return 0;
+    }
+    if (len === 0 || !numberIsFinite(len)) {
+      return len;
+    }
+    len = sign(len) * Math.floor(Math.abs(len));
+    if (len <= 0) {
+      return 0;
+    }
+    if (len > maxSafeInteger) {
+      return maxSafeInteger;
+    }
+    return len;
+  }
+  function numberIsFinite(value) {
+    return typeof value === 'number' && root_1.root.isFinite(value);
+  }
+  function sign(value) {
+    var valueAsNumber = +value;
+    if (valueAsNumber === 0) {
+      return valueAsNumber;
+    }
+    if (isNaN(valueAsNumber)) {
+      return valueAsNumber;
+    }
+    return valueAsNumber < 0 ? -1 : 1;
+  }
+  return module.exports;
+});
+
+$__System.registerDynamic("2f", ["7", "30", "24"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Observable_1 = $__require('7');
+  var ScalarObservable_1 = $__require('30');
+  var EmptyObservable_1 = $__require('24');
+  var ArrayLikeObservable = (function(_super) {
+    __extends(ArrayLikeObservable, _super);
+    function ArrayLikeObservable(arrayLike, mapFn, thisArg, scheduler) {
+      _super.call(this);
+      this.arrayLike = arrayLike;
+      this.scheduler = scheduler;
+      if (!mapFn && !scheduler && arrayLike.length === 1) {
+        this._isScalar = true;
+        this.value = arrayLike[0];
+      }
+      if (mapFn) {
+        this.mapFn = mapFn.bind(thisArg);
+      }
+    }
+    ArrayLikeObservable.create = function(arrayLike, mapFn, thisArg, scheduler) {
+      var length = arrayLike.length;
+      if (length === 0) {
+        return new EmptyObservable_1.EmptyObservable();
+      } else if (length === 1 && !mapFn) {
+        return new ScalarObservable_1.ScalarObservable(arrayLike[0], scheduler);
+      } else {
+        return new ArrayLikeObservable(arrayLike, mapFn, thisArg, scheduler);
+      }
+    };
+    ArrayLikeObservable.dispatch = function(state) {
+      var arrayLike = state.arrayLike,
+          index = state.index,
+          length = state.length,
+          mapFn = state.mapFn,
+          subscriber = state.subscriber;
+      if (subscriber.isUnsubscribed) {
+        return;
+      }
+      if (index >= length) {
+        subscriber.complete();
+        return;
+      }
+      var result = mapFn ? mapFn(arrayLike[index], index) : arrayLike[index];
+      subscriber.next(result);
+      state.index = index + 1;
+      this.schedule(state);
+    };
+    ArrayLikeObservable.prototype._subscribe = function(subscriber) {
+      var index = 0;
+      var _a = this,
+          arrayLike = _a.arrayLike,
+          mapFn = _a.mapFn,
+          scheduler = _a.scheduler;
+      var length = arrayLike.length;
+      if (scheduler) {
+        return scheduler.schedule(ArrayLikeObservable.dispatch, 0, {
+          arrayLike: arrayLike,
+          index: index,
+          length: length,
+          mapFn: mapFn,
+          subscriber: subscriber
+        });
+      } else {
+        for (var i = 0; i < length && !subscriber.isUnsubscribed; i++) {
+          var result = mapFn ? mapFn(arrayLike[i], i) : arrayLike[i];
+          subscriber.next(result);
+        }
+        subscriber.complete();
+      }
+    };
+    return ArrayLikeObservable;
+  }(Observable_1.Observable));
+  exports.ArrayLikeObservable = ArrayLikeObservable;
+  return module.exports;
+});
+
+$__System.registerDynamic("31", ["27", "2d", "32", "33", "5", "2a", "34", "2f", "35", "2e", "7", "36"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var isArray_1 = $__require('27');
+  var isFunction_1 = $__require('2d');
+  var isPromise_1 = $__require('32');
+  var isScheduler_1 = $__require('33');
+  var PromiseObservable_1 = $__require('5');
+  var IteratorObservable_1 = $__require('2a');
+  var ArrayObservable_1 = $__require('34');
+  var ArrayLikeObservable_1 = $__require('2f');
+  var observable_1 = $__require('35');
+  var iterator_1 = $__require('2e');
+  var Observable_1 = $__require('7');
+  var observeOn_1 = $__require('36');
+  var isArrayLike = (function(x) {
+    return x && typeof x.length === 'number';
+  });
+  var FromObservable = (function(_super) {
+    __extends(FromObservable, _super);
+    function FromObservable(ish, scheduler) {
+      _super.call(this, null);
+      this.ish = ish;
+      this.scheduler = scheduler;
+    }
+    FromObservable.create = function(ish, mapFnOrScheduler, thisArg, lastScheduler) {
+      var scheduler = null;
+      var mapFn = null;
+      if (isFunction_1.isFunction(mapFnOrScheduler)) {
+        scheduler = lastScheduler || null;
+        mapFn = mapFnOrScheduler;
+      } else if (isScheduler_1.isScheduler(scheduler)) {
+        scheduler = mapFnOrScheduler;
+      }
+      if (ish != null) {
+        if (typeof ish[observable_1.$$observable] === 'function') {
+          if (ish instanceof Observable_1.Observable && !scheduler) {
+            return ish;
+          }
+          return new FromObservable(ish, scheduler);
+        } else if (isArray_1.isArray(ish)) {
+          return new ArrayObservable_1.ArrayObservable(ish, scheduler);
+        } else if (isPromise_1.isPromise(ish)) {
+          return new PromiseObservable_1.PromiseObservable(ish, scheduler);
+        } else if (typeof ish[iterator_1.$$iterator] === 'function' || typeof ish === 'string') {
+          return new IteratorObservable_1.IteratorObservable(ish, null, null, scheduler);
+        } else if (isArrayLike(ish)) {
+          return new ArrayLikeObservable_1.ArrayLikeObservable(ish, mapFn, thisArg, scheduler);
+        }
+      }
+      throw new TypeError((ish !== null && typeof ish || ish) + ' is not observable');
+    };
+    FromObservable.prototype._subscribe = function(subscriber) {
+      var ish = this.ish;
+      var scheduler = this.scheduler;
+      if (scheduler == null) {
+        return ish[observable_1.$$observable]().subscribe(subscriber);
+      } else {
+        return ish[observable_1.$$observable]().subscribe(new observeOn_1.ObserveOnSubscriber(subscriber, scheduler, 0));
+      }
+    };
+    return FromObservable;
+  }(Observable_1.Observable));
+  exports.FromObservable = FromObservable;
+  return module.exports;
+});
+
+$__System.registerDynamic("37", ["31"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var FromObservable_1 = $__require('31');
+  exports.from = FromObservable_1.FromObservable.create;
+  return module.exports;
+});
+
+$__System.registerDynamic("38", ["7", "37"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var from_1 = $__require('37');
+  Observable_1.Observable.from = from_1.from;
+  return module.exports;
+});
+
+$__System.registerDynamic("39", ["7", "11", "12", "3a"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Observable_1 = $__require('7');
+  var tryCatch_1 = $__require('11');
+  var errorObject_1 = $__require('12');
+  var Subscription_1 = $__require('3a');
+  function isNodeStyleEventEmmitter(sourceObj) {
+    return !!sourceObj && typeof sourceObj.addListener === 'function' && typeof sourceObj.removeListener === 'function';
+  }
+  function isJQueryStyleEventEmitter(sourceObj) {
+    return !!sourceObj && typeof sourceObj.on === 'function' && typeof sourceObj.off === 'function';
+  }
+  function isNodeList(sourceObj) {
+    return !!sourceObj && sourceObj.toString() === '[object NodeList]';
+  }
+  function isHTMLCollection(sourceObj) {
+    return !!sourceObj && sourceObj.toString() === '[object HTMLCollection]';
+  }
+  function isEventTarget(sourceObj) {
+    return !!sourceObj && typeof sourceObj.addEventListener === 'function' && typeof sourceObj.removeEventListener === 'function';
+  }
+  var FromEventObservable = (function(_super) {
+    __extends(FromEventObservable, _super);
+    function FromEventObservable(sourceObj, eventName, selector) {
+      _super.call(this);
+      this.sourceObj = sourceObj;
+      this.eventName = eventName;
+      this.selector = selector;
+    }
+    FromEventObservable.create = function(sourceObj, eventName, selector) {
+      return new FromEventObservable(sourceObj, eventName, selector);
+    };
+    FromEventObservable.setupSubscription = function(sourceObj, eventName, handler, subscriber) {
+      var unsubscribe;
+      if (isNodeList(sourceObj) || isHTMLCollection(sourceObj)) {
+        for (var i = 0,
+            len = sourceObj.length; i < len; i++) {
+          FromEventObservable.setupSubscription(sourceObj[i], eventName, handler, subscriber);
+        }
+      } else if (isEventTarget(sourceObj)) {
+        sourceObj.addEventListener(eventName, handler);
+        unsubscribe = function() {
+          return sourceObj.removeEventListener(eventName, handler);
+        };
+      } else if (isJQueryStyleEventEmitter(sourceObj)) {
+        sourceObj.on(eventName, handler);
+        unsubscribe = function() {
+          return sourceObj.off(eventName, handler);
+        };
+      } else if (isNodeStyleEventEmmitter(sourceObj)) {
+        sourceObj.addListener(eventName, handler);
+        unsubscribe = function() {
+          return sourceObj.removeListener(eventName, handler);
+        };
+      }
+      subscriber.add(new Subscription_1.Subscription(unsubscribe));
+    };
+    FromEventObservable.prototype._subscribe = function(subscriber) {
+      var sourceObj = this.sourceObj;
+      var eventName = this.eventName;
+      var selector = this.selector;
+      var handler = selector ? function() {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+          args[_i - 0] = arguments[_i];
+        }
+        var result = tryCatch_1.tryCatch(selector).apply(void 0, args);
+        if (result === errorObject_1.errorObject) {
+          subscriber.error(errorObject_1.errorObject.e);
+        } else {
+          subscriber.next(result);
+        }
+      } : function(e) {
+        return subscriber.next(e);
+      };
+      FromEventObservable.setupSubscription(sourceObj, eventName, handler, subscriber);
+    };
+    return FromEventObservable;
+  }(Observable_1.Observable));
+  exports.FromEventObservable = FromEventObservable;
+  return module.exports;
+});
+
+$__System.registerDynamic("3b", ["39"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var FromEventObservable_1 = $__require('39');
+  exports.fromEvent = FromEventObservable_1.FromEventObservable.create;
+  return module.exports;
+});
+
+$__System.registerDynamic("3c", ["7", "3b"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var fromEvent_1 = $__require('3b');
+  Observable_1.Observable.fromEvent = fromEvent_1.fromEvent;
+  return module.exports;
+});
+
+$__System.registerDynamic("3d", ["7", "3a", "11", "12"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Observable_1 = $__require('7');
+  var Subscription_1 = $__require('3a');
+  var tryCatch_1 = $__require('11');
+  var errorObject_1 = $__require('12');
+  var FromEventPatternObservable = (function(_super) {
+    __extends(FromEventPatternObservable, _super);
+    function FromEventPatternObservable(addHandler, removeHandler, selector) {
+      _super.call(this);
+      this.addHandler = addHandler;
+      this.removeHandler = removeHandler;
+      this.selector = selector;
+    }
+    FromEventPatternObservable.create = function(addHandler, removeHandler, selector) {
+      return new FromEventPatternObservable(addHandler, removeHandler, selector);
+    };
+    FromEventPatternObservable.prototype._subscribe = function(subscriber) {
+      var addHandler = this.addHandler;
+      var removeHandler = this.removeHandler;
+      var selector = this.selector;
+      var handler = selector ? function(e) {
+        var result = tryCatch_1.tryCatch(selector).apply(null, arguments);
+        if (result === errorObject_1.errorObject) {
+          subscriber.error(result.e);
+        } else {
+          subscriber.next(result);
+        }
+      } : function(e) {
+        subscriber.next(e);
+      };
+      var result = tryCatch_1.tryCatch(addHandler)(handler);
+      if (result === errorObject_1.errorObject) {
+        subscriber.error(result.e);
+      }
+      subscriber.add(new Subscription_1.Subscription(function() {
+        removeHandler(handler);
+      }));
+    };
+    return FromEventPatternObservable;
+  }(Observable_1.Observable));
+  exports.FromEventPatternObservable = FromEventPatternObservable;
+  return module.exports;
+});
+
+$__System.registerDynamic("3e", ["3d"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var FromEventPatternObservable_1 = $__require('3d');
+  exports.fromEventPattern = FromEventPatternObservable_1.FromEventPatternObservable.create;
+  return module.exports;
+});
+
+$__System.registerDynamic("3f", ["7", "3e"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var fromEventPattern_1 = $__require('3e');
+  Observable_1.Observable.fromEventPattern = fromEventPattern_1.fromEventPattern;
+  return module.exports;
+});
+
+$__System.registerDynamic("40", ["5"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var PromiseObservable_1 = $__require('5');
+  exports.fromPromise = PromiseObservable_1.PromiseObservable.create;
+  return module.exports;
+});
+
+$__System.registerDynamic("41", ["7", "40"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var fromPromise_1 = $__require('40');
+  Observable_1.Observable.fromPromise = fromPromise_1.fromPromise;
+  return module.exports;
+});
+
+$__System.registerDynamic("42", ["43", "7", "44"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var isNumeric_1 = $__require('43');
+  var Observable_1 = $__require('7');
+  var async_1 = $__require('44');
+  var IntervalObservable = (function(_super) {
+    __extends(IntervalObservable, _super);
+    function IntervalObservable(period, scheduler) {
+      if (period === void 0) {
+        period = 0;
+      }
+      if (scheduler === void 0) {
+        scheduler = async_1.async;
+      }
+      _super.call(this);
+      this.period = period;
+      this.scheduler = scheduler;
+      if (!isNumeric_1.isNumeric(period) || period < 0) {
+        this.period = 0;
+      }
+      if (!scheduler || typeof scheduler.schedule !== 'function') {
+        this.scheduler = async_1.async;
+      }
+    }
+    IntervalObservable.create = function(period, scheduler) {
+      if (period === void 0) {
+        period = 0;
+      }
+      if (scheduler === void 0) {
+        scheduler = async_1.async;
+      }
+      return new IntervalObservable(period, scheduler);
+    };
+    IntervalObservable.dispatch = function(state) {
+      var index = state.index,
+          subscriber = state.subscriber,
+          period = state.period;
+      subscriber.next(index);
+      if (subscriber.isUnsubscribed) {
+        return;
+      }
+      state.index += 1;
+      this.schedule(state, period);
+    };
+    IntervalObservable.prototype._subscribe = function(subscriber) {
+      var index = 0;
+      var period = this.period;
+      var scheduler = this.scheduler;
+      subscriber.add(scheduler.schedule(IntervalObservable.dispatch, period, {
+        index: index,
+        subscriber: subscriber,
+        period: period
+      }));
+    };
+    return IntervalObservable;
+  }(Observable_1.Observable));
+  exports.IntervalObservable = IntervalObservable;
+  return module.exports;
+});
+
+$__System.registerDynamic("45", ["42"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var IntervalObservable_1 = $__require('42');
+  exports.interval = IntervalObservable_1.IntervalObservable.create;
+  return module.exports;
+});
+
+$__System.registerDynamic("46", ["7", "45"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var interval_1 = $__require('45');
+  Observable_1.Observable.interval = interval_1.interval;
+  return module.exports;
+});
+
+$__System.registerDynamic("47", ["48"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var merge_1 = $__require('48');
+  exports.merge = merge_1.mergeStatic;
+  return module.exports;
+});
+
+$__System.registerDynamic("49", ["7", "47"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var merge_1 = $__require('47');
+  Observable_1.Observable.merge = merge_1.merge;
+  return module.exports;
+});
+
+$__System.registerDynamic("4a", ["7", "4b"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var race_1 = $__require('4b');
+  Observable_1.Observable.race = race_1.raceStatic;
+  return module.exports;
+});
+
+$__System.registerDynamic("4c", ["7", "4d"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Observable_1 = $__require('7');
+  var noop_1 = $__require('4d');
+  var NeverObservable = (function(_super) {
+    __extends(NeverObservable, _super);
+    function NeverObservable() {
+      _super.call(this);
+    }
+    NeverObservable.create = function() {
+      return new NeverObservable();
+    };
+    NeverObservable.prototype._subscribe = function(subscriber) {
+      noop_1.noop();
+    };
+    return NeverObservable;
+  }(Observable_1.Observable));
+  exports.NeverObservable = NeverObservable;
+  return module.exports;
+});
+
+$__System.registerDynamic("4e", ["4c"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var NeverObservable_1 = $__require('4c');
+  exports.never = NeverObservable_1.NeverObservable.create;
+  return module.exports;
+});
+
+$__System.registerDynamic("4f", ["7", "4e"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var never_1 = $__require('4e');
+  Observable_1.Observable.never = never_1.never;
+  return module.exports;
+});
+
+$__System.registerDynamic("50", ["34"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var ArrayObservable_1 = $__require('34');
+  exports.of = ArrayObservable_1.ArrayObservable.of;
+  return module.exports;
+});
+
+$__System.registerDynamic("51", ["7", "50"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var of_1 = $__require('50');
+  Observable_1.Observable.of = of_1.of;
+  return module.exports;
+});
+
+$__System.registerDynamic("52", ["7"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Observable_1 = $__require('7');
+  var RangeObservable = (function(_super) {
+    __extends(RangeObservable, _super);
+    function RangeObservable(start, count, scheduler) {
+      _super.call(this);
+      this.start = start;
+      this._count = count;
+      this.scheduler = scheduler;
+    }
+    RangeObservable.create = function(start, count, scheduler) {
+      if (start === void 0) {
+        start = 0;
+      }
+      if (count === void 0) {
+        count = 0;
+      }
+      return new RangeObservable(start, count, scheduler);
+    };
+    RangeObservable.dispatch = function(state) {
+      var start = state.start,
+          index = state.index,
+          count = state.count,
+          subscriber = state.subscriber;
+      if (index >= count) {
+        subscriber.complete();
+        return;
+      }
+      subscriber.next(start);
+      if (subscriber.isUnsubscribed) {
+        return;
+      }
+      state.index = index + 1;
+      state.start = start + 1;
+      this.schedule(state);
+    };
+    RangeObservable.prototype._subscribe = function(subscriber) {
+      var index = 0;
+      var start = this.start;
+      var count = this._count;
+      var scheduler = this.scheduler;
+      if (scheduler) {
+        return scheduler.schedule(RangeObservable.dispatch, 0, {
+          index: index,
+          count: count,
+          start: start,
+          subscriber: subscriber
+        });
+      } else {
+        do {
+          if (index++ >= count) {
+            subscriber.complete();
+            break;
+          }
+          subscriber.next(start++);
+          if (subscriber.isUnsubscribed) {
+            break;
+          }
+        } while (true);
+      }
+    };
+    return RangeObservable;
+  }(Observable_1.Observable));
+  exports.RangeObservable = RangeObservable;
+  return module.exports;
+});
+
+$__System.registerDynamic("53", ["52"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var RangeObservable_1 = $__require('52');
+  exports.range = RangeObservable_1.RangeObservable.create;
+  return module.exports;
+});
+
+$__System.registerDynamic("54", ["7", "53"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var range_1 = $__require('53');
+  Observable_1.Observable.range = range_1.range;
+  return module.exports;
+});
+
+$__System.registerDynamic("55", ["7"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Observable_1 = $__require('7');
+  var ErrorObservable = (function(_super) {
+    __extends(ErrorObservable, _super);
+    function ErrorObservable(error, scheduler) {
+      _super.call(this);
+      this.error = error;
+      this.scheduler = scheduler;
+    }
+    ErrorObservable.create = function(error, scheduler) {
+      return new ErrorObservable(error, scheduler);
+    };
+    ErrorObservable.dispatch = function(arg) {
+      var error = arg.error,
+          subscriber = arg.subscriber;
+      subscriber.error(error);
+    };
+    ErrorObservable.prototype._subscribe = function(subscriber) {
+      var error = this.error;
+      var scheduler = this.scheduler;
+      if (scheduler) {
+        return scheduler.schedule(ErrorObservable.dispatch, 0, {
+          error: error,
+          subscriber: subscriber
+        });
+      } else {
+        subscriber.error(error);
+      }
+    };
+    return ErrorObservable;
+  }(Observable_1.Observable));
+  exports.ErrorObservable = ErrorObservable;
+  return module.exports;
+});
+
+$__System.registerDynamic("56", ["55"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var ErrorObservable_1 = $__require('55');
+  exports._throw = ErrorObservable_1.ErrorObservable.create;
+  return module.exports;
+});
+
+$__System.registerDynamic("57", ["7", "56"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var throw_1 = $__require('56');
+  Observable_1.Observable.throw = throw_1._throw;
+  return module.exports;
+});
+
+$__System.registerDynamic("58", ["43", "7", "44", "33", "59"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var isNumeric_1 = $__require('43');
+  var Observable_1 = $__require('7');
+  var async_1 = $__require('44');
+  var isScheduler_1 = $__require('33');
+  var isDate_1 = $__require('59');
+  var TimerObservable = (function(_super) {
+    __extends(TimerObservable, _super);
+    function TimerObservable(dueTime, period, scheduler) {
+      if (dueTime === void 0) {
+        dueTime = 0;
+      }
+      _super.call(this);
+      this.period = -1;
+      this.dueTime = 0;
+      if (isNumeric_1.isNumeric(period)) {
+        this.period = Number(period) < 1 && 1 || Number(period);
+      } else if (isScheduler_1.isScheduler(period)) {
+        scheduler = period;
+      }
+      if (!isScheduler_1.isScheduler(scheduler)) {
+        scheduler = async_1.async;
+      }
+      this.scheduler = scheduler;
+      this.dueTime = isDate_1.isDate(dueTime) ? (+dueTime - this.scheduler.now()) : dueTime;
+    }
+    TimerObservable.create = function(initialDelay, period, scheduler) {
+      if (initialDelay === void 0) {
+        initialDelay = 0;
+      }
+      return new TimerObservable(initialDelay, period, scheduler);
+    };
+    TimerObservable.dispatch = function(state) {
+      var index = state.index,
+          period = state.period,
+          subscriber = state.subscriber;
+      var action = this;
+      subscriber.next(index);
+      if (subscriber.isUnsubscribed) {
+        return;
+      } else if (period === -1) {
+        return subscriber.complete();
+      }
+      state.index = index + 1;
+      action.schedule(state, period);
+    };
+    TimerObservable.prototype._subscribe = function(subscriber) {
+      var index = 0;
+      var _a = this,
+          period = _a.period,
+          dueTime = _a.dueTime,
+          scheduler = _a.scheduler;
+      return scheduler.schedule(TimerObservable.dispatch, dueTime, {
+        index: index,
+        period: period,
+        subscriber: subscriber
+      });
+    };
+    return TimerObservable;
+  }(Observable_1.Observable));
+  exports.TimerObservable = TimerObservable;
+  return module.exports;
+});
+
+$__System.registerDynamic("5a", ["58"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var TimerObservable_1 = $__require('58');
+  exports.timer = TimerObservable_1.TimerObservable.create;
+  return module.exports;
+});
+
+$__System.registerDynamic("5b", ["7", "5a"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var timer_1 = $__require('5a');
+  Observable_1.Observable.timer = timer_1.timer;
+  return module.exports;
+});
+
+$__System.registerDynamic("5c", ["5d"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var zip_1 = $__require('5d');
+  exports.zip = zip_1.zipStatic;
+  return module.exports;
+});
+
+$__System.registerDynamic("5e", ["7", "5c"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var zip_1 = $__require('5c');
+  Observable_1.Observable.zip = zip_1.zip;
+  return module.exports;
+});
+
+$__System.registerDynamic("5f", ["20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function buffer(closingNotifier) {
+    return this.lift(new BufferOperator(closingNotifier));
+  }
+  exports.buffer = buffer;
+  var BufferOperator = (function() {
+    function BufferOperator(closingNotifier) {
+      this.closingNotifier = closingNotifier;
+    }
+    BufferOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new BufferSubscriber(subscriber, this.closingNotifier));
+    };
+    return BufferOperator;
+  }());
+  var BufferSubscriber = (function(_super) {
+    __extends(BufferSubscriber, _super);
+    function BufferSubscriber(destination, closingNotifier) {
+      _super.call(this, destination);
+      this.buffer = [];
+      this.add(subscribeToResult_1.subscribeToResult(this, closingNotifier));
+    }
+    BufferSubscriber.prototype._next = function(value) {
+      this.buffer.push(value);
+    };
+    BufferSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      var buffer = this.buffer;
+      this.buffer = [];
+      this.destination.next(buffer);
+    };
+    return BufferSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("60", ["7", "5f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var buffer_1 = $__require('5f');
+  Observable_1.Observable.prototype.buffer = buffer_1.buffer;
+  return module.exports;
+});
+
+$__System.registerDynamic("61", ["62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  function bufferCount(bufferSize, startBufferEvery) {
+    if (startBufferEvery === void 0) {
+      startBufferEvery = null;
+    }
+    return this.lift(new BufferCountOperator(bufferSize, startBufferEvery));
+  }
+  exports.bufferCount = bufferCount;
+  var BufferCountOperator = (function() {
+    function BufferCountOperator(bufferSize, startBufferEvery) {
+      this.bufferSize = bufferSize;
+      this.startBufferEvery = startBufferEvery;
+    }
+    BufferCountOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new BufferCountSubscriber(subscriber, this.bufferSize, this.startBufferEvery));
+    };
+    return BufferCountOperator;
+  }());
+  var BufferCountSubscriber = (function(_super) {
+    __extends(BufferCountSubscriber, _super);
+    function BufferCountSubscriber(destination, bufferSize, startBufferEvery) {
+      _super.call(this, destination);
+      this.bufferSize = bufferSize;
+      this.startBufferEvery = startBufferEvery;
+      this.buffers = [[]];
+      this.count = 0;
+    }
+    BufferCountSubscriber.prototype._next = function(value) {
+      var count = (this.count += 1);
+      var destination = this.destination;
+      var bufferSize = this.bufferSize;
+      var startBufferEvery = (this.startBufferEvery == null) ? bufferSize : this.startBufferEvery;
+      var buffers = this.buffers;
+      var len = buffers.length;
+      var remove = -1;
+      if (count % startBufferEvery === 0) {
+        buffers.push([]);
+      }
+      for (var i = 0; i < len; i++) {
+        var buffer = buffers[i];
+        buffer.push(value);
+        if (buffer.length === bufferSize) {
+          remove = i;
+          destination.next(buffer);
+        }
+      }
+      if (remove !== -1) {
+        buffers.splice(remove, 1);
+      }
+    };
+    BufferCountSubscriber.prototype._complete = function() {
+      var destination = this.destination;
+      var buffers = this.buffers;
+      while (buffers.length > 0) {
+        var buffer = buffers.shift();
+        if (buffer.length > 0) {
+          destination.next(buffer);
+        }
+      }
+      _super.prototype._complete.call(this);
+    };
+    return BufferCountSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("63", ["7", "61"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var bufferCount_1 = $__require('61');
+  Observable_1.Observable.prototype.bufferCount = bufferCount_1.bufferCount;
+  return module.exports;
+});
+
+$__System.registerDynamic("64", ["62", "44"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var async_1 = $__require('44');
+  function bufferTime(bufferTimeSpan, bufferCreationInterval, scheduler) {
+    if (bufferCreationInterval === void 0) {
+      bufferCreationInterval = null;
+    }
+    if (scheduler === void 0) {
+      scheduler = async_1.async;
+    }
+    return this.lift(new BufferTimeOperator(bufferTimeSpan, bufferCreationInterval, scheduler));
+  }
+  exports.bufferTime = bufferTime;
+  var BufferTimeOperator = (function() {
+    function BufferTimeOperator(bufferTimeSpan, bufferCreationInterval, scheduler) {
+      this.bufferTimeSpan = bufferTimeSpan;
+      this.bufferCreationInterval = bufferCreationInterval;
+      this.scheduler = scheduler;
+    }
+    BufferTimeOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new BufferTimeSubscriber(subscriber, this.bufferTimeSpan, this.bufferCreationInterval, this.scheduler));
+    };
+    return BufferTimeOperator;
+  }());
+  var BufferTimeSubscriber = (function(_super) {
+    __extends(BufferTimeSubscriber, _super);
+    function BufferTimeSubscriber(destination, bufferTimeSpan, bufferCreationInterval, scheduler) {
+      _super.call(this, destination);
+      this.bufferTimeSpan = bufferTimeSpan;
+      this.bufferCreationInterval = bufferCreationInterval;
+      this.scheduler = scheduler;
+      this.buffers = [];
+      var buffer = this.openBuffer();
+      if (bufferCreationInterval !== null && bufferCreationInterval >= 0) {
+        var closeState = {
+          subscriber: this,
+          buffer: buffer
+        };
+        var creationState = {
+          bufferTimeSpan: bufferTimeSpan,
+          bufferCreationInterval: bufferCreationInterval,
+          subscriber: this,
+          scheduler: scheduler
+        };
+        this.add(scheduler.schedule(dispatchBufferClose, bufferTimeSpan, closeState));
+        this.add(scheduler.schedule(dispatchBufferCreation, bufferCreationInterval, creationState));
+      } else {
+        var timeSpanOnlyState = {
+          subscriber: this,
+          buffer: buffer,
+          bufferTimeSpan: bufferTimeSpan
+        };
+        this.add(scheduler.schedule(dispatchBufferTimeSpanOnly, bufferTimeSpan, timeSpanOnlyState));
+      }
+    }
+    BufferTimeSubscriber.prototype._next = function(value) {
+      var buffers = this.buffers;
+      var len = buffers.length;
+      for (var i = 0; i < len; i++) {
+        buffers[i].push(value);
+      }
+    };
+    BufferTimeSubscriber.prototype._error = function(err) {
+      this.buffers.length = 0;
+      _super.prototype._error.call(this, err);
+    };
+    BufferTimeSubscriber.prototype._complete = function() {
+      var _a = this,
+          buffers = _a.buffers,
+          destination = _a.destination;
+      while (buffers.length > 0) {
+        destination.next(buffers.shift());
+      }
+      _super.prototype._complete.call(this);
+    };
+    BufferTimeSubscriber.prototype._unsubscribe = function() {
+      this.buffers = null;
+    };
+    BufferTimeSubscriber.prototype.openBuffer = function() {
+      var buffer = [];
+      this.buffers.push(buffer);
+      return buffer;
+    };
+    BufferTimeSubscriber.prototype.closeBuffer = function(buffer) {
+      this.destination.next(buffer);
+      var buffers = this.buffers;
+      buffers.splice(buffers.indexOf(buffer), 1);
+    };
+    return BufferTimeSubscriber;
+  }(Subscriber_1.Subscriber));
+  function dispatchBufferTimeSpanOnly(state) {
+    var subscriber = state.subscriber;
+    var prevBuffer = state.buffer;
+    if (prevBuffer) {
+      subscriber.closeBuffer(prevBuffer);
+    }
+    state.buffer = subscriber.openBuffer();
+    if (!subscriber.isUnsubscribed) {
+      this.schedule(state, state.bufferTimeSpan);
+    }
+  }
+  function dispatchBufferCreation(state) {
+    var bufferCreationInterval = state.bufferCreationInterval,
+        bufferTimeSpan = state.bufferTimeSpan,
+        subscriber = state.subscriber,
+        scheduler = state.scheduler;
+    var buffer = subscriber.openBuffer();
+    var action = this;
+    if (!subscriber.isUnsubscribed) {
+      action.add(scheduler.schedule(dispatchBufferClose, bufferTimeSpan, {
+        subscriber: subscriber,
+        buffer: buffer
+      }));
+      action.schedule(state, bufferCreationInterval);
+    }
+  }
+  function dispatchBufferClose(arg) {
+    var subscriber = arg.subscriber,
+        buffer = arg.buffer;
+    subscriber.closeBuffer(buffer);
+  }
+  return module.exports;
+});
+
+$__System.registerDynamic("65", ["7", "64"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var bufferTime_1 = $__require('64');
+  Observable_1.Observable.prototype.bufferTime = bufferTime_1.bufferTime;
+  return module.exports;
+});
+
+$__System.registerDynamic("66", ["3a", "1f", "20"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscription_1 = $__require('3a');
+  var subscribeToResult_1 = $__require('1f');
+  var OuterSubscriber_1 = $__require('20');
+  function bufferToggle(openings, closingSelector) {
+    return this.lift(new BufferToggleOperator(openings, closingSelector));
+  }
+  exports.bufferToggle = bufferToggle;
+  var BufferToggleOperator = (function() {
+    function BufferToggleOperator(openings, closingSelector) {
+      this.openings = openings;
+      this.closingSelector = closingSelector;
+    }
+    BufferToggleOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new BufferToggleSubscriber(subscriber, this.openings, this.closingSelector));
+    };
+    return BufferToggleOperator;
+  }());
+  var BufferToggleSubscriber = (function(_super) {
+    __extends(BufferToggleSubscriber, _super);
+    function BufferToggleSubscriber(destination, openings, closingSelector) {
+      _super.call(this, destination);
+      this.openings = openings;
+      this.closingSelector = closingSelector;
+      this.contexts = [];
+      this.add(subscribeToResult_1.subscribeToResult(this, openings));
+    }
+    BufferToggleSubscriber.prototype._next = function(value) {
+      var contexts = this.contexts;
+      var len = contexts.length;
+      for (var i = 0; i < len; i++) {
+        contexts[i].buffer.push(value);
+      }
+    };
+    BufferToggleSubscriber.prototype._error = function(err) {
+      var contexts = this.contexts;
+      while (contexts.length > 0) {
+        var context = contexts.shift();
+        context.subscription.unsubscribe();
+        context.buffer = null;
+        context.subscription = null;
+      }
+      this.contexts = null;
+      _super.prototype._error.call(this, err);
+    };
+    BufferToggleSubscriber.prototype._complete = function() {
+      var contexts = this.contexts;
+      while (contexts.length > 0) {
+        var context = contexts.shift();
+        this.destination.next(context.buffer);
+        context.subscription.unsubscribe();
+        context.buffer = null;
+        context.subscription = null;
+      }
+      this.contexts = null;
+      _super.prototype._complete.call(this);
+    };
+    BufferToggleSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      outerValue ? this.closeBuffer(outerValue) : this.openBuffer(innerValue);
+    };
+    BufferToggleSubscriber.prototype.notifyComplete = function(innerSub) {
+      this.closeBuffer(innerSub.context);
+    };
+    BufferToggleSubscriber.prototype.openBuffer = function(value) {
+      try {
+        var closingSelector = this.closingSelector;
+        var closingNotifier = closingSelector.call(this, value);
+        if (closingNotifier) {
+          this.trySubscribe(closingNotifier);
+        }
+      } catch (err) {
+        this._error(err);
+      }
+    };
+    BufferToggleSubscriber.prototype.closeBuffer = function(context) {
+      var contexts = this.contexts;
+      if (contexts && context) {
+        var buffer = context.buffer,
+            subscription = context.subscription;
+        this.destination.next(buffer);
+        contexts.splice(contexts.indexOf(context), 1);
+        this.remove(subscription);
+        subscription.unsubscribe();
+      }
+    };
+    BufferToggleSubscriber.prototype.trySubscribe = function(closingNotifier) {
+      var contexts = this.contexts;
+      var buffer = [];
+      var subscription = new Subscription_1.Subscription();
+      var context = {
+        buffer: buffer,
+        subscription: subscription
+      };
+      contexts.push(context);
+      var innerSubscription = subscribeToResult_1.subscribeToResult(this, closingNotifier, context);
+      if (!innerSubscription || innerSubscription.isUnsubscribed) {
+        this.closeBuffer(context);
+      } else {
+        innerSubscription.context = context;
+        this.add(innerSubscription);
+        subscription.add(innerSubscription);
+      }
+    };
+    return BufferToggleSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("67", ["7", "66"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var bufferToggle_1 = $__require('66');
+  Observable_1.Observable.prototype.bufferToggle = bufferToggle_1.bufferToggle;
+  return module.exports;
+});
+
+$__System.registerDynamic("68", ["3a", "11", "12", "20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscription_1 = $__require('3a');
+  var tryCatch_1 = $__require('11');
+  var errorObject_1 = $__require('12');
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function bufferWhen(closingSelector) {
+    return this.lift(new BufferWhenOperator(closingSelector));
+  }
+  exports.bufferWhen = bufferWhen;
+  var BufferWhenOperator = (function() {
+    function BufferWhenOperator(closingSelector) {
+      this.closingSelector = closingSelector;
+    }
+    BufferWhenOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new BufferWhenSubscriber(subscriber, this.closingSelector));
+    };
+    return BufferWhenOperator;
+  }());
+  var BufferWhenSubscriber = (function(_super) {
+    __extends(BufferWhenSubscriber, _super);
+    function BufferWhenSubscriber(destination, closingSelector) {
+      _super.call(this, destination);
+      this.closingSelector = closingSelector;
+      this.subscribing = false;
+      this.openBuffer();
+    }
+    BufferWhenSubscriber.prototype._next = function(value) {
+      this.buffer.push(value);
+    };
+    BufferWhenSubscriber.prototype._complete = function() {
+      var buffer = this.buffer;
+      if (buffer) {
+        this.destination.next(buffer);
+      }
+      _super.prototype._complete.call(this);
+    };
+    BufferWhenSubscriber.prototype._unsubscribe = function() {
+      this.buffer = null;
+      this.subscribing = false;
+    };
+    BufferWhenSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      this.openBuffer();
+    };
+    BufferWhenSubscriber.prototype.notifyComplete = function() {
+      if (this.subscribing) {
+        this.complete();
+      } else {
+        this.openBuffer();
+      }
+    };
+    BufferWhenSubscriber.prototype.openBuffer = function() {
+      var closingSubscription = this.closingSubscription;
+      if (closingSubscription) {
+        this.remove(closingSubscription);
+        closingSubscription.unsubscribe();
+      }
+      var buffer = this.buffer;
+      if (this.buffer) {
+        this.destination.next(buffer);
+      }
+      this.buffer = [];
+      var closingNotifier = tryCatch_1.tryCatch(this.closingSelector)();
+      if (closingNotifier === errorObject_1.errorObject) {
+        this.error(errorObject_1.errorObject.e);
+      } else {
+        closingSubscription = new Subscription_1.Subscription();
+        this.closingSubscription = closingSubscription;
+        this.add(closingSubscription);
+        this.subscribing = true;
+        closingSubscription.add(subscribeToResult_1.subscribeToResult(this, closingNotifier));
+        this.subscribing = false;
+      }
+    };
+    return BufferWhenSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("69", ["7", "68"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var bufferWhen_1 = $__require('68');
+  Observable_1.Observable.prototype.bufferWhen = bufferWhen_1.bufferWhen;
+  return module.exports;
+});
+
+$__System.registerDynamic("6a", ["6b"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var publishReplay_1 = $__require('6b');
+  function cache(bufferSize, windowTime, scheduler) {
+    if (bufferSize === void 0) {
+      bufferSize = Number.POSITIVE_INFINITY;
+    }
+    if (windowTime === void 0) {
+      windowTime = Number.POSITIVE_INFINITY;
+    }
+    return publishReplay_1.publishReplay.call(this, bufferSize, windowTime, scheduler).refCount();
+  }
+  exports.cache = cache;
+  return module.exports;
+});
+
+$__System.registerDynamic("6c", ["7", "6a"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var cache_1 = $__require('6a');
+  Observable_1.Observable.prototype.cache = cache_1.cache;
+  return module.exports;
+});
+
+$__System.registerDynamic("6d", ["62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  function _catch(selector) {
+    var operator = new CatchOperator(selector);
+    var caught = this.lift(operator);
+    return (operator.caught = caught);
+  }
+  exports._catch = _catch;
+  var CatchOperator = (function() {
+    function CatchOperator(selector) {
+      this.selector = selector;
+    }
+    CatchOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new CatchSubscriber(subscriber, this.selector, this.caught));
+    };
+    return CatchOperator;
+  }());
+  var CatchSubscriber = (function(_super) {
+    __extends(CatchSubscriber, _super);
+    function CatchSubscriber(destination, selector, caught) {
+      _super.call(this, destination);
+      this.selector = selector;
+      this.caught = caught;
+    }
+    CatchSubscriber.prototype.error = function(err) {
+      if (!this.isStopped) {
+        var result = void 0;
+        try {
+          result = this.selector(err, this.caught);
+        } catch (err) {
+          this.destination.error(err);
+          return;
+        }
+        this._innerSub(result);
+      }
+    };
+    CatchSubscriber.prototype._innerSub = function(result) {
+      this.unsubscribe();
+      this.destination.remove(this);
+      result.subscribe(this.destination);
+    };
+    return CatchSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("6e", ["7", "6d"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var catch_1 = $__require('6d');
+  Observable_1.Observable.prototype.catch = catch_1._catch;
+  return module.exports;
+});
+
+$__System.registerDynamic("6f", ["1a"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var combineLatest_1 = $__require('1a');
+  function combineAll(project) {
+    return this.lift(new combineLatest_1.CombineLatestOperator(project));
+  }
+  exports.combineAll = combineAll;
+  return module.exports;
+});
+
+$__System.registerDynamic("70", ["7", "6f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var combineAll_1 = $__require('6f');
+  Observable_1.Observable.prototype.combineAll = combineAll_1.combineAll;
+  return module.exports;
+});
+
+$__System.registerDynamic("1a", ["34", "27", "33", "20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var ArrayObservable_1 = $__require('34');
+  var isArray_1 = $__require('27');
+  var isScheduler_1 = $__require('33');
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function combineLatest() {
+    var observables = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      observables[_i - 0] = arguments[_i];
+    }
+    var project = null;
+    if (typeof observables[observables.length - 1] === 'function') {
+      project = observables.pop();
+    }
+    if (observables.length === 1 && isArray_1.isArray(observables[0])) {
+      observables = observables[0];
+    }
+    observables.unshift(this);
+    return new ArrayObservable_1.ArrayObservable(observables).lift(new CombineLatestOperator(project));
+  }
+  exports.combineLatest = combineLatest;
+  function combineLatestStatic() {
+    var observables = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      observables[_i - 0] = arguments[_i];
+    }
+    var project = null;
+    var scheduler = null;
+    if (isScheduler_1.isScheduler(observables[observables.length - 1])) {
+      scheduler = observables.pop();
+    }
+    if (typeof observables[observables.length - 1] === 'function') {
+      project = observables.pop();
+    }
+    if (observables.length === 1 && isArray_1.isArray(observables[0])) {
+      observables = observables[0];
+    }
+    return new ArrayObservable_1.ArrayObservable(observables, scheduler).lift(new CombineLatestOperator(project));
+  }
+  exports.combineLatestStatic = combineLatestStatic;
+  var CombineLatestOperator = (function() {
+    function CombineLatestOperator(project) {
+      this.project = project;
+    }
+    CombineLatestOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new CombineLatestSubscriber(subscriber, this.project));
+    };
+    return CombineLatestOperator;
+  }());
+  exports.CombineLatestOperator = CombineLatestOperator;
+  var CombineLatestSubscriber = (function(_super) {
+    __extends(CombineLatestSubscriber, _super);
+    function CombineLatestSubscriber(destination, project) {
+      _super.call(this, destination);
+      this.project = project;
+      this.active = 0;
+      this.values = [];
+      this.observables = [];
+      this.toRespond = [];
+    }
+    CombineLatestSubscriber.prototype._next = function(observable) {
+      var toRespond = this.toRespond;
+      toRespond.push(toRespond.length);
+      this.observables.push(observable);
+    };
+    CombineLatestSubscriber.prototype._complete = function() {
+      var observables = this.observables;
+      var len = observables.length;
+      if (len === 0) {
+        this.destination.complete();
+      } else {
+        this.active = len;
+        for (var i = 0; i < len; i++) {
+          var observable = observables[i];
+          this.add(subscribeToResult_1.subscribeToResult(this, observable, observable, i));
+        }
+      }
+    };
+    CombineLatestSubscriber.prototype.notifyComplete = function(unused) {
+      if ((this.active -= 1) === 0) {
+        this.destination.complete();
+      }
+    };
+    CombineLatestSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      var values = this.values;
+      values[outerIndex] = innerValue;
+      var toRespond = this.toRespond;
+      if (toRespond.length > 0) {
+        var found = toRespond.indexOf(outerIndex);
+        if (found !== -1) {
+          toRespond.splice(found, 1);
+        }
+      }
+      if (toRespond.length === 0) {
+        if (this.project) {
+          this._tryProject(values);
+        } else {
+          this.destination.next(values);
+        }
+      }
+    };
+    CombineLatestSubscriber.prototype._tryProject = function(values) {
+      var result;
+      try {
+        result = this.project.apply(this, values);
+      } catch (err) {
+        this.destination.error(err);
+        return;
+      }
+      this.destination.next(result);
+    };
+    return CombineLatestSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  exports.CombineLatestSubscriber = CombineLatestSubscriber;
+  return module.exports;
+});
+
+$__System.registerDynamic("71", ["7", "1a"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var combineLatest_1 = $__require('1a');
+  Observable_1.Observable.prototype.combineLatest = combineLatest_1.combineLatest;
+  return module.exports;
+});
+
+$__System.registerDynamic("72", ["7", "1c"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var concat_1 = $__require('1c');
+  Observable_1.Observable.prototype.concat = concat_1.concat;
+  return module.exports;
+});
+
+$__System.registerDynamic("73", ["74"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var mergeAll_1 = $__require('74');
+  function concatAll() {
+    return this.lift(new mergeAll_1.MergeAllOperator(1));
+  }
+  exports.concatAll = concatAll;
+  return module.exports;
+});
+
+$__System.registerDynamic("75", ["7", "73"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var concatAll_1 = $__require('73');
+  Observable_1.Observable.prototype.concatAll = concatAll_1.concatAll;
+  return module.exports;
+});
+
+$__System.registerDynamic("76", ["77"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var mergeMap_1 = $__require('77');
+  function concatMap(project, resultSelector) {
+    return this.lift(new mergeMap_1.MergeMapOperator(project, resultSelector, 1));
+  }
+  exports.concatMap = concatMap;
+  return module.exports;
+});
+
+$__System.registerDynamic("78", ["7", "76"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var concatMap_1 = $__require('76');
+  Observable_1.Observable.prototype.concatMap = concatMap_1.concatMap;
+  return module.exports;
+});
+
+$__System.registerDynamic("79", ["7a"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var mergeMapTo_1 = $__require('7a');
+  function concatMapTo(innerObservable, resultSelector) {
+    return this.lift(new mergeMapTo_1.MergeMapToOperator(innerObservable, resultSelector, 1));
+  }
+  exports.concatMapTo = concatMapTo;
+  return module.exports;
+});
+
+$__System.registerDynamic("7b", ["7", "79"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var concatMapTo_1 = $__require('79');
+  Observable_1.Observable.prototype.concatMapTo = concatMapTo_1.concatMapTo;
+  return module.exports;
+});
+
+$__System.registerDynamic("7c", ["62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  function count(predicate) {
+    return this.lift(new CountOperator(predicate, this));
+  }
+  exports.count = count;
+  var CountOperator = (function() {
+    function CountOperator(predicate, source) {
+      this.predicate = predicate;
+      this.source = source;
+    }
+    CountOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new CountSubscriber(subscriber, this.predicate, this.source));
+    };
+    return CountOperator;
+  }());
+  var CountSubscriber = (function(_super) {
+    __extends(CountSubscriber, _super);
+    function CountSubscriber(destination, predicate, source) {
+      _super.call(this, destination);
+      this.predicate = predicate;
+      this.source = source;
+      this.count = 0;
+      this.index = 0;
+    }
+    CountSubscriber.prototype._next = function(value) {
+      if (this.predicate) {
+        this._tryPredicate(value);
+      } else {
+        this.count++;
+      }
+    };
+    CountSubscriber.prototype._tryPredicate = function(value) {
+      var result;
+      try {
+        result = this.predicate(value, this.index++, this.source);
+      } catch (err) {
+        this.destination.error(err);
+        return;
+      }
+      if (result) {
+        this.count++;
+      }
+    };
+    CountSubscriber.prototype._complete = function() {
+      this.destination.next(this.count);
+      this.destination.complete();
+    };
+    return CountSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("7d", ["7", "7c"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var count_1 = $__require('7c');
+  Observable_1.Observable.prototype.count = count_1.count;
+  return module.exports;
+});
+
+$__System.registerDynamic("7e", ["62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  function dematerialize() {
+    return this.lift(new DeMaterializeOperator());
+  }
+  exports.dematerialize = dematerialize;
+  var DeMaterializeOperator = (function() {
+    function DeMaterializeOperator() {}
+    DeMaterializeOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new DeMaterializeSubscriber(subscriber));
+    };
+    return DeMaterializeOperator;
+  }());
+  var DeMaterializeSubscriber = (function(_super) {
+    __extends(DeMaterializeSubscriber, _super);
+    function DeMaterializeSubscriber(destination) {
+      _super.call(this, destination);
+    }
+    DeMaterializeSubscriber.prototype._next = function(value) {
+      value.observe(this.destination);
+    };
+    return DeMaterializeSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("7f", ["7", "7e"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var dematerialize_1 = $__require('7e');
+  Observable_1.Observable.prototype.dematerialize = dematerialize_1.dematerialize;
+  return module.exports;
+});
+
+$__System.registerDynamic("80", ["20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function debounce(durationSelector) {
+    return this.lift(new DebounceOperator(durationSelector));
+  }
+  exports.debounce = debounce;
+  var DebounceOperator = (function() {
+    function DebounceOperator(durationSelector) {
+      this.durationSelector = durationSelector;
+    }
+    DebounceOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new DebounceSubscriber(subscriber, this.durationSelector));
+    };
+    return DebounceOperator;
+  }());
+  var DebounceSubscriber = (function(_super) {
+    __extends(DebounceSubscriber, _super);
+    function DebounceSubscriber(destination, durationSelector) {
+      _super.call(this, destination);
+      this.durationSelector = durationSelector;
+      this.hasValue = false;
+      this.durationSubscription = null;
+    }
+    DebounceSubscriber.prototype._next = function(value) {
+      try {
+        var result = this.durationSelector.call(this, value);
+        if (result) {
+          this._tryNext(value, result);
+        }
+      } catch (err) {
+        this.destination.error(err);
+      }
+    };
+    DebounceSubscriber.prototype._complete = function() {
+      this.emitValue();
+      this.destination.complete();
+    };
+    DebounceSubscriber.prototype._tryNext = function(value, duration) {
+      var subscription = this.durationSubscription;
+      this.value = value;
+      this.hasValue = true;
+      if (subscription) {
+        subscription.unsubscribe();
+        this.remove(subscription);
+      }
+      subscription = subscribeToResult_1.subscribeToResult(this, duration);
+      if (!subscription.isUnsubscribed) {
+        this.add(this.durationSubscription = subscription);
+      }
+    };
+    DebounceSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      this.emitValue();
+    };
+    DebounceSubscriber.prototype.notifyComplete = function() {
+      this.emitValue();
+    };
+    DebounceSubscriber.prototype.emitValue = function() {
+      if (this.hasValue) {
+        var value = this.value;
+        var subscription = this.durationSubscription;
+        if (subscription) {
+          this.durationSubscription = null;
+          subscription.unsubscribe();
+          this.remove(subscription);
+        }
+        this.value = null;
+        this.hasValue = false;
+        _super.prototype._next.call(this, value);
+      }
+    };
+    return DebounceSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("81", ["7", "80"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var debounce_1 = $__require('80');
+  Observable_1.Observable.prototype.debounce = debounce_1.debounce;
+  return module.exports;
+});
+
+$__System.registerDynamic("82", ["62", "44"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var async_1 = $__require('44');
+  function debounceTime(dueTime, scheduler) {
+    if (scheduler === void 0) {
+      scheduler = async_1.async;
+    }
+    return this.lift(new DebounceTimeOperator(dueTime, scheduler));
+  }
+  exports.debounceTime = debounceTime;
+  var DebounceTimeOperator = (function() {
+    function DebounceTimeOperator(dueTime, scheduler) {
+      this.dueTime = dueTime;
+      this.scheduler = scheduler;
+    }
+    DebounceTimeOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new DebounceTimeSubscriber(subscriber, this.dueTime, this.scheduler));
+    };
+    return DebounceTimeOperator;
+  }());
+  var DebounceTimeSubscriber = (function(_super) {
+    __extends(DebounceTimeSubscriber, _super);
+    function DebounceTimeSubscriber(destination, dueTime, scheduler) {
+      _super.call(this, destination);
+      this.dueTime = dueTime;
+      this.scheduler = scheduler;
+      this.debouncedSubscription = null;
+      this.lastValue = null;
+      this.hasValue = false;
+    }
+    DebounceTimeSubscriber.prototype._next = function(value) {
+      this.clearDebounce();
+      this.lastValue = value;
+      this.hasValue = true;
+      this.add(this.debouncedSubscription = this.scheduler.schedule(dispatchNext, this.dueTime, this));
+    };
+    DebounceTimeSubscriber.prototype._complete = function() {
+      this.debouncedNext();
+      this.destination.complete();
+    };
+    DebounceTimeSubscriber.prototype.debouncedNext = function() {
+      this.clearDebounce();
+      if (this.hasValue) {
+        this.destination.next(this.lastValue);
+        this.lastValue = null;
+        this.hasValue = false;
+      }
+    };
+    DebounceTimeSubscriber.prototype.clearDebounce = function() {
+      var debouncedSubscription = this.debouncedSubscription;
+      if (debouncedSubscription !== null) {
+        this.remove(debouncedSubscription);
+        debouncedSubscription.unsubscribe();
+        this.debouncedSubscription = null;
+      }
+    };
+    return DebounceTimeSubscriber;
+  }(Subscriber_1.Subscriber));
+  function dispatchNext(subscriber) {
+    subscriber.debouncedNext();
+  }
+  return module.exports;
+});
+
+$__System.registerDynamic("83", ["7", "82"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var debounceTime_1 = $__require('82');
+  Observable_1.Observable.prototype.debounceTime = debounceTime_1.debounceTime;
+  return module.exports;
+});
+
+$__System.registerDynamic("84", ["62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  function defaultIfEmpty(defaultValue) {
+    if (defaultValue === void 0) {
+      defaultValue = null;
+    }
+    return this.lift(new DefaultIfEmptyOperator(defaultValue));
+  }
+  exports.defaultIfEmpty = defaultIfEmpty;
+  var DefaultIfEmptyOperator = (function() {
+    function DefaultIfEmptyOperator(defaultValue) {
+      this.defaultValue = defaultValue;
+    }
+    DefaultIfEmptyOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new DefaultIfEmptySubscriber(subscriber, this.defaultValue));
+    };
+    return DefaultIfEmptyOperator;
+  }());
+  var DefaultIfEmptySubscriber = (function(_super) {
+    __extends(DefaultIfEmptySubscriber, _super);
+    function DefaultIfEmptySubscriber(destination, defaultValue) {
+      _super.call(this, destination);
+      this.defaultValue = defaultValue;
+      this.isEmpty = true;
+    }
+    DefaultIfEmptySubscriber.prototype._next = function(value) {
+      this.isEmpty = false;
+      this.destination.next(value);
+    };
+    DefaultIfEmptySubscriber.prototype._complete = function() {
+      if (this.isEmpty) {
+        this.destination.next(this.defaultValue);
+      }
+      this.destination.complete();
+    };
+    return DefaultIfEmptySubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("85", ["7", "84"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var defaultIfEmpty_1 = $__require('84');
+  Observable_1.Observable.prototype.defaultIfEmpty = defaultIfEmpty_1.defaultIfEmpty;
+  return module.exports;
+});
+
+$__System.registerDynamic("86", ["44", "59", "62", "87"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var async_1 = $__require('44');
+  var isDate_1 = $__require('59');
+  var Subscriber_1 = $__require('62');
+  var Notification_1 = $__require('87');
+  function delay(delay, scheduler) {
+    if (scheduler === void 0) {
+      scheduler = async_1.async;
+    }
+    var absoluteDelay = isDate_1.isDate(delay);
+    var delayFor = absoluteDelay ? (+delay - scheduler.now()) : Math.abs(delay);
+    return this.lift(new DelayOperator(delayFor, scheduler));
+  }
+  exports.delay = delay;
+  var DelayOperator = (function() {
+    function DelayOperator(delay, scheduler) {
+      this.delay = delay;
+      this.scheduler = scheduler;
+    }
+    DelayOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new DelaySubscriber(subscriber, this.delay, this.scheduler));
+    };
+    return DelayOperator;
+  }());
+  var DelaySubscriber = (function(_super) {
+    __extends(DelaySubscriber, _super);
+    function DelaySubscriber(destination, delay, scheduler) {
+      _super.call(this, destination);
+      this.delay = delay;
+      this.scheduler = scheduler;
+      this.queue = [];
+      this.active = false;
+      this.errored = false;
+    }
+    DelaySubscriber.dispatch = function(state) {
+      var source = state.source;
+      var queue = source.queue;
+      var scheduler = state.scheduler;
+      var destination = state.destination;
+      while (queue.length > 0 && (queue[0].time - scheduler.now()) <= 0) {
+        queue.shift().notification.observe(destination);
+      }
+      if (queue.length > 0) {
+        var delay_1 = Math.max(0, queue[0].time - scheduler.now());
+        this.schedule(state, delay_1);
+      } else {
+        source.active = false;
+      }
+    };
+    DelaySubscriber.prototype._schedule = function(scheduler) {
+      this.active = true;
+      this.add(scheduler.schedule(DelaySubscriber.dispatch, this.delay, {
+        source: this,
+        destination: this.destination,
+        scheduler: scheduler
+      }));
+    };
+    DelaySubscriber.prototype.scheduleNotification = function(notification) {
+      if (this.errored === true) {
+        return;
+      }
+      var scheduler = this.scheduler;
+      var message = new DelayMessage(scheduler.now() + this.delay, notification);
+      this.queue.push(message);
+      if (this.active === false) {
+        this._schedule(scheduler);
+      }
+    };
+    DelaySubscriber.prototype._next = function(value) {
+      this.scheduleNotification(Notification_1.Notification.createNext(value));
+    };
+    DelaySubscriber.prototype._error = function(err) {
+      this.errored = true;
+      this.queue = [];
+      this.destination.error(err);
+    };
+    DelaySubscriber.prototype._complete = function() {
+      this.scheduleNotification(Notification_1.Notification.createComplete());
+    };
+    return DelaySubscriber;
+  }(Subscriber_1.Subscriber));
+  var DelayMessage = (function() {
+    function DelayMessage(time, notification) {
+      this.time = time;
+      this.notification = notification;
+    }
+    return DelayMessage;
+  }());
+  return module.exports;
+});
+
+$__System.registerDynamic("88", ["7", "86"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var delay_1 = $__require('86');
+  Observable_1.Observable.prototype.delay = delay_1.delay;
+  return module.exports;
+});
+
+$__System.registerDynamic("89", ["62", "7", "20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var Observable_1 = $__require('7');
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function delayWhen(delayDurationSelector, subscriptionDelay) {
+    if (subscriptionDelay) {
+      return new SubscriptionDelayObservable(this, subscriptionDelay).lift(new DelayWhenOperator(delayDurationSelector));
+    }
+    return this.lift(new DelayWhenOperator(delayDurationSelector));
+  }
+  exports.delayWhen = delayWhen;
+  var DelayWhenOperator = (function() {
+    function DelayWhenOperator(delayDurationSelector) {
+      this.delayDurationSelector = delayDurationSelector;
+    }
+    DelayWhenOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new DelayWhenSubscriber(subscriber, this.delayDurationSelector));
+    };
+    return DelayWhenOperator;
+  }());
+  var DelayWhenSubscriber = (function(_super) {
+    __extends(DelayWhenSubscriber, _super);
+    function DelayWhenSubscriber(destination, delayDurationSelector) {
+      _super.call(this, destination);
+      this.delayDurationSelector = delayDurationSelector;
+      this.completed = false;
+      this.delayNotifierSubscriptions = [];
+      this.values = [];
+    }
+    DelayWhenSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      this.destination.next(outerValue);
+      this.removeSubscription(innerSub);
+      this.tryComplete();
+    };
+    DelayWhenSubscriber.prototype.notifyError = function(error, innerSub) {
+      this._error(error);
+    };
+    DelayWhenSubscriber.prototype.notifyComplete = function(innerSub) {
+      var value = this.removeSubscription(innerSub);
+      if (value) {
+        this.destination.next(value);
+      }
+      this.tryComplete();
+    };
+    DelayWhenSubscriber.prototype._next = function(value) {
+      try {
+        var delayNotifier = this.delayDurationSelector(value);
+        if (delayNotifier) {
+          this.tryDelay(delayNotifier, value);
+        }
+      } catch (err) {
+        this.destination.error(err);
+      }
+    };
+    DelayWhenSubscriber.prototype._complete = function() {
+      this.completed = true;
+      this.tryComplete();
+    };
+    DelayWhenSubscriber.prototype.removeSubscription = function(subscription) {
+      subscription.unsubscribe();
+      var subscriptionIdx = this.delayNotifierSubscriptions.indexOf(subscription);
+      var value = null;
+      if (subscriptionIdx !== -1) {
+        value = this.values[subscriptionIdx];
+        this.delayNotifierSubscriptions.splice(subscriptionIdx, 1);
+        this.values.splice(subscriptionIdx, 1);
+      }
+      return value;
+    };
+    DelayWhenSubscriber.prototype.tryDelay = function(delayNotifier, value) {
+      var notifierSubscription = subscribeToResult_1.subscribeToResult(this, delayNotifier, value);
+      this.add(notifierSubscription);
+      this.delayNotifierSubscriptions.push(notifierSubscription);
+      this.values.push(value);
+    };
+    DelayWhenSubscriber.prototype.tryComplete = function() {
+      if (this.completed && this.delayNotifierSubscriptions.length === 0) {
+        this.destination.complete();
+      }
+    };
+    return DelayWhenSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  var SubscriptionDelayObservable = (function(_super) {
+    __extends(SubscriptionDelayObservable, _super);
+    function SubscriptionDelayObservable(source, subscriptionDelay) {
+      _super.call(this);
+      this.source = source;
+      this.subscriptionDelay = subscriptionDelay;
+    }
+    SubscriptionDelayObservable.prototype._subscribe = function(subscriber) {
+      this.subscriptionDelay.subscribe(new SubscriptionDelaySubscriber(subscriber, this.source));
+    };
+    return SubscriptionDelayObservable;
+  }(Observable_1.Observable));
+  var SubscriptionDelaySubscriber = (function(_super) {
+    __extends(SubscriptionDelaySubscriber, _super);
+    function SubscriptionDelaySubscriber(parent, source) {
+      _super.call(this);
+      this.parent = parent;
+      this.source = source;
+      this.sourceSubscribed = false;
+    }
+    SubscriptionDelaySubscriber.prototype._next = function(unused) {
+      this.subscribeToSource();
+    };
+    SubscriptionDelaySubscriber.prototype._error = function(err) {
+      this.unsubscribe();
+      this.parent.error(err);
+    };
+    SubscriptionDelaySubscriber.prototype._complete = function() {
+      this.subscribeToSource();
+    };
+    SubscriptionDelaySubscriber.prototype.subscribeToSource = function() {
+      if (!this.sourceSubscribed) {
+        this.sourceSubscribed = true;
+        this.unsubscribe();
+        this.source.subscribe(this.parent);
+      }
+    };
+    return SubscriptionDelaySubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("8a", ["7", "89"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var delayWhen_1 = $__require('89');
+  Observable_1.Observable.prototype.delayWhen = delayWhen_1.delayWhen;
+  return module.exports;
+});
+
+$__System.registerDynamic("8b", ["62", "11", "12"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var tryCatch_1 = $__require('11');
+  var errorObject_1 = $__require('12');
+  function distinctUntilChanged(compare, keySelector) {
+    return this.lift(new DistinctUntilChangedOperator(compare, keySelector));
+  }
+  exports.distinctUntilChanged = distinctUntilChanged;
+  var DistinctUntilChangedOperator = (function() {
+    function DistinctUntilChangedOperator(compare, keySelector) {
+      this.compare = compare;
+      this.keySelector = keySelector;
+    }
+    DistinctUntilChangedOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new DistinctUntilChangedSubscriber(subscriber, this.compare, this.keySelector));
+    };
+    return DistinctUntilChangedOperator;
+  }());
+  var DistinctUntilChangedSubscriber = (function(_super) {
+    __extends(DistinctUntilChangedSubscriber, _super);
+    function DistinctUntilChangedSubscriber(destination, compare, keySelector) {
+      _super.call(this, destination);
+      this.keySelector = keySelector;
+      this.hasKey = false;
+      if (typeof compare === 'function') {
+        this.compare = compare;
+      }
+    }
+    DistinctUntilChangedSubscriber.prototype.compare = function(x, y) {
+      return x === y;
+    };
+    DistinctUntilChangedSubscriber.prototype._next = function(value) {
+      var keySelector = this.keySelector;
+      var key = value;
+      if (keySelector) {
+        key = tryCatch_1.tryCatch(this.keySelector)(value);
+        if (key === errorObject_1.errorObject) {
+          return this.destination.error(errorObject_1.errorObject.e);
+        }
+      }
+      var result = false;
+      if (this.hasKey) {
+        result = tryCatch_1.tryCatch(this.compare)(this.key, key);
+        if (result === errorObject_1.errorObject) {
+          return this.destination.error(errorObject_1.errorObject.e);
+        }
+      } else {
+        this.hasKey = true;
+      }
+      if (Boolean(result) === false) {
+        this.key = key;
+        this.destination.next(value);
+      }
+    };
+    return DistinctUntilChangedSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("8c", ["7", "8b"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var distinctUntilChanged_1 = $__require('8b');
+  Observable_1.Observable.prototype.distinctUntilChanged = distinctUntilChanged_1.distinctUntilChanged;
+  return module.exports;
+});
+
+$__System.registerDynamic("8d", ["62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  function _do(nextOrObserver, error, complete) {
+    return this.lift(new DoOperator(nextOrObserver, error, complete));
+  }
+  exports._do = _do;
+  var DoOperator = (function() {
+    function DoOperator(nextOrObserver, error, complete) {
+      this.nextOrObserver = nextOrObserver;
+      this.error = error;
+      this.complete = complete;
+    }
+    DoOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new DoSubscriber(subscriber, this.nextOrObserver, this.error, this.complete));
+    };
+    return DoOperator;
+  }());
+  var DoSubscriber = (function(_super) {
+    __extends(DoSubscriber, _super);
+    function DoSubscriber(destination, nextOrObserver, error, complete) {
+      _super.call(this, destination);
+      var safeSubscriber = new Subscriber_1.Subscriber(nextOrObserver, error, complete);
+      safeSubscriber.syncErrorThrowable = true;
+      this.add(safeSubscriber);
+      this.safeSubscriber = safeSubscriber;
+    }
+    DoSubscriber.prototype._next = function(value) {
+      var safeSubscriber = this.safeSubscriber;
+      safeSubscriber.next(value);
+      if (safeSubscriber.syncErrorThrown) {
+        this.destination.error(safeSubscriber.syncErrorValue);
+      } else {
+        this.destination.next(value);
+      }
+    };
+    DoSubscriber.prototype._error = function(err) {
+      var safeSubscriber = this.safeSubscriber;
+      safeSubscriber.error(err);
+      if (safeSubscriber.syncErrorThrown) {
+        this.destination.error(safeSubscriber.syncErrorValue);
+      } else {
+        this.destination.error(err);
+      }
+    };
+    DoSubscriber.prototype._complete = function() {
+      var safeSubscriber = this.safeSubscriber;
+      safeSubscriber.complete();
+      if (safeSubscriber.syncErrorThrown) {
+        this.destination.error(safeSubscriber.syncErrorValue);
+      } else {
+        this.destination.complete();
+      }
+    };
+    return DoSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("8e", ["7", "8d"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var do_1 = $__require('8d');
+  Observable_1.Observable.prototype.do = do_1._do;
+  return module.exports;
+});
+
+$__System.registerDynamic("8f", ["11", "12", "20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var tryCatch_1 = $__require('11');
+  var errorObject_1 = $__require('12');
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function expand(project, concurrent, scheduler) {
+    if (concurrent === void 0) {
+      concurrent = Number.POSITIVE_INFINITY;
+    }
+    if (scheduler === void 0) {
+      scheduler = undefined;
+    }
+    concurrent = (concurrent || 0) < 1 ? Number.POSITIVE_INFINITY : concurrent;
+    return this.lift(new ExpandOperator(project, concurrent, scheduler));
+  }
+  exports.expand = expand;
+  var ExpandOperator = (function() {
+    function ExpandOperator(project, concurrent, scheduler) {
+      this.project = project;
+      this.concurrent = concurrent;
+      this.scheduler = scheduler;
+    }
+    ExpandOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new ExpandSubscriber(subscriber, this.project, this.concurrent, this.scheduler));
+    };
+    return ExpandOperator;
+  }());
+  exports.ExpandOperator = ExpandOperator;
+  var ExpandSubscriber = (function(_super) {
+    __extends(ExpandSubscriber, _super);
+    function ExpandSubscriber(destination, project, concurrent, scheduler) {
+      _super.call(this, destination);
+      this.project = project;
+      this.concurrent = concurrent;
+      this.scheduler = scheduler;
+      this.index = 0;
+      this.active = 0;
+      this.hasCompleted = false;
+      if (concurrent < Number.POSITIVE_INFINITY) {
+        this.buffer = [];
+      }
+    }
+    ExpandSubscriber.dispatch = function(arg) {
+      var subscriber = arg.subscriber,
+          result = arg.result,
+          value = arg.value,
+          index = arg.index;
+      subscriber.subscribeToProjection(result, value, index);
+    };
+    ExpandSubscriber.prototype._next = function(value) {
+      var destination = this.destination;
+      if (destination.isUnsubscribed) {
+        this._complete();
+        return;
+      }
+      var index = this.index++;
+      if (this.active < this.concurrent) {
+        destination.next(value);
+        var result = tryCatch_1.tryCatch(this.project)(value, index);
+        if (result === errorObject_1.errorObject) {
+          destination.error(errorObject_1.errorObject.e);
+        } else if (!this.scheduler) {
+          this.subscribeToProjection(result, value, index);
+        } else {
+          var state = {
+            subscriber: this,
+            result: result,
+            value: value,
+            index: index
+          };
+          this.add(this.scheduler.schedule(ExpandSubscriber.dispatch, 0, state));
+        }
+      } else {
+        this.buffer.push(value);
+      }
+    };
+    ExpandSubscriber.prototype.subscribeToProjection = function(result, value, index) {
+      this.active++;
+      this.add(subscribeToResult_1.subscribeToResult(this, result, value, index));
+    };
+    ExpandSubscriber.prototype._complete = function() {
+      this.hasCompleted = true;
+      if (this.hasCompleted && this.active === 0) {
+        this.destination.complete();
+      }
+    };
+    ExpandSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      this._next(innerValue);
+    };
+    ExpandSubscriber.prototype.notifyComplete = function(innerSub) {
+      var buffer = this.buffer;
+      this.remove(innerSub);
+      this.active--;
+      if (buffer && buffer.length > 0) {
+        this._next(buffer.shift());
+      }
+      if (this.hasCompleted && this.active === 0) {
+        this.destination.complete();
+      }
+    };
+    return ExpandSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  exports.ExpandSubscriber = ExpandSubscriber;
+  return module.exports;
+});
+
+$__System.registerDynamic("90", ["7", "8f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var expand_1 = $__require('8f');
+  Observable_1.Observable.prototype.expand = expand_1.expand;
+  return module.exports;
+});
+
+$__System.registerDynamic("91", ["7", "92"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var filter_1 = $__require('92');
+  Observable_1.Observable.prototype.filter = filter_1.filter;
+  return module.exports;
+});
+
+$__System.registerDynamic("93", ["62", "3a"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var Subscription_1 = $__require('3a');
+  function _finally(finallySelector) {
+    return this.lift(new FinallyOperator(finallySelector));
+  }
+  exports._finally = _finally;
+  var FinallyOperator = (function() {
+    function FinallyOperator(finallySelector) {
+      this.finallySelector = finallySelector;
+    }
+    FinallyOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new FinallySubscriber(subscriber, this.finallySelector));
+    };
+    return FinallyOperator;
+  }());
+  var FinallySubscriber = (function(_super) {
+    __extends(FinallySubscriber, _super);
+    function FinallySubscriber(destination, finallySelector) {
+      _super.call(this, destination);
+      this.add(new Subscription_1.Subscription(finallySelector));
+    }
+    return FinallySubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("94", ["7", "93"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var finally_1 = $__require('93');
+  Observable_1.Observable.prototype.finally = finally_1._finally;
+  return module.exports;
+});
+
+$__System.registerDynamic("95", ["62", "96"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var EmptyError_1 = $__require('96');
+  function first(predicate, resultSelector, defaultValue) {
+    return this.lift(new FirstOperator(predicate, resultSelector, defaultValue, this));
+  }
+  exports.first = first;
+  var FirstOperator = (function() {
+    function FirstOperator(predicate, resultSelector, defaultValue, source) {
+      this.predicate = predicate;
+      this.resultSelector = resultSelector;
+      this.defaultValue = defaultValue;
+      this.source = source;
+    }
+    FirstOperator.prototype.call = function(observer, source) {
+      return source._subscribe(new FirstSubscriber(observer, this.predicate, this.resultSelector, this.defaultValue, this.source));
+    };
+    return FirstOperator;
+  }());
+  var FirstSubscriber = (function(_super) {
+    __extends(FirstSubscriber, _super);
+    function FirstSubscriber(destination, predicate, resultSelector, defaultValue, source) {
+      _super.call(this, destination);
+      this.predicate = predicate;
+      this.resultSelector = resultSelector;
+      this.defaultValue = defaultValue;
+      this.source = source;
+      this.index = 0;
+      this.hasCompleted = false;
+    }
+    FirstSubscriber.prototype._next = function(value) {
+      var index = this.index++;
+      if (this.predicate) {
+        this._tryPredicate(value, index);
+      } else {
+        this._emit(value, index);
+      }
+    };
+    FirstSubscriber.prototype._tryPredicate = function(value, index) {
+      var result;
+      try {
+        result = this.predicate(value, index, this.source);
+      } catch (err) {
+        this.destination.error(err);
+        return;
+      }
+      if (result) {
+        this._emit(value, index);
+      }
+    };
+    FirstSubscriber.prototype._emit = function(value, index) {
+      if (this.resultSelector) {
+        this._tryResultSelector(value, index);
+        return;
+      }
+      this._emitFinal(value);
+    };
+    FirstSubscriber.prototype._tryResultSelector = function(value, index) {
+      var result;
+      try {
+        result = this.resultSelector(value, index);
+      } catch (err) {
+        this.destination.error(err);
+        return;
+      }
+      this._emitFinal(result);
+    };
+    FirstSubscriber.prototype._emitFinal = function(value) {
+      var destination = this.destination;
+      destination.next(value);
+      destination.complete();
+      this.hasCompleted = true;
+    };
+    FirstSubscriber.prototype._complete = function() {
+      var destination = this.destination;
+      if (!this.hasCompleted && typeof this.defaultValue !== 'undefined') {
+        destination.next(this.defaultValue);
+        destination.complete();
+      } else if (!this.hasCompleted) {
+        destination.error(new EmptyError_1.EmptyError);
+      }
+    };
+    return FirstSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("97", ["7", "95"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var first_1 = $__require('95');
+  Observable_1.Observable.prototype.first = first_1.first;
+  return module.exports;
+});
+
+$__System.registerDynamic("98", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var MapPolyfill = (function() {
+    function MapPolyfill() {
+      this.size = 0;
+      this._values = [];
+      this._keys = [];
+    }
+    MapPolyfill.prototype.get = function(key) {
+      var i = this._keys.indexOf(key);
+      return i === -1 ? undefined : this._values[i];
+    };
+    MapPolyfill.prototype.set = function(key, value) {
+      var i = this._keys.indexOf(key);
+      if (i === -1) {
+        this._keys.push(key);
+        this._values.push(value);
+        this.size++;
+      } else {
+        this._values[i] = value;
+      }
+      return this;
+    };
+    MapPolyfill.prototype.delete = function(key) {
+      var i = this._keys.indexOf(key);
+      if (i === -1) {
+        return false;
+      }
+      this._values.splice(i, 1);
+      this._keys.splice(i, 1);
+      this.size--;
+      return true;
+    };
+    MapPolyfill.prototype.clear = function() {
+      this._keys.length = 0;
+      this._values.length = 0;
+      this.size = 0;
+    };
+    MapPolyfill.prototype.forEach = function(cb, thisArg) {
+      for (var i = 0; i < this.size; i++) {
+        cb.call(thisArg, this._values[i], this._keys[i]);
+      }
+    };
+    return MapPolyfill;
+  }());
+  exports.MapPolyfill = MapPolyfill;
+  return module.exports;
+});
+
+$__System.registerDynamic("99", ["2b", "98"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var root_1 = $__require('2b');
+  var MapPolyfill_1 = $__require('98');
+  exports.Map = root_1.root.Map || (function() {
+    return MapPolyfill_1.MapPolyfill;
+  })();
+  return module.exports;
+});
+
+$__System.registerDynamic("9a", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var FastMap = (function() {
+    function FastMap() {
+      this.values = {};
+    }
+    FastMap.prototype.delete = function(key) {
+      this.values[key] = null;
+      return true;
+    };
+    FastMap.prototype.set = function(key, value) {
+      this.values[key] = value;
+      return this;
+    };
+    FastMap.prototype.get = function(key) {
+      return this.values[key];
+    };
+    FastMap.prototype.forEach = function(cb, thisArg) {
+      var values = this.values;
+      for (var key in values) {
+        if (values.hasOwnProperty(key) && values[key] !== null) {
+          cb.call(thisArg, values[key], key);
+        }
+      }
+    };
+    FastMap.prototype.clear = function() {
+      this.values = {};
+    };
+    return FastMap;
+  }());
+  exports.FastMap = FastMap;
+  return module.exports;
+});
+
+$__System.registerDynamic("9b", ["62", "3a", "7", "4", "99", "9a"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var Subscription_1 = $__require('3a');
+  var Observable_1 = $__require('7');
+  var Subject_1 = $__require('4');
+  var Map_1 = $__require('99');
+  var FastMap_1 = $__require('9a');
+  function groupBy(keySelector, elementSelector, durationSelector) {
+    return this.lift(new GroupByOperator(this, keySelector, elementSelector, durationSelector));
+  }
+  exports.groupBy = groupBy;
+  var GroupByOperator = (function() {
+    function GroupByOperator(source, keySelector, elementSelector, durationSelector) {
+      this.source = source;
+      this.keySelector = keySelector;
+      this.elementSelector = elementSelector;
+      this.durationSelector = durationSelector;
+    }
+    GroupByOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new GroupBySubscriber(subscriber, this.keySelector, this.elementSelector, this.durationSelector));
+    };
+    return GroupByOperator;
+  }());
+  var GroupBySubscriber = (function(_super) {
+    __extends(GroupBySubscriber, _super);
+    function GroupBySubscriber(destination, keySelector, elementSelector, durationSelector) {
+      _super.call(this);
+      this.keySelector = keySelector;
+      this.elementSelector = elementSelector;
+      this.durationSelector = durationSelector;
+      this.groups = null;
+      this.attemptedToUnsubscribe = false;
+      this.count = 0;
+      this.destination = destination;
+      this.add(destination);
+    }
+    GroupBySubscriber.prototype._next = function(value) {
+      var key;
+      try {
+        key = this.keySelector(value);
+      } catch (err) {
+        this.error(err);
+        return;
+      }
+      this._group(value, key);
+    };
+    GroupBySubscriber.prototype._group = function(value, key) {
+      var groups = this.groups;
+      if (!groups) {
+        groups = this.groups = typeof key === 'string' ? new FastMap_1.FastMap() : new Map_1.Map();
+      }
+      var group = groups.get(key);
+      if (!group) {
+        groups.set(key, group = new Subject_1.Subject());
+        var groupedObservable = new GroupedObservable(key, group, this);
+        if (this.durationSelector) {
+          this._selectDuration(key, group);
+        }
+        this.destination.next(groupedObservable);
+      }
+      if (this.elementSelector) {
+        this._selectElement(value, group);
+      } else {
+        this.tryGroupNext(value, group);
+      }
+    };
+    GroupBySubscriber.prototype._selectElement = function(value, group) {
+      var result;
+      try {
+        result = this.elementSelector(value);
+      } catch (err) {
+        this.error(err);
+        return;
+      }
+      this.tryGroupNext(result, group);
+    };
+    GroupBySubscriber.prototype._selectDuration = function(key, group) {
+      var duration;
+      try {
+        duration = this.durationSelector(new GroupedObservable(key, group));
+      } catch (err) {
+        this.error(err);
+        return;
+      }
+      this.add(duration.subscribe(new GroupDurationSubscriber(key, group, this)));
+    };
+    GroupBySubscriber.prototype.tryGroupNext = function(value, group) {
+      if (!group.isUnsubscribed) {
+        group.next(value);
+      }
+    };
+    GroupBySubscriber.prototype._error = function(err) {
+      var groups = this.groups;
+      if (groups) {
+        groups.forEach(function(group, key) {
+          group.error(err);
+        });
+        groups.clear();
+      }
+      this.destination.error(err);
+    };
+    GroupBySubscriber.prototype._complete = function() {
+      var groups = this.groups;
+      if (groups) {
+        groups.forEach(function(group, key) {
+          group.complete();
+        });
+        groups.clear();
+      }
+      this.destination.complete();
+    };
+    GroupBySubscriber.prototype.removeGroup = function(key) {
+      this.groups.delete(key);
+    };
+    GroupBySubscriber.prototype.unsubscribe = function() {
+      if (!this.isUnsubscribed && !this.attemptedToUnsubscribe) {
+        this.attemptedToUnsubscribe = true;
+        if (this.count === 0) {
+          _super.prototype.unsubscribe.call(this);
+        }
+      }
+    };
+    return GroupBySubscriber;
+  }(Subscriber_1.Subscriber));
+  var GroupDurationSubscriber = (function(_super) {
+    __extends(GroupDurationSubscriber, _super);
+    function GroupDurationSubscriber(key, group, parent) {
+      _super.call(this);
+      this.key = key;
+      this.group = group;
+      this.parent = parent;
+    }
+    GroupDurationSubscriber.prototype._next = function(value) {
+      this.tryComplete();
+    };
+    GroupDurationSubscriber.prototype._error = function(err) {
+      this.tryError(err);
+    };
+    GroupDurationSubscriber.prototype._complete = function() {
+      this.tryComplete();
+    };
+    GroupDurationSubscriber.prototype.tryError = function(err) {
+      var group = this.group;
+      if (!group.isUnsubscribed) {
+        group.error(err);
+      }
+      this.parent.removeGroup(this.key);
+    };
+    GroupDurationSubscriber.prototype.tryComplete = function() {
+      var group = this.group;
+      if (!group.isUnsubscribed) {
+        group.complete();
+      }
+      this.parent.removeGroup(this.key);
+    };
+    return GroupDurationSubscriber;
+  }(Subscriber_1.Subscriber));
+  var GroupedObservable = (function(_super) {
+    __extends(GroupedObservable, _super);
+    function GroupedObservable(key, groupSubject, refCountSubscription) {
+      _super.call(this);
+      this.key = key;
+      this.groupSubject = groupSubject;
+      this.refCountSubscription = refCountSubscription;
+    }
+    GroupedObservable.prototype._subscribe = function(subscriber) {
+      var subscription = new Subscription_1.Subscription();
+      var _a = this,
+          refCountSubscription = _a.refCountSubscription,
+          groupSubject = _a.groupSubject;
+      if (refCountSubscription && !refCountSubscription.isUnsubscribed) {
+        subscription.add(new InnerRefCountSubscription(refCountSubscription));
+      }
+      subscription.add(groupSubject.subscribe(subscriber));
+      return subscription;
+    };
+    return GroupedObservable;
+  }(Observable_1.Observable));
+  exports.GroupedObservable = GroupedObservable;
+  var InnerRefCountSubscription = (function(_super) {
+    __extends(InnerRefCountSubscription, _super);
+    function InnerRefCountSubscription(parent) {
+      _super.call(this);
+      this.parent = parent;
+      parent.count++;
+    }
+    InnerRefCountSubscription.prototype.unsubscribe = function() {
+      var parent = this.parent;
+      if (!parent.isUnsubscribed && !this.isUnsubscribed) {
+        _super.prototype.unsubscribe.call(this);
+        parent.count -= 1;
+        if (parent.count === 0 && parent.attemptedToUnsubscribe) {
+          parent.unsubscribe();
+        }
+      }
+    };
+    return InnerRefCountSubscription;
+  }(Subscription_1.Subscription));
+  return module.exports;
+});
+
+$__System.registerDynamic("9c", ["7", "9b"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var groupBy_1 = $__require('9b');
+  Observable_1.Observable.prototype.groupBy = groupBy_1.groupBy;
+  return module.exports;
+});
+
+$__System.registerDynamic("4d", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  function noop() {}
+  exports.noop = noop;
+  return module.exports;
+});
+
+$__System.registerDynamic("9d", ["62", "4d"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var noop_1 = $__require('4d');
+  function ignoreElements() {
+    return this.lift(new IgnoreElementsOperator());
+  }
+  exports.ignoreElements = ignoreElements;
+  ;
+  var IgnoreElementsOperator = (function() {
+    function IgnoreElementsOperator() {}
+    IgnoreElementsOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new IgnoreElementsSubscriber(subscriber));
+    };
+    return IgnoreElementsOperator;
+  }());
+  var IgnoreElementsSubscriber = (function(_super) {
+    __extends(IgnoreElementsSubscriber, _super);
+    function IgnoreElementsSubscriber() {
+      _super.apply(this, arguments);
+    }
+    IgnoreElementsSubscriber.prototype._next = function(unused) {
+      noop_1.noop();
+    };
+    return IgnoreElementsSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("9e", ["7", "9d"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var ignoreElements_1 = $__require('9d');
+  Observable_1.Observable.prototype.ignoreElements = ignoreElements_1.ignoreElements;
+  return module.exports;
+});
+
+$__System.registerDynamic("9f", ["11", "12", "20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var tryCatch_1 = $__require('11');
+  var errorObject_1 = $__require('12');
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function audit(durationSelector) {
+    return this.lift(new AuditOperator(durationSelector));
+  }
+  exports.audit = audit;
+  var AuditOperator = (function() {
+    function AuditOperator(durationSelector) {
+      this.durationSelector = durationSelector;
+    }
+    AuditOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new AuditSubscriber(subscriber, this.durationSelector));
+    };
+    return AuditOperator;
+  }());
+  var AuditSubscriber = (function(_super) {
+    __extends(AuditSubscriber, _super);
+    function AuditSubscriber(destination, durationSelector) {
+      _super.call(this, destination);
+      this.durationSelector = durationSelector;
+      this.hasValue = false;
+    }
+    AuditSubscriber.prototype._next = function(value) {
+      this.value = value;
+      this.hasValue = true;
+      if (!this.throttled) {
+        var duration = tryCatch_1.tryCatch(this.durationSelector)(value);
+        if (duration === errorObject_1.errorObject) {
+          this.destination.error(errorObject_1.errorObject.e);
+        } else {
+          this.add(this.throttled = subscribeToResult_1.subscribeToResult(this, duration));
+        }
+      }
+    };
+    AuditSubscriber.prototype.clearThrottle = function() {
+      var _a = this,
+          value = _a.value,
+          hasValue = _a.hasValue,
+          throttled = _a.throttled;
+      if (throttled) {
+        this.remove(throttled);
+        this.throttled = null;
+        throttled.unsubscribe();
+      }
+      if (hasValue) {
+        this.value = null;
+        this.hasValue = false;
+        this.destination.next(value);
+      }
+    };
+    AuditSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex) {
+      this.clearThrottle();
+    };
+    AuditSubscriber.prototype.notifyComplete = function() {
+      this.clearThrottle();
+    };
+    return AuditSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("a0", ["7", "9f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var audit_1 = $__require('9f');
+  Observable_1.Observable.prototype.audit = audit_1.audit;
+  return module.exports;
+});
+
+$__System.registerDynamic("a1", ["44", "62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var async_1 = $__require('44');
+  var Subscriber_1 = $__require('62');
+  function auditTime(delay, scheduler) {
+    if (scheduler === void 0) {
+      scheduler = async_1.async;
+    }
+    return this.lift(new AuditTimeOperator(delay, scheduler));
+  }
+  exports.auditTime = auditTime;
+  var AuditTimeOperator = (function() {
+    function AuditTimeOperator(delay, scheduler) {
+      this.delay = delay;
+      this.scheduler = scheduler;
+    }
+    AuditTimeOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new AuditTimeSubscriber(subscriber, this.delay, this.scheduler));
+    };
+    return AuditTimeOperator;
+  }());
+  var AuditTimeSubscriber = (function(_super) {
+    __extends(AuditTimeSubscriber, _super);
+    function AuditTimeSubscriber(destination, delay, scheduler) {
+      _super.call(this, destination);
+      this.delay = delay;
+      this.scheduler = scheduler;
+      this.hasValue = false;
+    }
+    AuditTimeSubscriber.prototype._next = function(value) {
+      this.value = value;
+      this.hasValue = true;
+      if (!this.throttled) {
+        this.add(this.throttled = this.scheduler.schedule(dispatchNext, this.delay, this));
+      }
+    };
+    AuditTimeSubscriber.prototype.clearThrottle = function() {
+      var _a = this,
+          value = _a.value,
+          hasValue = _a.hasValue,
+          throttled = _a.throttled;
+      if (throttled) {
+        this.remove(throttled);
+        this.throttled = null;
+        throttled.unsubscribe();
+      }
+      if (hasValue) {
+        this.value = null;
+        this.hasValue = false;
+        this.destination.next(value);
+      }
+    };
+    return AuditTimeSubscriber;
+  }(Subscriber_1.Subscriber));
+  function dispatchNext(subscriber) {
+    subscriber.clearThrottle();
+  }
+  return module.exports;
+});
+
+$__System.registerDynamic("a2", ["7", "a1"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var auditTime_1 = $__require('a1');
+  Observable_1.Observable.prototype.auditTime = auditTime_1.auditTime;
+  return module.exports;
+});
+
+$__System.registerDynamic("a3", ["62", "96"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var EmptyError_1 = $__require('96');
+  function last(predicate, resultSelector, defaultValue) {
+    return this.lift(new LastOperator(predicate, resultSelector, defaultValue, this));
+  }
+  exports.last = last;
+  var LastOperator = (function() {
+    function LastOperator(predicate, resultSelector, defaultValue, source) {
+      this.predicate = predicate;
+      this.resultSelector = resultSelector;
+      this.defaultValue = defaultValue;
+      this.source = source;
+    }
+    LastOperator.prototype.call = function(observer, source) {
+      return source._subscribe(new LastSubscriber(observer, this.predicate, this.resultSelector, this.defaultValue, this.source));
+    };
+    return LastOperator;
+  }());
+  var LastSubscriber = (function(_super) {
+    __extends(LastSubscriber, _super);
+    function LastSubscriber(destination, predicate, resultSelector, defaultValue, source) {
+      _super.call(this, destination);
+      this.predicate = predicate;
+      this.resultSelector = resultSelector;
+      this.defaultValue = defaultValue;
+      this.source = source;
+      this.hasValue = false;
+      this.index = 0;
+      if (typeof defaultValue !== 'undefined') {
+        this.lastValue = defaultValue;
+        this.hasValue = true;
+      }
+    }
+    LastSubscriber.prototype._next = function(value) {
+      var index = this.index++;
+      if (this.predicate) {
+        this._tryPredicate(value, index);
+      } else {
+        if (this.resultSelector) {
+          this._tryResultSelector(value, index);
+          return;
+        }
+        this.lastValue = value;
+        this.hasValue = true;
+      }
+    };
+    LastSubscriber.prototype._tryPredicate = function(value, index) {
+      var result;
+      try {
+        result = this.predicate(value, index, this.source);
+      } catch (err) {
+        this.destination.error(err);
+        return;
+      }
+      if (result) {
+        if (this.resultSelector) {
+          this._tryResultSelector(value, index);
+          return;
+        }
+        this.lastValue = value;
+        this.hasValue = true;
+      }
+    };
+    LastSubscriber.prototype._tryResultSelector = function(value, index) {
+      var result;
+      try {
+        result = this.resultSelector(value, index);
+      } catch (err) {
+        this.destination.error(err);
+        return;
+      }
+      this.lastValue = result;
+      this.hasValue = true;
+    };
+    LastSubscriber.prototype._complete = function() {
+      var destination = this.destination;
+      if (this.hasValue) {
+        destination.next(this.lastValue);
+        destination.complete();
+      } else {
+        destination.error(new EmptyError_1.EmptyError);
+      }
+    };
+    return LastSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("a4", ["7", "a3"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var last_1 = $__require('a3');
+  Observable_1.Observable.prototype.last = last_1.last;
+  return module.exports;
+});
+
+$__System.registerDynamic("a5", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  function letProto(func) {
+    return func(this);
+  }
+  exports.letProto = letProto;
+  return module.exports;
+});
+
+$__System.registerDynamic("a6", ["7", "a5"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var let_1 = $__require('a5');
+  Observable_1.Observable.prototype.let = let_1.letProto;
+  Observable_1.Observable.prototype.letBind = let_1.letProto;
+  return module.exports;
+});
+
+$__System.registerDynamic("a7", ["62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  function every(predicate, thisArg) {
+    var source = this;
+    return source.lift(new EveryOperator(predicate, thisArg, source));
+  }
+  exports.every = every;
+  var EveryOperator = (function() {
+    function EveryOperator(predicate, thisArg, source) {
+      this.predicate = predicate;
+      this.thisArg = thisArg;
+      this.source = source;
+    }
+    EveryOperator.prototype.call = function(observer, source) {
+      return source._subscribe(new EverySubscriber(observer, this.predicate, this.thisArg, this.source));
+    };
+    return EveryOperator;
+  }());
+  var EverySubscriber = (function(_super) {
+    __extends(EverySubscriber, _super);
+    function EverySubscriber(destination, predicate, thisArg, source) {
+      _super.call(this, destination);
+      this.predicate = predicate;
+      this.thisArg = thisArg;
+      this.source = source;
+      this.index = 0;
+      this.thisArg = thisArg || this;
+    }
+    EverySubscriber.prototype.notifyComplete = function(everyValueMatch) {
+      this.destination.next(everyValueMatch);
+      this.destination.complete();
+    };
+    EverySubscriber.prototype._next = function(value) {
+      var result = false;
+      try {
+        result = this.predicate.call(this.thisArg, value, this.index++, this.source);
+      } catch (err) {
+        this.destination.error(err);
+        return;
+      }
+      if (!result) {
+        this.notifyComplete(false);
+      }
+    };
+    EverySubscriber.prototype._complete = function() {
+      this.notifyComplete(true);
+    };
+    return EverySubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("a8", ["7", "a7"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var every_1 = $__require('a7');
+  Observable_1.Observable.prototype.every = every_1.every;
+  return module.exports;
+});
+
+$__System.registerDynamic("a9", ["7", "aa"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var map_1 = $__require('aa');
+  Observable_1.Observable.prototype.map = map_1.map;
+  return module.exports;
+});
+
+$__System.registerDynamic("ab", ["62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  function mapTo(value) {
+    return this.lift(new MapToOperator(value));
+  }
+  exports.mapTo = mapTo;
+  var MapToOperator = (function() {
+    function MapToOperator(value) {
+      this.value = value;
+    }
+    MapToOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new MapToSubscriber(subscriber, this.value));
+    };
+    return MapToOperator;
+  }());
+  var MapToSubscriber = (function(_super) {
+    __extends(MapToSubscriber, _super);
+    function MapToSubscriber(destination, value) {
+      _super.call(this, destination);
+      this.value = value;
+    }
+    MapToSubscriber.prototype._next = function(x) {
+      this.destination.next(this.value);
+    };
+    return MapToSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("ac", ["7", "ab"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var mapTo_1 = $__require('ab');
+  Observable_1.Observable.prototype.mapTo = mapTo_1.mapTo;
+  return module.exports;
+});
+
+$__System.registerDynamic("ad", ["62", "87"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var Notification_1 = $__require('87');
+  function materialize() {
+    return this.lift(new MaterializeOperator());
+  }
+  exports.materialize = materialize;
+  var MaterializeOperator = (function() {
+    function MaterializeOperator() {}
+    MaterializeOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new MaterializeSubscriber(subscriber));
+    };
+    return MaterializeOperator;
+  }());
+  var MaterializeSubscriber = (function(_super) {
+    __extends(MaterializeSubscriber, _super);
+    function MaterializeSubscriber(destination) {
+      _super.call(this, destination);
+    }
+    MaterializeSubscriber.prototype._next = function(value) {
+      this.destination.next(Notification_1.Notification.createNext(value));
+    };
+    MaterializeSubscriber.prototype._error = function(err) {
+      var destination = this.destination;
+      destination.next(Notification_1.Notification.createError(err));
+      destination.complete();
+    };
+    MaterializeSubscriber.prototype._complete = function() {
+      var destination = this.destination;
+      destination.next(Notification_1.Notification.createComplete());
+      destination.complete();
+    };
+    return MaterializeSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("ae", ["7", "ad"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var materialize_1 = $__require('ad');
+  Observable_1.Observable.prototype.materialize = materialize_1.materialize;
+  return module.exports;
+});
+
+$__System.registerDynamic("48", ["34", "74", "33"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var ArrayObservable_1 = $__require('34');
+  var mergeAll_1 = $__require('74');
+  var isScheduler_1 = $__require('33');
+  function merge() {
+    var observables = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      observables[_i - 0] = arguments[_i];
+    }
+    observables.unshift(this);
+    return mergeStatic.apply(this, observables);
+  }
+  exports.merge = merge;
+  function mergeStatic() {
+    var observables = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      observables[_i - 0] = arguments[_i];
+    }
+    var concurrent = Number.POSITIVE_INFINITY;
+    var scheduler = null;
+    var last = observables[observables.length - 1];
+    if (isScheduler_1.isScheduler(last)) {
+      scheduler = observables.pop();
+      if (observables.length > 1 && typeof observables[observables.length - 1] === 'number') {
+        concurrent = observables.pop();
+      }
+    } else if (typeof last === 'number') {
+      concurrent = observables.pop();
+    }
+    if (observables.length === 1) {
+      return observables[0];
+    }
+    return new ArrayObservable_1.ArrayObservable(observables, scheduler).lift(new mergeAll_1.MergeAllOperator(concurrent));
+  }
+  exports.mergeStatic = mergeStatic;
+  return module.exports;
+});
+
+$__System.registerDynamic("af", ["7", "48"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var merge_1 = $__require('48');
+  Observable_1.Observable.prototype.merge = merge_1.merge;
+  return module.exports;
+});
+
+$__System.registerDynamic("b0", ["7", "74"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var mergeAll_1 = $__require('74');
+  Observable_1.Observable.prototype.mergeAll = mergeAll_1.mergeAll;
+  return module.exports;
+});
+
+$__System.registerDynamic("77", ["1f", "20"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var subscribeToResult_1 = $__require('1f');
+  var OuterSubscriber_1 = $__require('20');
+  function mergeMap(project, resultSelector, concurrent) {
+    if (concurrent === void 0) {
+      concurrent = Number.POSITIVE_INFINITY;
+    }
+    if (typeof resultSelector === 'number') {
+      concurrent = resultSelector;
+      resultSelector = null;
+    }
+    return this.lift(new MergeMapOperator(project, resultSelector, concurrent));
+  }
+  exports.mergeMap = mergeMap;
+  var MergeMapOperator = (function() {
+    function MergeMapOperator(project, resultSelector, concurrent) {
+      if (concurrent === void 0) {
+        concurrent = Number.POSITIVE_INFINITY;
+      }
+      this.project = project;
+      this.resultSelector = resultSelector;
+      this.concurrent = concurrent;
+    }
+    MergeMapOperator.prototype.call = function(observer, source) {
+      return source._subscribe(new MergeMapSubscriber(observer, this.project, this.resultSelector, this.concurrent));
+    };
+    return MergeMapOperator;
+  }());
+  exports.MergeMapOperator = MergeMapOperator;
+  var MergeMapSubscriber = (function(_super) {
+    __extends(MergeMapSubscriber, _super);
+    function MergeMapSubscriber(destination, project, resultSelector, concurrent) {
+      if (concurrent === void 0) {
+        concurrent = Number.POSITIVE_INFINITY;
+      }
+      _super.call(this, destination);
+      this.project = project;
+      this.resultSelector = resultSelector;
+      this.concurrent = concurrent;
+      this.hasCompleted = false;
+      this.buffer = [];
+      this.active = 0;
+      this.index = 0;
+    }
+    MergeMapSubscriber.prototype._next = function(value) {
+      if (this.active < this.concurrent) {
+        this._tryNext(value);
+      } else {
+        this.buffer.push(value);
+      }
+    };
+    MergeMapSubscriber.prototype._tryNext = function(value) {
+      var result;
+      var index = this.index++;
+      try {
+        result = this.project(value, index);
+      } catch (err) {
+        this.destination.error(err);
+        return;
+      }
+      this.active++;
+      this._innerSub(result, value, index);
+    };
+    MergeMapSubscriber.prototype._innerSub = function(ish, value, index) {
+      this.add(subscribeToResult_1.subscribeToResult(this, ish, value, index));
+    };
+    MergeMapSubscriber.prototype._complete = function() {
+      this.hasCompleted = true;
+      if (this.active === 0 && this.buffer.length === 0) {
+        this.destination.complete();
+      }
+    };
+    MergeMapSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      if (this.resultSelector) {
+        this._notifyResultSelector(outerValue, innerValue, outerIndex, innerIndex);
+      } else {
+        this.destination.next(innerValue);
+      }
+    };
+    MergeMapSubscriber.prototype._notifyResultSelector = function(outerValue, innerValue, outerIndex, innerIndex) {
+      var result;
+      try {
+        result = this.resultSelector(outerValue, innerValue, outerIndex, innerIndex);
+      } catch (err) {
+        this.destination.error(err);
+        return;
+      }
+      this.destination.next(result);
+    };
+    MergeMapSubscriber.prototype.notifyComplete = function(innerSub) {
+      var buffer = this.buffer;
+      this.remove(innerSub);
+      this.active--;
+      if (buffer.length > 0) {
+        this._next(buffer.shift());
+      } else if (this.active === 0 && this.hasCompleted) {
+        this.destination.complete();
+      }
+    };
+    return MergeMapSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  exports.MergeMapSubscriber = MergeMapSubscriber;
+  return module.exports;
+});
+
+$__System.registerDynamic("b1", ["7", "77"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var mergeMap_1 = $__require('77');
+  Observable_1.Observable.prototype.mergeMap = mergeMap_1.mergeMap;
+  Observable_1.Observable.prototype.flatMap = mergeMap_1.mergeMap;
+  return module.exports;
+});
+
+$__System.registerDynamic("7a", ["20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function mergeMapTo(innerObservable, resultSelector, concurrent) {
+    if (concurrent === void 0) {
+      concurrent = Number.POSITIVE_INFINITY;
+    }
+    if (typeof resultSelector === 'number') {
+      concurrent = resultSelector;
+      resultSelector = null;
+    }
+    return this.lift(new MergeMapToOperator(innerObservable, resultSelector, concurrent));
+  }
+  exports.mergeMapTo = mergeMapTo;
+  var MergeMapToOperator = (function() {
+    function MergeMapToOperator(ish, resultSelector, concurrent) {
+      if (concurrent === void 0) {
+        concurrent = Number.POSITIVE_INFINITY;
+      }
+      this.ish = ish;
+      this.resultSelector = resultSelector;
+      this.concurrent = concurrent;
+    }
+    MergeMapToOperator.prototype.call = function(observer, source) {
+      return source._subscribe(new MergeMapToSubscriber(observer, this.ish, this.resultSelector, this.concurrent));
+    };
+    return MergeMapToOperator;
+  }());
+  exports.MergeMapToOperator = MergeMapToOperator;
+  var MergeMapToSubscriber = (function(_super) {
+    __extends(MergeMapToSubscriber, _super);
+    function MergeMapToSubscriber(destination, ish, resultSelector, concurrent) {
+      if (concurrent === void 0) {
+        concurrent = Number.POSITIVE_INFINITY;
+      }
+      _super.call(this, destination);
+      this.ish = ish;
+      this.resultSelector = resultSelector;
+      this.concurrent = concurrent;
+      this.hasCompleted = false;
+      this.buffer = [];
+      this.active = 0;
+      this.index = 0;
+    }
+    MergeMapToSubscriber.prototype._next = function(value) {
+      if (this.active < this.concurrent) {
+        var resultSelector = this.resultSelector;
+        var index = this.index++;
+        var ish = this.ish;
+        var destination = this.destination;
+        this.active++;
+        this._innerSub(ish, destination, resultSelector, value, index);
+      } else {
+        this.buffer.push(value);
+      }
+    };
+    MergeMapToSubscriber.prototype._innerSub = function(ish, destination, resultSelector, value, index) {
+      this.add(subscribeToResult_1.subscribeToResult(this, ish, value, index));
+    };
+    MergeMapToSubscriber.prototype._complete = function() {
+      this.hasCompleted = true;
+      if (this.active === 0 && this.buffer.length === 0) {
+        this.destination.complete();
+      }
+    };
+    MergeMapToSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      var _a = this,
+          resultSelector = _a.resultSelector,
+          destination = _a.destination;
+      if (resultSelector) {
+        this.trySelectResult(outerValue, innerValue, outerIndex, innerIndex);
+      } else {
+        destination.next(innerValue);
+      }
+    };
+    MergeMapToSubscriber.prototype.trySelectResult = function(outerValue, innerValue, outerIndex, innerIndex) {
+      var _a = this,
+          resultSelector = _a.resultSelector,
+          destination = _a.destination;
+      var result;
+      try {
+        result = resultSelector(outerValue, innerValue, outerIndex, innerIndex);
+      } catch (err) {
+        destination.error(err);
+        return;
+      }
+      destination.next(result);
+    };
+    MergeMapToSubscriber.prototype.notifyError = function(err) {
+      this.destination.error(err);
+    };
+    MergeMapToSubscriber.prototype.notifyComplete = function(innerSub) {
+      var buffer = this.buffer;
+      this.remove(innerSub);
+      this.active--;
+      if (buffer.length > 0) {
+        this._next(buffer.shift());
+      } else if (this.active === 0 && this.hasCompleted) {
+        this.destination.complete();
+      }
+    };
+    return MergeMapToSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  exports.MergeMapToSubscriber = MergeMapToSubscriber;
+  return module.exports;
+});
+
+$__System.registerDynamic("b2", ["7", "7a"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var mergeMapTo_1 = $__require('7a');
+  Observable_1.Observable.prototype.flatMapTo = mergeMapTo_1.mergeMapTo;
+  Observable_1.Observable.prototype.mergeMapTo = mergeMapTo_1.mergeMapTo;
+  return module.exports;
+});
+
+$__System.registerDynamic("b3", ["7", "b4"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var multicast_1 = $__require('b4');
+  Observable_1.Observable.prototype.multicast = multicast_1.multicast;
+  return module.exports;
+});
+
+$__System.registerDynamic("b5", ["7", "36"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var observeOn_1 = $__require('36');
+  Observable_1.Observable.prototype.observeOn = observeOn_1.observeOn;
+  return module.exports;
+});
+
+$__System.registerDynamic("b6", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  function not(pred, thisArg) {
+    function notPred() {
+      return !(notPred.pred.apply(notPred.thisArg, arguments));
+    }
+    notPred.pred = pred;
+    notPred.thisArg = thisArg;
+    return notPred;
+  }
+  exports.not = not;
+  return module.exports;
+});
+
+$__System.registerDynamic("92", ["62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  function filter(predicate, thisArg) {
+    return this.lift(new FilterOperator(predicate, thisArg));
+  }
+  exports.filter = filter;
+  var FilterOperator = (function() {
+    function FilterOperator(predicate, thisArg) {
+      this.predicate = predicate;
+      this.thisArg = thisArg;
+    }
+    FilterOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new FilterSubscriber(subscriber, this.predicate, this.thisArg));
+    };
+    return FilterOperator;
+  }());
+  var FilterSubscriber = (function(_super) {
+    __extends(FilterSubscriber, _super);
+    function FilterSubscriber(destination, predicate, thisArg) {
+      _super.call(this, destination);
+      this.predicate = predicate;
+      this.thisArg = thisArg;
+      this.count = 0;
+      this.predicate = predicate;
+    }
+    FilterSubscriber.prototype._next = function(value) {
+      var result;
+      try {
+        result = this.predicate.call(this.thisArg, value, this.count++);
+      } catch (err) {
+        this.destination.error(err);
+        return;
+      }
+      if (result) {
+        this.destination.next(value);
+      }
+    };
+    return FilterSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("b7", ["b6", "92"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var not_1 = $__require('b6');
+  var filter_1 = $__require('92');
+  function partition(predicate, thisArg) {
+    return [filter_1.filter.call(this, predicate), filter_1.filter.call(this, not_1.not(predicate, thisArg))];
+  }
+  exports.partition = partition;
+  return module.exports;
+});
+
+$__System.registerDynamic("b8", ["7", "b7"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var partition_1 = $__require('b7');
+  Observable_1.Observable.prototype.partition = partition_1.partition;
+  return module.exports;
+});
+
+$__System.registerDynamic("aa", ["62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  function map(project, thisArg) {
+    if (typeof project !== 'function') {
+      throw new TypeError('argument is not a function. Are you looking for `mapTo()`?');
+    }
+    return this.lift(new MapOperator(project, thisArg));
+  }
+  exports.map = map;
+  var MapOperator = (function() {
+    function MapOperator(project, thisArg) {
+      this.project = project;
+      this.thisArg = thisArg;
+    }
+    MapOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new MapSubscriber(subscriber, this.project, this.thisArg));
+    };
+    return MapOperator;
+  }());
+  var MapSubscriber = (function(_super) {
+    __extends(MapSubscriber, _super);
+    function MapSubscriber(destination, project, thisArg) {
+      _super.call(this, destination);
+      this.project = project;
+      this.count = 0;
+      this.thisArg = thisArg || this;
+    }
+    MapSubscriber.prototype._next = function(value) {
+      var result;
+      try {
+        result = this.project.call(this.thisArg, value, this.count++);
+      } catch (err) {
+        this.destination.error(err);
+        return;
+      }
+      this.destination.next(result);
+    };
+    return MapSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("b9", ["aa"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var map_1 = $__require('aa');
+  function pluck() {
+    var properties = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      properties[_i - 0] = arguments[_i];
+    }
+    var length = properties.length;
+    if (length === 0) {
+      throw new Error('List of properties cannot be empty.');
+    }
+    return map_1.map.call(this, plucker(properties, length));
+  }
+  exports.pluck = pluck;
+  function plucker(props, length) {
+    var mapper = function(x) {
+      var currentProp = x;
+      for (var i = 0; i < length; i++) {
+        var p = currentProp[props[i]];
+        if (typeof p !== 'undefined') {
+          currentProp = p;
+        } else {
+          return undefined;
+        }
+      }
+      return currentProp;
+    };
+    return mapper;
+  }
+  return module.exports;
+});
+
+$__System.registerDynamic("ba", ["7", "b9"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var pluck_1 = $__require('b9');
+  Observable_1.Observable.prototype.pluck = pluck_1.pluck;
+  return module.exports;
+});
+
+$__System.registerDynamic("bb", ["4", "b4"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Subject_1 = $__require('4');
+  var multicast_1 = $__require('b4');
+  function publish() {
+    return multicast_1.multicast.call(this, new Subject_1.Subject());
+  }
+  exports.publish = publish;
+  return module.exports;
+});
+
+$__System.registerDynamic("bc", ["7", "bb"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var publish_1 = $__require('bb');
+  Observable_1.Observable.prototype.publish = publish_1.publish;
+  return module.exports;
+});
+
+$__System.registerDynamic("bd", ["be", "b4"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var BehaviorSubject_1 = $__require('be');
+  var multicast_1 = $__require('b4');
+  function publishBehavior(value) {
+    return multicast_1.multicast.call(this, new BehaviorSubject_1.BehaviorSubject(value));
+  }
+  exports.publishBehavior = publishBehavior;
+  return module.exports;
+});
+
+$__System.registerDynamic("bf", ["7", "bd"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var publishBehavior_1 = $__require('bd');
+  Observable_1.Observable.prototype.publishBehavior = publishBehavior_1.publishBehavior;
+  return module.exports;
+});
+
+$__System.registerDynamic("6b", ["c0", "b4"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var ReplaySubject_1 = $__require('c0');
+  var multicast_1 = $__require('b4');
+  function publishReplay(bufferSize, windowTime, scheduler) {
+    if (bufferSize === void 0) {
+      bufferSize = Number.POSITIVE_INFINITY;
+    }
+    if (windowTime === void 0) {
+      windowTime = Number.POSITIVE_INFINITY;
+    }
+    return multicast_1.multicast.call(this, new ReplaySubject_1.ReplaySubject(bufferSize, windowTime, scheduler));
+  }
+  exports.publishReplay = publishReplay;
+  return module.exports;
+});
+
+$__System.registerDynamic("c1", ["7", "6b"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var publishReplay_1 = $__require('6b');
+  Observable_1.Observable.prototype.publishReplay = publishReplay_1.publishReplay;
+  return module.exports;
+});
+
+$__System.registerDynamic("c2", ["13", "b4"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var AsyncSubject_1 = $__require('13');
+  var multicast_1 = $__require('b4');
+  function publishLast() {
+    return multicast_1.multicast.call(this, new AsyncSubject_1.AsyncSubject());
+  }
+  exports.publishLast = publishLast;
+  return module.exports;
+});
+
+$__System.registerDynamic("c3", ["7", "c2"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var publishLast_1 = $__require('c2');
+  Observable_1.Observable.prototype.publishLast = publishLast_1.publishLast;
+  return module.exports;
+});
+
+$__System.registerDynamic("4b", ["27", "34", "20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var isArray_1 = $__require('27');
+  var ArrayObservable_1 = $__require('34');
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function race() {
+    var observables = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      observables[_i - 0] = arguments[_i];
+    }
+    if (observables.length === 1 && isArray_1.isArray(observables[0])) {
+      observables = observables[0];
+    }
+    observables.unshift(this);
+    return raceStatic.apply(this, observables);
+  }
+  exports.race = race;
+  function raceStatic() {
+    var observables = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      observables[_i - 0] = arguments[_i];
+    }
+    if (observables.length === 1) {
+      if (isArray_1.isArray(observables[0])) {
+        observables = observables[0];
+      } else {
+        return observables[0];
+      }
+    }
+    return new ArrayObservable_1.ArrayObservable(observables).lift(new RaceOperator());
+  }
+  exports.raceStatic = raceStatic;
+  var RaceOperator = (function() {
+    function RaceOperator() {}
+    RaceOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new RaceSubscriber(subscriber));
+    };
+    return RaceOperator;
+  }());
+  exports.RaceOperator = RaceOperator;
+  var RaceSubscriber = (function(_super) {
+    __extends(RaceSubscriber, _super);
+    function RaceSubscriber(destination) {
+      _super.call(this, destination);
+      this.hasFirst = false;
+      this.observables = [];
+      this.subscriptions = [];
+    }
+    RaceSubscriber.prototype._next = function(observable) {
+      this.observables.push(observable);
+    };
+    RaceSubscriber.prototype._complete = function() {
+      var observables = this.observables;
+      var len = observables.length;
+      if (len === 0) {
+        this.destination.complete();
+      } else {
+        for (var i = 0; i < len; i++) {
+          var observable = observables[i];
+          var subscription = subscribeToResult_1.subscribeToResult(this, observable, observable, i);
+          this.subscriptions.push(subscription);
+          this.add(subscription);
+        }
+        this.observables = null;
+      }
+    };
+    RaceSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      if (!this.hasFirst) {
+        this.hasFirst = true;
+        for (var i = 0; i < this.subscriptions.length; i++) {
+          if (i !== outerIndex) {
+            var subscription = this.subscriptions[i];
+            subscription.unsubscribe();
+            this.remove(subscription);
+          }
+        }
+        this.subscriptions = null;
+      }
+      this.destination.next(innerValue);
+    };
+    return RaceSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  exports.RaceSubscriber = RaceSubscriber;
+  return module.exports;
+});
+
+$__System.registerDynamic("c4", ["7", "4b"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var race_1 = $__require('4b');
+  Observable_1.Observable.prototype.race = race_1.race;
+  return module.exports;
+});
+
+$__System.registerDynamic("c5", ["62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  function reduce(project, seed) {
+    return this.lift(new ReduceOperator(project, seed));
+  }
+  exports.reduce = reduce;
+  var ReduceOperator = (function() {
+    function ReduceOperator(project, seed) {
+      this.project = project;
+      this.seed = seed;
+    }
+    ReduceOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new ReduceSubscriber(subscriber, this.project, this.seed));
+    };
+    return ReduceOperator;
+  }());
+  exports.ReduceOperator = ReduceOperator;
+  var ReduceSubscriber = (function(_super) {
+    __extends(ReduceSubscriber, _super);
+    function ReduceSubscriber(destination, project, seed) {
+      _super.call(this, destination);
+      this.hasValue = false;
+      this.acc = seed;
+      this.project = project;
+      this.hasSeed = typeof seed !== 'undefined';
+    }
+    ReduceSubscriber.prototype._next = function(value) {
+      if (this.hasValue || (this.hasValue = this.hasSeed)) {
+        this._tryReduce(value);
+      } else {
+        this.acc = value;
+        this.hasValue = true;
+      }
+    };
+    ReduceSubscriber.prototype._tryReduce = function(value) {
+      var result;
+      try {
+        result = this.project(this.acc, value);
+      } catch (err) {
+        this.destination.error(err);
+        return;
+      }
+      this.acc = result;
+    };
+    ReduceSubscriber.prototype._complete = function() {
+      if (this.hasValue || this.hasSeed) {
+        this.destination.next(this.acc);
+      }
+      this.destination.complete();
+    };
+    return ReduceSubscriber;
+  }(Subscriber_1.Subscriber));
+  exports.ReduceSubscriber = ReduceSubscriber;
+  return module.exports;
+});
+
+$__System.registerDynamic("c6", ["7", "c5"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var reduce_1 = $__require('c5');
+  Observable_1.Observable.prototype.reduce = reduce_1.reduce;
+  return module.exports;
+});
+
+$__System.registerDynamic("c7", ["62", "24"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var EmptyObservable_1 = $__require('24');
+  function repeat(count) {
+    if (count === void 0) {
+      count = -1;
+    }
+    if (count === 0) {
+      return new EmptyObservable_1.EmptyObservable();
+    } else if (count < 0) {
+      return this.lift(new RepeatOperator(-1, this));
+    } else {
+      return this.lift(new RepeatOperator(count - 1, this));
+    }
+  }
+  exports.repeat = repeat;
+  var RepeatOperator = (function() {
+    function RepeatOperator(count, source) {
+      this.count = count;
+      this.source = source;
+    }
+    RepeatOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new RepeatSubscriber(subscriber, this.count, this.source));
+    };
+    return RepeatOperator;
+  }());
+  var RepeatSubscriber = (function(_super) {
+    __extends(RepeatSubscriber, _super);
+    function RepeatSubscriber(destination, count, source) {
+      _super.call(this, destination);
+      this.count = count;
+      this.source = source;
+    }
+    RepeatSubscriber.prototype.complete = function() {
+      if (!this.isStopped) {
+        var _a = this,
+            source = _a.source,
+            count = _a.count;
+        if (count === 0) {
+          return _super.prototype.complete.call(this);
+        } else if (count > -1) {
+          this.count = count - 1;
+        }
+        this.unsubscribe();
+        this.isStopped = false;
+        this.isUnsubscribed = false;
+        source.subscribe(this);
+      }
+    };
+    return RepeatSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("c8", ["7", "c7"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var repeat_1 = $__require('c7');
+  Observable_1.Observable.prototype.repeat = repeat_1.repeat;
+  return module.exports;
+});
+
+$__System.registerDynamic("c9", ["62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  function retry(count) {
+    if (count === void 0) {
+      count = -1;
+    }
+    return this.lift(new RetryOperator(count, this));
+  }
+  exports.retry = retry;
+  var RetryOperator = (function() {
+    function RetryOperator(count, source) {
+      this.count = count;
+      this.source = source;
+    }
+    RetryOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new RetrySubscriber(subscriber, this.count, this.source));
+    };
+    return RetryOperator;
+  }());
+  var RetrySubscriber = (function(_super) {
+    __extends(RetrySubscriber, _super);
+    function RetrySubscriber(destination, count, source) {
+      _super.call(this, destination);
+      this.count = count;
+      this.source = source;
+    }
+    RetrySubscriber.prototype.error = function(err) {
+      if (!this.isStopped) {
+        var _a = this,
+            source = _a.source,
+            count = _a.count;
+        if (count === 0) {
+          return _super.prototype.error.call(this, err);
+        } else if (count > -1) {
+          this.count = count - 1;
+        }
+        this.unsubscribe();
+        this.isStopped = false;
+        this.isUnsubscribed = false;
+        source.subscribe(this);
+      }
+    };
+    return RetrySubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("ca", ["7", "c9"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var retry_1 = $__require('c9');
+  Observable_1.Observable.prototype.retry = retry_1.retry;
+  return module.exports;
+});
+
+$__System.registerDynamic("cb", ["4", "11", "12", "20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subject_1 = $__require('4');
+  var tryCatch_1 = $__require('11');
+  var errorObject_1 = $__require('12');
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function retryWhen(notifier) {
+    return this.lift(new RetryWhenOperator(notifier, this));
+  }
+  exports.retryWhen = retryWhen;
+  var RetryWhenOperator = (function() {
+    function RetryWhenOperator(notifier, source) {
+      this.notifier = notifier;
+      this.source = source;
+    }
+    RetryWhenOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new RetryWhenSubscriber(subscriber, this.notifier, this.source));
+    };
+    return RetryWhenOperator;
+  }());
+  var RetryWhenSubscriber = (function(_super) {
+    __extends(RetryWhenSubscriber, _super);
+    function RetryWhenSubscriber(destination, notifier, source) {
+      _super.call(this, destination);
+      this.notifier = notifier;
+      this.source = source;
+    }
+    RetryWhenSubscriber.prototype.error = function(err) {
+      if (!this.isStopped) {
+        var errors = this.errors;
+        var retries = this.retries;
+        var retriesSubscription = this.retriesSubscription;
+        if (!retries) {
+          errors = new Subject_1.Subject();
+          retries = tryCatch_1.tryCatch(this.notifier)(errors);
+          if (retries === errorObject_1.errorObject) {
+            return _super.prototype.error.call(this, errorObject_1.errorObject.e);
+          }
+          retriesSubscription = subscribeToResult_1.subscribeToResult(this, retries);
+        } else {
+          this.errors = null;
+          this.retriesSubscription = null;
+        }
+        this.unsubscribe();
+        this.isUnsubscribed = false;
+        this.errors = errors;
+        this.retries = retries;
+        this.retriesSubscription = retriesSubscription;
+        errors.next(err);
+      }
+    };
+    RetryWhenSubscriber.prototype._unsubscribe = function() {
+      var _a = this,
+          errors = _a.errors,
+          retriesSubscription = _a.retriesSubscription;
+      if (errors) {
+        errors.unsubscribe();
+        this.errors = null;
+      }
+      if (retriesSubscription) {
+        retriesSubscription.unsubscribe();
+        this.retriesSubscription = null;
+      }
+      this.retries = null;
+    };
+    RetryWhenSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      var _a = this,
+          errors = _a.errors,
+          retries = _a.retries,
+          retriesSubscription = _a.retriesSubscription;
+      this.errors = null;
+      this.retries = null;
+      this.retriesSubscription = null;
+      this.unsubscribe();
+      this.isStopped = false;
+      this.isUnsubscribed = false;
+      this.errors = errors;
+      this.retries = retries;
+      this.retriesSubscription = retriesSubscription;
+      this.source.subscribe(this);
+    };
+    return RetryWhenSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("cc", ["7", "cb"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var retryWhen_1 = $__require('cb');
+  Observable_1.Observable.prototype.retryWhen = retryWhen_1.retryWhen;
+  return module.exports;
+});
+
+$__System.registerDynamic("cd", ["20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function sample(notifier) {
+    return this.lift(new SampleOperator(notifier));
+  }
+  exports.sample = sample;
+  var SampleOperator = (function() {
+    function SampleOperator(notifier) {
+      this.notifier = notifier;
+    }
+    SampleOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new SampleSubscriber(subscriber, this.notifier));
+    };
+    return SampleOperator;
+  }());
+  var SampleSubscriber = (function(_super) {
+    __extends(SampleSubscriber, _super);
+    function SampleSubscriber(destination, notifier) {
+      _super.call(this, destination);
+      this.hasValue = false;
+      this.add(subscribeToResult_1.subscribeToResult(this, notifier));
+    }
+    SampleSubscriber.prototype._next = function(value) {
+      this.value = value;
+      this.hasValue = true;
+    };
+    SampleSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      this.emitValue();
+    };
+    SampleSubscriber.prototype.notifyComplete = function() {
+      this.emitValue();
+    };
+    SampleSubscriber.prototype.emitValue = function() {
+      if (this.hasValue) {
+        this.hasValue = false;
+        this.destination.next(this.value);
+      }
+    };
+    return SampleSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("ce", ["7", "cd"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var sample_1 = $__require('cd');
+  Observable_1.Observable.prototype.sample = sample_1.sample;
+  return module.exports;
+});
+
+$__System.registerDynamic("cf", ["62", "44"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var async_1 = $__require('44');
+  function sampleTime(delay, scheduler) {
+    if (scheduler === void 0) {
+      scheduler = async_1.async;
+    }
+    return this.lift(new SampleTimeOperator(delay, scheduler));
+  }
+  exports.sampleTime = sampleTime;
+  var SampleTimeOperator = (function() {
+    function SampleTimeOperator(delay, scheduler) {
+      this.delay = delay;
+      this.scheduler = scheduler;
+    }
+    SampleTimeOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new SampleTimeSubscriber(subscriber, this.delay, this.scheduler));
+    };
+    return SampleTimeOperator;
+  }());
+  var SampleTimeSubscriber = (function(_super) {
+    __extends(SampleTimeSubscriber, _super);
+    function SampleTimeSubscriber(destination, delay, scheduler) {
+      _super.call(this, destination);
+      this.delay = delay;
+      this.scheduler = scheduler;
+      this.hasValue = false;
+      this.add(scheduler.schedule(dispatchNotification, delay, {
+        subscriber: this,
+        delay: delay
+      }));
+    }
+    SampleTimeSubscriber.prototype._next = function(value) {
+      this.lastValue = value;
+      this.hasValue = true;
+    };
+    SampleTimeSubscriber.prototype.notifyNext = function() {
+      if (this.hasValue) {
+        this.hasValue = false;
+        this.destination.next(this.lastValue);
+      }
+    };
+    return SampleTimeSubscriber;
+  }(Subscriber_1.Subscriber));
+  function dispatchNotification(state) {
+    var subscriber = state.subscriber,
+        delay = state.delay;
+    subscriber.notifyNext();
+    this.schedule(state, delay);
+  }
+  return module.exports;
+});
+
+$__System.registerDynamic("d0", ["7", "cf"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var sampleTime_1 = $__require('cf');
+  Observable_1.Observable.prototype.sampleTime = sampleTime_1.sampleTime;
+  return module.exports;
+});
+
+$__System.registerDynamic("d1", ["62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  function scan(accumulator, seed) {
+    return this.lift(new ScanOperator(accumulator, seed));
+  }
+  exports.scan = scan;
+  var ScanOperator = (function() {
+    function ScanOperator(accumulator, seed) {
+      this.accumulator = accumulator;
+      this.seed = seed;
+    }
+    ScanOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new ScanSubscriber(subscriber, this.accumulator, this.seed));
+    };
+    return ScanOperator;
+  }());
+  var ScanSubscriber = (function(_super) {
+    __extends(ScanSubscriber, _super);
+    function ScanSubscriber(destination, accumulator, seed) {
+      _super.call(this, destination);
+      this.accumulator = accumulator;
+      this.accumulatorSet = false;
+      this.seed = seed;
+      this.accumulator = accumulator;
+      this.accumulatorSet = typeof seed !== 'undefined';
+    }
+    Object.defineProperty(ScanSubscriber.prototype, "seed", {
+      get: function() {
+        return this._seed;
+      },
+      set: function(value) {
+        this.accumulatorSet = true;
+        this._seed = value;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    ScanSubscriber.prototype._next = function(value) {
+      if (!this.accumulatorSet) {
+        this.seed = value;
+        this.destination.next(value);
+      } else {
+        return this._tryNext(value);
+      }
+    };
+    ScanSubscriber.prototype._tryNext = function(value) {
+      var result;
+      try {
+        result = this.accumulator(this.seed, value);
+      } catch (err) {
+        this.destination.error(err);
+      }
+      this.seed = result;
+      this.destination.next(result);
+    };
+    return ScanSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("d2", ["7", "d1"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var scan_1 = $__require('d1');
+  Observable_1.Observable.prototype.scan = scan_1.scan;
+  return module.exports;
+});
+
+$__System.registerDynamic("b4", ["d3"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var ConnectableObservable_1 = $__require('d3');
+  function multicast(subjectOrSubjectFactory) {
+    var subjectFactory;
+    if (typeof subjectOrSubjectFactory === 'function') {
+      subjectFactory = subjectOrSubjectFactory;
+    } else {
+      subjectFactory = function subjectFactory() {
+        return subjectOrSubjectFactory;
+      };
+    }
+    return new ConnectableObservable_1.ConnectableObservable(this, subjectFactory);
+  }
+  exports.multicast = multicast;
+  return module.exports;
+});
+
+$__System.registerDynamic("d4", ["b4", "4"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var multicast_1 = $__require('b4');
+  var Subject_1 = $__require('4');
+  function shareSubjectFactory() {
+    return new Subject_1.Subject();
+  }
+  function share() {
+    return multicast_1.multicast.call(this, shareSubjectFactory).refCount();
+  }
+  exports.share = share;
+  ;
+  return module.exports;
+});
+
+$__System.registerDynamic("d5", ["7", "d4"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var share_1 = $__require('d4');
+  Observable_1.Observable.prototype.share = share_1.share;
+  return module.exports;
+});
+
+$__System.registerDynamic("d6", ["62", "96"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var EmptyError_1 = $__require('96');
+  function single(predicate) {
+    return this.lift(new SingleOperator(predicate, this));
+  }
+  exports.single = single;
+  var SingleOperator = (function() {
+    function SingleOperator(predicate, source) {
+      this.predicate = predicate;
+      this.source = source;
+    }
+    SingleOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new SingleSubscriber(subscriber, this.predicate, this.source));
+    };
+    return SingleOperator;
+  }());
+  var SingleSubscriber = (function(_super) {
+    __extends(SingleSubscriber, _super);
+    function SingleSubscriber(destination, predicate, source) {
+      _super.call(this, destination);
+      this.predicate = predicate;
+      this.source = source;
+      this.seenValue = false;
+      this.index = 0;
+    }
+    SingleSubscriber.prototype.applySingleValue = function(value) {
+      if (this.seenValue) {
+        this.destination.error('Sequence contains more than one element');
+      } else {
+        this.seenValue = true;
+        this.singleValue = value;
+      }
+    };
+    SingleSubscriber.prototype._next = function(value) {
+      var predicate = this.predicate;
+      this.index++;
+      if (predicate) {
+        this.tryNext(value);
+      } else {
+        this.applySingleValue(value);
+      }
+    };
+    SingleSubscriber.prototype.tryNext = function(value) {
+      try {
+        var result = this.predicate(value, this.index, this.source);
+        if (result) {
+          this.applySingleValue(value);
+        }
+      } catch (err) {
+        this.destination.error(err);
+      }
+    };
+    SingleSubscriber.prototype._complete = function() {
+      var destination = this.destination;
+      if (this.index > 0) {
+        destination.next(this.seenValue ? this.singleValue : undefined);
+        destination.complete();
+      } else {
+        destination.error(new EmptyError_1.EmptyError);
+      }
+    };
+    return SingleSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("d7", ["7", "d6"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var single_1 = $__require('d6');
+  Observable_1.Observable.prototype.single = single_1.single;
+  return module.exports;
+});
+
+$__System.registerDynamic("d8", ["62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  function skip(total) {
+    return this.lift(new SkipOperator(total));
+  }
+  exports.skip = skip;
+  var SkipOperator = (function() {
+    function SkipOperator(total) {
+      this.total = total;
+    }
+    SkipOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new SkipSubscriber(subscriber, this.total));
+    };
+    return SkipOperator;
+  }());
+  var SkipSubscriber = (function(_super) {
+    __extends(SkipSubscriber, _super);
+    function SkipSubscriber(destination, total) {
+      _super.call(this, destination);
+      this.total = total;
+      this.count = 0;
+    }
+    SkipSubscriber.prototype._next = function(x) {
+      if (++this.count > this.total) {
+        this.destination.next(x);
+      }
+    };
+    return SkipSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("d9", ["7", "d8"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var skip_1 = $__require('d8');
+  Observable_1.Observable.prototype.skip = skip_1.skip;
+  return module.exports;
+});
+
+$__System.registerDynamic("da", ["20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function skipUntil(notifier) {
+    return this.lift(new SkipUntilOperator(notifier));
+  }
+  exports.skipUntil = skipUntil;
+  var SkipUntilOperator = (function() {
+    function SkipUntilOperator(notifier) {
+      this.notifier = notifier;
+    }
+    SkipUntilOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new SkipUntilSubscriber(subscriber, this.notifier));
+    };
+    return SkipUntilOperator;
+  }());
+  var SkipUntilSubscriber = (function(_super) {
+    __extends(SkipUntilSubscriber, _super);
+    function SkipUntilSubscriber(destination, notifier) {
+      _super.call(this, destination);
+      this.hasValue = false;
+      this.isInnerStopped = false;
+      this.add(subscribeToResult_1.subscribeToResult(this, notifier));
+    }
+    SkipUntilSubscriber.prototype._next = function(value) {
+      if (this.hasValue) {
+        _super.prototype._next.call(this, value);
+      }
+    };
+    SkipUntilSubscriber.prototype._complete = function() {
+      if (this.isInnerStopped) {
+        _super.prototype._complete.call(this);
+      } else {
+        this.unsubscribe();
+      }
+    };
+    SkipUntilSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      this.hasValue = true;
+    };
+    SkipUntilSubscriber.prototype.notifyComplete = function() {
+      this.isInnerStopped = true;
+      if (this.isStopped) {
+        _super.prototype._complete.call(this);
+      }
+    };
+    return SkipUntilSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("db", ["7", "da"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var skipUntil_1 = $__require('da');
+  Observable_1.Observable.prototype.skipUntil = skipUntil_1.skipUntil;
+  return module.exports;
+});
+
+$__System.registerDynamic("dc", ["62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  function skipWhile(predicate) {
+    return this.lift(new SkipWhileOperator(predicate));
+  }
+  exports.skipWhile = skipWhile;
+  var SkipWhileOperator = (function() {
+    function SkipWhileOperator(predicate) {
+      this.predicate = predicate;
+    }
+    SkipWhileOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new SkipWhileSubscriber(subscriber, this.predicate));
+    };
+    return SkipWhileOperator;
+  }());
+  var SkipWhileSubscriber = (function(_super) {
+    __extends(SkipWhileSubscriber, _super);
+    function SkipWhileSubscriber(destination, predicate) {
+      _super.call(this, destination);
+      this.predicate = predicate;
+      this.skipping = true;
+      this.index = 0;
+    }
+    SkipWhileSubscriber.prototype._next = function(value) {
+      var destination = this.destination;
+      if (this.skipping) {
+        this.tryCallPredicate(value);
+      }
+      if (!this.skipping) {
+        destination.next(value);
+      }
+    };
+    SkipWhileSubscriber.prototype.tryCallPredicate = function(value) {
+      try {
+        var result = this.predicate(value, this.index++);
+        this.skipping = Boolean(result);
+      } catch (err) {
+        this.destination.error(err);
+      }
+    };
+    return SkipWhileSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("dd", ["7", "dc"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var skipWhile_1 = $__require('dc');
+  Observable_1.Observable.prototype.skipWhile = skipWhile_1.skipWhile;
+  return module.exports;
+});
+
+$__System.registerDynamic("74", ["20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function mergeAll(concurrent) {
+    if (concurrent === void 0) {
+      concurrent = Number.POSITIVE_INFINITY;
+    }
+    return this.lift(new MergeAllOperator(concurrent));
+  }
+  exports.mergeAll = mergeAll;
+  var MergeAllOperator = (function() {
+    function MergeAllOperator(concurrent) {
+      this.concurrent = concurrent;
+    }
+    MergeAllOperator.prototype.call = function(observer, source) {
+      return source._subscribe(new MergeAllSubscriber(observer, this.concurrent));
+    };
+    return MergeAllOperator;
+  }());
+  exports.MergeAllOperator = MergeAllOperator;
+  var MergeAllSubscriber = (function(_super) {
+    __extends(MergeAllSubscriber, _super);
+    function MergeAllSubscriber(destination, concurrent) {
+      _super.call(this, destination);
+      this.concurrent = concurrent;
+      this.hasCompleted = false;
+      this.buffer = [];
+      this.active = 0;
+    }
+    MergeAllSubscriber.prototype._next = function(observable) {
+      if (this.active < this.concurrent) {
+        this.active++;
+        this.add(subscribeToResult_1.subscribeToResult(this, observable));
+      } else {
+        this.buffer.push(observable);
+      }
+    };
+    MergeAllSubscriber.prototype._complete = function() {
+      this.hasCompleted = true;
+      if (this.active === 0 && this.buffer.length === 0) {
+        this.destination.complete();
+      }
+    };
+    MergeAllSubscriber.prototype.notifyComplete = function(innerSub) {
+      var buffer = this.buffer;
+      this.remove(innerSub);
+      this.active--;
+      if (buffer.length > 0) {
+        this._next(buffer.shift());
+      } else if (this.active === 0 && this.hasCompleted) {
+        this.destination.complete();
+      }
+    };
+    return MergeAllSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  exports.MergeAllSubscriber = MergeAllSubscriber;
+  return module.exports;
+});
+
+$__System.registerDynamic("1c", ["33", "34", "74"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var isScheduler_1 = $__require('33');
+  var ArrayObservable_1 = $__require('34');
+  var mergeAll_1 = $__require('74');
+  function concat() {
+    var observables = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      observables[_i - 0] = arguments[_i];
+    }
+    return concatStatic.apply(void 0, [this].concat(observables));
+  }
+  exports.concat = concat;
+  function concatStatic() {
+    var observables = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      observables[_i - 0] = arguments[_i];
+    }
+    var scheduler = null;
+    var args = observables;
+    if (isScheduler_1.isScheduler(args[observables.length - 1])) {
+      scheduler = args.pop();
+    }
+    return new ArrayObservable_1.ArrayObservable(observables, scheduler).lift(new mergeAll_1.MergeAllOperator(1));
+  }
+  exports.concatStatic = concatStatic;
+  return module.exports;
+});
+
+$__System.registerDynamic("de", ["34", "30", "24", "1c", "33"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var ArrayObservable_1 = $__require('34');
+  var ScalarObservable_1 = $__require('30');
+  var EmptyObservable_1 = $__require('24');
+  var concat_1 = $__require('1c');
+  var isScheduler_1 = $__require('33');
+  function startWith() {
+    var array = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      array[_i - 0] = arguments[_i];
+    }
+    var scheduler = array[array.length - 1];
+    if (isScheduler_1.isScheduler(scheduler)) {
+      array.pop();
+    } else {
+      scheduler = null;
+    }
+    var len = array.length;
+    if (len === 1) {
+      return concat_1.concatStatic(new ScalarObservable_1.ScalarObservable(array[0], scheduler), this);
+    } else if (len > 1) {
+      return concat_1.concatStatic(new ArrayObservable_1.ArrayObservable(array, scheduler), this);
+    } else {
+      return concat_1.concatStatic(new EmptyObservable_1.EmptyObservable(scheduler), this);
+    }
+  }
+  exports.startWith = startWith;
+  return module.exports;
+});
+
+$__System.registerDynamic("df", ["7", "de"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var startWith_1 = $__require('de');
+  Observable_1.Observable.prototype.startWith = startWith_1.startWith;
+  return module.exports;
+});
+
+$__System.registerDynamic("43", ["27"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var isArray_1 = $__require('27');
+  function isNumeric(val) {
+    return !isArray_1.isArray(val) && (val - parseFloat(val) + 1) >= 0;
+  }
+  exports.isNumeric = isNumeric;
+  ;
+  return module.exports;
+});
+
+$__System.registerDynamic("e0", ["7", "e1", "43"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Observable_1 = $__require('7');
+  var asap_1 = $__require('e1');
+  var isNumeric_1 = $__require('43');
+  var SubscribeOnObservable = (function(_super) {
+    __extends(SubscribeOnObservable, _super);
+    function SubscribeOnObservable(source, delayTime, scheduler) {
+      if (delayTime === void 0) {
+        delayTime = 0;
+      }
+      if (scheduler === void 0) {
+        scheduler = asap_1.asap;
+      }
+      _super.call(this);
+      this.source = source;
+      this.delayTime = delayTime;
+      this.scheduler = scheduler;
+      if (!isNumeric_1.isNumeric(delayTime) || delayTime < 0) {
+        this.delayTime = 0;
+      }
+      if (!scheduler || typeof scheduler.schedule !== 'function') {
+        this.scheduler = asap_1.asap;
+      }
+    }
+    SubscribeOnObservable.create = function(source, delay, scheduler) {
+      if (delay === void 0) {
+        delay = 0;
+      }
+      if (scheduler === void 0) {
+        scheduler = asap_1.asap;
+      }
+      return new SubscribeOnObservable(source, delay, scheduler);
+    };
+    SubscribeOnObservable.dispatch = function(arg) {
+      var source = arg.source,
+          subscriber = arg.subscriber;
+      return source.subscribe(subscriber);
+    };
+    SubscribeOnObservable.prototype._subscribe = function(subscriber) {
+      var delay = this.delayTime;
+      var source = this.source;
+      var scheduler = this.scheduler;
+      return scheduler.schedule(SubscribeOnObservable.dispatch, delay, {
+        source: source,
+        subscriber: subscriber
+      });
+    };
+    return SubscribeOnObservable;
+  }(Observable_1.Observable));
+  exports.SubscribeOnObservable = SubscribeOnObservable;
+  return module.exports;
+});
+
+$__System.registerDynamic("e2", ["e0"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var SubscribeOnObservable_1 = $__require('e0');
+  function subscribeOn(scheduler, delay) {
+    if (delay === void 0) {
+      delay = 0;
+    }
+    return new SubscribeOnObservable_1.SubscribeOnObservable(this, delay, scheduler);
+  }
+  exports.subscribeOn = subscribeOn;
+  return module.exports;
+});
+
+$__System.registerDynamic("e3", ["7", "e2"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var subscribeOn_1 = $__require('e2');
+  Observable_1.Observable.prototype.subscribeOn = subscribeOn_1.subscribeOn;
+  return module.exports;
+});
+
+$__System.registerDynamic("e4", ["20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function _switch() {
+    return this.lift(new SwitchOperator());
+  }
+  exports._switch = _switch;
+  var SwitchOperator = (function() {
+    function SwitchOperator() {}
+    SwitchOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new SwitchSubscriber(subscriber));
+    };
+    return SwitchOperator;
+  }());
+  var SwitchSubscriber = (function(_super) {
+    __extends(SwitchSubscriber, _super);
+    function SwitchSubscriber(destination) {
+      _super.call(this, destination);
+      this.active = 0;
+      this.hasCompleted = false;
+    }
+    SwitchSubscriber.prototype._next = function(value) {
+      this.unsubscribeInner();
+      this.active++;
+      this.add(this.innerSubscription = subscribeToResult_1.subscribeToResult(this, value));
+    };
+    SwitchSubscriber.prototype._complete = function() {
+      this.hasCompleted = true;
+      if (this.active === 0) {
+        this.destination.complete();
+      }
+    };
+    SwitchSubscriber.prototype.unsubscribeInner = function() {
+      this.active = this.active > 0 ? this.active - 1 : 0;
+      var innerSubscription = this.innerSubscription;
+      if (innerSubscription) {
+        innerSubscription.unsubscribe();
+        this.remove(innerSubscription);
+      }
+    };
+    SwitchSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      this.destination.next(innerValue);
+    };
+    SwitchSubscriber.prototype.notifyError = function(err) {
+      this.destination.error(err);
+    };
+    SwitchSubscriber.prototype.notifyComplete = function() {
+      this.unsubscribeInner();
+      if (this.hasCompleted && this.active === 0) {
+        this.destination.complete();
+      }
+    };
+    return SwitchSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("e5", ["7", "e4"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var switch_1 = $__require('e4');
+  Observable_1.Observable.prototype.switch = switch_1._switch;
+  return module.exports;
+});
+
+$__System.registerDynamic("e6", ["20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function switchMap(project, resultSelector) {
+    return this.lift(new SwitchMapOperator(project, resultSelector));
+  }
+  exports.switchMap = switchMap;
+  var SwitchMapOperator = (function() {
+    function SwitchMapOperator(project, resultSelector) {
+      this.project = project;
+      this.resultSelector = resultSelector;
+    }
+    SwitchMapOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new SwitchMapSubscriber(subscriber, this.project, this.resultSelector));
+    };
+    return SwitchMapOperator;
+  }());
+  var SwitchMapSubscriber = (function(_super) {
+    __extends(SwitchMapSubscriber, _super);
+    function SwitchMapSubscriber(destination, project, resultSelector) {
+      _super.call(this, destination);
+      this.project = project;
+      this.resultSelector = resultSelector;
+      this.index = 0;
+    }
+    SwitchMapSubscriber.prototype._next = function(value) {
+      var result;
+      var index = this.index++;
+      try {
+        result = this.project(value, index);
+      } catch (error) {
+        this.destination.error(error);
+        return;
+      }
+      this._innerSub(result, value, index);
+    };
+    SwitchMapSubscriber.prototype._innerSub = function(result, value, index) {
+      var innerSubscription = this.innerSubscription;
+      if (innerSubscription) {
+        innerSubscription.unsubscribe();
+      }
+      this.add(this.innerSubscription = subscribeToResult_1.subscribeToResult(this, result, value, index));
+    };
+    SwitchMapSubscriber.prototype._complete = function() {
+      var innerSubscription = this.innerSubscription;
+      if (!innerSubscription || innerSubscription.isUnsubscribed) {
+        _super.prototype._complete.call(this);
+      }
+    };
+    SwitchMapSubscriber.prototype._unsubscribe = function() {
+      this.innerSubscription = null;
+    };
+    SwitchMapSubscriber.prototype.notifyComplete = function(innerSub) {
+      this.remove(innerSub);
+      this.innerSubscription = null;
+      if (this.isStopped) {
+        _super.prototype._complete.call(this);
+      }
+    };
+    SwitchMapSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      if (this.resultSelector) {
+        this._tryNotifyNext(outerValue, innerValue, outerIndex, innerIndex);
+      } else {
+        this.destination.next(innerValue);
+      }
+    };
+    SwitchMapSubscriber.prototype._tryNotifyNext = function(outerValue, innerValue, outerIndex, innerIndex) {
+      var result;
+      try {
+        result = this.resultSelector(outerValue, innerValue, outerIndex, innerIndex);
+      } catch (err) {
+        this.destination.error(err);
+        return;
+      }
+      this.destination.next(result);
+    };
+    return SwitchMapSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("e7", ["7", "e6"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var switchMap_1 = $__require('e6');
+  Observable_1.Observable.prototype.switchMap = switchMap_1.switchMap;
+  return module.exports;
+});
+
+$__System.registerDynamic("e8", ["20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function switchMapTo(innerObservable, resultSelector) {
+    return this.lift(new SwitchMapToOperator(innerObservable, resultSelector));
+  }
+  exports.switchMapTo = switchMapTo;
+  var SwitchMapToOperator = (function() {
+    function SwitchMapToOperator(observable, resultSelector) {
+      this.observable = observable;
+      this.resultSelector = resultSelector;
+    }
+    SwitchMapToOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new SwitchMapToSubscriber(subscriber, this.observable, this.resultSelector));
+    };
+    return SwitchMapToOperator;
+  }());
+  var SwitchMapToSubscriber = (function(_super) {
+    __extends(SwitchMapToSubscriber, _super);
+    function SwitchMapToSubscriber(destination, inner, resultSelector) {
+      _super.call(this, destination);
+      this.inner = inner;
+      this.resultSelector = resultSelector;
+      this.index = 0;
+    }
+    SwitchMapToSubscriber.prototype._next = function(value) {
+      var innerSubscription = this.innerSubscription;
+      if (innerSubscription) {
+        innerSubscription.unsubscribe();
+      }
+      this.add(this.innerSubscription = subscribeToResult_1.subscribeToResult(this, this.inner, value, this.index++));
+    };
+    SwitchMapToSubscriber.prototype._complete = function() {
+      var innerSubscription = this.innerSubscription;
+      if (!innerSubscription || innerSubscription.isUnsubscribed) {
+        _super.prototype._complete.call(this);
+      }
+    };
+    SwitchMapToSubscriber.prototype._unsubscribe = function() {
+      this.innerSubscription = null;
+    };
+    SwitchMapToSubscriber.prototype.notifyComplete = function(innerSub) {
+      this.remove(innerSub);
+      this.innerSubscription = null;
+      if (this.isStopped) {
+        _super.prototype._complete.call(this);
+      }
+    };
+    SwitchMapToSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      var _a = this,
+          resultSelector = _a.resultSelector,
+          destination = _a.destination;
+      if (resultSelector) {
+        this.tryResultSelector(outerValue, innerValue, outerIndex, innerIndex);
+      } else {
+        destination.next(innerValue);
+      }
+    };
+    SwitchMapToSubscriber.prototype.tryResultSelector = function(outerValue, innerValue, outerIndex, innerIndex) {
+      var _a = this,
+          resultSelector = _a.resultSelector,
+          destination = _a.destination;
+      var result;
+      try {
+        result = resultSelector(outerValue, innerValue, outerIndex, innerIndex);
+      } catch (err) {
+        destination.error(err);
+        return;
+      }
+      destination.next(result);
+    };
+    return SwitchMapToSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("e9", ["7", "e8"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var switchMapTo_1 = $__require('e8');
+  Observable_1.Observable.prototype.switchMapTo = switchMapTo_1.switchMapTo;
+  return module.exports;
+});
+
+$__System.registerDynamic("ea", ["62", "eb", "24"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var ArgumentOutOfRangeError_1 = $__require('eb');
+  var EmptyObservable_1 = $__require('24');
+  function take(total) {
+    if (total === 0) {
+      return new EmptyObservable_1.EmptyObservable();
+    } else {
+      return this.lift(new TakeOperator(total));
+    }
+  }
+  exports.take = take;
+  var TakeOperator = (function() {
+    function TakeOperator(total) {
+      this.total = total;
+      if (this.total < 0) {
+        throw new ArgumentOutOfRangeError_1.ArgumentOutOfRangeError;
+      }
+    }
+    TakeOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new TakeSubscriber(subscriber, this.total));
+    };
+    return TakeOperator;
+  }());
+  var TakeSubscriber = (function(_super) {
+    __extends(TakeSubscriber, _super);
+    function TakeSubscriber(destination, total) {
+      _super.call(this, destination);
+      this.total = total;
+      this.count = 0;
+    }
+    TakeSubscriber.prototype._next = function(value) {
+      var total = this.total;
+      if (++this.count <= total) {
+        this.destination.next(value);
+        if (this.count === total) {
+          this.destination.complete();
+          this.unsubscribe();
+        }
+      }
+    };
+    return TakeSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("ec", ["7", "ea"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var take_1 = $__require('ea');
+  Observable_1.Observable.prototype.take = take_1.take;
+  return module.exports;
+});
+
+$__System.registerDynamic("ed", ["62", "eb", "24"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var ArgumentOutOfRangeError_1 = $__require('eb');
+  var EmptyObservable_1 = $__require('24');
+  function takeLast(total) {
+    if (total === 0) {
+      return new EmptyObservable_1.EmptyObservable();
+    } else {
+      return this.lift(new TakeLastOperator(total));
+    }
+  }
+  exports.takeLast = takeLast;
+  var TakeLastOperator = (function() {
+    function TakeLastOperator(total) {
+      this.total = total;
+      if (this.total < 0) {
+        throw new ArgumentOutOfRangeError_1.ArgumentOutOfRangeError;
+      }
+    }
+    TakeLastOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new TakeLastSubscriber(subscriber, this.total));
+    };
+    return TakeLastOperator;
+  }());
+  var TakeLastSubscriber = (function(_super) {
+    __extends(TakeLastSubscriber, _super);
+    function TakeLastSubscriber(destination, total) {
+      _super.call(this, destination);
+      this.total = total;
+      this.ring = new Array();
+      this.count = 0;
+    }
+    TakeLastSubscriber.prototype._next = function(value) {
+      var ring = this.ring;
+      var total = this.total;
+      var count = this.count++;
+      if (ring.length < total) {
+        ring.push(value);
+      } else {
+        var index = count % total;
+        ring[index] = value;
+      }
+    };
+    TakeLastSubscriber.prototype._complete = function() {
+      var destination = this.destination;
+      var count = this.count;
+      if (count > 0) {
+        var total = this.count >= this.total ? this.total : this.count;
+        var ring = this.ring;
+        for (var i = 0; i < total; i++) {
+          var idx = (count++) % total;
+          destination.next(ring[idx]);
+        }
+      }
+      destination.complete();
+    };
+    return TakeLastSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("ee", ["7", "ed"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var takeLast_1 = $__require('ed');
+  Observable_1.Observable.prototype.takeLast = takeLast_1.takeLast;
+  return module.exports;
+});
+
+$__System.registerDynamic("ef", ["20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function takeUntil(notifier) {
+    return this.lift(new TakeUntilOperator(notifier));
+  }
+  exports.takeUntil = takeUntil;
+  var TakeUntilOperator = (function() {
+    function TakeUntilOperator(notifier) {
+      this.notifier = notifier;
+    }
+    TakeUntilOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new TakeUntilSubscriber(subscriber, this.notifier));
+    };
+    return TakeUntilOperator;
+  }());
+  var TakeUntilSubscriber = (function(_super) {
+    __extends(TakeUntilSubscriber, _super);
+    function TakeUntilSubscriber(destination, notifier) {
+      _super.call(this, destination);
+      this.notifier = notifier;
+      this.add(subscribeToResult_1.subscribeToResult(this, notifier));
+    }
+    TakeUntilSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      this.complete();
+    };
+    TakeUntilSubscriber.prototype.notifyComplete = function() {};
+    return TakeUntilSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("f0", ["7", "ef"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var takeUntil_1 = $__require('ef');
+  Observable_1.Observable.prototype.takeUntil = takeUntil_1.takeUntil;
+  return module.exports;
+});
+
+$__System.registerDynamic("f1", ["62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  function takeWhile(predicate) {
+    return this.lift(new TakeWhileOperator(predicate));
+  }
+  exports.takeWhile = takeWhile;
+  var TakeWhileOperator = (function() {
+    function TakeWhileOperator(predicate) {
+      this.predicate = predicate;
+    }
+    TakeWhileOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new TakeWhileSubscriber(subscriber, this.predicate));
+    };
+    return TakeWhileOperator;
+  }());
+  var TakeWhileSubscriber = (function(_super) {
+    __extends(TakeWhileSubscriber, _super);
+    function TakeWhileSubscriber(destination, predicate) {
+      _super.call(this, destination);
+      this.predicate = predicate;
+      this.index = 0;
+    }
+    TakeWhileSubscriber.prototype._next = function(value) {
+      var destination = this.destination;
+      var result;
+      try {
+        result = this.predicate(value, this.index++);
+      } catch (err) {
+        destination.error(err);
+        return;
+      }
+      this.nextOrComplete(value, result);
+    };
+    TakeWhileSubscriber.prototype.nextOrComplete = function(value, predicateResult) {
+      var destination = this.destination;
+      if (Boolean(predicateResult)) {
+        destination.next(value);
+      } else {
+        destination.complete();
+      }
+    };
+    return TakeWhileSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("f2", ["7", "f1"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var takeWhile_1 = $__require('f1');
+  Observable_1.Observable.prototype.takeWhile = takeWhile_1.takeWhile;
+  return module.exports;
+});
+
+$__System.registerDynamic("f3", ["20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function throttle(durationSelector) {
+    return this.lift(new ThrottleOperator(durationSelector));
+  }
+  exports.throttle = throttle;
+  var ThrottleOperator = (function() {
+    function ThrottleOperator(durationSelector) {
+      this.durationSelector = durationSelector;
+    }
+    ThrottleOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new ThrottleSubscriber(subscriber, this.durationSelector));
+    };
+    return ThrottleOperator;
+  }());
+  var ThrottleSubscriber = (function(_super) {
+    __extends(ThrottleSubscriber, _super);
+    function ThrottleSubscriber(destination, durationSelector) {
+      _super.call(this, destination);
+      this.destination = destination;
+      this.durationSelector = durationSelector;
+    }
+    ThrottleSubscriber.prototype._next = function(value) {
+      if (!this.throttled) {
+        this.tryDurationSelector(value);
+      }
+    };
+    ThrottleSubscriber.prototype.tryDurationSelector = function(value) {
+      var duration = null;
+      try {
+        duration = this.durationSelector(value);
+      } catch (err) {
+        this.destination.error(err);
+        return;
+      }
+      this.emitAndThrottle(value, duration);
+    };
+    ThrottleSubscriber.prototype.emitAndThrottle = function(value, duration) {
+      this.add(this.throttled = subscribeToResult_1.subscribeToResult(this, duration));
+      this.destination.next(value);
+    };
+    ThrottleSubscriber.prototype._unsubscribe = function() {
+      var throttled = this.throttled;
+      if (throttled) {
+        this.remove(throttled);
+        this.throttled = null;
+        throttled.unsubscribe();
+      }
+    };
+    ThrottleSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      this._unsubscribe();
+    };
+    ThrottleSubscriber.prototype.notifyComplete = function() {
+      this._unsubscribe();
+    };
+    return ThrottleSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("f4", ["7", "f3"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var throttle_1 = $__require('f3');
+  Observable_1.Observable.prototype.throttle = throttle_1.throttle;
+  return module.exports;
+});
+
+$__System.registerDynamic("f5", ["62", "44"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var async_1 = $__require('44');
+  function throttleTime(delay, scheduler) {
+    if (scheduler === void 0) {
+      scheduler = async_1.async;
+    }
+    return this.lift(new ThrottleTimeOperator(delay, scheduler));
+  }
+  exports.throttleTime = throttleTime;
+  var ThrottleTimeOperator = (function() {
+    function ThrottleTimeOperator(delay, scheduler) {
+      this.delay = delay;
+      this.scheduler = scheduler;
+    }
+    ThrottleTimeOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new ThrottleTimeSubscriber(subscriber, this.delay, this.scheduler));
+    };
+    return ThrottleTimeOperator;
+  }());
+  var ThrottleTimeSubscriber = (function(_super) {
+    __extends(ThrottleTimeSubscriber, _super);
+    function ThrottleTimeSubscriber(destination, delay, scheduler) {
+      _super.call(this, destination);
+      this.delay = delay;
+      this.scheduler = scheduler;
+    }
+    ThrottleTimeSubscriber.prototype._next = function(value) {
+      if (!this.throttled) {
+        this.add(this.throttled = this.scheduler.schedule(dispatchNext, this.delay, {subscriber: this}));
+        this.destination.next(value);
+      }
+    };
+    ThrottleTimeSubscriber.prototype.clearThrottle = function() {
+      var throttled = this.throttled;
+      if (throttled) {
+        throttled.unsubscribe();
+        this.remove(throttled);
+        this.throttled = null;
+      }
+    };
+    return ThrottleTimeSubscriber;
+  }(Subscriber_1.Subscriber));
+  function dispatchNext(arg) {
+    var subscriber = arg.subscriber;
+    subscriber.clearThrottle();
+  }
+  return module.exports;
+});
+
+$__System.registerDynamic("f6", ["7", "f5"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var throttleTime_1 = $__require('f5');
+  Observable_1.Observable.prototype.throttleTime = throttleTime_1.throttleTime;
+  return module.exports;
+});
+
+$__System.registerDynamic("f7", ["44", "59", "62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var async_1 = $__require('44');
+  var isDate_1 = $__require('59');
+  var Subscriber_1 = $__require('62');
+  function timeout(due, errorToSend, scheduler) {
+    if (errorToSend === void 0) {
+      errorToSend = null;
+    }
+    if (scheduler === void 0) {
+      scheduler = async_1.async;
+    }
+    var absoluteTimeout = isDate_1.isDate(due);
+    var waitFor = absoluteTimeout ? (+due - scheduler.now()) : Math.abs(due);
+    return this.lift(new TimeoutOperator(waitFor, absoluteTimeout, errorToSend, scheduler));
+  }
+  exports.timeout = timeout;
+  var TimeoutOperator = (function() {
+    function TimeoutOperator(waitFor, absoluteTimeout, errorToSend, scheduler) {
+      this.waitFor = waitFor;
+      this.absoluteTimeout = absoluteTimeout;
+      this.errorToSend = errorToSend;
+      this.scheduler = scheduler;
+    }
+    TimeoutOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new TimeoutSubscriber(subscriber, this.absoluteTimeout, this.waitFor, this.errorToSend, this.scheduler));
+    };
+    return TimeoutOperator;
+  }());
+  var TimeoutSubscriber = (function(_super) {
+    __extends(TimeoutSubscriber, _super);
+    function TimeoutSubscriber(destination, absoluteTimeout, waitFor, errorToSend, scheduler) {
+      _super.call(this, destination);
+      this.absoluteTimeout = absoluteTimeout;
+      this.waitFor = waitFor;
+      this.errorToSend = errorToSend;
+      this.scheduler = scheduler;
+      this.index = 0;
+      this._previousIndex = 0;
+      this._hasCompleted = false;
+      this.scheduleTimeout();
+    }
+    Object.defineProperty(TimeoutSubscriber.prototype, "previousIndex", {
+      get: function() {
+        return this._previousIndex;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(TimeoutSubscriber.prototype, "hasCompleted", {
+      get: function() {
+        return this._hasCompleted;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    TimeoutSubscriber.dispatchTimeout = function(state) {
+      var source = state.subscriber;
+      var currentIndex = state.index;
+      if (!source.hasCompleted && source.previousIndex === currentIndex) {
+        source.notifyTimeout();
+      }
+    };
+    TimeoutSubscriber.prototype.scheduleTimeout = function() {
+      var currentIndex = this.index;
+      this.scheduler.schedule(TimeoutSubscriber.dispatchTimeout, this.waitFor, {
+        subscriber: this,
+        index: currentIndex
+      });
+      this.index++;
+      this._previousIndex = currentIndex;
+    };
+    TimeoutSubscriber.prototype._next = function(value) {
+      this.destination.next(value);
+      if (!this.absoluteTimeout) {
+        this.scheduleTimeout();
+      }
+    };
+    TimeoutSubscriber.prototype._error = function(err) {
+      this.destination.error(err);
+      this._hasCompleted = true;
+    };
+    TimeoutSubscriber.prototype._complete = function() {
+      this.destination.complete();
+      this._hasCompleted = true;
+    };
+    TimeoutSubscriber.prototype.notifyTimeout = function() {
+      this.error(this.errorToSend || new Error('timeout'));
+    };
+    return TimeoutSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("f8", ["7", "f7"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var timeout_1 = $__require('f7');
+  Observable_1.Observable.prototype.timeout = timeout_1.timeout;
+  return module.exports;
+});
+
+$__System.registerDynamic("59", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  function isDate(value) {
+    return value instanceof Date && !isNaN(+value);
+  }
+  exports.isDate = isDate;
+  return module.exports;
+});
+
+$__System.registerDynamic("f9", ["44", "59", "20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var async_1 = $__require('44');
+  var isDate_1 = $__require('59');
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function timeoutWith(due, withObservable, scheduler) {
+    if (scheduler === void 0) {
+      scheduler = async_1.async;
+    }
+    var absoluteTimeout = isDate_1.isDate(due);
+    var waitFor = absoluteTimeout ? (+due - scheduler.now()) : Math.abs(due);
+    return this.lift(new TimeoutWithOperator(waitFor, absoluteTimeout, withObservable, scheduler));
+  }
+  exports.timeoutWith = timeoutWith;
+  var TimeoutWithOperator = (function() {
+    function TimeoutWithOperator(waitFor, absoluteTimeout, withObservable, scheduler) {
+      this.waitFor = waitFor;
+      this.absoluteTimeout = absoluteTimeout;
+      this.withObservable = withObservable;
+      this.scheduler = scheduler;
+    }
+    TimeoutWithOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new TimeoutWithSubscriber(subscriber, this.absoluteTimeout, this.waitFor, this.withObservable, this.scheduler));
+    };
+    return TimeoutWithOperator;
+  }());
+  var TimeoutWithSubscriber = (function(_super) {
+    __extends(TimeoutWithSubscriber, _super);
+    function TimeoutWithSubscriber(destination, absoluteTimeout, waitFor, withObservable, scheduler) {
+      _super.call(this);
+      this.destination = destination;
+      this.absoluteTimeout = absoluteTimeout;
+      this.waitFor = waitFor;
+      this.withObservable = withObservable;
+      this.scheduler = scheduler;
+      this.timeoutSubscription = undefined;
+      this.index = 0;
+      this._previousIndex = 0;
+      this._hasCompleted = false;
+      destination.add(this);
+      this.scheduleTimeout();
+    }
+    Object.defineProperty(TimeoutWithSubscriber.prototype, "previousIndex", {
+      get: function() {
+        return this._previousIndex;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    Object.defineProperty(TimeoutWithSubscriber.prototype, "hasCompleted", {
+      get: function() {
+        return this._hasCompleted;
+      },
+      enumerable: true,
+      configurable: true
+    });
+    TimeoutWithSubscriber.dispatchTimeout = function(state) {
+      var source = state.subscriber;
+      var currentIndex = state.index;
+      if (!source.hasCompleted && source.previousIndex === currentIndex) {
+        source.handleTimeout();
+      }
+    };
+    TimeoutWithSubscriber.prototype.scheduleTimeout = function() {
+      var currentIndex = this.index;
+      var timeoutState = {
+        subscriber: this,
+        index: currentIndex
+      };
+      this.scheduler.schedule(TimeoutWithSubscriber.dispatchTimeout, this.waitFor, timeoutState);
+      this.index++;
+      this._previousIndex = currentIndex;
+    };
+    TimeoutWithSubscriber.prototype._next = function(value) {
+      this.destination.next(value);
+      if (!this.absoluteTimeout) {
+        this.scheduleTimeout();
+      }
+    };
+    TimeoutWithSubscriber.prototype._error = function(err) {
+      this.destination.error(err);
+      this._hasCompleted = true;
+    };
+    TimeoutWithSubscriber.prototype._complete = function() {
+      this.destination.complete();
+      this._hasCompleted = true;
+    };
+    TimeoutWithSubscriber.prototype.handleTimeout = function() {
+      if (!this.isUnsubscribed) {
+        var withObservable = this.withObservable;
+        this.unsubscribe();
+        this.destination.add(this.timeoutSubscription = subscribeToResult_1.subscribeToResult(this, withObservable));
+      }
+    };
+    return TimeoutWithSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("fa", ["7", "f9"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var timeoutWith_1 = $__require('f9');
+  Observable_1.Observable.prototype.timeoutWith = timeoutWith_1.timeoutWith;
+  return module.exports;
+});
+
+$__System.registerDynamic("fb", ["62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  function toArray() {
+    return this.lift(new ToArrayOperator());
+  }
+  exports.toArray = toArray;
+  var ToArrayOperator = (function() {
+    function ToArrayOperator() {}
+    ToArrayOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new ToArraySubscriber(subscriber));
+    };
+    return ToArrayOperator;
+  }());
+  var ToArraySubscriber = (function(_super) {
+    __extends(ToArraySubscriber, _super);
+    function ToArraySubscriber(destination) {
+      _super.call(this, destination);
+      this.array = [];
+    }
+    ToArraySubscriber.prototype._next = function(x) {
+      this.array.push(x);
+    };
+    ToArraySubscriber.prototype._complete = function() {
+      this.destination.next(this.array);
+      this.destination.complete();
+    };
+    return ToArraySubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("fc", ["7", "fb"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var toArray_1 = $__require('fb');
+  Observable_1.Observable.prototype.toArray = toArray_1.toArray;
+  return module.exports;
+});
+
+$__System.registerDynamic("fd", ["7", "6"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var toPromise_1 = $__require('6');
+  Observable_1.Observable.prototype.toPromise = toPromise_1.toPromise;
+  return module.exports;
+});
+
+$__System.registerDynamic("fe", ["4", "20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subject_1 = $__require('4');
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function window(windowBoundaries) {
+    return this.lift(new WindowOperator(windowBoundaries));
+  }
+  exports.window = window;
+  var WindowOperator = (function() {
+    function WindowOperator(windowBoundaries) {
+      this.windowBoundaries = windowBoundaries;
+    }
+    WindowOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new WindowSubscriber(subscriber, this.windowBoundaries));
+    };
+    return WindowOperator;
+  }());
+  var WindowSubscriber = (function(_super) {
+    __extends(WindowSubscriber, _super);
+    function WindowSubscriber(destination, windowBoundaries) {
+      _super.call(this, destination);
+      this.destination = destination;
+      this.windowBoundaries = windowBoundaries;
+      this.add(subscribeToResult_1.subscribeToResult(this, windowBoundaries));
+      this.openWindow();
+    }
+    WindowSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      this.openWindow();
+    };
+    WindowSubscriber.prototype.notifyError = function(error, innerSub) {
+      this._error(error);
+    };
+    WindowSubscriber.prototype.notifyComplete = function(innerSub) {
+      this._complete();
+    };
+    WindowSubscriber.prototype._next = function(value) {
+      this.window.next(value);
+    };
+    WindowSubscriber.prototype._error = function(err) {
+      this.window.error(err);
+      this.destination.error(err);
+    };
+    WindowSubscriber.prototype._complete = function() {
+      this.window.complete();
+      this.destination.complete();
+    };
+    WindowSubscriber.prototype.openWindow = function() {
+      var prevWindow = this.window;
+      if (prevWindow) {
+        prevWindow.complete();
+      }
+      var destination = this.destination;
+      var newWindow = this.window = new Subject_1.Subject();
+      destination.add(newWindow);
+      destination.next(newWindow);
+    };
+    return WindowSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("ff", ["7", "fe"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var window_1 = $__require('fe');
+  Observable_1.Observable.prototype.window = window_1.window;
+  return module.exports;
+});
+
+$__System.registerDynamic("100", ["62", "4"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var Subject_1 = $__require('4');
+  function windowCount(windowSize, startWindowEvery) {
+    if (startWindowEvery === void 0) {
+      startWindowEvery = 0;
+    }
+    return this.lift(new WindowCountOperator(windowSize, startWindowEvery));
+  }
+  exports.windowCount = windowCount;
+  var WindowCountOperator = (function() {
+    function WindowCountOperator(windowSize, startWindowEvery) {
+      this.windowSize = windowSize;
+      this.startWindowEvery = startWindowEvery;
+    }
+    WindowCountOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new WindowCountSubscriber(subscriber, this.windowSize, this.startWindowEvery));
+    };
+    return WindowCountOperator;
+  }());
+  var WindowCountSubscriber = (function(_super) {
+    __extends(WindowCountSubscriber, _super);
+    function WindowCountSubscriber(destination, windowSize, startWindowEvery) {
+      _super.call(this, destination);
+      this.destination = destination;
+      this.windowSize = windowSize;
+      this.startWindowEvery = startWindowEvery;
+      this.windows = [new Subject_1.Subject()];
+      this.count = 0;
+      var firstWindow = this.windows[0];
+      destination.add(firstWindow);
+      destination.next(firstWindow);
+    }
+    WindowCountSubscriber.prototype._next = function(value) {
+      var startWindowEvery = (this.startWindowEvery > 0) ? this.startWindowEvery : this.windowSize;
+      var destination = this.destination;
+      var windowSize = this.windowSize;
+      var windows = this.windows;
+      var len = windows.length;
+      for (var i = 0; i < len; i++) {
+        windows[i].next(value);
+      }
+      var c = this.count - windowSize + 1;
+      if (c >= 0 && c % startWindowEvery === 0) {
+        windows.shift().complete();
+      }
+      if (++this.count % startWindowEvery === 0) {
+        var window_1 = new Subject_1.Subject();
+        windows.push(window_1);
+        destination.add(window_1);
+        destination.next(window_1);
+      }
+    };
+    WindowCountSubscriber.prototype._error = function(err) {
+      var windows = this.windows;
+      while (windows.length > 0) {
+        windows.shift().error(err);
+      }
+      this.destination.error(err);
+    };
+    WindowCountSubscriber.prototype._complete = function() {
+      var windows = this.windows;
+      while (windows.length > 0) {
+        windows.shift().complete();
+      }
+      this.destination.complete();
+    };
+    return WindowCountSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("101", ["7", "100"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var windowCount_1 = $__require('100');
+  Observable_1.Observable.prototype.windowCount = windowCount_1.windowCount;
+  return module.exports;
+});
+
+$__System.registerDynamic("102", ["62", "4", "44"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var Subject_1 = $__require('4');
+  var async_1 = $__require('44');
+  function windowTime(windowTimeSpan, windowCreationInterval, scheduler) {
+    if (windowCreationInterval === void 0) {
+      windowCreationInterval = null;
+    }
+    if (scheduler === void 0) {
+      scheduler = async_1.async;
+    }
+    return this.lift(new WindowTimeOperator(windowTimeSpan, windowCreationInterval, scheduler));
+  }
+  exports.windowTime = windowTime;
+  var WindowTimeOperator = (function() {
+    function WindowTimeOperator(windowTimeSpan, windowCreationInterval, scheduler) {
+      this.windowTimeSpan = windowTimeSpan;
+      this.windowCreationInterval = windowCreationInterval;
+      this.scheduler = scheduler;
+    }
+    WindowTimeOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new WindowTimeSubscriber(subscriber, this.windowTimeSpan, this.windowCreationInterval, this.scheduler));
+    };
+    return WindowTimeOperator;
+  }());
+  var WindowTimeSubscriber = (function(_super) {
+    __extends(WindowTimeSubscriber, _super);
+    function WindowTimeSubscriber(destination, windowTimeSpan, windowCreationInterval, scheduler) {
+      _super.call(this, destination);
+      this.destination = destination;
+      this.windowTimeSpan = windowTimeSpan;
+      this.windowCreationInterval = windowCreationInterval;
+      this.scheduler = scheduler;
+      this.windows = [];
+      if (windowCreationInterval !== null && windowCreationInterval >= 0) {
+        var window_1 = this.openWindow();
+        var closeState = {
+          subscriber: this,
+          window: window_1,
+          context: null
+        };
+        var creationState = {
+          windowTimeSpan: windowTimeSpan,
+          windowCreationInterval: windowCreationInterval,
+          subscriber: this,
+          scheduler: scheduler
+        };
+        this.add(scheduler.schedule(dispatchWindowClose, windowTimeSpan, closeState));
+        this.add(scheduler.schedule(dispatchWindowCreation, windowCreationInterval, creationState));
+      } else {
+        var window_2 = this.openWindow();
+        var timeSpanOnlyState = {
+          subscriber: this,
+          window: window_2,
+          windowTimeSpan: windowTimeSpan
+        };
+        this.add(scheduler.schedule(dispatchWindowTimeSpanOnly, windowTimeSpan, timeSpanOnlyState));
+      }
+    }
+    WindowTimeSubscriber.prototype._next = function(value) {
+      var windows = this.windows;
+      var len = windows.length;
+      for (var i = 0; i < len; i++) {
+        var window_3 = windows[i];
+        if (!window_3.isUnsubscribed) {
+          window_3.next(value);
+        }
+      }
+    };
+    WindowTimeSubscriber.prototype._error = function(err) {
+      var windows = this.windows;
+      while (windows.length > 0) {
+        windows.shift().error(err);
+      }
+      this.destination.error(err);
+    };
+    WindowTimeSubscriber.prototype._complete = function() {
+      var windows = this.windows;
+      while (windows.length > 0) {
+        var window_4 = windows.shift();
+        if (!window_4.isUnsubscribed) {
+          window_4.complete();
+        }
+      }
+      this.destination.complete();
+    };
+    WindowTimeSubscriber.prototype.openWindow = function() {
+      var window = new Subject_1.Subject();
+      this.windows.push(window);
+      var destination = this.destination;
+      destination.add(window);
+      destination.next(window);
+      return window;
+    };
+    WindowTimeSubscriber.prototype.closeWindow = function(window) {
+      window.complete();
+      var windows = this.windows;
+      windows.splice(windows.indexOf(window), 1);
+    };
+    return WindowTimeSubscriber;
+  }(Subscriber_1.Subscriber));
+  function dispatchWindowTimeSpanOnly(state) {
+    var subscriber = state.subscriber,
+        windowTimeSpan = state.windowTimeSpan,
+        window = state.window;
+    if (window) {
+      window.complete();
+    }
+    state.window = subscriber.openWindow();
+    this.schedule(state, windowTimeSpan);
+  }
+  function dispatchWindowCreation(state) {
+    var windowTimeSpan = state.windowTimeSpan,
+        subscriber = state.subscriber,
+        scheduler = state.scheduler,
+        windowCreationInterval = state.windowCreationInterval;
+    var window = subscriber.openWindow();
+    var action = this;
+    var context = {
+      action: action,
+      subscription: null
+    };
+    var timeSpanState = {
+      subscriber: subscriber,
+      window: window,
+      context: context
+    };
+    context.subscription = scheduler.schedule(dispatchWindowClose, windowTimeSpan, timeSpanState);
+    action.add(context.subscription);
+    action.schedule(state, windowCreationInterval);
+  }
+  function dispatchWindowClose(arg) {
+    var subscriber = arg.subscriber,
+        window = arg.window,
+        context = arg.context;
+    if (context && context.action && context.subscription) {
+      context.action.remove(context.subscription);
+    }
+    subscriber.closeWindow(window);
+  }
+  return module.exports;
+});
+
+$__System.registerDynamic("103", ["7", "102"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var windowTime_1 = $__require('102');
+  Observable_1.Observable.prototype.windowTime = windowTime_1.windowTime;
+  return module.exports;
+});
+
+$__System.registerDynamic("104", ["4", "3a", "11", "12", "20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subject_1 = $__require('4');
+  var Subscription_1 = $__require('3a');
+  var tryCatch_1 = $__require('11');
+  var errorObject_1 = $__require('12');
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function windowToggle(openings, closingSelector) {
+    return this.lift(new WindowToggleOperator(openings, closingSelector));
+  }
+  exports.windowToggle = windowToggle;
+  var WindowToggleOperator = (function() {
+    function WindowToggleOperator(openings, closingSelector) {
+      this.openings = openings;
+      this.closingSelector = closingSelector;
+    }
+    WindowToggleOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new WindowToggleSubscriber(subscriber, this.openings, this.closingSelector));
+    };
+    return WindowToggleOperator;
+  }());
+  var WindowToggleSubscriber = (function(_super) {
+    __extends(WindowToggleSubscriber, _super);
+    function WindowToggleSubscriber(destination, openings, closingSelector) {
+      _super.call(this, destination);
+      this.openings = openings;
+      this.closingSelector = closingSelector;
+      this.contexts = [];
+      this.add(this.openSubscription = subscribeToResult_1.subscribeToResult(this, openings, openings));
+    }
+    WindowToggleSubscriber.prototype._next = function(value) {
+      var contexts = this.contexts;
+      if (contexts) {
+        var len = contexts.length;
+        for (var i = 0; i < len; i++) {
+          contexts[i].window.next(value);
+        }
+      }
+    };
+    WindowToggleSubscriber.prototype._error = function(err) {
+      var contexts = this.contexts;
+      this.contexts = null;
+      if (contexts) {
+        var len = contexts.length;
+        var index = -1;
+        while (++index < len) {
+          var context = contexts[index];
+          context.window.error(err);
+          context.subscription.unsubscribe();
+        }
+      }
+      _super.prototype._error.call(this, err);
+    };
+    WindowToggleSubscriber.prototype._complete = function() {
+      var contexts = this.contexts;
+      this.contexts = null;
+      if (contexts) {
+        var len = contexts.length;
+        var index = -1;
+        while (++index < len) {
+          var context = contexts[index];
+          context.window.complete();
+          context.subscription.unsubscribe();
+        }
+      }
+      _super.prototype._complete.call(this);
+    };
+    WindowToggleSubscriber.prototype._unsubscribe = function() {
+      var contexts = this.contexts;
+      this.contexts = null;
+      if (contexts) {
+        var len = contexts.length;
+        var index = -1;
+        while (++index < len) {
+          var context = contexts[index];
+          context.window.unsubscribe();
+          context.subscription.unsubscribe();
+        }
+      }
+    };
+    WindowToggleSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      if (outerValue === this.openings) {
+        var closingSelector = this.closingSelector;
+        var closingNotifier = tryCatch_1.tryCatch(closingSelector)(innerValue);
+        if (closingNotifier === errorObject_1.errorObject) {
+          return this.error(errorObject_1.errorObject.e);
+        } else {
+          var window_1 = new Subject_1.Subject();
+          var subscription = new Subscription_1.Subscription();
+          var context = {
+            window: window_1,
+            subscription: subscription
+          };
+          this.contexts.push(context);
+          var innerSubscription = subscribeToResult_1.subscribeToResult(this, closingNotifier, context);
+          if (innerSubscription.isUnsubscribed) {
+            this.closeWindow(this.contexts.length - 1);
+          } else {
+            innerSubscription.context = context;
+            subscription.add(innerSubscription);
+          }
+          this.destination.next(window_1);
+        }
+      } else {
+        this.closeWindow(this.contexts.indexOf(outerValue));
+      }
+    };
+    WindowToggleSubscriber.prototype.notifyError = function(err) {
+      this.error(err);
+    };
+    WindowToggleSubscriber.prototype.notifyComplete = function(inner) {
+      if (inner !== this.openSubscription) {
+        this.closeWindow(this.contexts.indexOf(inner.context));
+      }
+    };
+    WindowToggleSubscriber.prototype.closeWindow = function(index) {
+      if (index === -1) {
+        return;
+      }
+      var contexts = this.contexts;
+      var context = contexts[index];
+      var window = context.window,
+          subscription = context.subscription;
+      contexts.splice(index, 1);
+      window.complete();
+      subscription.unsubscribe();
+    };
+    return WindowToggleSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("105", ["7", "104"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var windowToggle_1 = $__require('104');
+  Observable_1.Observable.prototype.windowToggle = windowToggle_1.windowToggle;
+  return module.exports;
+});
+
+$__System.registerDynamic("106", ["4", "11", "12", "20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subject_1 = $__require('4');
+  var tryCatch_1 = $__require('11');
+  var errorObject_1 = $__require('12');
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function windowWhen(closingSelector) {
+    return this.lift(new WindowOperator(closingSelector));
+  }
+  exports.windowWhen = windowWhen;
+  var WindowOperator = (function() {
+    function WindowOperator(closingSelector) {
+      this.closingSelector = closingSelector;
+    }
+    WindowOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new WindowSubscriber(subscriber, this.closingSelector));
+    };
+    return WindowOperator;
+  }());
+  var WindowSubscriber = (function(_super) {
+    __extends(WindowSubscriber, _super);
+    function WindowSubscriber(destination, closingSelector) {
+      _super.call(this, destination);
+      this.destination = destination;
+      this.closingSelector = closingSelector;
+      this.openWindow();
+    }
+    WindowSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      this.openWindow(innerSub);
+    };
+    WindowSubscriber.prototype.notifyError = function(error, innerSub) {
+      this._error(error);
+    };
+    WindowSubscriber.prototype.notifyComplete = function(innerSub) {
+      this.openWindow(innerSub);
+    };
+    WindowSubscriber.prototype._next = function(value) {
+      this.window.next(value);
+    };
+    WindowSubscriber.prototype._error = function(err) {
+      this.window.error(err);
+      this.destination.error(err);
+      this.unsubscribeClosingNotification();
+    };
+    WindowSubscriber.prototype._complete = function() {
+      this.window.complete();
+      this.destination.complete();
+      this.unsubscribeClosingNotification();
+    };
+    WindowSubscriber.prototype.unsubscribeClosingNotification = function() {
+      if (this.closingNotification) {
+        this.closingNotification.unsubscribe();
+      }
+    };
+    WindowSubscriber.prototype.openWindow = function(innerSub) {
+      if (innerSub === void 0) {
+        innerSub = null;
+      }
+      if (innerSub) {
+        this.remove(innerSub);
+        innerSub.unsubscribe();
+      }
+      var prevWindow = this.window;
+      if (prevWindow) {
+        prevWindow.complete();
+      }
+      var window = this.window = new Subject_1.Subject();
+      this.destination.next(window);
+      var closingNotifier = tryCatch_1.tryCatch(this.closingSelector)();
+      if (closingNotifier === errorObject_1.errorObject) {
+        var err = errorObject_1.errorObject.e;
+        this.destination.error(err);
+        this.window.error(err);
+      } else {
+        this.add(this.closingNotification = subscribeToResult_1.subscribeToResult(this, closingNotifier));
+        this.add(window);
+      }
+    };
+    return WindowSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("107", ["7", "106"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var windowWhen_1 = $__require('106');
+  Observable_1.Observable.prototype.windowWhen = windowWhen_1.windowWhen;
+  return module.exports;
+});
+
+$__System.registerDynamic("108", ["20", "1f"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  function withLatestFrom() {
+    var args = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      args[_i - 0] = arguments[_i];
+    }
+    var project;
+    if (typeof args[args.length - 1] === 'function') {
+      project = args.pop();
+    }
+    var observables = args;
+    return this.lift(new WithLatestFromOperator(observables, project));
+  }
+  exports.withLatestFrom = withLatestFrom;
+  var WithLatestFromOperator = (function() {
+    function WithLatestFromOperator(observables, project) {
+      this.observables = observables;
+      this.project = project;
+    }
+    WithLatestFromOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new WithLatestFromSubscriber(subscriber, this.observables, this.project));
+    };
+    return WithLatestFromOperator;
+  }());
+  var WithLatestFromSubscriber = (function(_super) {
+    __extends(WithLatestFromSubscriber, _super);
+    function WithLatestFromSubscriber(destination, observables, project) {
+      _super.call(this, destination);
+      this.observables = observables;
+      this.project = project;
+      this.toRespond = [];
+      var len = observables.length;
+      this.values = new Array(len);
+      for (var i = 0; i < len; i++) {
+        this.toRespond.push(i);
+      }
+      for (var i = 0; i < len; i++) {
+        var observable = observables[i];
+        this.add(subscribeToResult_1.subscribeToResult(this, observable, observable, i));
+      }
+    }
+    WithLatestFromSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      this.values[outerIndex] = innerValue;
+      var toRespond = this.toRespond;
+      if (toRespond.length > 0) {
+        var found = toRespond.indexOf(outerIndex);
+        if (found !== -1) {
+          toRespond.splice(found, 1);
+        }
+      }
+    };
+    WithLatestFromSubscriber.prototype.notifyComplete = function() {};
+    WithLatestFromSubscriber.prototype._next = function(value) {
+      if (this.toRespond.length === 0) {
+        var args = [value].concat(this.values);
+        if (this.project) {
+          this._tryProject(args);
+        } else {
+          this.destination.next(args);
+        }
+      }
+    };
+    WithLatestFromSubscriber.prototype._tryProject = function(args) {
+      var result;
+      try {
+        result = this.project.apply(this, args);
+      } catch (err) {
+        this.destination.error(err);
+        return;
+      }
+      this.destination.next(result);
+    };
+    return WithLatestFromSubscriber;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("109", ["7", "108"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var withLatestFrom_1 = $__require('108');
+  Observable_1.Observable.prototype.withLatestFrom = withLatestFrom_1.withLatestFrom;
+  return module.exports;
+});
+
+$__System.registerDynamic("10a", ["7", "5d"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var zip_1 = $__require('5d');
+  Observable_1.Observable.prototype.zip = zip_1.zipProto;
+  return module.exports;
+});
+
+$__System.registerDynamic("30", ["7"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Observable_1 = $__require('7');
+  var ScalarObservable = (function(_super) {
+    __extends(ScalarObservable, _super);
+    function ScalarObservable(value, scheduler) {
+      _super.call(this);
+      this.value = value;
+      this.scheduler = scheduler;
+      this._isScalar = true;
+    }
+    ScalarObservable.create = function(value, scheduler) {
+      return new ScalarObservable(value, scheduler);
+    };
+    ScalarObservable.dispatch = function(state) {
+      var done = state.done,
+          value = state.value,
+          subscriber = state.subscriber;
+      if (done) {
+        subscriber.complete();
+        return;
+      }
+      subscriber.next(value);
+      if (subscriber.isUnsubscribed) {
+        return;
+      }
+      state.done = true;
+      this.schedule(state);
+    };
+    ScalarObservable.prototype._subscribe = function(subscriber) {
+      var value = this.value;
+      var scheduler = this.scheduler;
+      if (scheduler) {
+        return scheduler.schedule(ScalarObservable.dispatch, 0, {
+          done: false,
+          value: value,
+          subscriber: subscriber
+        });
+      } else {
+        subscriber.next(value);
+        if (!subscriber.isUnsubscribed) {
+          subscriber.complete();
+        }
+      }
+    };
+    return ScalarObservable;
+  }(Observable_1.Observable));
+  exports.ScalarObservable = ScalarObservable;
+  return module.exports;
+});
+
+$__System.registerDynamic("24", ["7"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Observable_1 = $__require('7');
+  var EmptyObservable = (function(_super) {
+    __extends(EmptyObservable, _super);
+    function EmptyObservable(scheduler) {
+      _super.call(this);
+      this.scheduler = scheduler;
+    }
+    EmptyObservable.create = function(scheduler) {
+      return new EmptyObservable(scheduler);
+    };
+    EmptyObservable.dispatch = function(arg) {
+      var subscriber = arg.subscriber;
+      subscriber.complete();
+    };
+    EmptyObservable.prototype._subscribe = function(subscriber) {
+      var scheduler = this.scheduler;
+      if (scheduler) {
+        return scheduler.schedule(EmptyObservable.dispatch, 0, {subscriber: subscriber});
+      } else {
+        subscriber.complete();
+      }
+    };
+    return EmptyObservable;
+  }(Observable_1.Observable));
+  exports.EmptyObservable = EmptyObservable;
+  return module.exports;
+});
+
+$__System.registerDynamic("33", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  function isScheduler(value) {
+    return value && typeof value.schedule === 'function';
+  }
+  exports.isScheduler = isScheduler;
+  return module.exports;
+});
+
+$__System.registerDynamic("34", ["7", "30", "24", "33"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Observable_1 = $__require('7');
+  var ScalarObservable_1 = $__require('30');
+  var EmptyObservable_1 = $__require('24');
+  var isScheduler_1 = $__require('33');
+  var ArrayObservable = (function(_super) {
+    __extends(ArrayObservable, _super);
+    function ArrayObservable(array, scheduler) {
+      _super.call(this);
+      this.array = array;
+      this.scheduler = scheduler;
+      if (!scheduler && array.length === 1) {
+        this._isScalar = true;
+        this.value = array[0];
+      }
+    }
+    ArrayObservable.create = function(array, scheduler) {
+      return new ArrayObservable(array, scheduler);
+    };
+    ArrayObservable.of = function() {
+      var array = [];
+      for (var _i = 0; _i < arguments.length; _i++) {
+        array[_i - 0] = arguments[_i];
+      }
+      var scheduler = array[array.length - 1];
+      if (isScheduler_1.isScheduler(scheduler)) {
+        array.pop();
+      } else {
+        scheduler = null;
+      }
+      var len = array.length;
+      if (len > 1) {
+        return new ArrayObservable(array, scheduler);
+      } else if (len === 1) {
+        return new ScalarObservable_1.ScalarObservable(array[0], scheduler);
+      } else {
+        return new EmptyObservable_1.EmptyObservable(scheduler);
+      }
+    };
+    ArrayObservable.dispatch = function(state) {
+      var array = state.array,
+          index = state.index,
+          count = state.count,
+          subscriber = state.subscriber;
+      if (index >= count) {
+        subscriber.complete();
+        return;
+      }
+      subscriber.next(array[index]);
+      if (subscriber.isUnsubscribed) {
+        return;
+      }
+      state.index = index + 1;
+      this.schedule(state);
+    };
+    ArrayObservable.prototype._subscribe = function(subscriber) {
+      var index = 0;
+      var array = this.array;
+      var count = array.length;
+      var scheduler = this.scheduler;
+      if (scheduler) {
+        return scheduler.schedule(ArrayObservable.dispatch, 0, {
+          array: array,
+          index: index,
+          count: count,
+          subscriber: subscriber
+        });
+      } else {
+        for (var i = 0; i < count && !subscriber.isUnsubscribed; i++) {
+          subscriber.next(array[i]);
+        }
+        subscriber.complete();
+      }
+    };
+    return ArrayObservable;
+  }(Observable_1.Observable));
+  exports.ArrayObservable = ArrayObservable;
+  return module.exports;
+});
+
+$__System.registerDynamic("20", ["62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var OuterSubscriber = (function(_super) {
+    __extends(OuterSubscriber, _super);
+    function OuterSubscriber() {
+      _super.apply(this, arguments);
+    }
+    OuterSubscriber.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      this.destination.next(innerValue);
+    };
+    OuterSubscriber.prototype.notifyError = function(error, innerSub) {
+      this.destination.error(error);
+    };
+    OuterSubscriber.prototype.notifyComplete = function(innerSub) {
+      this.destination.complete();
+    };
+    return OuterSubscriber;
+  }(Subscriber_1.Subscriber));
+  exports.OuterSubscriber = OuterSubscriber;
+  return module.exports;
+});
+
+$__System.registerDynamic("32", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  function isPromise(value) {
+    return value && typeof value.subscribe !== 'function' && typeof value.then === 'function';
+  }
+  exports.isPromise = isPromise;
+  return module.exports;
+});
+
+$__System.registerDynamic("10b", ["62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var InnerSubscriber = (function(_super) {
+    __extends(InnerSubscriber, _super);
+    function InnerSubscriber(parent, outerValue, outerIndex) {
+      _super.call(this);
+      this.parent = parent;
+      this.outerValue = outerValue;
+      this.outerIndex = outerIndex;
+      this.index = 0;
+    }
+    InnerSubscriber.prototype._next = function(value) {
+      this.parent.notifyNext(this.outerValue, value, this.outerIndex, this.index++, this);
+    };
+    InnerSubscriber.prototype._error = function(error) {
+      this.parent.notifyError(error, this);
+      this.unsubscribe();
+    };
+    InnerSubscriber.prototype._complete = function() {
+      this.parent.notifyComplete(this);
+      this.unsubscribe();
+    };
+    return InnerSubscriber;
+  }(Subscriber_1.Subscriber));
+  exports.InnerSubscriber = InnerSubscriber;
+  return module.exports;
+});
+
+$__System.registerDynamic("1f", ["2b", "27", "32", "7", "2e", "35", "10b"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var root_1 = $__require('2b');
+  var isArray_1 = $__require('27');
+  var isPromise_1 = $__require('32');
+  var Observable_1 = $__require('7');
+  var iterator_1 = $__require('2e');
+  var observable_1 = $__require('35');
+  var InnerSubscriber_1 = $__require('10b');
+  function subscribeToResult(outerSubscriber, result, outerValue, outerIndex) {
+    var destination = new InnerSubscriber_1.InnerSubscriber(outerSubscriber, outerValue, outerIndex);
+    if (destination.isUnsubscribed) {
+      return;
+    }
+    if (result instanceof Observable_1.Observable) {
+      if (result._isScalar) {
+        destination.next(result.value);
+        destination.complete();
+        return;
+      } else {
+        return result.subscribe(destination);
+      }
+    }
+    if (isArray_1.isArray(result)) {
+      for (var i = 0,
+          len = result.length; i < len && !destination.isUnsubscribed; i++) {
+        destination.next(result[i]);
+      }
+      if (!destination.isUnsubscribed) {
+        destination.complete();
+      }
+    } else if (isPromise_1.isPromise(result)) {
+      result.then(function(value) {
+        if (!destination.isUnsubscribed) {
+          destination.next(value);
+          destination.complete();
+        }
+      }, function(err) {
+        return destination.error(err);
+      }).then(null, function(err) {
+        root_1.root.setTimeout(function() {
+          throw err;
+        });
+      });
+      return destination;
+    } else if (typeof result[iterator_1.$$iterator] === 'function') {
+      for (var _i = 0,
+          _a = result; _i < _a.length; _i++) {
+        var item = _a[_i];
+        destination.next(item);
+        if (destination.isUnsubscribed) {
+          break;
+        }
+      }
+      if (!destination.isUnsubscribed) {
+        destination.complete();
+      }
+    } else if (typeof result[observable_1.$$observable] === 'function') {
+      var obs = result[observable_1.$$observable]();
+      if (typeof obs.subscribe !== 'function') {
+        destination.error('invalid observable');
+      } else {
+        return obs.subscribe(new InnerSubscriber_1.InnerSubscriber(outerSubscriber, outerValue, outerIndex));
+      }
+    } else {
+      destination.error(new TypeError('unknown type returned'));
+    }
+  }
+  exports.subscribeToResult = subscribeToResult;
+  return module.exports;
+});
+
+$__System.registerDynamic("5d", ["34", "27", "62", "20", "1f", "2e"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var ArrayObservable_1 = $__require('34');
+  var isArray_1 = $__require('27');
+  var Subscriber_1 = $__require('62');
+  var OuterSubscriber_1 = $__require('20');
+  var subscribeToResult_1 = $__require('1f');
+  var iterator_1 = $__require('2e');
+  function zipProto() {
+    var observables = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      observables[_i - 0] = arguments[_i];
+    }
+    observables.unshift(this);
+    return zipStatic.apply(this, observables);
+  }
+  exports.zipProto = zipProto;
+  function zipStatic() {
+    var observables = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+      observables[_i - 0] = arguments[_i];
+    }
+    var project = observables[observables.length - 1];
+    if (typeof project === 'function') {
+      observables.pop();
+    }
+    return new ArrayObservable_1.ArrayObservable(observables).lift(new ZipOperator(project));
+  }
+  exports.zipStatic = zipStatic;
+  var ZipOperator = (function() {
+    function ZipOperator(project) {
+      this.project = project;
+    }
+    ZipOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new ZipSubscriber(subscriber, this.project));
+    };
+    return ZipOperator;
+  }());
+  exports.ZipOperator = ZipOperator;
+  var ZipSubscriber = (function(_super) {
+    __extends(ZipSubscriber, _super);
+    function ZipSubscriber(destination, project, values) {
+      if (values === void 0) {
+        values = Object.create(null);
+      }
+      _super.call(this, destination);
+      this.index = 0;
+      this.iterators = [];
+      this.active = 0;
+      this.project = (typeof project === 'function') ? project : null;
+      this.values = values;
+    }
+    ZipSubscriber.prototype._next = function(value) {
+      var iterators = this.iterators;
+      var index = this.index++;
+      if (isArray_1.isArray(value)) {
+        iterators.push(new StaticArrayIterator(value));
+      } else if (typeof value[iterator_1.$$iterator] === 'function') {
+        iterators.push(new StaticIterator(value[iterator_1.$$iterator]()));
+      } else {
+        iterators.push(new ZipBufferIterator(this.destination, this, value, index));
+      }
+    };
+    ZipSubscriber.prototype._complete = function() {
+      var iterators = this.iterators;
+      var len = iterators.length;
+      this.active = len;
+      for (var i = 0; i < len; i++) {
+        var iterator = iterators[i];
+        if (iterator.stillUnsubscribed) {
+          this.add(iterator.subscribe(iterator, i));
+        } else {
+          this.active--;
+        }
+      }
+    };
+    ZipSubscriber.prototype.notifyInactive = function() {
+      this.active--;
+      if (this.active === 0) {
+        this.destination.complete();
+      }
+    };
+    ZipSubscriber.prototype.checkIterators = function() {
+      var iterators = this.iterators;
+      var len = iterators.length;
+      var destination = this.destination;
+      for (var i = 0; i < len; i++) {
+        var iterator = iterators[i];
+        if (typeof iterator.hasValue === 'function' && !iterator.hasValue()) {
+          return;
+        }
+      }
+      var shouldComplete = false;
+      var args = [];
+      for (var i = 0; i < len; i++) {
+        var iterator = iterators[i];
+        var result = iterator.next();
+        if (iterator.hasCompleted()) {
+          shouldComplete = true;
+        }
+        if (result.done) {
+          destination.complete();
+          return;
+        }
+        args.push(result.value);
+      }
+      if (this.project) {
+        this._tryProject(args);
+      } else {
+        destination.next(args);
+      }
+      if (shouldComplete) {
+        destination.complete();
+      }
+    };
+    ZipSubscriber.prototype._tryProject = function(args) {
+      var result;
+      try {
+        result = this.project.apply(this, args);
+      } catch (err) {
+        this.destination.error(err);
+        return;
+      }
+      this.destination.next(result);
+    };
+    return ZipSubscriber;
+  }(Subscriber_1.Subscriber));
+  exports.ZipSubscriber = ZipSubscriber;
+  var StaticIterator = (function() {
+    function StaticIterator(iterator) {
+      this.iterator = iterator;
+      this.nextResult = iterator.next();
+    }
+    StaticIterator.prototype.hasValue = function() {
+      return true;
+    };
+    StaticIterator.prototype.next = function() {
+      var result = this.nextResult;
+      this.nextResult = this.iterator.next();
+      return result;
+    };
+    StaticIterator.prototype.hasCompleted = function() {
+      var nextResult = this.nextResult;
+      return nextResult && nextResult.done;
+    };
+    return StaticIterator;
+  }());
+  var StaticArrayIterator = (function() {
+    function StaticArrayIterator(array) {
+      this.array = array;
+      this.index = 0;
+      this.length = 0;
+      this.length = array.length;
+    }
+    StaticArrayIterator.prototype[iterator_1.$$iterator] = function() {
+      return this;
+    };
+    StaticArrayIterator.prototype.next = function(value) {
+      var i = this.index++;
+      var array = this.array;
+      return i < this.length ? {
+        value: array[i],
+        done: false
+      } : {done: true};
+    };
+    StaticArrayIterator.prototype.hasValue = function() {
+      return this.array.length > this.index;
+    };
+    StaticArrayIterator.prototype.hasCompleted = function() {
+      return this.array.length === this.index;
+    };
+    return StaticArrayIterator;
+  }());
+  var ZipBufferIterator = (function(_super) {
+    __extends(ZipBufferIterator, _super);
+    function ZipBufferIterator(destination, parent, observable, index) {
+      _super.call(this, destination);
+      this.parent = parent;
+      this.observable = observable;
+      this.index = index;
+      this.stillUnsubscribed = true;
+      this.buffer = [];
+      this.isComplete = false;
+    }
+    ZipBufferIterator.prototype[iterator_1.$$iterator] = function() {
+      return this;
+    };
+    ZipBufferIterator.prototype.next = function() {
+      var buffer = this.buffer;
+      if (buffer.length === 0 && this.isComplete) {
+        return {done: true};
+      } else {
+        return {
+          value: buffer.shift(),
+          done: false
+        };
+      }
+    };
+    ZipBufferIterator.prototype.hasValue = function() {
+      return this.buffer.length > 0;
+    };
+    ZipBufferIterator.prototype.hasCompleted = function() {
+      return this.buffer.length === 0 && this.isComplete;
+    };
+    ZipBufferIterator.prototype.notifyComplete = function() {
+      if (this.buffer.length > 0) {
+        this.isComplete = true;
+        this.parent.notifyInactive();
+      } else {
+        this.destination.complete();
+      }
+    };
+    ZipBufferIterator.prototype.notifyNext = function(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+      this.buffer.push(innerValue);
+      this.parent.checkIterators();
+    };
+    ZipBufferIterator.prototype.subscribe = function(value, index) {
+      return subscribeToResult_1.subscribeToResult(this, this.observable, this, index);
+    };
+    return ZipBufferIterator;
+  }(OuterSubscriber_1.OuterSubscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("10c", ["5d"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var zip_1 = $__require('5d');
+  function zipAll(project) {
+    return this.lift(new zip_1.ZipOperator(project));
+  }
+  exports.zipAll = zipAll;
+  return module.exports;
+});
+
+$__System.registerDynamic("10d", ["7", "10c"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var zipAll_1 = $__require('10c');
+  Observable_1.Observable.prototype.zipAll = zipAll_1.zipAll;
+  return module.exports;
+});
+
+$__System.registerDynamic("10e", ["62"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Subscriber_1 = $__require('62');
+  var Operator = (function() {
+    function Operator() {}
+    Operator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new Subscriber_1.Subscriber(subscriber));
+    };
+    return Operator;
+  }());
+  exports.Operator = Operator;
+  return module.exports;
+});
+
+$__System.registerDynamic("13", ["4"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subject_1 = $__require('4');
+  var AsyncSubject = (function(_super) {
+    __extends(AsyncSubject, _super);
+    function AsyncSubject() {
+      _super.apply(this, arguments);
+      this.value = null;
+      this.hasNext = false;
+    }
+    AsyncSubject.prototype._subscribe = function(subscriber) {
+      if (this.hasCompleted && this.hasNext) {
+        subscriber.next(this.value);
+      }
+      return _super.prototype._subscribe.call(this, subscriber);
+    };
+    AsyncSubject.prototype._next = function(value) {
+      this.value = value;
+      this.hasNext = true;
+    };
+    AsyncSubject.prototype._complete = function() {
+      var index = -1;
+      var observers = this.observers;
+      var len = observers.length;
+      this.isUnsubscribed = true;
+      if (this.hasNext) {
+        while (++index < len) {
+          var o = observers[index];
+          o.next(this.value);
+          o.complete();
+        }
+      } else {
+        while (++index < len) {
+          observers[index].complete();
+        }
+      }
+      this.isUnsubscribed = false;
+      this.unsubscribe();
+    };
+    return AsyncSubject;
+  }(Subject_1.Subject));
+  exports.AsyncSubject = AsyncSubject;
+  return module.exports;
+});
+
+$__System.registerDynamic("36", ["62", "87"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscriber_1 = $__require('62');
+  var Notification_1 = $__require('87');
+  function observeOn(scheduler, delay) {
+    if (delay === void 0) {
+      delay = 0;
+    }
+    return this.lift(new ObserveOnOperator(scheduler, delay));
+  }
+  exports.observeOn = observeOn;
+  var ObserveOnOperator = (function() {
+    function ObserveOnOperator(scheduler, delay) {
+      if (delay === void 0) {
+        delay = 0;
+      }
+      this.scheduler = scheduler;
+      this.delay = delay;
+    }
+    ObserveOnOperator.prototype.call = function(subscriber, source) {
+      return source._subscribe(new ObserveOnSubscriber(subscriber, this.scheduler, this.delay));
+    };
+    return ObserveOnOperator;
+  }());
+  exports.ObserveOnOperator = ObserveOnOperator;
+  var ObserveOnSubscriber = (function(_super) {
+    __extends(ObserveOnSubscriber, _super);
+    function ObserveOnSubscriber(destination, scheduler, delay) {
+      if (delay === void 0) {
+        delay = 0;
+      }
+      _super.call(this, destination);
+      this.scheduler = scheduler;
+      this.delay = delay;
+    }
+    ObserveOnSubscriber.dispatch = function(arg) {
+      var notification = arg.notification,
+          destination = arg.destination;
+      notification.observe(destination);
+    };
+    ObserveOnSubscriber.prototype.scheduleMessage = function(notification) {
+      this.add(this.scheduler.schedule(ObserveOnSubscriber.dispatch, this.delay, new ObserveOnMessage(notification, this.destination)));
+    };
+    ObserveOnSubscriber.prototype._next = function(value) {
+      this.scheduleMessage(Notification_1.Notification.createNext(value));
+    };
+    ObserveOnSubscriber.prototype._error = function(err) {
+      this.scheduleMessage(Notification_1.Notification.createError(err));
+    };
+    ObserveOnSubscriber.prototype._complete = function() {
+      this.scheduleMessage(Notification_1.Notification.createComplete());
+    };
+    return ObserveOnSubscriber;
+  }(Subscriber_1.Subscriber));
+  exports.ObserveOnSubscriber = ObserveOnSubscriber;
+  var ObserveOnMessage = (function() {
+    function ObserveOnMessage(notification, destination) {
+      this.notification = notification;
+      this.destination = destination;
+    }
+    return ObserveOnMessage;
+  }());
+  exports.ObserveOnMessage = ObserveOnMessage;
+  return module.exports;
+});
+
+$__System.registerDynamic("c0", ["4", "10f", "36"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subject_1 = $__require('4');
+  var queue_1 = $__require('10f');
+  var observeOn_1 = $__require('36');
+  var ReplaySubject = (function(_super) {
+    __extends(ReplaySubject, _super);
+    function ReplaySubject(bufferSize, windowTime, scheduler) {
+      if (bufferSize === void 0) {
+        bufferSize = Number.POSITIVE_INFINITY;
+      }
+      if (windowTime === void 0) {
+        windowTime = Number.POSITIVE_INFINITY;
+      }
+      _super.call(this);
+      this.events = [];
+      this.scheduler = scheduler;
+      this.bufferSize = bufferSize < 1 ? 1 : bufferSize;
+      this._windowTime = windowTime < 1 ? 1 : windowTime;
+    }
+    ReplaySubject.prototype._next = function(value) {
+      var now = this._getNow();
+      this.events.push(new ReplayEvent(now, value));
+      this._trimBufferThenGetEvents(now);
+      _super.prototype._next.call(this, value);
+    };
+    ReplaySubject.prototype._subscribe = function(subscriber) {
+      var events = this._trimBufferThenGetEvents(this._getNow());
+      var scheduler = this.scheduler;
+      if (scheduler) {
+        subscriber.add(subscriber = new observeOn_1.ObserveOnSubscriber(subscriber, scheduler));
+      }
+      var index = -1;
+      var len = events.length;
+      while (++index < len && !subscriber.isUnsubscribed) {
+        subscriber.next(events[index].value);
+      }
+      return _super.prototype._subscribe.call(this, subscriber);
+    };
+    ReplaySubject.prototype._getNow = function() {
+      return (this.scheduler || queue_1.queue).now();
+    };
+    ReplaySubject.prototype._trimBufferThenGetEvents = function(now) {
+      var bufferSize = this.bufferSize;
+      var _windowTime = this._windowTime;
+      var events = this.events;
+      var eventsCount = events.length;
+      var spliceCount = 0;
+      while (spliceCount < eventsCount) {
+        if ((now - events[spliceCount].time) < _windowTime) {
+          break;
+        }
+        spliceCount += 1;
+      }
+      if (eventsCount > bufferSize) {
+        spliceCount = Math.max(spliceCount, eventsCount - bufferSize);
+      }
+      if (spliceCount > 0) {
+        events.splice(0, spliceCount);
+      }
+      return events;
+    };
+    return ReplaySubject;
+  }(Subject_1.Subject));
+  exports.ReplaySubject = ReplaySubject;
+  var ReplayEvent = (function() {
+    function ReplayEvent(time, value) {
+      this.time = time;
+      this.value = value;
+    }
+    return ReplayEvent;
+  }());
+  return module.exports;
+});
+
+$__System.registerDynamic("be", ["4", "110", "111"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subject_1 = $__require('4');
+  var throwError_1 = $__require('110');
+  var ObjectUnsubscribedError_1 = $__require('111');
+  var BehaviorSubject = (function(_super) {
+    __extends(BehaviorSubject, _super);
+    function BehaviorSubject(_value) {
+      _super.call(this);
+      this._value = _value;
+    }
+    BehaviorSubject.prototype.getValue = function() {
+      if (this.hasErrored) {
+        throwError_1.throwError(this.errorValue);
+      } else if (this.isUnsubscribed) {
+        throwError_1.throwError(new ObjectUnsubscribedError_1.ObjectUnsubscribedError());
+      } else {
+        return this._value;
+      }
+    };
+    Object.defineProperty(BehaviorSubject.prototype, "value", {
+      get: function() {
+        return this.getValue();
+      },
+      enumerable: true,
+      configurable: true
+    });
+    BehaviorSubject.prototype._subscribe = function(subscriber) {
+      var subscription = _super.prototype._subscribe.call(this, subscriber);
+      if (subscription && !subscription.isUnsubscribed) {
+        subscriber.next(this._value);
+      }
+      return subscription;
+    };
+    BehaviorSubject.prototype._next = function(value) {
+      _super.prototype._next.call(this, this._value = value);
+    };
+    BehaviorSubject.prototype._error = function(err) {
+      this.hasErrored = true;
+      _super.prototype._error.call(this, this.errorValue = err);
+    };
+    return BehaviorSubject;
+  }(Subject_1.Subject));
+  exports.BehaviorSubject = BehaviorSubject;
+  return module.exports;
+});
+
+$__System.registerDynamic("d3", ["7", "62", "3a"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Observable_1 = $__require('7');
+  var Subscriber_1 = $__require('62');
+  var Subscription_1 = $__require('3a');
+  var ConnectableObservable = (function(_super) {
+    __extends(ConnectableObservable, _super);
+    function ConnectableObservable(source, subjectFactory) {
+      _super.call(this);
+      this.source = source;
+      this.subjectFactory = subjectFactory;
+    }
+    ConnectableObservable.prototype._subscribe = function(subscriber) {
+      return this.getSubject().subscribe(subscriber);
+    };
+    ConnectableObservable.prototype.getSubject = function() {
+      var subject = this.subject;
+      if (subject && !subject.isUnsubscribed) {
+        return subject;
+      }
+      return (this.subject = this.subjectFactory());
+    };
+    ConnectableObservable.prototype.connect = function() {
+      var source = this.source;
+      var subscription = this.subscription;
+      if (subscription && !subscription.isUnsubscribed) {
+        return subscription;
+      }
+      subscription = source.subscribe(this.getSubject());
+      subscription.add(new ConnectableSubscription(this));
+      return (this.subscription = subscription);
+    };
+    ConnectableObservable.prototype.refCount = function() {
+      return new RefCountObservable(this);
+    };
+    ConnectableObservable.prototype._closeSubscription = function() {
+      this.subject = null;
+      this.subscription = null;
+    };
+    return ConnectableObservable;
+  }(Observable_1.Observable));
+  exports.ConnectableObservable = ConnectableObservable;
+  var ConnectableSubscription = (function(_super) {
+    __extends(ConnectableSubscription, _super);
+    function ConnectableSubscription(connectable) {
+      _super.call(this);
+      this.connectable = connectable;
+    }
+    ConnectableSubscription.prototype._unsubscribe = function() {
+      var connectable = this.connectable;
+      connectable._closeSubscription();
+      this.connectable = null;
+    };
+    return ConnectableSubscription;
+  }(Subscription_1.Subscription));
+  var RefCountObservable = (function(_super) {
+    __extends(RefCountObservable, _super);
+    function RefCountObservable(connectable, refCount) {
+      if (refCount === void 0) {
+        refCount = 0;
+      }
+      _super.call(this);
+      this.connectable = connectable;
+      this.refCount = refCount;
+    }
+    RefCountObservable.prototype._subscribe = function(subscriber) {
+      var connectable = this.connectable;
+      var refCountSubscriber = new RefCountSubscriber(subscriber, this);
+      var subscription = connectable.subscribe(refCountSubscriber);
+      if (!subscription.isUnsubscribed && ++this.refCount === 1) {
+        refCountSubscriber.connection = this.connection = connectable.connect();
+      }
+      return subscription;
+    };
+    return RefCountObservable;
+  }(Observable_1.Observable));
+  var RefCountSubscriber = (function(_super) {
+    __extends(RefCountSubscriber, _super);
+    function RefCountSubscriber(destination, refCountObservable) {
+      _super.call(this, null);
+      this.destination = destination;
+      this.refCountObservable = refCountObservable;
+      this.connection = refCountObservable.connection;
+      destination.add(this);
+    }
+    RefCountSubscriber.prototype._next = function(value) {
+      this.destination.next(value);
+    };
+    RefCountSubscriber.prototype._error = function(err) {
+      this._resetConnectable();
+      this.destination.error(err);
+    };
+    RefCountSubscriber.prototype._complete = function() {
+      this._resetConnectable();
+      this.destination.complete();
+    };
+    RefCountSubscriber.prototype._resetConnectable = function() {
+      var observable = this.refCountObservable;
+      var obsConnection = observable.connection;
+      var subConnection = this.connection;
+      if (subConnection && subConnection === obsConnection) {
+        observable.refCount = 0;
+        obsConnection.unsubscribe();
+        observable.connection = null;
+        this.unsubscribe();
+      }
+    };
+    RefCountSubscriber.prototype._unsubscribe = function() {
+      var observable = this.refCountObservable;
+      if (observable.refCount === 0) {
+        return;
+      }
+      if (--observable.refCount === 0) {
+        var obsConnection = observable.connection;
+        var subConnection = this.connection;
+        if (subConnection && subConnection === obsConnection) {
+          obsConnection.unsubscribe();
+          observable.connection = null;
+        }
+      }
+    };
+    return RefCountSubscriber;
+  }(Subscriber_1.Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("87", ["7"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Observable_1 = $__require('7');
+  var Notification = (function() {
+    function Notification(kind, value, exception) {
+      this.kind = kind;
+      this.value = value;
+      this.exception = exception;
+      this.hasValue = kind === 'N';
+    }
+    Notification.prototype.observe = function(observer) {
+      switch (this.kind) {
+        case 'N':
+          return observer.next && observer.next(this.value);
+        case 'E':
+          return observer.error && observer.error(this.exception);
+        case 'C':
+          return observer.complete && observer.complete();
+      }
+    };
+    Notification.prototype.do = function(next, error, complete) {
+      var kind = this.kind;
+      switch (kind) {
+        case 'N':
+          return next && next(this.value);
+        case 'E':
+          return error && error(this.exception);
+        case 'C':
+          return complete && complete();
+      }
+    };
+    Notification.prototype.accept = function(nextOrObserver, error, complete) {
+      if (nextOrObserver && typeof nextOrObserver.next === 'function') {
+        return this.observe(nextOrObserver);
+      } else {
+        return this.do(nextOrObserver, error, complete);
+      }
+    };
+    Notification.prototype.toObservable = function() {
+      var kind = this.kind;
+      switch (kind) {
+        case 'N':
+          return Observable_1.Observable.of(this.value);
+        case 'E':
+          return Observable_1.Observable.throw(this.exception);
+        case 'C':
+          return Observable_1.Observable.empty();
+      }
+    };
+    Notification.createNext = function(value) {
+      if (typeof value !== 'undefined') {
+        return new Notification('N', value);
+      }
+      return this.undefinedValueNotification;
+    };
+    Notification.createError = function(err) {
+      return new Notification('E', undefined, err);
+    };
+    Notification.createComplete = function() {
+      return this.completeNotification;
+    };
+    Notification.completeNotification = new Notification('C');
+    Notification.undefinedValueNotification = new Notification('N', undefined);
+    return Notification;
+  }());
+  exports.Notification = Notification;
+  return module.exports;
+});
+
+$__System.registerDynamic("96", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var EmptyError = (function(_super) {
+    __extends(EmptyError, _super);
+    function EmptyError() {
+      _super.call(this, 'no elements in sequence');
+      this.name = 'EmptyError';
+    }
+    return EmptyError;
+  }(Error));
+  exports.EmptyError = EmptyError;
+  return module.exports;
+});
+
+$__System.registerDynamic("eb", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var ArgumentOutOfRangeError = (function(_super) {
+    __extends(ArgumentOutOfRangeError, _super);
+    function ArgumentOutOfRangeError() {
+      _super.call(this, 'argument out of range');
+      this.name = 'ArgumentOutOfRangeError';
+    }
+    return ArgumentOutOfRangeError;
+  }(Error));
+  exports.ArgumentOutOfRangeError = ArgumentOutOfRangeError;
+  return module.exports;
+});
+
+$__System.registerDynamic("112", ["2b"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var root_1 = $__require('2b');
+  var ImmediateDefinition = (function() {
+    function ImmediateDefinition(root) {
+      this.root = root;
+      if (root.setImmediate && typeof root.setImmediate === 'function') {
+        this.setImmediate = root.setImmediate.bind(root);
+        this.clearImmediate = root.clearImmediate.bind(root);
+      } else {
+        this.nextHandle = 1;
+        this.tasksByHandle = {};
+        this.currentlyRunningATask = false;
+        if (this.canUseProcessNextTick()) {
+          this.setImmediate = this.createProcessNextTickSetImmediate();
+        } else if (this.canUsePostMessage()) {
+          this.setImmediate = this.createPostMessageSetImmediate();
+        } else if (this.canUseMessageChannel()) {
+          this.setImmediate = this.createMessageChannelSetImmediate();
+        } else if (this.canUseReadyStateChange()) {
+          this.setImmediate = this.createReadyStateChangeSetImmediate();
+        } else {
+          this.setImmediate = this.createSetTimeoutSetImmediate();
+        }
+        var ci = function clearImmediate(handle) {
+          delete clearImmediate.instance.tasksByHandle[handle];
+        };
+        ci.instance = this;
+        this.clearImmediate = ci;
+      }
+    }
+    ImmediateDefinition.prototype.identify = function(o) {
+      return this.root.Object.prototype.toString.call(o);
+    };
+    ImmediateDefinition.prototype.canUseProcessNextTick = function() {
+      return this.identify(this.root.process) === '[object process]';
+    };
+    ImmediateDefinition.prototype.canUseMessageChannel = function() {
+      return Boolean(this.root.MessageChannel);
+    };
+    ImmediateDefinition.prototype.canUseReadyStateChange = function() {
+      var document = this.root.document;
+      return Boolean(document && 'onreadystatechange' in document.createElement('script'));
+    };
+    ImmediateDefinition.prototype.canUsePostMessage = function() {
+      var root = this.root;
+      if (root.postMessage && !root.importScripts) {
+        var postMessageIsAsynchronous_1 = true;
+        var oldOnMessage = root.onmessage;
+        root.onmessage = function() {
+          postMessageIsAsynchronous_1 = false;
+        };
+        root.postMessage('', '*');
+        root.onmessage = oldOnMessage;
+        return postMessageIsAsynchronous_1;
+      }
+      return false;
+    };
+    ImmediateDefinition.prototype.partiallyApplied = function(handler) {
+      var args = [];
+      for (var _i = 1; _i < arguments.length; _i++) {
+        args[_i - 1] = arguments[_i];
+      }
+      var fn = function result() {
+        var _a = result,
+            handler = _a.handler,
+            args = _a.args;
+        if (typeof handler === 'function') {
+          handler.apply(undefined, args);
+        } else {
+          (new Function('' + handler))();
+        }
+      };
+      fn.handler = handler;
+      fn.args = args;
+      return fn;
+    };
+    ImmediateDefinition.prototype.addFromSetImmediateArguments = function(args) {
+      this.tasksByHandle[this.nextHandle] = this.partiallyApplied.apply(undefined, args);
+      return this.nextHandle++;
+    };
+    ImmediateDefinition.prototype.createProcessNextTickSetImmediate = function() {
+      var fn = function setImmediate() {
+        var instance = setImmediate.instance;
+        var handle = instance.addFromSetImmediateArguments(arguments);
+        instance.root.process.nextTick(instance.partiallyApplied(instance.runIfPresent, handle));
+        return handle;
+      };
+      fn.instance = this;
+      return fn;
+    };
+    ImmediateDefinition.prototype.createPostMessageSetImmediate = function() {
+      var root = this.root;
+      var messagePrefix = 'setImmediate$' + root.Math.random() + '$';
+      var onGlobalMessage = function globalMessageHandler(event) {
+        var instance = globalMessageHandler.instance;
+        if (event.source === root && typeof event.data === 'string' && event.data.indexOf(messagePrefix) === 0) {
+          instance.runIfPresent(+event.data.slice(messagePrefix.length));
+        }
+      };
+      onGlobalMessage.instance = this;
+      root.addEventListener('message', onGlobalMessage, false);
+      var fn = function setImmediate() {
+        var _a = setImmediate,
+            messagePrefix = _a.messagePrefix,
+            instance = _a.instance;
+        var handle = instance.addFromSetImmediateArguments(arguments);
+        instance.root.postMessage(messagePrefix + handle, '*');
+        return handle;
+      };
+      fn.instance = this;
+      fn.messagePrefix = messagePrefix;
+      return fn;
+    };
+    ImmediateDefinition.prototype.runIfPresent = function(handle) {
+      if (this.currentlyRunningATask) {
+        this.root.setTimeout(this.partiallyApplied(this.runIfPresent, handle), 0);
+      } else {
+        var task = this.tasksByHandle[handle];
+        if (task) {
+          this.currentlyRunningATask = true;
+          try {
+            task();
+          } finally {
+            this.clearImmediate(handle);
+            this.currentlyRunningATask = false;
+          }
+        }
+      }
+    };
+    ImmediateDefinition.prototype.createMessageChannelSetImmediate = function() {
+      var _this = this;
+      var channel = new this.root.MessageChannel();
+      channel.port1.onmessage = function(event) {
+        var handle = event.data;
+        _this.runIfPresent(handle);
+      };
+      var fn = function setImmediate() {
+        var _a = setImmediate,
+            channel = _a.channel,
+            instance = _a.instance;
+        var handle = instance.addFromSetImmediateArguments(arguments);
+        channel.port2.postMessage(handle);
+        return handle;
+      };
+      fn.channel = channel;
+      fn.instance = this;
+      return fn;
+    };
+    ImmediateDefinition.prototype.createReadyStateChangeSetImmediate = function() {
+      var fn = function setImmediate() {
+        var instance = setImmediate.instance;
+        var root = instance.root;
+        var doc = root.document;
+        var html = doc.documentElement;
+        var handle = instance.addFromSetImmediateArguments(arguments);
+        var script = doc.createElement('script');
+        script.onreadystatechange = function() {
+          instance.runIfPresent(handle);
+          script.onreadystatechange = null;
+          html.removeChild(script);
+          script = null;
+        };
+        html.appendChild(script);
+        return handle;
+      };
+      fn.instance = this;
+      return fn;
+    };
+    ImmediateDefinition.prototype.createSetTimeoutSetImmediate = function() {
+      var fn = function setImmediate() {
+        var instance = setImmediate.instance;
+        var handle = instance.addFromSetImmediateArguments(arguments);
+        instance.root.setTimeout(instance.partiallyApplied(instance.runIfPresent, handle), 0);
+        return handle;
+      };
+      fn.instance = this;
+      return fn;
+    };
+    return ImmediateDefinition;
+  }());
+  exports.ImmediateDefinition = ImmediateDefinition;
+  exports.Immediate = new ImmediateDefinition(root_1.root);
+  return module.exports;
+});
+
+$__System.registerDynamic("113", ["112", "114"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Immediate_1 = $__require('112');
+  var FutureAction_1 = $__require('114');
+  var AsapAction = (function(_super) {
+    __extends(AsapAction, _super);
+    function AsapAction() {
+      _super.apply(this, arguments);
+    }
+    AsapAction.prototype._schedule = function(state, delay) {
+      if (delay === void 0) {
+        delay = 0;
+      }
+      if (delay > 0) {
+        return _super.prototype._schedule.call(this, state, delay);
+      }
+      this.delay = delay;
+      this.state = state;
+      var scheduler = this.scheduler;
+      scheduler.actions.push(this);
+      if (!scheduler.scheduledId) {
+        scheduler.scheduledId = Immediate_1.Immediate.setImmediate(function() {
+          scheduler.scheduledId = null;
+          scheduler.flush();
+        });
+      }
+      return this;
+    };
+    AsapAction.prototype._unsubscribe = function() {
+      var scheduler = this.scheduler;
+      var scheduledId = scheduler.scheduledId,
+          actions = scheduler.actions;
+      _super.prototype._unsubscribe.call(this);
+      if (actions.length === 0) {
+        scheduler.active = false;
+        if (scheduledId != null) {
+          scheduler.scheduledId = null;
+          Immediate_1.Immediate.clearImmediate(scheduledId);
+        }
+      }
+    };
+    return AsapAction;
+  }(FutureAction_1.FutureAction));
+  exports.AsapAction = AsapAction;
+  return module.exports;
+});
+
+$__System.registerDynamic("115", ["113", "116"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var AsapAction_1 = $__require('113');
+  var QueueScheduler_1 = $__require('116');
+  var AsapScheduler = (function(_super) {
+    __extends(AsapScheduler, _super);
+    function AsapScheduler() {
+      _super.apply(this, arguments);
+    }
+    AsapScheduler.prototype.scheduleNow = function(work, state) {
+      return new AsapAction_1.AsapAction(this, work).schedule(state);
+    };
+    return AsapScheduler;
+  }(QueueScheduler_1.QueueScheduler));
+  exports.AsapScheduler = AsapScheduler;
+  return module.exports;
+});
+
+$__System.registerDynamic("e1", ["115"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var AsapScheduler_1 = $__require('115');
+  exports.asap = new AsapScheduler_1.AsapScheduler();
+  return module.exports;
+});
+
+$__System.registerDynamic("117", ["114", "116"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var FutureAction_1 = $__require('114');
+  var QueueScheduler_1 = $__require('116');
+  var AsyncScheduler = (function(_super) {
+    __extends(AsyncScheduler, _super);
+    function AsyncScheduler() {
+      _super.apply(this, arguments);
+    }
+    AsyncScheduler.prototype.scheduleNow = function(work, state) {
+      return new FutureAction_1.FutureAction(this, work).schedule(state, 0);
+    };
+    return AsyncScheduler;
+  }(QueueScheduler_1.QueueScheduler));
+  exports.AsyncScheduler = AsyncScheduler;
+  return module.exports;
+});
+
+$__System.registerDynamic("44", ["117"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var AsyncScheduler_1 = $__require('117');
+  exports.async = new AsyncScheduler_1.AsyncScheduler();
+  return module.exports;
+});
+
+$__System.registerDynamic("118", ["114"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var FutureAction_1 = $__require('114');
+  var QueueAction = (function(_super) {
+    __extends(QueueAction, _super);
+    function QueueAction() {
+      _super.apply(this, arguments);
+    }
+    QueueAction.prototype._schedule = function(state, delay) {
+      if (delay === void 0) {
+        delay = 0;
+      }
+      if (delay > 0) {
+        return _super.prototype._schedule.call(this, state, delay);
+      }
+      this.delay = delay;
+      this.state = state;
+      var scheduler = this.scheduler;
+      scheduler.actions.push(this);
+      scheduler.flush();
+      return this;
+    };
+    return QueueAction;
+  }(FutureAction_1.FutureAction));
+  exports.QueueAction = QueueAction;
+  return module.exports;
+});
+
+$__System.registerDynamic("114", ["2b", "3a"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var root_1 = $__require('2b');
+  var Subscription_1 = $__require('3a');
+  var FutureAction = (function(_super) {
+    __extends(FutureAction, _super);
+    function FutureAction(scheduler, work) {
+      _super.call(this);
+      this.scheduler = scheduler;
+      this.work = work;
+      this.pending = false;
+    }
+    FutureAction.prototype.execute = function() {
+      if (this.isUnsubscribed) {
+        this.error = new Error('executing a cancelled action');
+      } else {
+        try {
+          this.work(this.state);
+        } catch (e) {
+          this.unsubscribe();
+          this.error = e;
+        }
+      }
+    };
+    FutureAction.prototype.schedule = function(state, delay) {
+      if (delay === void 0) {
+        delay = 0;
+      }
+      if (this.isUnsubscribed) {
+        return this;
+      }
+      return this._schedule(state, delay);
+    };
+    FutureAction.prototype._schedule = function(state, delay) {
+      var _this = this;
+      if (delay === void 0) {
+        delay = 0;
+      }
+      this.state = state;
+      this.pending = true;
+      var id = this.id;
+      if (id != null && this.delay === delay) {
+        return this;
+      }
+      this.delay = delay;
+      if (id != null) {
+        this.id = null;
+        root_1.root.clearInterval(id);
+      }
+      this.id = root_1.root.setInterval(function() {
+        _this.pending = false;
+        var _a = _this,
+            id = _a.id,
+            scheduler = _a.scheduler;
+        scheduler.actions.push(_this);
+        scheduler.flush();
+        if (_this.pending === false && id != null) {
+          _this.id = null;
+          root_1.root.clearInterval(id);
+        }
+      }, delay);
+      return this;
+    };
+    FutureAction.prototype._unsubscribe = function() {
+      this.pending = false;
+      var _a = this,
+          id = _a.id,
+          scheduler = _a.scheduler;
+      var actions = scheduler.actions;
+      var index = actions.indexOf(this);
+      if (id != null) {
+        this.id = null;
+        root_1.root.clearInterval(id);
+      }
+      if (index !== -1) {
+        actions.splice(index, 1);
+      }
+      this.work = null;
+      this.state = null;
+      this.scheduler = null;
+    };
+    return FutureAction;
+  }(Subscription_1.Subscription));
+  exports.FutureAction = FutureAction;
+  return module.exports;
+});
+
+$__System.registerDynamic("116", ["118", "114"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var QueueAction_1 = $__require('118');
+  var FutureAction_1 = $__require('114');
+  var QueueScheduler = (function() {
+    function QueueScheduler() {
+      this.active = false;
+      this.actions = [];
+      this.scheduledId = null;
+    }
+    QueueScheduler.prototype.now = function() {
+      return Date.now();
+    };
+    QueueScheduler.prototype.flush = function() {
+      if (this.active || this.scheduledId) {
+        return;
+      }
+      this.active = true;
+      var actions = this.actions;
+      for (var action = null; action = actions.shift(); ) {
+        action.execute();
+        if (action.error) {
+          this.active = false;
+          throw action.error;
+        }
+      }
+      this.active = false;
+    };
+    QueueScheduler.prototype.schedule = function(work, delay, state) {
+      if (delay === void 0) {
+        delay = 0;
+      }
+      return (delay <= 0) ? this.scheduleNow(work, state) : this.scheduleLater(work, delay, state);
+    };
+    QueueScheduler.prototype.scheduleNow = function(work, state) {
+      return new QueueAction_1.QueueAction(this, work).schedule(state);
+    };
+    QueueScheduler.prototype.scheduleLater = function(work, delay, state) {
+      return new FutureAction_1.FutureAction(this, work).schedule(state, delay);
+    };
+    return QueueScheduler;
+  }());
+  exports.QueueScheduler = QueueScheduler;
+  return module.exports;
+});
+
+$__System.registerDynamic("10f", ["116"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var QueueScheduler_1 = $__require('116');
+  exports.queue = new QueueScheduler_1.QueueScheduler();
+  return module.exports;
+});
+
+$__System.registerDynamic("2e", ["2b"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var root_1 = $__require('2b');
+  var Symbol = root_1.root.Symbol;
+  if (typeof Symbol === 'function') {
+    if (Symbol.iterator) {
+      exports.$$iterator = Symbol.iterator;
+    } else if (typeof Symbol.for === 'function') {
+      exports.$$iterator = Symbol.for('iterator');
+    }
+  } else {
+    if (root_1.root.Set && typeof new root_1.root.Set()['@@iterator'] === 'function') {
+      exports.$$iterator = '@@iterator';
+    } else if (root_1.root.Map) {
+      var keys = Object.getOwnPropertyNames(root_1.root.Map.prototype);
+      for (var i = 0; i < keys.length; ++i) {
+        var key = keys[i];
+        if (key !== 'entries' && key !== 'size' && root_1.root.Map.prototype[key] === root_1.root.Map.prototype['entries']) {
+          exports.$$iterator = key;
+          break;
+        }
+      }
+    } else {
+      exports.$$iterator = '@@iterator';
+    }
+  }
+  return module.exports;
+});
+
+$__System.registerDynamic("119", ["4", "7", "15", "18", "19", "1d", "22", "25", "29", "38", "3c", "3f", "41", "46", "49", "4a", "4f", "51", "54", "57", "5b", "5e", "60", "63", "65", "67", "69", "6c", "6e", "70", "71", "72", "75", "78", "7b", "7d", "7f", "81", "83", "85", "88", "8a", "8c", "8e", "90", "91", "94", "97", "9c", "9e", "a0", "a2", "a4", "a6", "a8", "a9", "ac", "ae", "af", "b0", "b1", "b2", "b3", "b5", "b8", "ba", "bc", "bf", "c1", "c3", "c4", "c6", "c8", "ca", "cc", "ce", "d0", "d2", "d5", "d7", "d9", "db", "dd", "df", "e3", "e5", "e7", "e9", "ec", "ee", "f0", "f2", "f4", "f6", "f8", "fa", "fc", "fd", "ff", "101", "103", "105", "107", "109", "10a", "10d", "10e", "3a", "62", "13", "c0", "be", "d3", "87", "96", "eb", "111", "11a", "e1", "44", "10f", "11b", "35", "2e"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Subject_1 = $__require('4');
+  exports.Subject = Subject_1.Subject;
+  var Observable_1 = $__require('7');
+  exports.Observable = Observable_1.Observable;
+  $__require('15');
+  $__require('18');
+  $__require('19');
+  $__require('1d');
+  $__require('22');
+  $__require('25');
+  $__require('29');
+  $__require('38');
+  $__require('3c');
+  $__require('3f');
+  $__require('41');
+  $__require('46');
+  $__require('49');
+  $__require('4a');
+  $__require('4f');
+  $__require('51');
+  $__require('54');
+  $__require('57');
+  $__require('5b');
+  $__require('5e');
+  $__require('60');
+  $__require('63');
+  $__require('65');
+  $__require('67');
+  $__require('69');
+  $__require('6c');
+  $__require('6e');
+  $__require('70');
+  $__require('71');
+  $__require('72');
+  $__require('75');
+  $__require('78');
+  $__require('7b');
+  $__require('7d');
+  $__require('7f');
+  $__require('81');
+  $__require('83');
+  $__require('85');
+  $__require('88');
+  $__require('8a');
+  $__require('8c');
+  $__require('8e');
+  $__require('90');
+  $__require('91');
+  $__require('94');
+  $__require('97');
+  $__require('9c');
+  $__require('9e');
+  $__require('a0');
+  $__require('a2');
+  $__require('a4');
+  $__require('a6');
+  $__require('a8');
+  $__require('a9');
+  $__require('ac');
+  $__require('ae');
+  $__require('af');
+  $__require('b0');
+  $__require('b1');
+  $__require('b2');
+  $__require('b3');
+  $__require('b5');
+  $__require('b8');
+  $__require('ba');
+  $__require('bc');
+  $__require('bf');
+  $__require('c1');
+  $__require('c3');
+  $__require('c4');
+  $__require('c6');
+  $__require('c8');
+  $__require('ca');
+  $__require('cc');
+  $__require('ce');
+  $__require('d0');
+  $__require('d2');
+  $__require('d5');
+  $__require('d7');
+  $__require('d9');
+  $__require('db');
+  $__require('dd');
+  $__require('df');
+  $__require('e3');
+  $__require('e5');
+  $__require('e7');
+  $__require('e9');
+  $__require('ec');
+  $__require('ee');
+  $__require('f0');
+  $__require('f2');
+  $__require('f4');
+  $__require('f6');
+  $__require('f8');
+  $__require('fa');
+  $__require('fc');
+  $__require('fd');
+  $__require('ff');
+  $__require('101');
+  $__require('103');
+  $__require('105');
+  $__require('107');
+  $__require('109');
+  $__require('10a');
+  $__require('10d');
+  var Operator_1 = $__require('10e');
+  exports.Operator = Operator_1.Operator;
+  var Subscription_1 = $__require('3a');
+  exports.Subscription = Subscription_1.Subscription;
+  var Subscriber_1 = $__require('62');
+  exports.Subscriber = Subscriber_1.Subscriber;
+  var AsyncSubject_1 = $__require('13');
+  exports.AsyncSubject = AsyncSubject_1.AsyncSubject;
+  var ReplaySubject_1 = $__require('c0');
+  exports.ReplaySubject = ReplaySubject_1.ReplaySubject;
+  var BehaviorSubject_1 = $__require('be');
+  exports.BehaviorSubject = BehaviorSubject_1.BehaviorSubject;
+  var ConnectableObservable_1 = $__require('d3');
+  exports.ConnectableObservable = ConnectableObservable_1.ConnectableObservable;
+  var Notification_1 = $__require('87');
+  exports.Notification = Notification_1.Notification;
+  var EmptyError_1 = $__require('96');
+  exports.EmptyError = EmptyError_1.EmptyError;
+  var ArgumentOutOfRangeError_1 = $__require('eb');
+  exports.ArgumentOutOfRangeError = ArgumentOutOfRangeError_1.ArgumentOutOfRangeError;
+  var ObjectUnsubscribedError_1 = $__require('111');
+  exports.ObjectUnsubscribedError = ObjectUnsubscribedError_1.ObjectUnsubscribedError;
+  var UnsubscriptionError_1 = $__require('11a');
+  exports.UnsubscriptionError = UnsubscriptionError_1.UnsubscriptionError;
+  var asap_1 = $__require('e1');
+  var async_1 = $__require('44');
+  var queue_1 = $__require('10f');
+  var rxSubscriber_1 = $__require('11b');
+  var observable_1 = $__require('35');
+  var iterator_1 = $__require('2e');
+  var Scheduler = {
+    asap: asap_1.asap,
+    async: async_1.async,
+    queue: queue_1.queue
+  };
+  exports.Scheduler = Scheduler;
+  var Symbol = {
+    rxSubscriber: rxSubscriber_1.$$rxSubscriber,
+    observable: observable_1.$$observable,
+    iterator: iterator_1.$$iterator
+  };
+  exports.Symbol = Symbol;
+  return module.exports;
+});
+
+$__System.registerDynamic("d", ["3", "119"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('3');
+  var Rx_1 = $__require('119');
+  var NotificationsService = (function() {
+    function NotificationsService() {
+      this.emitter = new Rx_1.Subject();
+    }
+    NotificationsService.prototype.set = function(notification, to) {
+      notification.id = notification.override && notification.override.id ? notification.override.id : Math.random().toString(36).substring(3);
+      this.emitter.next({
+        command: "set",
+        notification: notification,
+        add: to
+      });
+      return notification;
+    };
+    ;
+    NotificationsService.prototype.getChangeEmitter = function() {
+      return this.emitter;
+    };
+    NotificationsService.prototype.success = function(title, content, override) {
+      return this.set({
+        title: title,
+        content: content,
+        type: "success",
+        override: override
+      }, true);
+    };
+    NotificationsService.prototype.error = function(title, content, override) {
+      return this.set({
+        title: title,
+        content: content,
+        type: "error",
+        override: override
+      }, true);
+    };
+    NotificationsService.prototype.alert = function(title, content, override) {
+      return this.set({
+        title: title,
+        content: content,
+        type: "alert",
+        override: override
+      }, true);
+    };
+    NotificationsService.prototype.info = function(title, content, override) {
+      return this.set({
+        title: title,
+        content: content,
+        type: "info",
+        override: override
+      }, true);
+    };
+    NotificationsService.prototype.bare = function(title, content, override) {
+      return this.set({
+        title: title,
+        content: content,
+        type: "bare",
+        override: override
+      }, true);
+    };
+    NotificationsService.prototype.create = function(title, content, type, override) {
+      return this.set({
+        title: title,
+        content: content,
+        type: type,
+        override: override
+      }, true);
+    };
+    NotificationsService.prototype.html = function(html, type, override) {
+      return this.set({
+        html: html,
+        type: type,
+        override: override,
+        title: null,
+        content: null
+      }, true);
+    };
+    NotificationsService.prototype.remove = function(id) {
+      if (id)
+        this.emitter.next({
+          command: "clean",
+          id: id
+        });
+      else
+        this.emitter.next({command: "cleanAll"});
+    };
+    NotificationsService = __decorate([core_1.Injectable(), __metadata('design:paramtypes', [])], NotificationsService);
+    return NotificationsService;
+  }());
+  exports.NotificationsService = NotificationsService;
+  return module.exports;
+});
+
+$__System.registerDynamic("11c", ["3a"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Subscription_1 = $__require('3a');
+  var SubjectSubscription = (function(_super) {
+    __extends(SubjectSubscription, _super);
+    function SubjectSubscription(subject, observer) {
+      _super.call(this);
+      this.subject = subject;
+      this.observer = observer;
+      this.isUnsubscribed = false;
+    }
+    SubjectSubscription.prototype.unsubscribe = function() {
+      if (this.isUnsubscribed) {
+        return;
+      }
+      this.isUnsubscribed = true;
+      var subject = this.subject;
+      var observers = subject.observers;
+      this.subject = null;
+      if (!observers || observers.length === 0 || subject.isUnsubscribed) {
+        return;
+      }
+      var subscriberIndex = observers.indexOf(this.observer);
+      if (subscriberIndex !== -1) {
+        observers.splice(subscriberIndex, 1);
+      }
+    };
+    return SubjectSubscription;
+  }(Subscription_1.Subscription));
+  exports.SubjectSubscription = SubjectSubscription;
+  return module.exports;
+});
+
+$__System.registerDynamic("110", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  function throwError(e) {
+    throw e;
+  }
+  exports.throwError = throwError;
+  return module.exports;
+});
+
+$__System.registerDynamic("111", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var ObjectUnsubscribedError = (function(_super) {
+    __extends(ObjectUnsubscribedError, _super);
+    function ObjectUnsubscribedError() {
+      _super.call(this, 'object unsubscribed');
+      this.name = 'ObjectUnsubscribedError';
+    }
+    return ObjectUnsubscribedError;
+  }(Error));
+  exports.ObjectUnsubscribedError = ObjectUnsubscribedError;
+  return module.exports;
+});
+
+$__System.registerDynamic("4", ["7", "62", "3a", "11c", "11b", "110", "111"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var Observable_1 = $__require('7');
+  var Subscriber_1 = $__require('62');
+  var Subscription_1 = $__require('3a');
+  var SubjectSubscription_1 = $__require('11c');
+  var rxSubscriber_1 = $__require('11b');
+  var throwError_1 = $__require('110');
+  var ObjectUnsubscribedError_1 = $__require('111');
+  var Subject = (function(_super) {
+    __extends(Subject, _super);
+    function Subject(destination, source) {
+      _super.call(this);
+      this.destination = destination;
+      this.source = source;
+      this.observers = [];
+      this.isUnsubscribed = false;
+      this.isStopped = false;
+      this.hasErrored = false;
+      this.dispatching = false;
+      this.hasCompleted = false;
+      this.source = source;
+    }
+    Subject.prototype.lift = function(operator) {
+      var subject = new Subject(this.destination || this, this);
+      subject.operator = operator;
+      return subject;
+    };
+    Subject.prototype.add = function(subscription) {
+      return Subscription_1.Subscription.prototype.add.call(this, subscription);
+    };
+    Subject.prototype.remove = function(subscription) {
+      Subscription_1.Subscription.prototype.remove.call(this, subscription);
+    };
+    Subject.prototype.unsubscribe = function() {
+      Subscription_1.Subscription.prototype.unsubscribe.call(this);
+    };
+    Subject.prototype._subscribe = function(subscriber) {
+      if (this.source) {
+        return this.source.subscribe(subscriber);
+      } else {
+        if (subscriber.isUnsubscribed) {
+          return;
+        } else if (this.hasErrored) {
+          return subscriber.error(this.errorValue);
+        } else if (this.hasCompleted) {
+          return subscriber.complete();
+        }
+        this.throwIfUnsubscribed();
+        var subscription = new SubjectSubscription_1.SubjectSubscription(this, subscriber);
+        this.observers.push(subscriber);
+        return subscription;
+      }
+    };
+    Subject.prototype._unsubscribe = function() {
+      this.source = null;
+      this.isStopped = true;
+      this.observers = null;
+      this.destination = null;
+    };
+    Subject.prototype.next = function(value) {
+      this.throwIfUnsubscribed();
+      if (this.isStopped) {
+        return;
+      }
+      this.dispatching = true;
+      this._next(value);
+      this.dispatching = false;
+      if (this.hasErrored) {
+        this._error(this.errorValue);
+      } else if (this.hasCompleted) {
+        this._complete();
+      }
+    };
+    Subject.prototype.error = function(err) {
+      this.throwIfUnsubscribed();
+      if (this.isStopped) {
+        return;
+      }
+      this.isStopped = true;
+      this.hasErrored = true;
+      this.errorValue = err;
+      if (this.dispatching) {
+        return;
+      }
+      this._error(err);
+    };
+    Subject.prototype.complete = function() {
+      this.throwIfUnsubscribed();
+      if (this.isStopped) {
+        return;
+      }
+      this.isStopped = true;
+      this.hasCompleted = true;
+      if (this.dispatching) {
+        return;
+      }
+      this._complete();
+    };
+    Subject.prototype.asObservable = function() {
+      var observable = new SubjectObservable(this);
+      return observable;
+    };
+    Subject.prototype._next = function(value) {
+      if (this.destination) {
+        this.destination.next(value);
+      } else {
+        this._finalNext(value);
+      }
+    };
+    Subject.prototype._finalNext = function(value) {
+      var index = -1;
+      var observers = this.observers.slice(0);
+      var len = observers.length;
+      while (++index < len) {
+        observers[index].next(value);
+      }
+    };
+    Subject.prototype._error = function(err) {
+      if (this.destination) {
+        this.destination.error(err);
+      } else {
+        this._finalError(err);
+      }
+    };
+    Subject.prototype._finalError = function(err) {
+      var index = -1;
+      var observers = this.observers;
+      this.observers = null;
+      this.isUnsubscribed = true;
+      if (observers) {
+        var len = observers.length;
+        while (++index < len) {
+          observers[index].error(err);
+        }
+      }
+      this.isUnsubscribed = false;
+      this.unsubscribe();
+    };
+    Subject.prototype._complete = function() {
+      if (this.destination) {
+        this.destination.complete();
+      } else {
+        this._finalComplete();
+      }
+    };
+    Subject.prototype._finalComplete = function() {
+      var index = -1;
+      var observers = this.observers;
+      this.observers = null;
+      this.isUnsubscribed = true;
+      if (observers) {
+        var len = observers.length;
+        while (++index < len) {
+          observers[index].complete();
+        }
+      }
+      this.isUnsubscribed = false;
+      this.unsubscribe();
+    };
+    Subject.prototype.throwIfUnsubscribed = function() {
+      if (this.isUnsubscribed) {
+        throwError_1.throwError(new ObjectUnsubscribedError_1.ObjectUnsubscribedError());
+      }
+    };
+    Subject.prototype[rxSubscriber_1.$$rxSubscriber] = function() {
+      return new Subscriber_1.Subscriber(this);
+    };
+    Subject.create = function(destination, source) {
+      return new Subject(destination, source);
+    };
+    return Subject;
+  }(Observable_1.Observable));
+  exports.Subject = Subject;
+  var SubjectObservable = (function(_super) {
+    __extends(SubjectObservable, _super);
+    function SubjectObservable(source) {
+      _super.call(this);
+      this.source = source;
+    }
+    return SubjectObservable;
+  }(Observable_1.Observable));
+  return module.exports;
+});
+
+$__System.registerDynamic("5", ["2b", "7"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var root_1 = $__require('2b');
+  var Observable_1 = $__require('7');
+  var PromiseObservable = (function(_super) {
+    __extends(PromiseObservable, _super);
+    function PromiseObservable(promise, scheduler) {
+      if (scheduler === void 0) {
+        scheduler = null;
+      }
+      _super.call(this);
+      this.promise = promise;
+      this.scheduler = scheduler;
+    }
+    PromiseObservable.create = function(promise, scheduler) {
+      if (scheduler === void 0) {
+        scheduler = null;
+      }
+      return new PromiseObservable(promise, scheduler);
+    };
+    PromiseObservable.prototype._subscribe = function(subscriber) {
+      var _this = this;
+      var promise = this.promise;
+      var scheduler = this.scheduler;
+      if (scheduler == null) {
+        if (this._isScalar) {
+          if (!subscriber.isUnsubscribed) {
+            subscriber.next(this.value);
+            subscriber.complete();
+          }
+        } else {
+          promise.then(function(value) {
+            _this.value = value;
+            _this._isScalar = true;
+            if (!subscriber.isUnsubscribed) {
+              subscriber.next(value);
+              subscriber.complete();
+            }
+          }, function(err) {
+            if (!subscriber.isUnsubscribed) {
+              subscriber.error(err);
+            }
+          }).then(null, function(err) {
+            root_1.root.setTimeout(function() {
+              throw err;
+            });
+          });
+        }
+      } else {
+        if (this._isScalar) {
+          if (!subscriber.isUnsubscribed) {
+            return scheduler.schedule(dispatchNext, 0, {
+              value: this.value,
+              subscriber: subscriber
+            });
+          }
+        } else {
+          promise.then(function(value) {
+            _this.value = value;
+            _this._isScalar = true;
+            if (!subscriber.isUnsubscribed) {
+              subscriber.add(scheduler.schedule(dispatchNext, 0, {
+                value: value,
+                subscriber: subscriber
+              }));
+            }
+          }, function(err) {
+            if (!subscriber.isUnsubscribed) {
+              subscriber.add(scheduler.schedule(dispatchError, 0, {
+                err: err,
+                subscriber: subscriber
+              }));
+            }
+          }).then(null, function(err) {
+            root_1.root.setTimeout(function() {
+              throw err;
+            });
+          });
+        }
+      }
+    };
+    return PromiseObservable;
+  }(Observable_1.Observable));
+  exports.PromiseObservable = PromiseObservable;
+  function dispatchNext(arg) {
+    var value = arg.value,
+        subscriber = arg.subscriber;
+    if (!subscriber.isUnsubscribed) {
+      subscriber.next(value);
+      subscriber.complete();
+    }
+  }
+  function dispatchError(arg) {
+    var err = arg.err,
+        subscriber = arg.subscriber;
+    if (!subscriber.isUnsubscribed) {
+      subscriber.error(err);
+    }
+  }
+  return module.exports;
+});
+
+$__System.registerDynamic("6", ["2b"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var root_1 = $__require('2b');
+  function toPromise(PromiseCtor) {
+    var _this = this;
+    if (!PromiseCtor) {
+      if (root_1.root.Rx && root_1.root.Rx.config && root_1.root.Rx.config.Promise) {
+        PromiseCtor = root_1.root.Rx.config.Promise;
+      } else if (root_1.root.Promise) {
+        PromiseCtor = root_1.root.Promise;
+      }
+    }
+    if (!PromiseCtor) {
+      throw new Error('no Promise impl found');
+    }
+    return new PromiseCtor(function(resolve, reject) {
+      var value;
+      _this.subscribe(function(x) {
+        return value = x;
+      }, function(err) {
+        return reject(err);
+      }, function() {
+        return resolve(value);
+      });
+    });
+  }
+  exports.toPromise = toPromise;
+  return module.exports;
+});
+
+$__System.registerDynamic("35", ["2b"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var root_1 = $__require('2b');
+  var Symbol = root_1.root.Symbol;
+  if (typeof Symbol === 'function') {
+    if (Symbol.observable) {
+      exports.$$observable = Symbol.observable;
+    } else {
+      if (typeof Symbol.for === 'function') {
+        exports.$$observable = Symbol.for('observable');
+      } else {
+        exports.$$observable = Symbol('observable');
+      }
+      Symbol.observable = exports.$$observable;
+    }
+  } else {
+    exports.$$observable = '@@observable';
+  }
+  return module.exports;
+});
+
+$__System.registerDynamic("27", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  exports.isArray = Array.isArray || (function(x) {
+    return x && typeof x.length === 'number';
+  });
+  return module.exports;
+});
+
+$__System.registerDynamic("2c", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  function isObject(x) {
+    return x != null && typeof x === 'object';
+  }
+  exports.isObject = isObject;
+  return module.exports;
+});
+
+$__System.registerDynamic("2d", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  function isFunction(x) {
+    return typeof x === 'function';
+  }
+  exports.isFunction = isFunction;
+  return module.exports;
+});
+
+$__System.registerDynamic("11", ["12"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var errorObject_1 = $__require('12');
+  var tryCatchTarget;
+  function tryCatcher() {
+    try {
+      return tryCatchTarget.apply(this, arguments);
+    } catch (e) {
+      errorObject_1.errorObject.e = e;
+      return errorObject_1.errorObject;
+    }
+  }
+  function tryCatch(fn) {
+    tryCatchTarget = fn;
+    return tryCatcher;
+  }
+  exports.tryCatch = tryCatch;
+  ;
+  return module.exports;
+});
+
+$__System.registerDynamic("12", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  exports.errorObject = {e: {}};
+  return module.exports;
+});
+
+$__System.registerDynamic("11a", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var UnsubscriptionError = (function(_super) {
+    __extends(UnsubscriptionError, _super);
+    function UnsubscriptionError(errors) {
+      _super.call(this);
+      this.errors = errors;
+      this.name = 'UnsubscriptionError';
+      this.message = errors ? errors.length + " errors occurred during unsubscription:\n" + errors.map(function(err, i) {
+        return ((i + 1) + ") " + err.toString());
+      }).join('\n') : '';
+    }
+    return UnsubscriptionError;
+  }(Error));
+  exports.UnsubscriptionError = UnsubscriptionError;
+  return module.exports;
+});
+
+$__System.registerDynamic("3a", ["27", "2c", "2d", "11", "12", "11a"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var isArray_1 = $__require('27');
+  var isObject_1 = $__require('2c');
+  var isFunction_1 = $__require('2d');
+  var tryCatch_1 = $__require('11');
+  var errorObject_1 = $__require('12');
+  var UnsubscriptionError_1 = $__require('11a');
+  var Subscription = (function() {
+    function Subscription(unsubscribe) {
+      this.isUnsubscribed = false;
+      if (unsubscribe) {
+        this._unsubscribe = unsubscribe;
+      }
+    }
+    Subscription.prototype.unsubscribe = function() {
+      var hasErrors = false;
+      var errors;
+      if (this.isUnsubscribed) {
+        return;
+      }
+      this.isUnsubscribed = true;
+      var _a = this,
+          _unsubscribe = _a._unsubscribe,
+          _subscriptions = _a._subscriptions;
+      this._subscriptions = null;
+      if (isFunction_1.isFunction(_unsubscribe)) {
+        var trial = tryCatch_1.tryCatch(_unsubscribe).call(this);
+        if (trial === errorObject_1.errorObject) {
+          hasErrors = true;
+          (errors = errors || []).push(errorObject_1.errorObject.e);
+        }
+      }
+      if (isArray_1.isArray(_subscriptions)) {
+        var index = -1;
+        var len = _subscriptions.length;
+        while (++index < len) {
+          var sub = _subscriptions[index];
+          if (isObject_1.isObject(sub)) {
+            var trial = tryCatch_1.tryCatch(sub.unsubscribe).call(sub);
+            if (trial === errorObject_1.errorObject) {
+              hasErrors = true;
+              errors = errors || [];
+              var err = errorObject_1.errorObject.e;
+              if (err instanceof UnsubscriptionError_1.UnsubscriptionError) {
+                errors = errors.concat(err.errors);
+              } else {
+                errors.push(err);
+              }
+            }
+          }
+        }
+      }
+      if (hasErrors) {
+        throw new UnsubscriptionError_1.UnsubscriptionError(errors);
+      }
+    };
+    Subscription.prototype.add = function(teardown) {
+      if (!teardown || (teardown === this) || (teardown === Subscription.EMPTY)) {
+        return;
+      }
+      var sub = teardown;
+      switch (typeof teardown) {
+        case 'function':
+          sub = new Subscription(teardown);
+        case 'object':
+          if (sub.isUnsubscribed || typeof sub.unsubscribe !== 'function') {
+            break;
+          } else if (this.isUnsubscribed) {
+            sub.unsubscribe();
+          } else {
+            (this._subscriptions || (this._subscriptions = [])).push(sub);
+          }
+          break;
+        default:
+          throw new Error('Unrecognized teardown ' + teardown + ' added to Subscription.');
+      }
+      return sub;
+    };
+    Subscription.prototype.remove = function(subscription) {
+      if (subscription == null || (subscription === this) || (subscription === Subscription.EMPTY)) {
+        return;
+      }
+      var subscriptions = this._subscriptions;
+      if (subscriptions) {
+        var subscriptionIndex = subscriptions.indexOf(subscription);
+        if (subscriptionIndex !== -1) {
+          subscriptions.splice(subscriptionIndex, 1);
+        }
+      }
+    };
+    Subscription.EMPTY = (function(empty) {
+      empty.isUnsubscribed = true;
+      return empty;
+    }(new Subscription()));
+    return Subscription;
+  }());
+  exports.Subscription = Subscription;
+  return module.exports;
+});
+
+$__System.registerDynamic("11d", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  exports.empty = {
+    isUnsubscribed: true,
+    next: function(value) {},
+    error: function(err) {
+      throw err;
+    },
+    complete: function() {}
+  };
+  return module.exports;
+});
+
+$__System.registerDynamic("62", ["2d", "3a", "11b", "11d"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __extends = (this && this.__extends) || function(d, b) {
+    for (var p in b)
+      if (b.hasOwnProperty(p))
+        d[p] = b[p];
+    function __() {
+      this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+  };
+  var isFunction_1 = $__require('2d');
+  var Subscription_1 = $__require('3a');
+  var rxSubscriber_1 = $__require('11b');
+  var Observer_1 = $__require('11d');
+  var Subscriber = (function(_super) {
+    __extends(Subscriber, _super);
+    function Subscriber(destinationOrNext, error, complete) {
+      _super.call(this);
+      this.syncErrorValue = null;
+      this.syncErrorThrown = false;
+      this.syncErrorThrowable = false;
+      this.isStopped = false;
+      switch (arguments.length) {
+        case 0:
+          this.destination = Observer_1.empty;
+          break;
+        case 1:
+          if (!destinationOrNext) {
+            this.destination = Observer_1.empty;
+            break;
+          }
+          if (typeof destinationOrNext === 'object') {
+            if (destinationOrNext instanceof Subscriber) {
+              this.destination = destinationOrNext;
+              this.destination.add(this);
+            } else {
+              this.syncErrorThrowable = true;
+              this.destination = new SafeSubscriber(this, destinationOrNext);
+            }
+            break;
+          }
+        default:
+          this.syncErrorThrowable = true;
+          this.destination = new SafeSubscriber(this, destinationOrNext, error, complete);
+          break;
+      }
+    }
+    Subscriber.create = function(next, error, complete) {
+      var subscriber = new Subscriber(next, error, complete);
+      subscriber.syncErrorThrowable = false;
+      return subscriber;
+    };
+    Subscriber.prototype.next = function(value) {
+      if (!this.isStopped) {
+        this._next(value);
+      }
+    };
+    Subscriber.prototype.error = function(err) {
+      if (!this.isStopped) {
+        this.isStopped = true;
+        this._error(err);
+      }
+    };
+    Subscriber.prototype.complete = function() {
+      if (!this.isStopped) {
+        this.isStopped = true;
+        this._complete();
+      }
+    };
+    Subscriber.prototype.unsubscribe = function() {
+      if (this.isUnsubscribed) {
+        return;
+      }
+      this.isStopped = true;
+      _super.prototype.unsubscribe.call(this);
+    };
+    Subscriber.prototype._next = function(value) {
+      this.destination.next(value);
+    };
+    Subscriber.prototype._error = function(err) {
+      this.destination.error(err);
+      this.unsubscribe();
+    };
+    Subscriber.prototype._complete = function() {
+      this.destination.complete();
+      this.unsubscribe();
+    };
+    Subscriber.prototype[rxSubscriber_1.$$rxSubscriber] = function() {
+      return this;
+    };
+    return Subscriber;
+  }(Subscription_1.Subscription));
+  exports.Subscriber = Subscriber;
+  var SafeSubscriber = (function(_super) {
+    __extends(SafeSubscriber, _super);
+    function SafeSubscriber(_parent, observerOrNext, error, complete) {
+      _super.call(this);
+      this._parent = _parent;
+      var next;
+      var context = this;
+      if (isFunction_1.isFunction(observerOrNext)) {
+        next = observerOrNext;
+      } else if (observerOrNext) {
+        context = observerOrNext;
+        next = observerOrNext.next;
+        error = observerOrNext.error;
+        complete = observerOrNext.complete;
+        if (isFunction_1.isFunction(context.unsubscribe)) {
+          this.add(context.unsubscribe.bind(context));
+        }
+        context.unsubscribe = this.unsubscribe.bind(this);
+      }
+      this._context = context;
+      this._next = next;
+      this._error = error;
+      this._complete = complete;
+    }
+    SafeSubscriber.prototype.next = function(value) {
+      if (!this.isStopped && this._next) {
+        var _parent = this._parent;
+        if (!_parent.syncErrorThrowable) {
+          this.__tryOrUnsub(this._next, value);
+        } else if (this.__tryOrSetError(_parent, this._next, value)) {
+          this.unsubscribe();
+        }
+      }
+    };
+    SafeSubscriber.prototype.error = function(err) {
+      if (!this.isStopped) {
+        var _parent = this._parent;
+        if (this._error) {
+          if (!_parent.syncErrorThrowable) {
+            this.__tryOrUnsub(this._error, err);
+            this.unsubscribe();
+          } else {
+            this.__tryOrSetError(_parent, this._error, err);
+            this.unsubscribe();
+          }
+        } else if (!_parent.syncErrorThrowable) {
+          this.unsubscribe();
+          throw err;
+        } else {
+          _parent.syncErrorValue = err;
+          _parent.syncErrorThrown = true;
+          this.unsubscribe();
+        }
+      }
+    };
+    SafeSubscriber.prototype.complete = function() {
+      if (!this.isStopped) {
+        var _parent = this._parent;
+        if (this._complete) {
+          if (!_parent.syncErrorThrowable) {
+            this.__tryOrUnsub(this._complete);
+            this.unsubscribe();
+          } else {
+            this.__tryOrSetError(_parent, this._complete);
+            this.unsubscribe();
+          }
+        } else {
+          this.unsubscribe();
+        }
+      }
+    };
+    SafeSubscriber.prototype.__tryOrUnsub = function(fn, value) {
+      try {
+        fn.call(this._context, value);
+      } catch (err) {
+        this.unsubscribe();
+        throw err;
+      }
+    };
+    SafeSubscriber.prototype.__tryOrSetError = function(parent, fn, value) {
+      try {
+        fn.call(this._context, value);
+      } catch (err) {
+        parent.syncErrorValue = err;
+        parent.syncErrorThrown = true;
+        return true;
+      }
+      return false;
+    };
+    SafeSubscriber.prototype._unsubscribe = function() {
+      var _parent = this._parent;
+      this._context = null;
+      this._parent = null;
+      _parent.unsubscribe();
+    };
+    return SafeSubscriber;
+  }(Subscriber));
+  return module.exports;
+});
+
+$__System.registerDynamic("2b", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var objectTypes = {
+    'boolean': false,
+    'function': true,
+    'object': true,
+    'number': false,
+    'string': false,
+    'undefined': false
+  };
+  exports.root = (objectTypes[typeof self] && self) || (objectTypes[typeof window] && window);
+  var freeExports = objectTypes[typeof exports] && exports && !exports.nodeType && exports;
+  var freeModule = objectTypes[typeof module] && module && !module.nodeType && module;
+  var freeGlobal = objectTypes[typeof global] && global;
+  if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal)) {
+    exports.root = freeGlobal;
+  }
+  return module.exports;
+});
+
+$__System.registerDynamic("11b", ["2b"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var root_1 = $__require('2b');
+  var Symbol = root_1.root.Symbol;
+  exports.$$rxSubscriber = (typeof Symbol === 'function' && typeof Symbol.for === 'function') ? Symbol.for('rxSubscriber') : '@@rxSubscriber';
+  return module.exports;
+});
+
+$__System.registerDynamic("11e", ["62", "11b"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var Subscriber_1 = $__require('62');
+  var rxSubscriber_1 = $__require('11b');
+  function toSubscriber(nextOrObserver, error, complete) {
+    if (nextOrObserver && typeof nextOrObserver === 'object') {
+      if (nextOrObserver instanceof Subscriber_1.Subscriber) {
+        return nextOrObserver;
+      } else if (typeof nextOrObserver[rxSubscriber_1.$$rxSubscriber] === 'function') {
+        return nextOrObserver[rxSubscriber_1.$$rxSubscriber]();
+      }
+    }
+    return new Subscriber_1.Subscriber(nextOrObserver, error, complete);
+  }
+  exports.toSubscriber = toSubscriber;
+  return module.exports;
+});
+
+$__System.registerDynamic("7", ["2b", "35", "11e"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var root_1 = $__require('2b');
+  var observable_1 = $__require('35');
+  var toSubscriber_1 = $__require('11e');
+  var Observable = (function() {
+    function Observable(subscribe) {
+      this._isScalar = false;
+      if (subscribe) {
+        this._subscribe = subscribe;
+      }
+    }
+    Observable.prototype.lift = function(operator) {
+      var observable = new Observable();
+      observable.source = this;
+      observable.operator = operator;
+      return observable;
+    };
+    Observable.prototype.subscribe = function(observerOrNext, error, complete) {
+      var operator = this.operator;
+      var sink = toSubscriber_1.toSubscriber(observerOrNext, error, complete);
+      sink.add(operator ? operator.call(sink, this) : this._subscribe(sink));
+      if (sink.syncErrorThrowable) {
+        sink.syncErrorThrowable = false;
+        if (sink.syncErrorThrown) {
+          throw sink.syncErrorValue;
+        }
+      }
+      return sink;
+    };
+    Observable.prototype.forEach = function(next, PromiseCtor) {
+      var _this = this;
+      if (!PromiseCtor) {
+        if (root_1.root.Rx && root_1.root.Rx.config && root_1.root.Rx.config.Promise) {
+          PromiseCtor = root_1.root.Rx.config.Promise;
+        } else if (root_1.root.Promise) {
+          PromiseCtor = root_1.root.Promise;
+        }
+      }
+      if (!PromiseCtor) {
+        throw new Error('no Promise impl found');
+      }
+      return new PromiseCtor(function(resolve, reject) {
+        var subscription = _this.subscribe(function(value) {
+          if (subscription) {
+            try {
+              next(value);
+            } catch (err) {
+              reject(err);
+              subscription.unsubscribe();
+            }
+          } else {
+            next(value);
+          }
+        }, reject, resolve);
+      });
+    };
+    Observable.prototype._subscribe = function(subscriber) {
+      return this.source.subscribe(subscriber);
+    };
+    Observable.prototype[observable_1.$$observable] = function() {
+      return this;
+    };
+    Observable.create = function(subscribe) {
+      return new Observable(subscribe);
+    };
+    return Observable;
+  }());
+  exports.Observable = Observable;
+  return module.exports;
+});
+
+(function() {
+var define = $__System.amdDefine;
+var __extends = this && this.__extends || function(d, b) {
+  function __() {
+    this.constructor = d;
+  }
+  for (var p in b)
+    b.hasOwnProperty(p) && (d[p] = b[p]);
+  d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, new __);
+};
+!function(global, factory) {
+  "object" == typeof exports && "undefined" != typeof module ? factory(exports, require("rxjs/Subject"), require("rxjs/observable/PromiseObservable"), require("rxjs/operator/toPromise"), require("rxjs/Observable")) : "function" == typeof define && define.amd ? define("3", ["exports", "4", "5", "6", "7"], factory) : factory((global.ng = global.ng || {}, global.ng.core = global.ng.core || {}), global.Rx, global.Rx, global.Rx.Observable.prototype, global.Rx);
 }(this, function(exports, rxjs_Subject, rxjs_observable_PromiseObservable, rxjs_operator_toPromise, rxjs_Observable) {
   "use strict";
   function scheduleMicroTask(fn) {
@@ -18667,4607 +33648,12 @@ var __extends = this && this.__extends || function(d, b) {
 });
 
 })();
-(function() {
-var define = $__System.amdDefine;
-var __extends = this && this.__extends || function(d, b) {
-  function __() {
-    this.constructor = d;
-  }
-  for (var p in b)
-    b.hasOwnProperty(p) && (d[p] = b[p]);
-  d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, new __);
-};
-!function(global, factory) {
-  "object" == typeof exports && "undefined" != typeof module ? factory(exports, require("@angular/common"), require("@angular/core"), require("rxjs/Subject"), require("rxjs/observable/PromiseObservable"), require("rxjs/operator/toPromise"), require("rxjs/Observable")) : "function" == typeof define && define.amd ? define("6", ["exports", "10", "3", "c", "d", "e", "f"], factory) : factory((global.ng = global.ng || {}, global.ng.platformBrowser = global.ng.platformBrowser || {}), global.ng.common, global.ng.core, global.Rx, global.Rx, global.Rx.Observable.prototype, global.Rx);
-}(this, function(exports, _angular_common, _angular_core, rxjs_Subject, rxjs_observable_PromiseObservable, rxjs_operator_toPromise, rxjs_Observable) {
-  "use strict";
-  function isPresent(obj) {
-    return void 0 !== obj && null !== obj;
-  }
-  function isBlank(obj) {
-    return void 0 === obj || null === obj;
-  }
-  function isNumber(obj) {
-    return "number" == typeof obj;
-  }
-  function isString(obj) {
-    return "string" == typeof obj;
-  }
-  function isFunction(obj) {
-    return "function" == typeof obj;
-  }
-  function isArray(obj) {
-    return Array.isArray(obj);
-  }
-  function noop() {}
-  function stringify(token) {
-    if ("string" == typeof token)
-      return token;
-    if (void 0 === token || null === token)
-      return "" + token;
-    if (token.name)
-      return token.name;
-    if (token.overriddenName)
-      return token.overriddenName;
-    var res = token.toString(),
-        newLineIndex = res.indexOf("\n");
-    return newLineIndex === -1 ? res : res.substring(0, newLineIndex);
-  }
-  function serializeEnum(val) {
-    return val;
-  }
-  function print(obj) {
-    console.log(obj);
-  }
-  function setValueOnPath(global, path, value) {
-    for (var parts = path.split("."),
-        obj = global; parts.length > 1; ) {
-      var name = parts.shift();
-      obj = obj.hasOwnProperty(name) && isPresent(obj[name]) ? obj[name] : obj[name] = {};
-    }
-    void 0 !== obj && null !== obj || (obj = {}), obj[parts.shift()] = value;
-  }
-  function getDOM() {
-    return _DOM;
-  }
-  function setRootDomAdapter(adapter) {
-    isBlank(_DOM) && (_DOM = adapter);
-  }
-  function supportsState() {
-    return !!window.history.pushState;
-  }
-  function enableDebugTools(ref) {
-    return context.ng = new AngularTools(ref), ref;
-  }
-  function disableDebugTools() {
-    delete context.ng;
-  }
-  function _flattenArray(source, target) {
-    if (isPresent(source))
-      for (var i = 0; i < source.length; i++) {
-        var item = source[i];
-        isArray(item) ? _flattenArray(item, target) : target.push(item);
-      }
-    return target;
-  }
-  function sanitizeUrl(url) {
-    return url = String(url), url.match(SAFE_URL_PATTERN) || url.match(DATA_URL_PATTERN) ? url : (_angular_core.isDevMode() && getDOM().log("WARNING: sanitizing unsafe URL value " + url + " (see http://g.co/ng/security#xss)"), "unsafe:" + url);
-  }
-  function sanitizeSrcset(srcset) {
-    return srcset = String(srcset), srcset.split(",").map(function(srcset) {
-      return sanitizeUrl(srcset.trim());
-    }).join(", ");
-  }
-  function getInertElement() {
-    if (inertElement)
-      return inertElement;
-    DOM = getDOM();
-    var templateEl = DOM.createElement("template");
-    if ("content" in templateEl)
-      return templateEl;
-    var doc = DOM.createHtmlDocument();
-    if (inertElement = DOM.querySelector(doc, "body"), null == inertElement) {
-      var html = DOM.createElement("html", doc);
-      inertElement = DOM.createElement("body", doc), DOM.appendChild(html, inertElement), DOM.appendChild(doc, html);
-    }
-    return inertElement;
-  }
-  function tagSet(tags) {
-    for (var res = {},
-        _i = 0,
-        _a = tags.split(","); _i < _a.length; _i++) {
-      var t = _a[_i];
-      res[t.toLowerCase()] = !0;
-    }
-    return res;
-  }
-  function merge() {
-    for (var sets = [],
-        _i = 0; _i < arguments.length; _i++)
-      sets[_i - 0] = arguments[_i];
-    for (var res = {},
-        _a = 0,
-        sets_1 = sets; _a < sets_1.length; _a++) {
-      var s = sets_1[_a];
-      for (var v in s)
-        s.hasOwnProperty(v) && (res[v] = !0);
-    }
-    return res;
-  }
-  function encodeEntities(value) {
-    return value.replace(/&/g, "&amp;").replace(SURROGATE_PAIR_REGEXP, function(match) {
-      var hi = match.charCodeAt(0),
-          low = match.charCodeAt(1);
-      return "&#" + (1024 * (hi - 55296) + (low - 56320) + 65536) + ";";
-    }).replace(NON_ALPHANUMERIC_REGEXP, function(match) {
-      return "&#" + match.charCodeAt(0) + ";";
-    }).replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  }
-  function stripCustomNsAttrs(el) {
-    DOM.attributeMap(el).forEach(function(_, attrName) {
-      "xmlns:ns1" !== attrName && 0 !== attrName.indexOf("ns1:") || DOM.removeAttribute(el, attrName);
-    });
-    for (var _i = 0,
-        _a = DOM.childNodesAsList(el); _i < _a.length; _i++) {
-      var n = _a[_i];
-      DOM.isElementNode(n) && stripCustomNsAttrs(n);
-    }
-  }
-  function sanitizeHtml(unsafeHtmlInput) {
-    try {
-      var containerEl = getInertElement(),
-          unsafeHtml = unsafeHtmlInput ? String(unsafeHtmlInput) : "",
-          mXSSAttempts = 5,
-          parsedHtml = unsafeHtml;
-      do {
-        if (0 === mXSSAttempts)
-          throw new Error("Failed to sanitize html because the input is unstable");
-        mXSSAttempts--, unsafeHtml = parsedHtml, DOM.setInnerHTML(containerEl, unsafeHtml), DOM.defaultDoc().documentMode && stripCustomNsAttrs(containerEl), parsedHtml = DOM.getInnerHTML(containerEl);
-      } while (unsafeHtml !== parsedHtml);
-      for (var sanitizer = new SanitizingHtmlSerializer,
-          safeHtml = sanitizer.sanitizeChildren(DOM.getTemplateContent(containerEl) || containerEl),
-          parent_1 = DOM.getTemplateContent(containerEl) || containerEl,
-          _i = 0,
-          _a = DOM.childNodesAsList(parent_1); _i < _a.length; _i++) {
-        var child = _a[_i];
-        DOM.removeChild(parent_1, child);
-      }
-      return _angular_core.isDevMode() && safeHtml !== unsafeHtmlInput && DOM.log("WARNING: sanitizing HTML stripped some content (see http://g.co/ng/security#xss)."), safeHtml;
-    } catch (e) {
-      throw inertElement = null, e;
-    }
-  }
-  function hasBalancedQuotes(value) {
-    for (var outsideSingle = !0,
-        outsideDouble = !0,
-        i = 0; i < value.length; i++) {
-      var c = value.charAt(i);
-      "'" === c && outsideDouble ? outsideSingle = !outsideSingle : '"' === c && outsideSingle && (outsideDouble = !outsideDouble);
-    }
-    return outsideSingle && outsideDouble;
-  }
-  function sanitizeStyle(value) {
-    if (value = String(value).trim(), !value)
-      return "";
-    var urlMatch = URL_RE.exec(value);
-    return urlMatch && sanitizeUrl(urlMatch[1]) === urlMatch[1] || value.match(SAFE_STYLE_VALUE) && hasBalancedQuotes(value) ? value : (_angular_core.isDevMode() && getDOM().log("WARNING: sanitizing unsafe style value " + value + " (see http://g.co/ng/security#xss)."), "unsafe");
-  }
-  function camelCaseToDashCase(input) {
-    return StringWrapper.replaceAllMapped(input, CAMEL_CASE_REGEXP, function(m) {
-      return "-" + m[1].toLowerCase();
-    });
-  }
-  function dashCaseToCamelCase(input) {
-    return StringWrapper.replaceAllMapped(input, DASH_CASE_REGEXP, function(m) {
-      return m[1].toUpperCase();
-    });
-  }
-  function _populateStyles(element, styles, defaultStyles) {
-    var data = {};
-    return styles.styles.forEach(function(entry) {
-      StringMapWrapper.forEach(entry, function(val, prop) {
-        var formattedProp = dashCaseToCamelCase(prop);
-        data[formattedProp] = val == _angular_core.AUTO_STYLE ? _computeStyle(element, formattedProp) : val.toString() + _resolveStyleUnit(val, prop, formattedProp);
-      });
-    }), StringMapWrapper.forEach(defaultStyles, function(value, prop) {
-      isPresent(data[prop]) || (data[prop] = value);
-    }), data;
-  }
-  function _resolveStyleUnit(val, userProvidedProp, formattedProp) {
-    var unit = "";
-    if (_isPixelDimensionStyle(formattedProp) && 0 != val && "0" != val)
-      if (isNumber(val))
-        unit = "px";
-      else if (0 == _findDimensionalSuffix(val.toString()).length)
-        throw new _angular_core.BaseException("Please provide a CSS unit value for " + userProvidedProp + ":" + val);
-    return unit;
-  }
-  function _findDimensionalSuffix(value) {
-    for (var i = 0; i < value.length; i++) {
-      var c = StringWrapper.charCodeAt(value, i);
-      if (!(c >= _$0 && c <= _$9 || c == _$PERIOD))
-        return value.substring(i, value.length);
-    }
-    return "";
-  }
-  function _isPixelDimensionStyle(prop) {
-    switch (prop) {
-      case "width":
-      case "height":
-      case "minWidth":
-      case "minHeight":
-      case "maxWidth":
-      case "maxHeight":
-      case "left":
-      case "top":
-      case "bottom":
-      case "right":
-      case "fontSize":
-      case "outlineWidth":
-      case "outlineOffset":
-      case "paddingTop":
-      case "paddingLeft":
-      case "paddingBottom":
-      case "paddingRight":
-      case "marginTop":
-      case "marginLeft":
-      case "marginBottom":
-      case "marginRight":
-      case "borderRadius":
-      case "borderWidth":
-      case "borderTopWidth":
-      case "borderLeftWidth":
-      case "borderRightWidth":
-      case "borderBottomWidth":
-      case "textIndent":
-        return !0;
-      default:
-        return !1;
-    }
-  }
-  function _computeStyle(element, prop) {
-    return getDOM().getComputedStyle(element)[prop];
-  }
-  function getBaseElementHref() {
-    return isBlank(baseElement) && (baseElement = document.querySelector("base"), isBlank(baseElement)) ? null : baseElement.getAttribute("href");
-  }
-  function relativePath(url) {
-    return isBlank(urlParsingNode) && (urlParsingNode = document.createElement("a")), urlParsingNode.setAttribute("href", url), "/" === urlParsingNode.pathname.charAt(0) ? urlParsingNode.pathname : "/" + urlParsingNode.pathname;
-  }
-  function parseCookieValue(cookie, name) {
-    name = encodeURIComponent(name);
-    for (var cookies = cookie.split(";"),
-        _i = 0,
-        cookies_1 = cookies; _i < cookies_1.length; _i++) {
-      var cookie_1 = cookies_1[_i],
-          _a = cookie_1.split("=", 2),
-          key = _a[0],
-          value = _a[1];
-      if (key.trim() === name)
-        return decodeURIComponent(value);
-    }
-    return null;
-  }
-  function moveNodesAfterSibling(sibling, nodes) {
-    var parent = getDOM().parentElement(sibling);
-    if (nodes.length > 0 && isPresent(parent)) {
-      var nextSibling = getDOM().nextSibling(sibling);
-      if (isPresent(nextSibling))
-        for (var i = 0; i < nodes.length; i++)
-          getDOM().insertBefore(nextSibling, nodes[i]);
-      else
-        for (var i = 0; i < nodes.length; i++)
-          getDOM().appendChild(parent, nodes[i]);
-    }
-  }
-  function appendNodes(parent, nodes) {
-    for (var i = 0; i < nodes.length; i++)
-      getDOM().appendChild(parent, nodes[i]);
-  }
-  function decoratePreventDefault(eventHandler) {
-    return function(event) {
-      var allowDefaultBehavior = eventHandler(event);
-      allowDefaultBehavior === !1 && getDOM().preventDefault(event);
-    };
-  }
-  function _shimContentAttribute(componentShortId) {
-    return StringWrapper.replaceAll(CONTENT_ATTR, COMPONENT_REGEX, componentShortId);
-  }
-  function _shimHostAttribute(componentShortId) {
-    return StringWrapper.replaceAll(HOST_ATTR, COMPONENT_REGEX, componentShortId);
-  }
-  function _flattenStyles(compId, styles, target) {
-    for (var i = 0; i < styles.length; i++) {
-      var style = styles[i];
-      isArray(style) ? _flattenStyles(compId, style, target) : (style = StringWrapper.replaceAll(style, COMPONENT_REGEX, compId), target.push(style));
-    }
-    return target;
-  }
-  function splitNamespace(name) {
-    if (":" != name[0])
-      return [null, name];
-    var match = RegExpWrapper.firstMatch(NS_PREFIX_RE, name);
-    return [match[1], match[2]];
-  }
-  function inspectNativeElement(element) {
-    return _angular_core.getDebugNode(element);
-  }
-  function _createConditionalRootRenderer(rootRenderer) {
-    return _angular_core.isDevMode() ? _createRootRenderer(rootRenderer) : rootRenderer;
-  }
-  function _createRootRenderer(rootRenderer) {
-    return getDOM().setGlobalVar(INSPECT_GLOBAL_NAME, inspectNativeElement), getDOM().setGlobalVar(CORE_TOKENS_GLOBAL_NAME, CORE_TOKENS), new DebugDomRootRenderer(rootRenderer);
-  }
-  function browserPlatform() {
-    return isBlank(_angular_core.getPlatform()) && _angular_core.createPlatform(_angular_core.ReflectiveInjector.resolveAndCreate(BROWSER_PLATFORM_PROVIDERS)), _angular_core.assertPlatform(BROWSER_PLATFORM_MARKER);
-  }
-  function initDomAdapter() {
-    BrowserDomAdapter.makeCurrent(), wtfInit(), BrowserGetTestability.init();
-  }
-  function _exceptionHandler() {
-    return new _angular_core.ExceptionHandler(getDOM());
-  }
-  function _document() {
-    return getDOM().defaultDoc();
-  }
-  function _resolveDefaultAnimationDriver() {
-    return getDOM().supportsWebAnimation() ? new WebAnimationsDriver : new NoOpAnimationDriver;
-  }
-  function deserializeGenericEvent(serializedEvent) {
-    return serializedEvent;
-  }
-  function appInitFnFactory(platformLocation, zone) {
-    return function() {
-      return zone.runGuarded(function() {
-        return platformLocation.init();
-      });
-    };
-  }
-  function initUiLocation(injector) {
-    return function() {
-      var zone = injector.get(_angular_core.NgZone);
-      zone.runGuarded(function() {
-        return injector.get(MessageBasedPlatformLocation).start();
-      });
-    };
-  }
-  function serializeGenericEvent(e) {
-    return serializeEvent(e, EVENT_PROPERTIES);
-  }
-  function serializeEventWithTarget(e) {
-    var serializedEvent = serializeEvent(e, EVENT_PROPERTIES);
-    return addTarget(e, serializedEvent);
-  }
-  function serializeMouseEvent(e) {
-    return serializeEvent(e, MOUSE_EVENT_PROPERTIES);
-  }
-  function serializeKeyboardEvent(e) {
-    var serializedEvent = serializeEvent(e, KEYBOARD_EVENT_PROPERTIES);
-    return addTarget(e, serializedEvent);
-  }
-  function serializeTransitionEvent(e) {
-    var serializedEvent = serializeEvent(e, TRANSITION_EVENT_PROPERTIES);
-    return addTarget(e, serializedEvent);
-  }
-  function addTarget(e, serializedEvent) {
-    if (NODES_WITH_VALUE.has(e.target.tagName.toLowerCase())) {
-      var target = e.target;
-      serializedEvent.target = {value: target.value}, isPresent(target.files) && (serializedEvent.target.files = target.files);
-    }
-    return serializedEvent;
-  }
-  function serializeEvent(e, properties) {
-    for (var serialized = {},
-        i = 0; i < properties.length; i++) {
-      var prop = properties[i];
-      serialized[prop] = e[prop];
-    }
-    return serialized;
-  }
-  function initializeGenericWorkerRenderer(injector) {
-    var bus = injector.get(MessageBus),
-        zone = injector.get(_angular_core.NgZone);
-    bus.attachToZone(zone);
-    var services = injector.get(WORKER_UI_STARTABLE_MESSAGING_SERVICE);
-    zone.runGuarded(function() {
-      services.forEach(function(svc) {
-        svc.start();
-      });
-    });
-  }
-  function messageBusFactory(instance) {
-    return instance.bus;
-  }
-  function initWebWorkerRenderPlatform() {
-    BrowserDomAdapter.makeCurrent(), wtfInit(), BrowserGetTestability.init();
-  }
-  function workerUiPlatform() {
-    return isBlank(_angular_core.getPlatform()) && _angular_core.createPlatform(_angular_core.ReflectiveInjector.resolveAndCreate(WORKER_UI_PLATFORM_PROVIDERS)), _angular_core.assertPlatform(WORKER_RENDER_PLATFORM_MARKER);
-  }
-  function _exceptionHandler$1() {
-    return new _angular_core.ExceptionHandler(getDOM());
-  }
-  function _document$1() {
-    return getDOM().defaultDoc();
-  }
-  function initWebWorkerAppFn(injector) {
-    return function() {
-      var scriptUri;
-      try {
-        scriptUri = injector.get(WORKER_SCRIPT);
-      } catch (e) {
-        throw new BaseException$1("You must provide your WebWorker's initialization script with the WORKER_SCRIPT token");
-      }
-      var instance = injector.get(WebWorkerInstance);
-      spawnWebWorker(scriptUri, instance), initializeGenericWorkerRenderer(injector);
-    };
-  }
-  function spawnWebWorker(uri, instance) {
-    var webWorker = new Worker(uri),
-        sink = new PostMessageBusSink(webWorker),
-        source = new PostMessageBusSource(webWorker),
-        bus = new PostMessageBus(sink, source);
-    instance.init(webWorker, bus);
-  }
-  function _resolveDefaultAnimationDriver$1() {
-    return new NoOpAnimationDriver;
-  }
-  function eventNameWithTarget(target, eventName) {
-    return target + ":" + eventName;
-  }
-  function workerAppPlatform() {
-    return isBlank(_angular_core.getPlatform()) && _angular_core.createPlatform(_angular_core.ReflectiveInjector.resolveAndCreate(WORKER_APP_PLATFORM_PROVIDERS)), _angular_core.assertPlatform(WORKER_APP_PLATFORM_MARKER);
-  }
-  function _exceptionHandler$2() {
-    return new _angular_core.ExceptionHandler(new PrintLogger);
-  }
-  function createMessageBus(zone) {
-    var sink = new PostMessageBusSink(_postMessage),
-        source = new PostMessageBusSource,
-        bus = new PostMessageBus(sink, source);
-    return bus.attachToZone(zone), bus;
-  }
-  function setupWebWorker() {
-    WorkerDomAdapter.makeCurrent();
-  }
-  var globalScope;
-  globalScope = "undefined" == typeof window ? "undefined" != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope ? self : global : window;
-  var global$1 = globalScope,
-      Date = global$1.Date;
-  global$1.assert = function(condition) {};
-  var StringWrapper = function() {
-    function StringWrapper() {}
-    return StringWrapper.fromCharCode = function(code) {
-      return String.fromCharCode(code);
-    }, StringWrapper.charCodeAt = function(s, index) {
-      return s.charCodeAt(index);
-    }, StringWrapper.split = function(s, regExp) {
-      return s.split(regExp);
-    }, StringWrapper.equals = function(s, s2) {
-      return s === s2;
-    }, StringWrapper.stripLeft = function(s, charVal) {
-      if (s && s.length) {
-        for (var pos = 0,
-            i = 0; i < s.length && s[i] == charVal; i++)
-          pos++;
-        s = s.substring(pos);
-      }
-      return s;
-    }, StringWrapper.stripRight = function(s, charVal) {
-      if (s && s.length) {
-        for (var pos = s.length,
-            i = s.length - 1; i >= 0 && s[i] == charVal; i--)
-          pos--;
-        s = s.substring(0, pos);
-      }
-      return s;
-    }, StringWrapper.replace = function(s, from, replace) {
-      return s.replace(from, replace);
-    }, StringWrapper.replaceAll = function(s, from, replace) {
-      return s.replace(from, replace);
-    }, StringWrapper.slice = function(s, from, to) {
-      return void 0 === from && (from = 0), void 0 === to && (to = null), s.slice(from, null === to ? void 0 : to);
-    }, StringWrapper.replaceAllMapped = function(s, from, cb) {
-      return s.replace(from, function() {
-        for (var matches = [],
-            _i = 0; _i < arguments.length; _i++)
-          matches[_i - 0] = arguments[_i];
-        return matches.splice(-2, 2), cb(matches);
-      });
-    }, StringWrapper.contains = function(s, substr) {
-      return s.indexOf(substr) != -1;
-    }, StringWrapper.compare = function(a, b) {
-      return a < b ? -1 : a > b ? 1 : 0;
-    }, StringWrapper;
-  }(),
-      NumberParseError = function(_super) {
-        function NumberParseError(message) {
-          _super.call(this), this.message = message;
-        }
-        return __extends(NumberParseError, _super), NumberParseError.prototype.toString = function() {
-          return this.message;
-        }, NumberParseError;
-      }(Error),
-      NumberWrapper = function() {
-        function NumberWrapper() {}
-        return NumberWrapper.toFixed = function(n, fractionDigits) {
-          return n.toFixed(fractionDigits);
-        }, NumberWrapper.equal = function(a, b) {
-          return a === b;
-        }, NumberWrapper.parseIntAutoRadix = function(text) {
-          var result = parseInt(text);
-          if (isNaN(result))
-            throw new NumberParseError("Invalid integer literal when parsing " + text);
-          return result;
-        }, NumberWrapper.parseInt = function(text, radix) {
-          if (10 == radix) {
-            if (/^(\-|\+)?[0-9]+$/.test(text))
-              return parseInt(text, radix);
-          } else if (16 == radix) {
-            if (/^(\-|\+)?[0-9ABCDEFabcdef]+$/.test(text))
-              return parseInt(text, radix);
-          } else {
-            var result = parseInt(text, radix);
-            if (!isNaN(result))
-              return result;
-          }
-          throw new NumberParseError("Invalid integer literal when parsing " + text + " in base " + radix);
-        }, NumberWrapper.parseFloat = function(text) {
-          return parseFloat(text);
-        }, Object.defineProperty(NumberWrapper, "NaN", {
-          get: function() {
-            return NaN;
-          },
-          enumerable: !0,
-          configurable: !0
-        }), NumberWrapper.isNumeric = function(value) {
-          return !isNaN(value - parseFloat(value));
-        }, NumberWrapper.isNaN = function(value) {
-          return isNaN(value);
-        }, NumberWrapper.isInteger = function(value) {
-          return Number.isInteger(value);
-        }, NumberWrapper;
-      }(),
-      RegExpWrapper = function() {
-        function RegExpWrapper() {}
-        return RegExpWrapper.create = function(regExpStr, flags) {
-          return void 0 === flags && (flags = ""), flags = flags.replace(/g/g, ""), new global$1.RegExp(regExpStr, flags + "g");
-        }, RegExpWrapper.firstMatch = function(regExp, input) {
-          return regExp.lastIndex = 0, regExp.exec(input);
-        }, RegExpWrapper.test = function(regExp, input) {
-          return regExp.lastIndex = 0, regExp.test(input);
-        }, RegExpWrapper.matcher = function(regExp, input) {
-          return regExp.lastIndex = 0, {
-            re: regExp,
-            input: input
-          };
-        }, RegExpWrapper.replaceAll = function(regExp, input, replace) {
-          var c = regExp.exec(input),
-              res = "";
-          regExp.lastIndex = 0;
-          for (var prev = 0; c; )
-            res += input.substring(prev, c.index), res += replace(c), prev = c.index + c[0].length, regExp.lastIndex = prev, c = regExp.exec(input);
-          return res += input.substring(prev);
-        }, RegExpWrapper;
-      }(),
-      FunctionWrapper = function() {
-        function FunctionWrapper() {}
-        return FunctionWrapper.apply = function(fn, posArgs) {
-          return fn.apply(null, posArgs);
-        }, FunctionWrapper.bind = function(fn, scope) {
-          return fn.bind(scope);
-        }, FunctionWrapper;
-      }(),
-      Json = function() {
-        function Json() {}
-        return Json.parse = function(s) {
-          return global$1.JSON.parse(s);
-        }, Json.stringify = function(data) {
-          return global$1.JSON.stringify(data, null, 2);
-        }, Json;
-      }(),
-      DateWrapper = function() {
-        function DateWrapper() {}
-        return DateWrapper.create = function(year, month, day, hour, minutes, seconds, milliseconds) {
-          return void 0 === month && (month = 1), void 0 === day && (day = 1), void 0 === hour && (hour = 0), void 0 === minutes && (minutes = 0), void 0 === seconds && (seconds = 0), void 0 === milliseconds && (milliseconds = 0), new Date(year, month - 1, day, hour, minutes, seconds, milliseconds);
-        }, DateWrapper.fromISOString = function(str) {
-          return new Date(str);
-        }, DateWrapper.fromMillis = function(ms) {
-          return new Date(ms);
-        }, DateWrapper.toMillis = function(date) {
-          return date.getTime();
-        }, DateWrapper.now = function() {
-          return new Date;
-        }, DateWrapper.toJson = function(date) {
-          return date.toJSON();
-        }, DateWrapper;
-      }(),
-      _DOM = null,
-      DomAdapter = function() {
-        function DomAdapter() {
-          this.xhrType = null;
-        }
-        return DomAdapter.prototype.getXHR = function() {
-          return this.xhrType;
-        }, Object.defineProperty(DomAdapter.prototype, "attrToPropMap", {
-          get: function() {
-            return this._attrToPropMap;
-          },
-          set: function(value) {
-            this._attrToPropMap = value;
-          },
-          enumerable: !0,
-          configurable: !0
-        }), DomAdapter;
-      }(),
-      BrowserPlatformLocation = function(_super) {
-        function BrowserPlatformLocation() {
-          _super.call(this), this._init();
-        }
-        return __extends(BrowserPlatformLocation, _super), BrowserPlatformLocation.prototype._init = function() {
-          this._location = getDOM().getLocation(), this._history = getDOM().getHistory();
-        }, Object.defineProperty(BrowserPlatformLocation.prototype, "location", {
-          get: function() {
-            return this._location;
-          },
-          enumerable: !0,
-          configurable: !0
-        }), BrowserPlatformLocation.prototype.getBaseHrefFromDOM = function() {
-          return getDOM().getBaseHref();
-        }, BrowserPlatformLocation.prototype.onPopState = function(fn) {
-          getDOM().getGlobalEventTarget("window").addEventListener("popstate", fn, !1);
-        }, BrowserPlatformLocation.prototype.onHashChange = function(fn) {
-          getDOM().getGlobalEventTarget("window").addEventListener("hashchange", fn, !1);
-        }, Object.defineProperty(BrowserPlatformLocation.prototype, "pathname", {
-          get: function() {
-            return this._location.pathname;
-          },
-          set: function(newPath) {
-            this._location.pathname = newPath;
-          },
-          enumerable: !0,
-          configurable: !0
-        }), Object.defineProperty(BrowserPlatformLocation.prototype, "search", {
-          get: function() {
-            return this._location.search;
-          },
-          enumerable: !0,
-          configurable: !0
-        }), Object.defineProperty(BrowserPlatformLocation.prototype, "hash", {
-          get: function() {
-            return this._location.hash;
-          },
-          enumerable: !0,
-          configurable: !0
-        }), BrowserPlatformLocation.prototype.pushState = function(state, title, url) {
-          supportsState() ? this._history.pushState(state, title, url) : this._location.hash = url;
-        }, BrowserPlatformLocation.prototype.replaceState = function(state, title, url) {
-          supportsState() ? this._history.replaceState(state, title, url) : this._location.hash = url;
-        }, BrowserPlatformLocation.prototype.forward = function() {
-          this._history.forward();
-        }, BrowserPlatformLocation.prototype.back = function() {
-          this._history.back();
-        }, BrowserPlatformLocation;
-      }(_angular_common.PlatformLocation);
-  BrowserPlatformLocation.decorators = [{type: _angular_core.Injectable}], BrowserPlatformLocation.ctorParameters = [];
-  var Title = function() {
-    function Title() {}
-    return Title.prototype.getTitle = function() {
-      return getDOM().getTitle();
-    }, Title.prototype.setTitle = function(newTitle) {
-      getDOM().setTitle(newTitle);
-    }, Title;
-  }(),
-      win = "undefined" != typeof window && window || {},
-      ChangeDetectionPerfRecord = function() {
-        function ChangeDetectionPerfRecord(msPerTick, numTicks) {
-          this.msPerTick = msPerTick, this.numTicks = numTicks;
-        }
-        return ChangeDetectionPerfRecord;
-      }(),
-      AngularTools = function() {
-        function AngularTools(ref) {
-          this.profiler = new AngularProfiler(ref);
-        }
-        return AngularTools;
-      }(),
-      AngularProfiler = function() {
-        function AngularProfiler(ref) {
-          this.appRef = ref.injector.get(_angular_core.ApplicationRef);
-        }
-        return AngularProfiler.prototype.timeChangeDetection = function(config) {
-          var record = isPresent(config) && config.record,
-              profileName = "Change Detection",
-              isProfilerAvailable = isPresent(win.console.profile);
-          record && isProfilerAvailable && win.console.profile(profileName);
-          for (var start = getDOM().performanceNow(),
-              numTicks = 0; numTicks < 5 || getDOM().performanceNow() - start < 500; )
-            this.appRef.tick(), numTicks++;
-          var end = getDOM().performanceNow();
-          record && isProfilerAvailable && win.console.profileEnd(profileName);
-          var msPerTick = (end - start) / numTicks;
-          return win.console.log("ran " + numTicks + " change detection cycles"), win.console.log(NumberWrapper.toFixed(msPerTick, 2) + " ms per check"), new ChangeDetectionPerfRecord(msPerTick, numTicks);
-        }, AngularProfiler;
-      }(),
-      context = global$1,
-      By = function() {
-        function By() {}
-        return By.all = function() {
-          return function(debugElement) {
-            return !0;
-          };
-        }, By.css = function(selector) {
-          return function(debugElement) {
-            return !!isPresent(debugElement.nativeElement) && getDOM().elementMatches(debugElement.nativeElement, selector);
-          };
-        }, By.directive = function(type) {
-          return function(debugElement) {
-            return debugElement.providerTokens.indexOf(type) !== -1;
-          };
-        }, By;
-      }(),
-      DOCUMENT = new _angular_core.OpaqueToken("DocumentToken"),
-      Map$1 = global$1.Map,
-      Set$1 = global$1.Set,
-      StringMapWrapper = (function() {
-        try {
-          if (1 === new Map$1([[1, 2]]).size)
-            return function(pairs) {
-              return new Map$1(pairs);
-            };
-        } catch (e) {}
-        return function(pairs) {
-          for (var map = new Map$1,
-              i = 0; i < pairs.length; i++) {
-            var pair = pairs[i];
-            map.set(pair[0], pair[1]);
-          }
-          return map;
-        };
-      }(), function() {
-        try {
-          if (new Map$1(new Map$1))
-            return function(m) {
-              return new Map$1(m);
-            };
-        } catch (e) {}
-        return function(m) {
-          var map = new Map$1;
-          return m.forEach(function(v, k) {
-            map.set(k, v);
-          }), map;
-        };
-      }(), function() {
-        return (new Map$1).keys().next ? function(m) {
-          for (var k,
-              keyIterator = m.keys(); !(k = keyIterator.next()).done; )
-            m.set(k.value, null);
-        } : function(m) {
-          m.forEach(function(v, k) {
-            m.set(k, null);
-          });
-        };
-      }(), function() {
-        try {
-          if ((new Map$1).values().next)
-            return function(m, getValues) {
-              return getValues ? Array.from(m.values()) : Array.from(m.keys());
-            };
-        } catch (e) {}
-        return function(m, getValues) {
-          var res = ListWrapper.createFixedSize(m.size),
-              i = 0;
-          return m.forEach(function(v, k) {
-            res[i] = getValues ? v : k, i++;
-          }), res;
-        };
-      }(), function() {
-        function StringMapWrapper() {}
-        return StringMapWrapper.create = function() {
-          return {};
-        }, StringMapWrapper.contains = function(map, key) {
-          return map.hasOwnProperty(key);
-        }, StringMapWrapper.get = function(map, key) {
-          return map.hasOwnProperty(key) ? map[key] : void 0;
-        }, StringMapWrapper.set = function(map, key, value) {
-          map[key] = value;
-        }, StringMapWrapper.keys = function(map) {
-          return Object.keys(map);
-        }, StringMapWrapper.values = function(map) {
-          return Object.keys(map).reduce(function(r, a) {
-            return r.push(map[a]), r;
-          }, []);
-        }, StringMapWrapper.isEmpty = function(map) {
-          for (var prop in map)
-            return !1;
-          return !0;
-        }, StringMapWrapper.delete = function(map, key) {
-          delete map[key];
-        }, StringMapWrapper.forEach = function(map, callback) {
-          for (var prop in map)
-            map.hasOwnProperty(prop) && callback(map[prop], prop);
-        }, StringMapWrapper.merge = function(m1, m2) {
-          var m = {};
-          for (var attr in m1)
-            m1.hasOwnProperty(attr) && (m[attr] = m1[attr]);
-          for (var attr in m2)
-            m2.hasOwnProperty(attr) && (m[attr] = m2[attr]);
-          return m;
-        }, StringMapWrapper.equals = function(m1, m2) {
-          var k1 = Object.keys(m1),
-              k2 = Object.keys(m2);
-          if (k1.length != k2.length)
-            return !1;
-          for (var key,
-              i = 0; i < k1.length; i++)
-            if (key = k1[i], m1[key] !== m2[key])
-              return !1;
-          return !0;
-        }, StringMapWrapper;
-      }()),
-      ListWrapper = function() {
-        function ListWrapper() {}
-        return ListWrapper.createFixedSize = function(size) {
-          return new Array(size);
-        }, ListWrapper.createGrowableSize = function(size) {
-          return new Array(size);
-        }, ListWrapper.clone = function(array) {
-          return array.slice(0);
-        }, ListWrapper.forEachWithIndex = function(array, fn) {
-          for (var i = 0; i < array.length; i++)
-            fn(array[i], i);
-        }, ListWrapper.first = function(array) {
-          return array ? array[0] : null;
-        }, ListWrapper.last = function(array) {
-          return array && 0 != array.length ? array[array.length - 1] : null;
-        }, ListWrapper.indexOf = function(array, value, startIndex) {
-          return void 0 === startIndex && (startIndex = 0), array.indexOf(value, startIndex);
-        }, ListWrapper.contains = function(list, el) {
-          return list.indexOf(el) !== -1;
-        }, ListWrapper.reversed = function(array) {
-          var a = ListWrapper.clone(array);
-          return a.reverse();
-        }, ListWrapper.concat = function(a, b) {
-          return a.concat(b);
-        }, ListWrapper.insert = function(list, index, value) {
-          list.splice(index, 0, value);
-        }, ListWrapper.removeAt = function(list, index) {
-          var res = list[index];
-          return list.splice(index, 1), res;
-        }, ListWrapper.removeAll = function(list, items) {
-          for (var i = 0; i < items.length; ++i) {
-            var index = list.indexOf(items[i]);
-            list.splice(index, 1);
-          }
-        }, ListWrapper.remove = function(list, el) {
-          var index = list.indexOf(el);
-          return index > -1 && (list.splice(index, 1), !0);
-        }, ListWrapper.clear = function(list) {
-          list.length = 0;
-        }, ListWrapper.isEmpty = function(list) {
-          return 0 == list.length;
-        }, ListWrapper.fill = function(list, value, start, end) {
-          void 0 === start && (start = 0), void 0 === end && (end = null), list.fill(value, start, null === end ? list.length : end);
-        }, ListWrapper.equals = function(a, b) {
-          if (a.length != b.length)
-            return !1;
-          for (var i = 0; i < a.length; ++i)
-            if (a[i] !== b[i])
-              return !1;
-          return !0;
-        }, ListWrapper.slice = function(l, from, to) {
-          return void 0 === from && (from = 0), void 0 === to && (to = null), l.slice(from, null === to ? void 0 : to);
-        }, ListWrapper.splice = function(l, from, length) {
-          return l.splice(from, length);
-        }, ListWrapper.sort = function(l, compareFn) {
-          isPresent(compareFn) ? l.sort(compareFn) : l.sort();
-        }, ListWrapper.toString = function(l) {
-          return l.toString();
-        }, ListWrapper.toJSON = function(l) {
-          return JSON.stringify(l);
-        }, ListWrapper.maximum = function(list, predicate) {
-          if (0 == list.length)
-            return null;
-          for (var solution = null,
-              maxValue = -(1 / 0),
-              index = 0; index < list.length; index++) {
-            var candidate = list[index];
-            if (!isBlank(candidate)) {
-              var candidateValue = predicate(candidate);
-              candidateValue > maxValue && (solution = candidate, maxValue = candidateValue);
-            }
-          }
-          return solution;
-        }, ListWrapper.flatten = function(list) {
-          var target = [];
-          return _flattenArray(list, target), target;
-        }, ListWrapper.addAll = function(list, source) {
-          for (var i = 0; i < source.length; i++)
-            list.push(source[i]);
-        }, ListWrapper;
-      }(),
-      createSetFromList = function() {
-        var test = new Set$1([1, 2, 3]);
-        return 3 === test.size ? function(lst) {
-          return new Set$1(lst);
-        } : function(lst) {
-          var res = new Set$1(lst);
-          if (res.size !== lst.length)
-            for (var i = 0; i < lst.length; i++)
-              res.add(lst[i]);
-          return res;
-        };
-      }(),
-      SetWrapper = function() {
-        function SetWrapper() {}
-        return SetWrapper.createFromList = function(lst) {
-          return createSetFromList(lst);
-        }, SetWrapper.has = function(s, key) {
-          return s.has(key);
-        }, SetWrapper.delete = function(m, k) {
-          m.delete(k);
-        }, SetWrapper;
-      }(),
-      BaseException$1 = function(_super) {
-        function BaseException$1(message) {
-          void 0 === message && (message = "--"), _super.call(this, message), this.message = message, this.stack = new Error(message).stack;
-        }
-        return __extends(BaseException$1, _super), BaseException$1.prototype.toString = function() {
-          return this.message;
-        }, BaseException$1;
-      }(Error),
-      EVENT_MANAGER_PLUGINS = new _angular_core.OpaqueToken("EventManagerPlugins"),
-      EventManager = function() {
-        function EventManager(plugins, _zone) {
-          var _this = this;
-          this._zone = _zone, plugins.forEach(function(p) {
-            return p.manager = _this;
-          }), this._plugins = ListWrapper.reversed(plugins);
-        }
-        return EventManager.prototype.addEventListener = function(element, eventName, handler) {
-          var plugin = this._findPluginFor(eventName);
-          return plugin.addEventListener(element, eventName, handler);
-        }, EventManager.prototype.addGlobalEventListener = function(target, eventName, handler) {
-          var plugin = this._findPluginFor(eventName);
-          return plugin.addGlobalEventListener(target, eventName, handler);
-        }, EventManager.prototype.getZone = function() {
-          return this._zone;
-        }, EventManager.prototype._findPluginFor = function(eventName) {
-          for (var plugins = this._plugins,
-              i = 0; i < plugins.length; i++) {
-            var plugin = plugins[i];
-            if (plugin.supports(eventName))
-              return plugin;
-          }
-          throw new BaseException$1("No event manager plugin found for event " + eventName);
-        }, EventManager;
-      }();
-  EventManager.decorators = [{type: _angular_core.Injectable}], EventManager.ctorParameters = [{
-    type: Array,
-    decorators: [{
-      type: _angular_core.Inject,
-      args: [EVENT_MANAGER_PLUGINS]
-    }]
-  }, {type: _angular_core.NgZone}];
-  var EventManagerPlugin = function() {
-    function EventManagerPlugin() {}
-    return EventManagerPlugin.prototype.supports = function(eventName) {
-      return !1;
-    }, EventManagerPlugin.prototype.addEventListener = function(element, eventName, handler) {
-      throw "not implemented";
-    }, EventManagerPlugin.prototype.addGlobalEventListener = function(element, eventName, handler) {
-      throw "not implemented";
-    }, EventManagerPlugin;
-  }(),
-      _eventNames = {
-        pan: !0,
-        panstart: !0,
-        panmove: !0,
-        panend: !0,
-        pancancel: !0,
-        panleft: !0,
-        panright: !0,
-        panup: !0,
-        pandown: !0,
-        pinch: !0,
-        pinchstart: !0,
-        pinchmove: !0,
-        pinchend: !0,
-        pinchcancel: !0,
-        pinchin: !0,
-        pinchout: !0,
-        press: !0,
-        pressup: !0,
-        rotate: !0,
-        rotatestart: !0,
-        rotatemove: !0,
-        rotateend: !0,
-        rotatecancel: !0,
-        swipe: !0,
-        swipeleft: !0,
-        swiperight: !0,
-        swipeup: !0,
-        swipedown: !0,
-        tap: !0
-      },
-      HammerGesturesPluginCommon = function(_super) {
-        function HammerGesturesPluginCommon() {
-          _super.call(this);
-        }
-        return __extends(HammerGesturesPluginCommon, _super), HammerGesturesPluginCommon.prototype.supports = function(eventName) {
-          return eventName = eventName.toLowerCase(), StringMapWrapper.contains(_eventNames, eventName);
-        }, HammerGesturesPluginCommon;
-      }(EventManagerPlugin),
-      HAMMER_GESTURE_CONFIG = new _angular_core.OpaqueToken("HammerGestureConfig"),
-      HammerGestureConfig = function() {
-        function HammerGestureConfig() {
-          this.events = [], this.overrides = {};
-        }
-        return HammerGestureConfig.prototype.buildHammer = function(element) {
-          var mc = new Hammer(element);
-          mc.get("pinch").set({enable: !0}), mc.get("rotate").set({enable: !0});
-          for (var eventName in this.overrides)
-            mc.get(eventName).set(this.overrides[eventName]);
-          return mc;
-        }, HammerGestureConfig;
-      }();
-  HammerGestureConfig.decorators = [{type: _angular_core.Injectable}];
-  var HammerGesturesPlugin = function(_super) {
-    function HammerGesturesPlugin(_config) {
-      _super.call(this), this._config = _config;
-    }
-    return __extends(HammerGesturesPlugin, _super), HammerGesturesPlugin.prototype.supports = function(eventName) {
-      if (!_super.prototype.supports.call(this, eventName) && !this.isCustomEvent(eventName))
-        return !1;
-      if (!isPresent(window.Hammer))
-        throw new BaseException$1("Hammer.js is not loaded, can not bind " + eventName + " event");
-      return !0;
-    }, HammerGesturesPlugin.prototype.addEventListener = function(element, eventName, handler) {
-      var _this = this,
-          zone = this.manager.getZone();
-      return eventName = eventName.toLowerCase(), zone.runOutsideAngular(function() {
-        var mc = _this._config.buildHammer(element),
-            callback = function(eventObj) {
-              zone.runGuarded(function() {
-                handler(eventObj);
-              });
-            };
-        return mc.on(eventName, callback), function() {
-          mc.off(eventName, callback);
-        };
-      });
-    }, HammerGesturesPlugin.prototype.isCustomEvent = function(eventName) {
-      return this._config.events.indexOf(eventName) > -1;
-    }, HammerGesturesPlugin;
-  }(HammerGesturesPluginCommon);
-  HammerGesturesPlugin.decorators = [{type: _angular_core.Injectable}], HammerGesturesPlugin.ctorParameters = [{
-    type: HammerGestureConfig,
-    decorators: [{
-      type: _angular_core.Inject,
-      args: [HAMMER_GESTURE_CONFIG]
-    }]
-  }];
-  var wtfInit = _angular_core.__core_private__.wtfInit,
-      VIEW_ENCAPSULATION_VALUES = _angular_core.__core_private__.VIEW_ENCAPSULATION_VALUES,
-      DebugDomRootRenderer = _angular_core.__core_private__.DebugDomRootRenderer,
-      SecurityContext = _angular_core.__core_private__.SecurityContext,
-      SanitizationService = _angular_core.__core_private__.SanitizationService,
-      NoOpAnimationDriver = _angular_core.__core_private__.NoOpAnimationDriver,
-      AnimationDriver = _angular_core.__core_private__.AnimationDriver,
-      SAFE_URL_PATTERN = /^(?:(?:https?|mailto|ftp|tel|file):|[^&:\/?#]*(?:[\/?#]|$))/gi,
-      DATA_URL_PATTERN = /^data:(?:image\/(?:bmp|gif|jpeg|jpg|png|tiff|webp)|video\/(?:mpeg|mp4|ogg|webm)|audio\/(?:mp3|oga|ogg|opus));base64,[a-z0-9+\/]+=*$/i,
-      inertElement = null,
-      DOM = null,
-      VOID_ELEMENTS = tagSet("area,br,col,hr,img,wbr"),
-      OPTIONAL_END_TAG_BLOCK_ELEMENTS = tagSet("colgroup,dd,dt,li,p,tbody,td,tfoot,th,thead,tr"),
-      OPTIONAL_END_TAG_INLINE_ELEMENTS = tagSet("rp,rt"),
-      OPTIONAL_END_TAG_ELEMENTS = merge(OPTIONAL_END_TAG_INLINE_ELEMENTS, OPTIONAL_END_TAG_BLOCK_ELEMENTS),
-      BLOCK_ELEMENTS = merge(OPTIONAL_END_TAG_BLOCK_ELEMENTS, tagSet("address,article,aside,blockquote,caption,center,del,details,dialog,dir,div,dl,figure,figcaption,footer,h1,h2,h3,h4,h5,h6,header,hgroup,hr,ins,main,map,menu,nav,ol,pre,section,summary,table,ul")),
-      INLINE_ELEMENTS = merge(OPTIONAL_END_TAG_INLINE_ELEMENTS, tagSet("a,abbr,acronym,audio,b,bdi,bdo,big,br,cite,code,del,dfn,em,font,i,img,ins,kbd,label,map,mark,picture,q,ruby,rp,rt,s,samp,small,source,span,strike,strong,sub,sup,time,track,tt,u,var,video")),
-      VALID_ELEMENTS = merge(VOID_ELEMENTS, BLOCK_ELEMENTS, INLINE_ELEMENTS, OPTIONAL_END_TAG_ELEMENTS),
-      URI_ATTRS = tagSet("background,cite,href,itemtype,longdesc,poster,src,xlink:href"),
-      SRCSET_ATTRS = tagSet("srcset"),
-      HTML_ATTRS = tagSet("abbr,accesskey,align,alt,autoplay,axis,bgcolor,border,cellpadding,cellspacing,class,clear,color,cols,colspan,compact,controls,coords,datetime,default,dir,download,face,headers,height,hidden,hreflang,hspace,ismap,itemscope,itemprop,kind,label,lang,language,loop,media,muted,nohref,nowrap,open,preload,rel,rev,role,rows,rowspan,rules,scope,scrolling,shape,size,sizes,span,srclang,start,summary,tabindex,target,title,translate,type,usemap,valign,value,vspace,width"),
-      VALID_ATTRS = merge(URI_ATTRS, SRCSET_ATTRS, HTML_ATTRS),
-      SanitizingHtmlSerializer = function() {
-        function SanitizingHtmlSerializer() {
-          this.buf = [];
-        }
-        return SanitizingHtmlSerializer.prototype.sanitizeChildren = function(el) {
-          for (var current = el.firstChild; current; )
-            if (DOM.isElementNode(current) ? this.startElement(current) : DOM.isTextNode(current) && this.chars(DOM.nodeValue(current)), DOM.firstChild(current))
-              current = DOM.firstChild(current);
-            else
-              for (; current; ) {
-                if (DOM.isElementNode(current) && this.endElement(DOM.nodeName(current).toLowerCase()), DOM.nextSibling(current)) {
-                  current = DOM.nextSibling(current);
-                  break;
-                }
-                current = DOM.parentElement(current);
-              }
-          return this.buf.join("");
-        }, SanitizingHtmlSerializer.prototype.startElement = function(element) {
-          var _this = this,
-              tagName = DOM.nodeName(element).toLowerCase();
-          tagName = tagName.toLowerCase(), VALID_ELEMENTS.hasOwnProperty(tagName) && (this.buf.push("<"), this.buf.push(tagName), DOM.attributeMap(element).forEach(function(value, attrName) {
-            var lower = attrName.toLowerCase();
-            VALID_ATTRS.hasOwnProperty(lower) && (URI_ATTRS[lower] && (value = sanitizeUrl(value)), SRCSET_ATTRS[lower] && (value = sanitizeSrcset(value)), _this.buf.push(" "), _this.buf.push(attrName), _this.buf.push('="'), _this.buf.push(encodeEntities(value)), _this.buf.push('"'));
-          }), this.buf.push(">"));
-        }, SanitizingHtmlSerializer.prototype.endElement = function(tagName) {
-          tagName = tagName.toLowerCase(), VALID_ELEMENTS.hasOwnProperty(tagName) && !VOID_ELEMENTS.hasOwnProperty(tagName) && (this.buf.push("</"), this.buf.push(tagName), this.buf.push(">"));
-        }, SanitizingHtmlSerializer.prototype.chars = function(chars) {
-          this.buf.push(encodeEntities(chars));
-        }, SanitizingHtmlSerializer;
-      }(),
-      SURROGATE_PAIR_REGEXP = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g,
-      NON_ALPHANUMERIC_REGEXP = /([^\#-~ |!])/g,
-      VALUES = "[-,.\"'%_!# a-zA-Z0-9]+",
-      TRANSFORMATION_FNS = "(?:matrix|translate|scale|rotate|skew|perspective)(?:X|Y|3d)?",
-      COLOR_FNS = "(?:rgb|hsl)a?",
-      FN_ARGS = "\\([-0-9.%, a-zA-Z]+\\)",
-      SAFE_STYLE_VALUE = new RegExp("^(" + VALUES + "|(?:" + TRANSFORMATION_FNS + "|" + COLOR_FNS + ")" + FN_ARGS + ")$", "g"),
-      URL_RE = /^url\(([^)]+)\)$/,
-      DomSanitizationService = function() {
-        function DomSanitizationService() {}
-        return DomSanitizationService;
-      }(),
-      DomSanitizationServiceImpl = function(_super) {
-        function DomSanitizationServiceImpl() {
-          _super.apply(this, arguments);
-        }
-        return __extends(DomSanitizationServiceImpl, _super), DomSanitizationServiceImpl.prototype.sanitize = function(ctx, value) {
-          if (null == value)
-            return null;
-          switch (ctx) {
-            case SecurityContext.NONE:
-              return value;
-            case SecurityContext.HTML:
-              return value instanceof SafeHtmlImpl ? value.changingThisBreaksApplicationSecurity : (this.checkNotSafeValue(value, "HTML"), sanitizeHtml(String(value)));
-            case SecurityContext.STYLE:
-              return value instanceof SafeStyleImpl ? value.changingThisBreaksApplicationSecurity : (this.checkNotSafeValue(value, "Style"), sanitizeStyle(value));
-            case SecurityContext.SCRIPT:
-              if (value instanceof SafeScriptImpl)
-                return value.changingThisBreaksApplicationSecurity;
-              throw this.checkNotSafeValue(value, "Script"), new Error("unsafe value used in a script context");
-            case SecurityContext.URL:
-              return value instanceof SafeUrlImpl ? value.changingThisBreaksApplicationSecurity : (this.checkNotSafeValue(value, "URL"), sanitizeUrl(String(value)));
-            case SecurityContext.RESOURCE_URL:
-              if (value instanceof SafeResourceUrlImpl)
-                return value.changingThisBreaksApplicationSecurity;
-              throw this.checkNotSafeValue(value, "ResourceURL"), new Error("unsafe value used in a resource URL context (see http://g.co/ng/security#xss)");
-            default:
-              throw new Error("Unexpected SecurityContext " + ctx + " (see http://g.co/ng/security#xss)");
-          }
-        }, DomSanitizationServiceImpl.prototype.checkNotSafeValue = function(value, expectedType) {
-          if (value instanceof SafeValueImpl)
-            throw new Error("Required a safe " + expectedType + ", got a " + value.getTypeName() + " (see http://g.co/ng/security#xss)");
-        }, DomSanitizationServiceImpl.prototype.bypassSecurityTrustHtml = function(value) {
-          return new SafeHtmlImpl(value);
-        }, DomSanitizationServiceImpl.prototype.bypassSecurityTrustStyle = function(value) {
-          return new SafeStyleImpl(value);
-        }, DomSanitizationServiceImpl.prototype.bypassSecurityTrustScript = function(value) {
-          return new SafeScriptImpl(value);
-        }, DomSanitizationServiceImpl.prototype.bypassSecurityTrustUrl = function(value) {
-          return new SafeUrlImpl(value);
-        }, DomSanitizationServiceImpl.prototype.bypassSecurityTrustResourceUrl = function(value) {
-          return new SafeResourceUrlImpl(value);
-        }, DomSanitizationServiceImpl;
-      }(DomSanitizationService);
-  DomSanitizationServiceImpl.decorators = [{type: _angular_core.Injectable}];
-  var SafeValueImpl = function() {
-    function SafeValueImpl(changingThisBreaksApplicationSecurity) {
-      this.changingThisBreaksApplicationSecurity = changingThisBreaksApplicationSecurity;
-    }
-    return SafeValueImpl.prototype.toString = function() {
-      return "SafeValue must use [property]=binding: " + this.changingThisBreaksApplicationSecurity + " (see http://g.co/ng/security#xss)";
-    }, SafeValueImpl;
-  }(),
-      SafeHtmlImpl = function(_super) {
-        function SafeHtmlImpl() {
-          _super.apply(this, arguments);
-        }
-        return __extends(SafeHtmlImpl, _super), SafeHtmlImpl.prototype.getTypeName = function() {
-          return "HTML";
-        }, SafeHtmlImpl;
-      }(SafeValueImpl),
-      SafeStyleImpl = function(_super) {
-        function SafeStyleImpl() {
-          _super.apply(this, arguments);
-        }
-        return __extends(SafeStyleImpl, _super), SafeStyleImpl.prototype.getTypeName = function() {
-          return "Style";
-        }, SafeStyleImpl;
-      }(SafeValueImpl),
-      SafeScriptImpl = function(_super) {
-        function SafeScriptImpl() {
-          _super.apply(this, arguments);
-        }
-        return __extends(SafeScriptImpl, _super), SafeScriptImpl.prototype.getTypeName = function() {
-          return "Script";
-        }, SafeScriptImpl;
-      }(SafeValueImpl),
-      SafeUrlImpl = function(_super) {
-        function SafeUrlImpl() {
-          _super.apply(this, arguments);
-        }
-        return __extends(SafeUrlImpl, _super), SafeUrlImpl.prototype.getTypeName = function() {
-          return "URL";
-        }, SafeUrlImpl;
-      }(SafeValueImpl),
-      SafeResourceUrlImpl = function(_super) {
-        function SafeResourceUrlImpl() {
-          _super.apply(this, arguments);
-        }
-        return __extends(SafeResourceUrlImpl, _super), SafeResourceUrlImpl.prototype.getTypeName = function() {
-          return "ResourceURL";
-        }, SafeResourceUrlImpl;
-      }(SafeValueImpl),
-      CAMEL_CASE_REGEXP = /([A-Z])/g,
-      DASH_CASE_REGEXP = /-([a-z])/g,
-      WebAnimationsPlayer = function() {
-        function WebAnimationsPlayer(_player, totalTime) {
-          var _this = this;
-          this._player = _player, this.totalTime = totalTime, this._subscriptions = [], this._finished = !1, this.parentPlayer = null, this.reset(), this._player.onfinish = function() {
-            return _this._onFinish();
-          };
-        }
-        return WebAnimationsPlayer.prototype._onFinish = function() {
-          this._finished || (this._finished = !0, isPresent(this.parentPlayer) || this.destroy(), this._subscriptions.forEach(function(fn) {
-            return fn();
-          }), this._subscriptions = []);
-        }, WebAnimationsPlayer.prototype.onDone = function(fn) {
-          this._subscriptions.push(fn);
-        }, WebAnimationsPlayer.prototype.play = function() {
-          this._player.play();
-        }, WebAnimationsPlayer.prototype.pause = function() {
-          this._player.pause();
-        }, WebAnimationsPlayer.prototype.finish = function() {
-          this._onFinish(), this._player.finish();
-        }, WebAnimationsPlayer.prototype.reset = function() {
-          this._player.cancel();
-        }, WebAnimationsPlayer.prototype.restart = function() {
-          this.reset(), this.play();
-        }, WebAnimationsPlayer.prototype.destroy = function() {
-          this.reset(), this._onFinish();
-        }, WebAnimationsPlayer.prototype.setPosition = function(p) {
-          this._player.currentTime = p * this.totalTime;
-        }, WebAnimationsPlayer.prototype.getPosition = function() {
-          return this._player.currentTime / this.totalTime;
-        }, WebAnimationsPlayer;
-      }(),
-      WebAnimationsDriver = function() {
-        function WebAnimationsDriver() {}
-        return WebAnimationsDriver.prototype.animate = function(element, startingStyles, keyframes, duration, delay, easing) {
-          var anyElm = element,
-              formattedSteps = [],
-              startingStyleLookup = {};
-          if (isPresent(startingStyles) && startingStyles.styles.length > 0 && (startingStyleLookup = _populateStyles(anyElm, startingStyles, {}), startingStyleLookup.offset = 0, formattedSteps.push(startingStyleLookup)), keyframes.forEach(function(keyframe) {
-            var data = _populateStyles(anyElm, keyframe.styles, startingStyleLookup);
-            data.offset = keyframe.offset, formattedSteps.push(data);
-          }), 1 == formattedSteps.length) {
-            var start = formattedSteps[0];
-            start.offset = null, formattedSteps = [start, start];
-          }
-          var playerOptions = {
-            duration: duration,
-            delay: delay,
-            easing: easing,
-            fill: "both"
-          },
-              player = this._triggerWebAnimation(anyElm, formattedSteps, playerOptions);
-          return new WebAnimationsPlayer(player, duration);
-        }, WebAnimationsDriver.prototype._triggerWebAnimation = function(elm, keyframes, options) {
-          return elm.animate(keyframes, options);
-        }, WebAnimationsDriver;
-      }(),
-      _$0 = 48,
-      _$9 = 57,
-      _$PERIOD = 46,
-      GenericBrowserDomAdapter = function(_super) {
-        function GenericBrowserDomAdapter() {
-          var _this = this;
-          _super.call(this), this._animationPrefix = null, this._transitionEnd = null;
-          try {
-            var element = this.createElement("div", this.defaultDoc());
-            if (isPresent(this.getStyle(element, "animationName")))
-              this._animationPrefix = "";
-            else
-              for (var domPrefixes = ["Webkit", "Moz", "O", "ms"],
-                  i = 0; i < domPrefixes.length; i++)
-                if (isPresent(this.getStyle(element, domPrefixes[i] + "AnimationName"))) {
-                  this._animationPrefix = "-" + domPrefixes[i].toLowerCase() + "-";
-                  break;
-                }
-            var transEndEventNames = {
-              WebkitTransition: "webkitTransitionEnd",
-              MozTransition: "transitionend",
-              OTransition: "oTransitionEnd otransitionend",
-              transition: "transitionend"
-            };
-            StringMapWrapper.forEach(transEndEventNames, function(value, key) {
-              isPresent(_this.getStyle(element, key)) && (_this._transitionEnd = value);
-            });
-          } catch (e) {
-            this._animationPrefix = null, this._transitionEnd = null;
-          }
-        }
-        return __extends(GenericBrowserDomAdapter, _super), GenericBrowserDomAdapter.prototype.getDistributedNodes = function(el) {
-          return el.getDistributedNodes();
-        }, GenericBrowserDomAdapter.prototype.resolveAndSetHref = function(el, baseUrl, href) {
-          el.href = null == href ? baseUrl : baseUrl + "/../" + href;
-        }, GenericBrowserDomAdapter.prototype.supportsDOMEvents = function() {
-          return !0;
-        }, GenericBrowserDomAdapter.prototype.supportsNativeShadowDOM = function() {
-          return isFunction(this.defaultDoc().body.createShadowRoot);
-        }, GenericBrowserDomAdapter.prototype.getAnimationPrefix = function() {
-          return isPresent(this._animationPrefix) ? this._animationPrefix : "";
-        }, GenericBrowserDomAdapter.prototype.getTransitionEnd = function() {
-          return isPresent(this._transitionEnd) ? this._transitionEnd : "";
-        }, GenericBrowserDomAdapter.prototype.supportsAnimation = function() {
-          return isPresent(this._animationPrefix) && isPresent(this._transitionEnd);
-        }, GenericBrowserDomAdapter;
-      }(DomAdapter),
-      _attrToPropMap = {
-        class: "className",
-        innerHtml: "innerHTML",
-        readonly: "readOnly",
-        tabindex: "tabIndex"
-      },
-      DOM_KEY_LOCATION_NUMPAD = 3,
-      _keyMap = {
-        "\b": "Backspace",
-        "\t": "Tab",
-        "": "Delete",
-        "": "Escape",
-        Del: "Delete",
-        Esc: "Escape",
-        Left: "ArrowLeft",
-        Right: "ArrowRight",
-        Up: "ArrowUp",
-        Down: "ArrowDown",
-        Menu: "ContextMenu",
-        Scroll: "ScrollLock",
-        Win: "OS"
-      },
-      _chromeNumKeyPadMap = {
-        A: "1",
-        B: "2",
-        C: "3",
-        D: "4",
-        E: "5",
-        F: "6",
-        G: "7",
-        H: "8",
-        I: "9",
-        J: "*",
-        K: "+",
-        M: "-",
-        N: ".",
-        O: "/",
-        "`": "0",
-        "": "NumLock"
-      },
-      BrowserDomAdapter = function(_super) {
-        function BrowserDomAdapter() {
-          _super.apply(this, arguments);
-        }
-        return __extends(BrowserDomAdapter, _super), BrowserDomAdapter.prototype.parse = function(templateHtml) {
-          throw new Error("parse not implemented");
-        }, BrowserDomAdapter.makeCurrent = function() {
-          setRootDomAdapter(new BrowserDomAdapter);
-        }, BrowserDomAdapter.prototype.hasProperty = function(element, name) {
-          return name in element;
-        }, BrowserDomAdapter.prototype.setProperty = function(el, name, value) {
-          el[name] = value;
-        }, BrowserDomAdapter.prototype.getProperty = function(el, name) {
-          return el[name];
-        }, BrowserDomAdapter.prototype.invoke = function(el, methodName, args) {
-          el[methodName].apply(el, args);
-        }, BrowserDomAdapter.prototype.logError = function(error) {
-          window.console.error ? window.console.error(error) : window.console.log(error);
-        }, BrowserDomAdapter.prototype.log = function(error) {
-          window.console.log(error);
-        }, BrowserDomAdapter.prototype.logGroup = function(error) {
-          window.console.group ? (window.console.group(error), this.logError(error)) : window.console.log(error);
-        }, BrowserDomAdapter.prototype.logGroupEnd = function() {
-          window.console.groupEnd && window.console.groupEnd();
-        }, Object.defineProperty(BrowserDomAdapter.prototype, "attrToPropMap", {
-          get: function() {
-            return _attrToPropMap;
-          },
-          enumerable: !0,
-          configurable: !0
-        }), BrowserDomAdapter.prototype.query = function(selector) {
-          return document.querySelector(selector);
-        }, BrowserDomAdapter.prototype.querySelector = function(el, selector) {
-          return el.querySelector(selector);
-        }, BrowserDomAdapter.prototype.querySelectorAll = function(el, selector) {
-          return el.querySelectorAll(selector);
-        }, BrowserDomAdapter.prototype.on = function(el, evt, listener) {
-          el.addEventListener(evt, listener, !1);
-        }, BrowserDomAdapter.prototype.onAndCancel = function(el, evt, listener) {
-          return el.addEventListener(evt, listener, !1), function() {
-            el.removeEventListener(evt, listener, !1);
-          };
-        }, BrowserDomAdapter.prototype.dispatchEvent = function(el, evt) {
-          el.dispatchEvent(evt);
-        }, BrowserDomAdapter.prototype.createMouseEvent = function(eventType) {
-          var evt = document.createEvent("MouseEvent");
-          return evt.initEvent(eventType, !0, !0), evt;
-        }, BrowserDomAdapter.prototype.createEvent = function(eventType) {
-          var evt = document.createEvent("Event");
-          return evt.initEvent(eventType, !0, !0), evt;
-        }, BrowserDomAdapter.prototype.preventDefault = function(evt) {
-          evt.preventDefault(), evt.returnValue = !1;
-        }, BrowserDomAdapter.prototype.isPrevented = function(evt) {
-          return evt.defaultPrevented || isPresent(evt.returnValue) && !evt.returnValue;
-        }, BrowserDomAdapter.prototype.getInnerHTML = function(el) {
-          return el.innerHTML;
-        }, BrowserDomAdapter.prototype.getTemplateContent = function(el) {
-          return "content" in el && el instanceof HTMLTemplateElement ? el.content : null;
-        }, BrowserDomAdapter.prototype.getOuterHTML = function(el) {
-          return el.outerHTML;
-        }, BrowserDomAdapter.prototype.nodeName = function(node) {
-          return node.nodeName;
-        }, BrowserDomAdapter.prototype.nodeValue = function(node) {
-          return node.nodeValue;
-        }, BrowserDomAdapter.prototype.type = function(node) {
-          return node.type;
-        }, BrowserDomAdapter.prototype.content = function(node) {
-          return this.hasProperty(node, "content") ? node.content : node;
-        }, BrowserDomAdapter.prototype.firstChild = function(el) {
-          return el.firstChild;
-        }, BrowserDomAdapter.prototype.nextSibling = function(el) {
-          return el.nextSibling;
-        }, BrowserDomAdapter.prototype.parentElement = function(el) {
-          return el.parentNode;
-        }, BrowserDomAdapter.prototype.childNodes = function(el) {
-          return el.childNodes;
-        }, BrowserDomAdapter.prototype.childNodesAsList = function(el) {
-          for (var childNodes = el.childNodes,
-              res = ListWrapper.createFixedSize(childNodes.length),
-              i = 0; i < childNodes.length; i++)
-            res[i] = childNodes[i];
-          return res;
-        }, BrowserDomAdapter.prototype.clearNodes = function(el) {
-          for (; el.firstChild; )
-            el.removeChild(el.firstChild);
-        }, BrowserDomAdapter.prototype.appendChild = function(el, node) {
-          el.appendChild(node);
-        }, BrowserDomAdapter.prototype.removeChild = function(el, node) {
-          el.removeChild(node);
-        }, BrowserDomAdapter.prototype.replaceChild = function(el, newChild, oldChild) {
-          el.replaceChild(newChild, oldChild);
-        }, BrowserDomAdapter.prototype.remove = function(node) {
-          return node.parentNode && node.parentNode.removeChild(node), node;
-        }, BrowserDomAdapter.prototype.insertBefore = function(el, node) {
-          el.parentNode.insertBefore(node, el);
-        }, BrowserDomAdapter.prototype.insertAllBefore = function(el, nodes) {
-          nodes.forEach(function(n) {
-            return el.parentNode.insertBefore(n, el);
-          });
-        }, BrowserDomAdapter.prototype.insertAfter = function(el, node) {
-          el.parentNode.insertBefore(node, el.nextSibling);
-        }, BrowserDomAdapter.prototype.setInnerHTML = function(el, value) {
-          el.innerHTML = value;
-        }, BrowserDomAdapter.prototype.getText = function(el) {
-          return el.textContent;
-        }, BrowserDomAdapter.prototype.setText = function(el, value) {
-          el.textContent = value;
-        }, BrowserDomAdapter.prototype.getValue = function(el) {
-          return el.value;
-        }, BrowserDomAdapter.prototype.setValue = function(el, value) {
-          el.value = value;
-        }, BrowserDomAdapter.prototype.getChecked = function(el) {
-          return el.checked;
-        }, BrowserDomAdapter.prototype.setChecked = function(el, value) {
-          el.checked = value;
-        }, BrowserDomAdapter.prototype.createComment = function(text) {
-          return document.createComment(text);
-        }, BrowserDomAdapter.prototype.createTemplate = function(html) {
-          var t = document.createElement("template");
-          return t.innerHTML = html, t;
-        }, BrowserDomAdapter.prototype.createElement = function(tagName, doc) {
-          return void 0 === doc && (doc = document), doc.createElement(tagName);
-        }, BrowserDomAdapter.prototype.createElementNS = function(ns, tagName, doc) {
-          return void 0 === doc && (doc = document), doc.createElementNS(ns, tagName);
-        }, BrowserDomAdapter.prototype.createTextNode = function(text, doc) {
-          return void 0 === doc && (doc = document), doc.createTextNode(text);
-        }, BrowserDomAdapter.prototype.createScriptTag = function(attrName, attrValue, doc) {
-          void 0 === doc && (doc = document);
-          var el = doc.createElement("SCRIPT");
-          return el.setAttribute(attrName, attrValue), el;
-        }, BrowserDomAdapter.prototype.createStyleElement = function(css, doc) {
-          void 0 === doc && (doc = document);
-          var style = doc.createElement("style");
-          return this.appendChild(style, this.createTextNode(css)), style;
-        }, BrowserDomAdapter.prototype.createShadowRoot = function(el) {
-          return el.createShadowRoot();
-        }, BrowserDomAdapter.prototype.getShadowRoot = function(el) {
-          return el.shadowRoot;
-        }, BrowserDomAdapter.prototype.getHost = function(el) {
-          return el.host;
-        }, BrowserDomAdapter.prototype.clone = function(node) {
-          return node.cloneNode(!0);
-        }, BrowserDomAdapter.prototype.getElementsByClassName = function(element, name) {
-          return element.getElementsByClassName(name);
-        }, BrowserDomAdapter.prototype.getElementsByTagName = function(element, name) {
-          return element.getElementsByTagName(name);
-        }, BrowserDomAdapter.prototype.classList = function(element) {
-          return Array.prototype.slice.call(element.classList, 0);
-        }, BrowserDomAdapter.prototype.addClass = function(element, className) {
-          element.classList.add(className);
-        }, BrowserDomAdapter.prototype.removeClass = function(element, className) {
-          element.classList.remove(className);
-        }, BrowserDomAdapter.prototype.hasClass = function(element, className) {
-          return element.classList.contains(className);
-        }, BrowserDomAdapter.prototype.setStyle = function(element, styleName, styleValue) {
-          element.style[styleName] = styleValue;
-        }, BrowserDomAdapter.prototype.removeStyle = function(element, stylename) {
-          element.style[stylename] = null;
-        }, BrowserDomAdapter.prototype.getStyle = function(element, stylename) {
-          return element.style[stylename];
-        }, BrowserDomAdapter.prototype.hasStyle = function(element, styleName, styleValue) {
-          void 0 === styleValue && (styleValue = null);
-          var value = this.getStyle(element, styleName) || "";
-          return styleValue ? value == styleValue : value.length > 0;
-        }, BrowserDomAdapter.prototype.tagName = function(element) {
-          return element.tagName;
-        }, BrowserDomAdapter.prototype.attributeMap = function(element) {
-          for (var res = new Map,
-              elAttrs = element.attributes,
-              i = 0; i < elAttrs.length; i++) {
-            var attrib = elAttrs[i];
-            res.set(attrib.name, attrib.value);
-          }
-          return res;
-        }, BrowserDomAdapter.prototype.hasAttribute = function(element, attribute) {
-          return element.hasAttribute(attribute);
-        }, BrowserDomAdapter.prototype.hasAttributeNS = function(element, ns, attribute) {
-          return element.hasAttributeNS(ns, attribute);
-        }, BrowserDomAdapter.prototype.getAttribute = function(element, attribute) {
-          return element.getAttribute(attribute);
-        }, BrowserDomAdapter.prototype.getAttributeNS = function(element, ns, name) {
-          return element.getAttributeNS(ns, name);
-        }, BrowserDomAdapter.prototype.setAttribute = function(element, name, value) {
-          element.setAttribute(name, value);
-        }, BrowserDomAdapter.prototype.setAttributeNS = function(element, ns, name, value) {
-          element.setAttributeNS(ns, name, value);
-        }, BrowserDomAdapter.prototype.removeAttribute = function(element, attribute) {
-          element.removeAttribute(attribute);
-        }, BrowserDomAdapter.prototype.removeAttributeNS = function(element, ns, name) {
-          element.removeAttributeNS(ns, name);
-        }, BrowserDomAdapter.prototype.templateAwareRoot = function(el) {
-          return this.isTemplateElement(el) ? this.content(el) : el;
-        }, BrowserDomAdapter.prototype.createHtmlDocument = function() {
-          return document.implementation.createHTMLDocument("fakeTitle");
-        }, BrowserDomAdapter.prototype.defaultDoc = function() {
-          return document;
-        }, BrowserDomAdapter.prototype.getBoundingClientRect = function(el) {
-          try {
-            return el.getBoundingClientRect();
-          } catch (e) {
-            return {
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              width: 0,
-              height: 0
-            };
-          }
-        }, BrowserDomAdapter.prototype.getTitle = function() {
-          return document.title;
-        }, BrowserDomAdapter.prototype.setTitle = function(newTitle) {
-          document.title = newTitle || "";
-        }, BrowserDomAdapter.prototype.elementMatches = function(n, selector) {
-          var matches = !1;
-          return n instanceof HTMLElement && (n.matches ? matches = n.matches(selector) : n.msMatchesSelector ? matches = n.msMatchesSelector(selector) : n.webkitMatchesSelector && (matches = n.webkitMatchesSelector(selector))), matches;
-        }, BrowserDomAdapter.prototype.isTemplateElement = function(el) {
-          return el instanceof HTMLElement && "TEMPLATE" == el.nodeName;
-        }, BrowserDomAdapter.prototype.isTextNode = function(node) {
-          return node.nodeType === Node.TEXT_NODE;
-        }, BrowserDomAdapter.prototype.isCommentNode = function(node) {
-          return node.nodeType === Node.COMMENT_NODE;
-        }, BrowserDomAdapter.prototype.isElementNode = function(node) {
-          return node.nodeType === Node.ELEMENT_NODE;
-        }, BrowserDomAdapter.prototype.hasShadowRoot = function(node) {
-          return node instanceof HTMLElement && isPresent(node.shadowRoot);
-        }, BrowserDomAdapter.prototype.isShadowRoot = function(node) {
-          return node instanceof DocumentFragment;
-        }, BrowserDomAdapter.prototype.importIntoDoc = function(node) {
-          var toImport = node;
-          return this.isTemplateElement(node) && (toImport = this.content(node)), document.importNode(toImport, !0);
-        }, BrowserDomAdapter.prototype.adoptNode = function(node) {
-          return document.adoptNode(node);
-        }, BrowserDomAdapter.prototype.getHref = function(el) {
-          return el.href;
-        }, BrowserDomAdapter.prototype.getEventKey = function(event) {
-          var key = event.key;
-          if (isBlank(key)) {
-            if (key = event.keyIdentifier, isBlank(key))
-              return "Unidentified";
-            key.startsWith("U+") && (key = String.fromCharCode(parseInt(key.substring(2), 16)), event.location === DOM_KEY_LOCATION_NUMPAD && _chromeNumKeyPadMap.hasOwnProperty(key) && (key = _chromeNumKeyPadMap[key]));
-          }
-          return _keyMap.hasOwnProperty(key) && (key = _keyMap[key]), key;
-        }, BrowserDomAdapter.prototype.getGlobalEventTarget = function(target) {
-          return "window" == target ? window : "document" == target ? document : "body" == target ? document.body : void 0;
-        }, BrowserDomAdapter.prototype.getHistory = function() {
-          return window.history;
-        }, BrowserDomAdapter.prototype.getLocation = function() {
-          return window.location;
-        }, BrowserDomAdapter.prototype.getBaseHref = function() {
-          var href = getBaseElementHref();
-          return isBlank(href) ? null : relativePath(href);
-        }, BrowserDomAdapter.prototype.resetBaseElement = function() {
-          baseElement = null;
-        }, BrowserDomAdapter.prototype.getUserAgent = function() {
-          return window.navigator.userAgent;
-        }, BrowserDomAdapter.prototype.setData = function(element, name, value) {
-          this.setAttribute(element, "data-" + name, value);
-        }, BrowserDomAdapter.prototype.getData = function(element, name) {
-          return this.getAttribute(element, "data-" + name);
-        }, BrowserDomAdapter.prototype.getComputedStyle = function(element) {
-          return getComputedStyle(element);
-        }, BrowserDomAdapter.prototype.setGlobalVar = function(path, value) {
-          setValueOnPath(global$1, path, value);
-        }, BrowserDomAdapter.prototype.requestAnimationFrame = function(callback) {
-          return window.requestAnimationFrame(callback);
-        }, BrowserDomAdapter.prototype.cancelAnimationFrame = function(id) {
-          window.cancelAnimationFrame(id);
-        }, BrowserDomAdapter.prototype.supportsWebAnimation = function() {
-          return isFunction(document.body.animate);
-        }, BrowserDomAdapter.prototype.performanceNow = function() {
-          return isPresent(window.performance) && isPresent(window.performance.now) ? window.performance.now() : DateWrapper.toMillis(DateWrapper.now());
-        }, BrowserDomAdapter.prototype.supportsCookies = function() {
-          return !0;
-        }, BrowserDomAdapter.prototype.getCookie = function(name) {
-          return parseCookieValue(document.cookie, name);
-        }, BrowserDomAdapter.prototype.setCookie = function(name, value) {
-          document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
-        }, BrowserDomAdapter;
-      }(GenericBrowserDomAdapter),
-      baseElement = null,
-      urlParsingNode = null,
-      PublicTestability = function() {
-        function PublicTestability(testability) {
-          this._testability = testability;
-        }
-        return PublicTestability.prototype.isStable = function() {
-          return this._testability.isStable();
-        }, PublicTestability.prototype.whenStable = function(callback) {
-          this._testability.whenStable(callback);
-        }, PublicTestability.prototype.findBindings = function(using, provider, exactMatch) {
-          return this.findProviders(using, provider, exactMatch);
-        }, PublicTestability.prototype.findProviders = function(using, provider, exactMatch) {
-          return this._testability.findBindings(using, provider, exactMatch);
-        }, PublicTestability;
-      }(),
-      BrowserGetTestability = function() {
-        function BrowserGetTestability() {}
-        return BrowserGetTestability.init = function() {
-          _angular_core.setTestabilityGetter(new BrowserGetTestability);
-        }, BrowserGetTestability.prototype.addToWindow = function(registry) {
-          global$1.getAngularTestability = function(elem, findInAncestors) {
-            void 0 === findInAncestors && (findInAncestors = !0);
-            var testability = registry.findTestabilityInTree(elem, findInAncestors);
-            if (null == testability)
-              throw new Error("Could not find testability for element.");
-            return new PublicTestability(testability);
-          }, global$1.getAllAngularTestabilities = function() {
-            var testabilities = registry.getAllTestabilities();
-            return testabilities.map(function(testability) {
-              return new PublicTestability(testability);
-            });
-          }, global$1.getAllAngularRootElements = function() {
-            return registry.getAllRootElements();
-          };
-          var whenAllStable = function(callback) {
-            var testabilities = global$1.getAllAngularTestabilities(),
-                count = testabilities.length,
-                didWork = !1,
-                decrement = function(didWork_) {
-                  didWork = didWork || didWork_, count--, 0 == count && callback(didWork);
-                };
-            testabilities.forEach(function(testability) {
-              testability.whenStable(decrement);
-            });
-          };
-          global$1.frameworkStabilizers || (global$1.frameworkStabilizers = ListWrapper.createGrowableSize(0)), global$1.frameworkStabilizers.push(whenAllStable);
-        }, BrowserGetTestability.prototype.findTestabilityInTree = function(registry, elem, findInAncestors) {
-          if (null == elem)
-            return null;
-          var t = registry.getTestability(elem);
-          return isPresent(t) ? t : findInAncestors ? getDOM().isShadowRoot(elem) ? this.findTestabilityInTree(registry, getDOM().getHost(elem), !0) : this.findTestabilityInTree(registry, getDOM().parentElement(elem), !0) : null;
-        }, BrowserGetTestability;
-      }(),
-      SharedStylesHost = function() {
-        function SharedStylesHost() {
-          this._styles = [], this._stylesSet = new Set;
-        }
-        return SharedStylesHost.prototype.addStyles = function(styles) {
-          var _this = this,
-              additions = [];
-          styles.forEach(function(style) {
-            SetWrapper.has(_this._stylesSet, style) || (_this._stylesSet.add(style), _this._styles.push(style), additions.push(style));
-          }), this.onStylesAdded(additions);
-        }, SharedStylesHost.prototype.onStylesAdded = function(additions) {}, SharedStylesHost.prototype.getAllStyles = function() {
-          return this._styles;
-        }, SharedStylesHost;
-      }();
-  SharedStylesHost.decorators = [{type: _angular_core.Injectable}], SharedStylesHost.ctorParameters = [];
-  var DomSharedStylesHost = function(_super) {
-    function DomSharedStylesHost(doc) {
-      _super.call(this), this._hostNodes = new Set, this._hostNodes.add(doc.head);
-    }
-    return __extends(DomSharedStylesHost, _super), DomSharedStylesHost.prototype._addStylesToHost = function(styles, host) {
-      for (var i = 0; i < styles.length; i++) {
-        var style = styles[i];
-        getDOM().appendChild(host, getDOM().createStyleElement(style));
-      }
-    }, DomSharedStylesHost.prototype.addHost = function(hostNode) {
-      this._addStylesToHost(this._styles, hostNode), this._hostNodes.add(hostNode);
-    }, DomSharedStylesHost.prototype.removeHost = function(hostNode) {
-      SetWrapper.delete(this._hostNodes, hostNode);
-    }, DomSharedStylesHost.prototype.onStylesAdded = function(additions) {
-      var _this = this;
-      this._hostNodes.forEach(function(hostNode) {
-        _this._addStylesToHost(additions, hostNode);
-      });
-    }, DomSharedStylesHost;
-  }(SharedStylesHost);
-  DomSharedStylesHost.decorators = [{type: _angular_core.Injectable}], DomSharedStylesHost.ctorParameters = [{
-    type: void 0,
-    decorators: [{
-      type: _angular_core.Inject,
-      args: [DOCUMENT]
-    }]
-  }];
-  var NAMESPACE_URIS = {
-    xlink: "http://www.w3.org/1999/xlink",
-    svg: "http://www.w3.org/2000/svg",
-    xhtml: "http://www.w3.org/1999/xhtml"
-  },
-      TEMPLATE_COMMENT_TEXT = "template bindings={}",
-      TEMPLATE_BINDINGS_EXP = /^template bindings=(.*)$/g,
-      DomRootRenderer = function() {
-        function DomRootRenderer(document, eventManager, sharedStylesHost, animationDriver) {
-          this.document = document, this.eventManager = eventManager, this.sharedStylesHost = sharedStylesHost, this.animationDriver = animationDriver, this.registeredComponents = new Map;
-        }
-        return DomRootRenderer.prototype.renderComponent = function(componentProto) {
-          var renderer = this.registeredComponents.get(componentProto.id);
-          return isBlank(renderer) && (renderer = new DomRenderer(this, componentProto, this.animationDriver), this.registeredComponents.set(componentProto.id, renderer)), renderer;
-        }, DomRootRenderer;
-      }(),
-      DomRootRenderer_ = function(_super) {
-        function DomRootRenderer_(_document, _eventManager, sharedStylesHost, animationDriver) {
-          _super.call(this, _document, _eventManager, sharedStylesHost, animationDriver);
-        }
-        return __extends(DomRootRenderer_, _super), DomRootRenderer_;
-      }(DomRootRenderer);
-  DomRootRenderer_.decorators = [{type: _angular_core.Injectable}], DomRootRenderer_.ctorParameters = [{
-    type: void 0,
-    decorators: [{
-      type: _angular_core.Inject,
-      args: [DOCUMENT]
-    }]
-  }, {type: EventManager}, {type: DomSharedStylesHost}, {type: AnimationDriver}];
-  var DomRenderer = function() {
-    function DomRenderer(_rootRenderer, componentProto, _animationDriver) {
-      this._rootRenderer = _rootRenderer, this.componentProto = componentProto, this._animationDriver = _animationDriver, this._styles = _flattenStyles(componentProto.id, componentProto.styles, []), componentProto.encapsulation !== _angular_core.ViewEncapsulation.Native && this._rootRenderer.sharedStylesHost.addStyles(this._styles), this.componentProto.encapsulation === _angular_core.ViewEncapsulation.Emulated ? (this._contentAttr = _shimContentAttribute(componentProto.id), this._hostAttr = _shimHostAttribute(componentProto.id)) : (this._contentAttr = null, this._hostAttr = null);
-    }
-    return DomRenderer.prototype.selectRootElement = function(selectorOrNode, debugInfo) {
-      var el;
-      if (isString(selectorOrNode)) {
-        if (el = getDOM().querySelector(this._rootRenderer.document, selectorOrNode), isBlank(el))
-          throw new BaseException$1('The selector "' + selectorOrNode + '" did not match any elements');
-      } else
-        el = selectorOrNode;
-      return getDOM().clearNodes(el), el;
-    }, DomRenderer.prototype.createElement = function(parent, name, debugInfo) {
-      var nsAndName = splitNamespace(name),
-          el = isPresent(nsAndName[0]) ? getDOM().createElementNS(NAMESPACE_URIS[nsAndName[0]], nsAndName[1]) : getDOM().createElement(nsAndName[1]);
-      return isPresent(this._contentAttr) && getDOM().setAttribute(el, this._contentAttr, ""), isPresent(parent) && getDOM().appendChild(parent, el), el;
-    }, DomRenderer.prototype.createViewRoot = function(hostElement) {
-      var nodesParent;
-      if (this.componentProto.encapsulation === _angular_core.ViewEncapsulation.Native) {
-        nodesParent = getDOM().createShadowRoot(hostElement), this._rootRenderer.sharedStylesHost.addHost(nodesParent);
-        for (var i = 0; i < this._styles.length; i++)
-          getDOM().appendChild(nodesParent, getDOM().createStyleElement(this._styles[i]));
-      } else
-        isPresent(this._hostAttr) && getDOM().setAttribute(hostElement, this._hostAttr, ""), nodesParent = hostElement;
-      return nodesParent;
-    }, DomRenderer.prototype.createTemplateAnchor = function(parentElement, debugInfo) {
-      var comment = getDOM().createComment(TEMPLATE_COMMENT_TEXT);
-      return isPresent(parentElement) && getDOM().appendChild(parentElement, comment), comment;
-    }, DomRenderer.prototype.createText = function(parentElement, value, debugInfo) {
-      var node = getDOM().createTextNode(value);
-      return isPresent(parentElement) && getDOM().appendChild(parentElement, node), node;
-    }, DomRenderer.prototype.projectNodes = function(parentElement, nodes) {
-      isBlank(parentElement) || appendNodes(parentElement, nodes);
-    }, DomRenderer.prototype.attachViewAfter = function(node, viewRootNodes) {
-      moveNodesAfterSibling(node, viewRootNodes);
-    }, DomRenderer.prototype.detachView = function(viewRootNodes) {
-      for (var i = 0; i < viewRootNodes.length; i++)
-        getDOM().remove(viewRootNodes[i]);
-    }, DomRenderer.prototype.destroyView = function(hostElement, viewAllNodes) {
-      this.componentProto.encapsulation === _angular_core.ViewEncapsulation.Native && isPresent(hostElement) && this._rootRenderer.sharedStylesHost.removeHost(getDOM().getShadowRoot(hostElement));
-    }, DomRenderer.prototype.listen = function(renderElement, name, callback) {
-      return this._rootRenderer.eventManager.addEventListener(renderElement, name, decoratePreventDefault(callback));
-    }, DomRenderer.prototype.listenGlobal = function(target, name, callback) {
-      return this._rootRenderer.eventManager.addGlobalEventListener(target, name, decoratePreventDefault(callback));
-    }, DomRenderer.prototype.setElementProperty = function(renderElement, propertyName, propertyValue) {
-      getDOM().setProperty(renderElement, propertyName, propertyValue);
-    }, DomRenderer.prototype.setElementAttribute = function(renderElement, attributeName, attributeValue) {
-      var attrNs,
-          nsAndName = splitNamespace(attributeName);
-      isPresent(nsAndName[0]) && (attributeName = nsAndName[0] + ":" + nsAndName[1], attrNs = NAMESPACE_URIS[nsAndName[0]]), isPresent(attributeValue) ? isPresent(attrNs) ? getDOM().setAttributeNS(renderElement, attrNs, attributeName, attributeValue) : getDOM().setAttribute(renderElement, attributeName, attributeValue) : isPresent(attrNs) ? getDOM().removeAttributeNS(renderElement, attrNs, nsAndName[1]) : getDOM().removeAttribute(renderElement, attributeName);
-    }, DomRenderer.prototype.setBindingDebugInfo = function(renderElement, propertyName, propertyValue) {
-      var dashCasedPropertyName = camelCaseToDashCase(propertyName);
-      if (getDOM().isCommentNode(renderElement)) {
-        var existingBindings = RegExpWrapper.firstMatch(TEMPLATE_BINDINGS_EXP, StringWrapper.replaceAll(getDOM().getText(renderElement), /\n/g, "")),
-            parsedBindings = Json.parse(existingBindings[1]);
-        parsedBindings[dashCasedPropertyName] = propertyValue, getDOM().setText(renderElement, StringWrapper.replace(TEMPLATE_COMMENT_TEXT, "{}", Json.stringify(parsedBindings)));
-      } else
-        this.setElementAttribute(renderElement, propertyName, propertyValue);
-    }, DomRenderer.prototype.setElementClass = function(renderElement, className, isAdd) {
-      isAdd ? getDOM().addClass(renderElement, className) : getDOM().removeClass(renderElement, className);
-    }, DomRenderer.prototype.setElementStyle = function(renderElement, styleName, styleValue) {
-      isPresent(styleValue) ? getDOM().setStyle(renderElement, styleName, stringify(styleValue)) : getDOM().removeStyle(renderElement, styleName);
-    }, DomRenderer.prototype.invokeElementMethod = function(renderElement, methodName, args) {
-      getDOM().invoke(renderElement, methodName, args);
-    }, DomRenderer.prototype.setText = function(renderNode, text) {
-      getDOM().setText(renderNode, text);
-    }, DomRenderer.prototype.animate = function(element, startingStyles, keyframes, duration, delay, easing) {
-      return this._animationDriver.animate(element, startingStyles, keyframes, duration, delay, easing);
-    }, DomRenderer;
-  }(),
-      COMPONENT_REGEX = /%COMP%/g,
-      COMPONENT_VARIABLE = "%COMP%",
-      HOST_ATTR = "_nghost-" + COMPONENT_VARIABLE,
-      CONTENT_ATTR = "_ngcontent-" + COMPONENT_VARIABLE,
-      NS_PREFIX_RE = /^:([^:]+):(.+)/g,
-      CORE_TOKENS = {
-        ApplicationRef: _angular_core.ApplicationRef,
-        NgZone: _angular_core.NgZone
-      },
-      INSPECT_GLOBAL_NAME = "ng.probe",
-      CORE_TOKENS_GLOBAL_NAME = "ng.coreTokens",
-      ELEMENT_PROBE_PROVIDERS = [{
-        provide: _angular_core.RootRenderer,
-        useFactory: _createConditionalRootRenderer,
-        deps: [DomRootRenderer]
-      }],
-      DomEventsPlugin = function(_super) {
-        function DomEventsPlugin() {
-          _super.apply(this, arguments);
-        }
-        return __extends(DomEventsPlugin, _super), DomEventsPlugin.prototype.supports = function(eventName) {
-          return !0;
-        }, DomEventsPlugin.prototype.addEventListener = function(element, eventName, handler) {
-          var zone = this.manager.getZone(),
-              outsideHandler = function(event) {
-                return zone.runGuarded(function() {
-                  return handler(event);
-                });
-              };
-          return this.manager.getZone().runOutsideAngular(function() {
-            return getDOM().onAndCancel(element, eventName, outsideHandler);
-          });
-        }, DomEventsPlugin.prototype.addGlobalEventListener = function(target, eventName, handler) {
-          var element = getDOM().getGlobalEventTarget(target),
-              zone = this.manager.getZone(),
-              outsideHandler = function(event) {
-                return zone.runGuarded(function() {
-                  return handler(event);
-                });
-              };
-          return this.manager.getZone().runOutsideAngular(function() {
-            return getDOM().onAndCancel(element, eventName, outsideHandler);
-          });
-        }, DomEventsPlugin;
-      }(EventManagerPlugin);
-  DomEventsPlugin.decorators = [{type: _angular_core.Injectable}];
-  var modifierKeys = ["alt", "control", "meta", "shift"],
-      modifierKeyGetters = {
-        alt: function(event) {
-          return event.altKey;
-        },
-        control: function(event) {
-          return event.ctrlKey;
-        },
-        meta: function(event) {
-          return event.metaKey;
-        },
-        shift: function(event) {
-          return event.shiftKey;
-        }
-      },
-      KeyEventsPlugin = function(_super) {
-        function KeyEventsPlugin() {
-          _super.call(this);
-        }
-        return __extends(KeyEventsPlugin, _super), KeyEventsPlugin.prototype.supports = function(eventName) {
-          return isPresent(KeyEventsPlugin.parseEventName(eventName));
-        }, KeyEventsPlugin.prototype.addEventListener = function(element, eventName, handler) {
-          var parsedEvent = KeyEventsPlugin.parseEventName(eventName),
-              outsideHandler = KeyEventsPlugin.eventCallback(element, StringMapWrapper.get(parsedEvent, "fullKey"), handler, this.manager.getZone());
-          return this.manager.getZone().runOutsideAngular(function() {
-            return getDOM().onAndCancel(element, StringMapWrapper.get(parsedEvent, "domEventName"), outsideHandler);
-          });
-        }, KeyEventsPlugin.parseEventName = function(eventName) {
-          var parts = eventName.toLowerCase().split("."),
-              domEventName = parts.shift();
-          if (0 === parts.length || !StringWrapper.equals(domEventName, "keydown") && !StringWrapper.equals(domEventName, "keyup"))
-            return null;
-          var key = KeyEventsPlugin._normalizeKey(parts.pop()),
-              fullKey = "";
-          if (modifierKeys.forEach(function(modifierName) {
-            ListWrapper.contains(parts, modifierName) && (ListWrapper.remove(parts, modifierName), fullKey += modifierName + ".");
-          }), fullKey += key, 0 != parts.length || 0 === key.length)
-            return null;
-          var result = StringMapWrapper.create();
-          return StringMapWrapper.set(result, "domEventName", domEventName), StringMapWrapper.set(result, "fullKey", fullKey), result;
-        }, KeyEventsPlugin.getEventFullKey = function(event) {
-          var fullKey = "",
-              key = getDOM().getEventKey(event);
-          return key = key.toLowerCase(), StringWrapper.equals(key, " ") ? key = "space" : StringWrapper.equals(key, ".") && (key = "dot"), modifierKeys.forEach(function(modifierName) {
-            if (modifierName != key) {
-              var modifierGetter = StringMapWrapper.get(modifierKeyGetters, modifierName);
-              modifierGetter(event) && (fullKey += modifierName + ".");
-            }
-          }), fullKey += key;
-        }, KeyEventsPlugin.eventCallback = function(element, fullKey, handler, zone) {
-          return function(event) {
-            StringWrapper.equals(KeyEventsPlugin.getEventFullKey(event), fullKey) && zone.runGuarded(function() {
-              return handler(event);
-            });
-          };
-        }, KeyEventsPlugin._normalizeKey = function(keyName) {
-          switch (keyName) {
-            case "esc":
-              return "escape";
-            default:
-              return keyName;
-          }
-        }, KeyEventsPlugin;
-      }(EventManagerPlugin);
-  KeyEventsPlugin.decorators = [{type: _angular_core.Injectable}], KeyEventsPlugin.ctorParameters = [];
-  var BROWSER_PLATFORM_MARKER = new _angular_core.OpaqueToken("BrowserPlatformMarker"),
-      BROWSER_PLATFORM_PROVIDERS = [{
-        provide: BROWSER_PLATFORM_MARKER,
-        useValue: !0
-      }, _angular_core.PLATFORM_COMMON_PROVIDERS, {
-        provide: _angular_core.PLATFORM_INITIALIZER,
-        useValue: initDomAdapter,
-        multi: !0
-      }, {
-        provide: _angular_common.PlatformLocation,
-        useClass: BrowserPlatformLocation
-      }],
-      BROWSER_SANITIZATION_PROVIDERS = [{
-        provide: SanitizationService,
-        useExisting: DomSanitizationService
-      }, {
-        provide: DomSanitizationService,
-        useClass: DomSanitizationServiceImpl
-      }],
-      BROWSER_APP_PROVIDERS = [_angular_core.APPLICATION_COMMON_PROVIDERS, _angular_common.FORM_PROVIDERS, BROWSER_SANITIZATION_PROVIDERS, {
-        provide: _angular_core.ExceptionHandler,
-        useFactory: _exceptionHandler,
-        deps: []
-      }, {
-        provide: DOCUMENT,
-        useFactory: _document,
-        deps: []
-      }, {
-        provide: EVENT_MANAGER_PLUGINS,
-        useClass: DomEventsPlugin,
-        multi: !0
-      }, {
-        provide: EVENT_MANAGER_PLUGINS,
-        useClass: KeyEventsPlugin,
-        multi: !0
-      }, {
-        provide: EVENT_MANAGER_PLUGINS,
-        useClass: HammerGesturesPlugin,
-        multi: !0
-      }, {
-        provide: HAMMER_GESTURE_CONFIG,
-        useClass: HammerGestureConfig
-      }, {
-        provide: DomRootRenderer,
-        useClass: DomRootRenderer_
-      }, {
-        provide: _angular_core.RootRenderer,
-        useExisting: DomRootRenderer
-      }, {
-        provide: SharedStylesHost,
-        useExisting: DomSharedStylesHost
-      }, {
-        provide: AnimationDriver,
-        useFactory: _resolveDefaultAnimationDriver
-      }, DomSharedStylesHost, _angular_core.Testability, EventManager, ELEMENT_PROBE_PROVIDERS],
-      PromiseCompleter = function() {
-        function PromiseCompleter() {
-          var _this = this;
-          this.promise = new Promise(function(res, rej) {
-            _this.resolve = res, _this.reject = rej;
-          });
-        }
-        return PromiseCompleter;
-      }(),
-      PromiseWrapper = function() {
-        function PromiseWrapper() {}
-        return PromiseWrapper.resolve = function(obj) {
-          return Promise.resolve(obj);
-        }, PromiseWrapper.reject = function(obj, _) {
-          return Promise.reject(obj);
-        }, PromiseWrapper.catchError = function(promise, onError) {
-          return promise.catch(onError);
-        }, PromiseWrapper.all = function(promises) {
-          return 0 == promises.length ? Promise.resolve([]) : Promise.all(promises);
-        }, PromiseWrapper.then = function(promise, success, rejection) {
-          return promise.then(success, rejection);
-        }, PromiseWrapper.wrap = function(computation) {
-          return new Promise(function(res, rej) {
-            try {
-              res(computation());
-            } catch (e) {
-              rej(e);
-            }
-          });
-        }, PromiseWrapper.scheduleMicrotask = function(computation) {
-          PromiseWrapper.then(PromiseWrapper.resolve(null), computation, function(_) {});
-        }, PromiseWrapper.completer = function() {
-          return new PromiseCompleter;
-        }, PromiseWrapper;
-      }(),
-      ObservableWrapper = function() {
-        function ObservableWrapper() {}
-        return ObservableWrapper.subscribe = function(emitter, onNext, onError, onComplete) {
-          return void 0 === onComplete && (onComplete = function() {}), onError = "function" == typeof onError && onError || noop, onComplete = "function" == typeof onComplete && onComplete || noop, emitter.subscribe({
-            next: onNext,
-            error: onError,
-            complete: onComplete
-          });
-        }, ObservableWrapper.isObservable = function(obs) {
-          return !!obs.subscribe;
-        }, ObservableWrapper.hasSubscribers = function(obs) {
-          return obs.observers.length > 0;
-        }, ObservableWrapper.dispose = function(subscription) {
-          subscription.unsubscribe();
-        }, ObservableWrapper.callNext = function(emitter, value) {
-          emitter.emit(value);
-        }, ObservableWrapper.callEmit = function(emitter, value) {
-          emitter.emit(value);
-        }, ObservableWrapper.callError = function(emitter, error) {
-          emitter.error(error);
-        }, ObservableWrapper.callComplete = function(emitter) {
-          emitter.complete();
-        }, ObservableWrapper.fromPromise = function(promise) {
-          return rxjs_observable_PromiseObservable.PromiseObservable.create(promise);
-        }, ObservableWrapper.toPromise = function(obj) {
-          return rxjs_operator_toPromise.toPromise.call(obj);
-        }, ObservableWrapper;
-      }(),
-      EventEmitter = function(_super) {
-        function EventEmitter(isAsync) {
-          void 0 === isAsync && (isAsync = !1), _super.call(this), this.__isAsync = isAsync;
-        }
-        return __extends(EventEmitter, _super), EventEmitter.prototype.emit = function(value) {
-          _super.prototype.next.call(this, value);
-        }, EventEmitter.prototype.next = function(value) {
-          _super.prototype.next.call(this, value);
-        }, EventEmitter.prototype.subscribe = function(generatorOrNext, error, complete) {
-          var schedulerFn,
-              errorFn = function(err) {
-                return null;
-              },
-              completeFn = function() {
-                return null;
-              };
-          return generatorOrNext && "object" == typeof generatorOrNext ? (schedulerFn = this.__isAsync ? function(value) {
-            setTimeout(function() {
-              return generatorOrNext.next(value);
-            });
-          } : function(value) {
-            generatorOrNext.next(value);
-          }, generatorOrNext.error && (errorFn = this.__isAsync ? function(err) {
-            setTimeout(function() {
-              return generatorOrNext.error(err);
-            });
-          } : function(err) {
-            generatorOrNext.error(err);
-          }), generatorOrNext.complete && (completeFn = this.__isAsync ? function() {
-            setTimeout(function() {
-              return generatorOrNext.complete();
-            });
-          } : function() {
-            generatorOrNext.complete();
-          })) : (schedulerFn = this.__isAsync ? function(value) {
-            setTimeout(function() {
-              return generatorOrNext(value);
-            });
-          } : function(value) {
-            generatorOrNext(value);
-          }, error && (errorFn = this.__isAsync ? function(err) {
-            setTimeout(function() {
-              return error(err);
-            });
-          } : function(err) {
-            error(err);
-          }), complete && (completeFn = this.__isAsync ? function() {
-            setTimeout(function() {
-              return complete();
-            });
-          } : function() {
-            complete();
-          })), _super.prototype.subscribe.call(this, schedulerFn, errorFn, completeFn);
-        }, EventEmitter;
-      }(rxjs_Subject.Subject),
-      MessageBus = function() {
-        function MessageBus() {}
-        return MessageBus;
-      }(),
-      RenderStore = function() {
-        function RenderStore() {
-          this._nextIndex = 0, this._lookupById = new Map, this._lookupByObject = new Map;
-        }
-        return RenderStore.prototype.allocateId = function() {
-          return this._nextIndex++;
-        }, RenderStore.prototype.store = function(obj, id) {
-          this._lookupById.set(id, obj), this._lookupByObject.set(obj, id);
-        }, RenderStore.prototype.remove = function(obj) {
-          var index = this._lookupByObject.get(obj);
-          this._lookupByObject.delete(obj), this._lookupById.delete(index);
-        }, RenderStore.prototype.deserialize = function(id) {
-          return null == id ? null : this._lookupById.has(id) ? this._lookupById.get(id) : null;
-        }, RenderStore.prototype.serialize = function(obj) {
-          return null == obj ? null : this._lookupByObject.get(obj);
-        }, RenderStore;
-      }();
-  RenderStore.decorators = [{type: _angular_core.Injectable}], RenderStore.ctorParameters = [];
-  var LocationType = function() {
-    function LocationType(href, protocol, host, hostname, port, pathname, search, hash, origin) {
-      this.href = href, this.protocol = protocol, this.host = host, this.hostname = hostname, this.port = port, this.pathname = pathname, this.search = search, this.hash = hash, this.origin = origin;
-    }
-    return LocationType;
-  }(),
-      PRIMITIVE = String,
-      Serializer = function() {
-        function Serializer(_renderStore) {
-          this._renderStore = _renderStore;
-        }
-        return Serializer.prototype.serialize = function(obj, type) {
-          var _this = this;
-          if (!isPresent(obj))
-            return null;
-          if (isArray(obj))
-            return obj.map(function(v) {
-              return _this.serialize(v, type);
-            });
-          if (type == PRIMITIVE)
-            return obj;
-          if (type == RenderStoreObject)
-            return this._renderStore.serialize(obj);
-          if (type === _angular_core.RenderComponentType)
-            return this._serializeRenderComponentType(obj);
-          if (type === _angular_core.ViewEncapsulation)
-            return serializeEnum(obj);
-          if (type === LocationType)
-            return this._serializeLocation(obj);
-          throw new BaseException$1("No serializer for " + type.toString());
-        }, Serializer.prototype.deserialize = function(map, type, data) {
-          var _this = this;
-          if (!isPresent(map))
-            return null;
-          if (isArray(map)) {
-            var obj = [];
-            return map.forEach(function(val) {
-              return obj.push(_this.deserialize(val, type, data));
-            }), obj;
-          }
-          if (type == PRIMITIVE)
-            return map;
-          if (type == RenderStoreObject)
-            return this._renderStore.deserialize(map);
-          if (type === _angular_core.RenderComponentType)
-            return this._deserializeRenderComponentType(map);
-          if (type === _angular_core.ViewEncapsulation)
-            return VIEW_ENCAPSULATION_VALUES[map];
-          if (type === LocationType)
-            return this._deserializeLocation(map);
-          throw new BaseException$1("No deserializer for " + type.toString());
-        }, Serializer.prototype._serializeLocation = function(loc) {
-          return {
-            href: loc.href,
-            protocol: loc.protocol,
-            host: loc.host,
-            hostname: loc.hostname,
-            port: loc.port,
-            pathname: loc.pathname,
-            search: loc.search,
-            hash: loc.hash,
-            origin: loc.origin
-          };
-        }, Serializer.prototype._deserializeLocation = function(loc) {
-          return new LocationType(loc.href, loc.protocol, loc.host, loc.hostname, loc.port, loc.pathname, loc.search, loc.hash, loc.origin);
-        }, Serializer.prototype._serializeRenderComponentType = function(obj) {
-          return {
-            id: obj.id,
-            templateUrl: obj.templateUrl,
-            slotCount: obj.slotCount,
-            encapsulation: this.serialize(obj.encapsulation, _angular_core.ViewEncapsulation),
-            styles: this.serialize(obj.styles, PRIMITIVE)
-          };
-        }, Serializer.prototype._deserializeRenderComponentType = function(map) {
-          return new _angular_core.RenderComponentType(map.id, map.templateUrl, map.slotCount, this.deserialize(map.encapsulation, _angular_core.ViewEncapsulation), this.deserialize(map.styles, PRIMITIVE));
-        }, Serializer;
-      }();
-  Serializer.decorators = [{type: _angular_core.Injectable}], Serializer.ctorParameters = [{type: RenderStore}];
-  var RenderStoreObject = function() {
-    function RenderStoreObject() {}
-    return RenderStoreObject;
-  }(),
-      ClientMessageBrokerFactory = function() {
-        function ClientMessageBrokerFactory() {}
-        return ClientMessageBrokerFactory;
-      }(),
-      ClientMessageBrokerFactory_ = function(_super) {
-        function ClientMessageBrokerFactory_(_messageBus, _serializer) {
-          _super.call(this), this._messageBus = _messageBus, this._serializer = _serializer;
-        }
-        return __extends(ClientMessageBrokerFactory_, _super), ClientMessageBrokerFactory_.prototype.createMessageBroker = function(channel, runInZone) {
-          return void 0 === runInZone && (runInZone = !0), this._messageBus.initChannel(channel, runInZone), new ClientMessageBroker_(this._messageBus, this._serializer, channel);
-        }, ClientMessageBrokerFactory_;
-      }(ClientMessageBrokerFactory);
-  ClientMessageBrokerFactory_.decorators = [{type: _angular_core.Injectable}], ClientMessageBrokerFactory_.ctorParameters = [{type: MessageBus}, {type: Serializer}];
-  var ClientMessageBroker = function() {
-    function ClientMessageBroker() {}
-    return ClientMessageBroker;
-  }(),
-      ClientMessageBroker_ = function(_super) {
-        function ClientMessageBroker_(messageBus, _serializer, channel) {
-          var _this = this;
-          _super.call(this), this.channel = channel, this._pending = new Map, this._sink = messageBus.to(channel), this._serializer = _serializer;
-          var source = messageBus.from(channel);
-          ObservableWrapper.subscribe(source, function(message) {
-            return _this._handleMessage(message);
-          });
-        }
-        return __extends(ClientMessageBroker_, _super), ClientMessageBroker_.prototype._generateMessageId = function(name) {
-          for (var time = stringify(DateWrapper.toMillis(DateWrapper.now())),
-              iteration = 0,
-              id = name + time + stringify(iteration); isPresent(this._pending[id]); )
-            id = "" + name + time + iteration, iteration++;
-          return id;
-        }, ClientMessageBroker_.prototype.runOnService = function(args, returnType) {
-          var _this = this,
-              fnArgs = [];
-          isPresent(args.args) && args.args.forEach(function(argument) {
-            null != argument.type ? fnArgs.push(_this._serializer.serialize(argument.value, argument.type)) : fnArgs.push(argument.value);
-          });
-          var promise,
-              id = null;
-          if (null != returnType) {
-            var completer = PromiseWrapper.completer();
-            id = this._generateMessageId(args.method), this._pending.set(id, completer), PromiseWrapper.catchError(completer.promise, function(err, stack) {
-              print(err), completer.reject(err, stack);
-            }), promise = PromiseWrapper.then(completer.promise, function(value) {
-              return null == _this._serializer ? value : _this._serializer.deserialize(value, returnType);
-            });
-          } else
-            promise = null;
-          var message = {
-            method: args.method,
-            args: fnArgs
-          };
-          return null != id && (message.id = id), ObservableWrapper.callEmit(this._sink, message), promise;
-        }, ClientMessageBroker_.prototype._handleMessage = function(message) {
-          var data = new MessageData(message);
-          if (StringWrapper.equals(data.type, "result") || StringWrapper.equals(data.type, "error")) {
-            var id = data.id;
-            this._pending.has(id) && (StringWrapper.equals(data.type, "result") ? this._pending.get(id).resolve(data.value) : this._pending.get(id).reject(data.value, null), this._pending.delete(id));
-          }
-        }, ClientMessageBroker_;
-      }(ClientMessageBroker),
-      MessageData = function() {
-        function MessageData(data) {
-          this.type = StringMapWrapper.get(data, "type"), this.id = this._getValueIfPresent(data, "id"), this.value = this._getValueIfPresent(data, "value");
-        }
-        return MessageData.prototype._getValueIfPresent = function(data, key) {
-          return StringMapWrapper.contains(data, key) ? StringMapWrapper.get(data, key) : null;
-        }, MessageData;
-      }(),
-      FnArg = function() {
-        function FnArg(value, type) {
-          this.value = value, this.type = type;
-        }
-        return FnArg;
-      }(),
-      UiArguments = function() {
-        function UiArguments(method, args) {
-          this.method = method, this.args = args;
-        }
-        return UiArguments;
-      }(),
-      ServiceMessageBrokerFactory = function() {
-        function ServiceMessageBrokerFactory() {}
-        return ServiceMessageBrokerFactory;
-      }(),
-      ServiceMessageBrokerFactory_ = function(_super) {
-        function ServiceMessageBrokerFactory_(_messageBus, _serializer) {
-          _super.call(this), this._messageBus = _messageBus, this._serializer = _serializer;
-        }
-        return __extends(ServiceMessageBrokerFactory_, _super), ServiceMessageBrokerFactory_.prototype.createMessageBroker = function(channel, runInZone) {
-          return void 0 === runInZone && (runInZone = !0), this._messageBus.initChannel(channel, runInZone), new ServiceMessageBroker_(this._messageBus, this._serializer, channel);
-        }, ServiceMessageBrokerFactory_;
-      }(ServiceMessageBrokerFactory);
-  ServiceMessageBrokerFactory_.decorators = [{type: _angular_core.Injectable}], ServiceMessageBrokerFactory_.ctorParameters = [{type: MessageBus}, {type: Serializer}];
-  var ServiceMessageBroker = function() {
-    function ServiceMessageBroker() {}
-    return ServiceMessageBroker;
-  }(),
-      ServiceMessageBroker_ = function(_super) {
-        function ServiceMessageBroker_(messageBus, _serializer, channel) {
-          var _this = this;
-          _super.call(this), this._serializer = _serializer, this.channel = channel, this._methods = new Map$1, this._sink = messageBus.to(channel);
-          var source = messageBus.from(channel);
-          ObservableWrapper.subscribe(source, function(message) {
-            return _this._handleMessage(message);
-          });
-        }
-        return __extends(ServiceMessageBroker_, _super), ServiceMessageBroker_.prototype.registerMethod = function(methodName, signature, method, returnType) {
-          var _this = this;
-          this._methods.set(methodName, function(message) {
-            for (var serializedArgs = message.args,
-                numArgs = null === signature ? 0 : signature.length,
-                deserializedArgs = ListWrapper.createFixedSize(numArgs),
-                i = 0; i < numArgs; i++) {
-              var serializedArg = serializedArgs[i];
-              deserializedArgs[i] = _this._serializer.deserialize(serializedArg, signature[i]);
-            }
-            var promise = FunctionWrapper.apply(method, deserializedArgs);
-            isPresent(returnType) && isPresent(promise) && _this._wrapWebWorkerPromise(message.id, promise, returnType);
-          });
-        }, ServiceMessageBroker_.prototype._handleMessage = function(map) {
-          var message = new ReceivedMessage(map);
-          this._methods.has(message.method) && this._methods.get(message.method)(message);
-        }, ServiceMessageBroker_.prototype._wrapWebWorkerPromise = function(id, promise, type) {
-          var _this = this;
-          PromiseWrapper.then(promise, function(result) {
-            ObservableWrapper.callEmit(_this._sink, {
-              type: "result",
-              value: _this._serializer.serialize(result, type),
-              id: id
-            });
-          });
-        }, ServiceMessageBroker_;
-      }(ServiceMessageBroker),
-      ReceivedMessage = function() {
-        function ReceivedMessage(data) {
-          this.method = data.method, this.args = data.args, this.id = data.id, this.type = data.type;
-        }
-        return ReceivedMessage;
-      }(),
-      RENDERER_CHANNEL = "ng-Renderer",
-      EVENT_CHANNEL = "ng-Events",
-      ROUTER_CHANNEL = "ng-Router",
-      WebWorkerPlatformLocation = function(_super) {
-        function WebWorkerPlatformLocation(brokerFactory, bus, _serializer) {
-          var _this = this;
-          _super.call(this), this._serializer = _serializer, this._popStateListeners = [], this._hashChangeListeners = [], this._location = null, this._broker = brokerFactory.createMessageBroker(ROUTER_CHANNEL), this._channelSource = bus.from(ROUTER_CHANNEL), ObservableWrapper.subscribe(this._channelSource, function(msg) {
-            var listeners = null;
-            if (StringMapWrapper.contains(msg, "event")) {
-              var type = msg.event.type;
-              if (StringWrapper.equals(type, "popstate") ? listeners = _this._popStateListeners : StringWrapper.equals(type, "hashchange") && (listeners = _this._hashChangeListeners), null !== listeners) {
-                var e_1 = deserializeGenericEvent(msg.event);
-                _this._location = _this._serializer.deserialize(msg.location, LocationType), listeners.forEach(function(fn) {
-                  return fn(e_1);
-                });
-              }
-            }
-          });
-        }
-        return __extends(WebWorkerPlatformLocation, _super), WebWorkerPlatformLocation.prototype.init = function() {
-          var _this = this,
-              args = new UiArguments("getLocation"),
-              locationPromise = this._broker.runOnService(args, LocationType);
-          return PromiseWrapper.then(locationPromise, function(val) {
-            return _this._location = val, !0;
-          }, function(err) {
-            throw new BaseException$1(err);
-          });
-        }, WebWorkerPlatformLocation.prototype.getBaseHrefFromDOM = function() {
-          throw new BaseException$1("Attempt to get base href from DOM from WebWorker. You must either provide a value for the APP_BASE_HREF token through DI or use the hash location strategy.");
-        }, WebWorkerPlatformLocation.prototype.onPopState = function(fn) {
-          this._popStateListeners.push(fn);
-        }, WebWorkerPlatformLocation.prototype.onHashChange = function(fn) {
-          this._hashChangeListeners.push(fn);
-        }, Object.defineProperty(WebWorkerPlatformLocation.prototype, "pathname", {
-          get: function() {
-            return null === this._location ? null : this._location.pathname;
-          },
-          set: function(newPath) {
-            if (null === this._location)
-              throw new BaseException$1("Attempt to set pathname before value is obtained from UI");
-            this._location.pathname = newPath;
-            var fnArgs = [new FnArg(newPath, PRIMITIVE)],
-                args = new UiArguments("setPathname", fnArgs);
-            this._broker.runOnService(args, null);
-          },
-          enumerable: !0,
-          configurable: !0
-        }), Object.defineProperty(WebWorkerPlatformLocation.prototype, "search", {
-          get: function() {
-            return null === this._location ? null : this._location.search;
-          },
-          enumerable: !0,
-          configurable: !0
-        }), Object.defineProperty(WebWorkerPlatformLocation.prototype, "hash", {
-          get: function() {
-            return null === this._location ? null : this._location.hash;
-          },
-          enumerable: !0,
-          configurable: !0
-        }), WebWorkerPlatformLocation.prototype.pushState = function(state, title, url) {
-          var fnArgs = [new FnArg(state, PRIMITIVE), new FnArg(title, PRIMITIVE), new FnArg(url, PRIMITIVE)],
-              args = new UiArguments("pushState", fnArgs);
-          this._broker.runOnService(args, null);
-        }, WebWorkerPlatformLocation.prototype.replaceState = function(state, title, url) {
-          var fnArgs = [new FnArg(state, PRIMITIVE), new FnArg(title, PRIMITIVE), new FnArg(url, PRIMITIVE)],
-              args = new UiArguments("replaceState", fnArgs);
-          this._broker.runOnService(args, null);
-        }, WebWorkerPlatformLocation.prototype.forward = function() {
-          var args = new UiArguments("forward");
-          this._broker.runOnService(args, null);
-        }, WebWorkerPlatformLocation.prototype.back = function() {
-          var args = new UiArguments("back");
-          this._broker.runOnService(args, null);
-        }, WebWorkerPlatformLocation;
-      }(_angular_common.PlatformLocation);
-  WebWorkerPlatformLocation.decorators = [{type: _angular_core.Injectable}], WebWorkerPlatformLocation.ctorParameters = [{type: ClientMessageBrokerFactory}, {type: MessageBus}, {type: Serializer}];
-  var WORKER_APP_LOCATION_PROVIDERS = [{
-    provide: _angular_common.PlatformLocation,
-    useClass: WebWorkerPlatformLocation
-  }, {
-    provide: _angular_core.APP_INITIALIZER,
-    useFactory: appInitFnFactory,
-    multi: !0,
-    deps: [_angular_common.PlatformLocation, _angular_core.NgZone]
-  }],
-      MessageBasedPlatformLocation = function() {
-        function MessageBasedPlatformLocation(_brokerFactory, _platformLocation, bus, _serializer) {
-          this._brokerFactory = _brokerFactory, this._platformLocation = _platformLocation, this._serializer = _serializer, this._platformLocation.onPopState(FunctionWrapper.bind(this._sendUrlChangeEvent, this)), this._platformLocation.onHashChange(FunctionWrapper.bind(this._sendUrlChangeEvent, this)), this._broker = this._brokerFactory.createMessageBroker(ROUTER_CHANNEL), this._channelSink = bus.to(ROUTER_CHANNEL);
-        }
-        return MessageBasedPlatformLocation.prototype.start = function() {
-          this._broker.registerMethod("getLocation", null, FunctionWrapper.bind(this._getLocation, this), LocationType), this._broker.registerMethod("setPathname", [PRIMITIVE], FunctionWrapper.bind(this._setPathname, this)), this._broker.registerMethod("pushState", [PRIMITIVE, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._platformLocation.pushState, this._platformLocation)), this._broker.registerMethod("replaceState", [PRIMITIVE, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._platformLocation.replaceState, this._platformLocation)), this._broker.registerMethod("forward", null, FunctionWrapper.bind(this._platformLocation.forward, this._platformLocation)), this._broker.registerMethod("back", null, FunctionWrapper.bind(this._platformLocation.back, this._platformLocation));
-        }, MessageBasedPlatformLocation.prototype._getLocation = function() {
-          return PromiseWrapper.resolve(this._platformLocation.location);
-        }, MessageBasedPlatformLocation.prototype._sendUrlChangeEvent = function(e) {
-          var loc = this._serializer.serialize(this._platformLocation.location, LocationType),
-              serializedEvent = {type: e.type};
-          ObservableWrapper.callEmit(this._channelSink, {
-            event: serializedEvent,
-            location: loc
-          });
-        }, MessageBasedPlatformLocation.prototype._setPathname = function(pathname) {
-          this._platformLocation.pathname = pathname;
-        }, MessageBasedPlatformLocation;
-      }();
-  MessageBasedPlatformLocation.decorators = [{type: _angular_core.Injectable}], MessageBasedPlatformLocation.ctorParameters = [{type: ServiceMessageBrokerFactory}, {type: BrowserPlatformLocation}, {type: MessageBus}, {type: Serializer}];
-  var WORKER_UI_LOCATION_PROVIDERS = [MessageBasedPlatformLocation, BrowserPlatformLocation, {
-    provide: _angular_core.APP_INITIALIZER,
-    useFactory: initUiLocation,
-    multi: !0,
-    deps: [_angular_core.Injector]
-  }],
-      ON_WEB_WORKER = new _angular_core.OpaqueToken("WebWorker.onWebWorker"),
-      PostMessageBusSink = function() {
-        function PostMessageBusSink(_postMessageTarget) {
-          this._postMessageTarget = _postMessageTarget, this._channels = StringMapWrapper.create(), this._messageBuffer = [];
-        }
-        return PostMessageBusSink.prototype.attachToZone = function(zone) {
-          var _this = this;
-          this._zone = zone, this._zone.runOutsideAngular(function() {
-            ObservableWrapper.subscribe(_this._zone.onStable, function(_) {
-              _this._handleOnEventDone();
-            });
-          });
-        }, PostMessageBusSink.prototype.initChannel = function(channel, runInZone) {
-          var _this = this;
-          if (void 0 === runInZone && (runInZone = !0), StringMapWrapper.contains(this._channels, channel))
-            throw new BaseException$1(channel + " has already been initialized");
-          var emitter = new EventEmitter((!1)),
-              channelInfo = new _Channel(emitter, runInZone);
-          this._channels[channel] = channelInfo, emitter.subscribe(function(data) {
-            var message = {
-              channel: channel,
-              message: data
-            };
-            runInZone ? _this._messageBuffer.push(message) : _this._sendMessages([message]);
-          });
-        }, PostMessageBusSink.prototype.to = function(channel) {
-          if (StringMapWrapper.contains(this._channels, channel))
-            return this._channels[channel].emitter;
-          throw new BaseException$1(channel + " is not set up. Did you forget to call initChannel?");
-        }, PostMessageBusSink.prototype._handleOnEventDone = function() {
-          this._messageBuffer.length > 0 && (this._sendMessages(this._messageBuffer), this._messageBuffer = []);
-        }, PostMessageBusSink.prototype._sendMessages = function(messages) {
-          this._postMessageTarget.postMessage(messages);
-        }, PostMessageBusSink;
-      }(),
-      PostMessageBusSource = function() {
-        function PostMessageBusSource(eventTarget) {
-          var _this = this;
-          if (this._channels = StringMapWrapper.create(), eventTarget)
-            eventTarget.addEventListener("message", function(ev) {
-              return _this._handleMessages(ev);
-            });
-          else {
-            var workerScope = self;
-            workerScope.addEventListener("message", function(ev) {
-              return _this._handleMessages(ev);
-            });
-          }
-        }
-        return PostMessageBusSource.prototype.attachToZone = function(zone) {
-          this._zone = zone;
-        }, PostMessageBusSource.prototype.initChannel = function(channel, runInZone) {
-          if (void 0 === runInZone && (runInZone = !0), StringMapWrapper.contains(this._channels, channel))
-            throw new BaseException$1(channel + " has already been initialized");
-          var emitter = new EventEmitter((!1)),
-              channelInfo = new _Channel(emitter, runInZone);
-          this._channels[channel] = channelInfo;
-        }, PostMessageBusSource.prototype.from = function(channel) {
-          if (StringMapWrapper.contains(this._channels, channel))
-            return this._channels[channel].emitter;
-          throw new BaseException$1(channel + " is not set up. Did you forget to call initChannel?");
-        }, PostMessageBusSource.prototype._handleMessages = function(ev) {
-          for (var messages = ev.data,
-              i = 0; i < messages.length; i++)
-            this._handleMessage(messages[i]);
-        }, PostMessageBusSource.prototype._handleMessage = function(data) {
-          var channel = data.channel;
-          if (StringMapWrapper.contains(this._channels, channel)) {
-            var channelInfo = this._channels[channel];
-            channelInfo.runInZone ? this._zone.run(function() {
-              channelInfo.emitter.emit(data.message);
-            }) : channelInfo.emitter.emit(data.message);
-          }
-        }, PostMessageBusSource;
-      }(),
-      PostMessageBus = function() {
-        function PostMessageBus(sink, source) {
-          this.sink = sink, this.source = source;
-        }
-        return PostMessageBus.prototype.attachToZone = function(zone) {
-          this.source.attachToZone(zone), this.sink.attachToZone(zone);
-        }, PostMessageBus.prototype.initChannel = function(channel, runInZone) {
-          void 0 === runInZone && (runInZone = !0), this.source.initChannel(channel, runInZone), this.sink.initChannel(channel, runInZone);
-        }, PostMessageBus.prototype.from = function(channel) {
-          return this.source.from(channel);
-        }, PostMessageBus.prototype.to = function(channel) {
-          return this.sink.to(channel);
-        }, PostMessageBus;
-      }();
-  PostMessageBus.decorators = [{type: _angular_core.Injectable}], PostMessageBus.ctorParameters = [{type: PostMessageBusSink}, {type: PostMessageBusSource}];
-  var _Channel = function() {
-    function _Channel(emitter, runInZone) {
-      this.emitter = emitter, this.runInZone = runInZone;
-    }
-    return _Channel;
-  }(),
-      MOUSE_EVENT_PROPERTIES = ["altKey", "button", "clientX", "clientY", "metaKey", "movementX", "movementY", "offsetX", "offsetY", "region", "screenX", "screenY", "shiftKey"],
-      KEYBOARD_EVENT_PROPERTIES = ["altkey", "charCode", "code", "ctrlKey", "isComposing", "key", "keyCode", "location", "metaKey", "repeat", "shiftKey", "which"],
-      TRANSITION_EVENT_PROPERTIES = ["propertyName", "elapsedTime", "pseudoElement"],
-      EVENT_PROPERTIES = ["type", "bubbles", "cancelable"],
-      NODES_WITH_VALUE = new Set$1(["input", "select", "option", "button", "li", "meter", "progress", "param", "textarea"]),
-      EventDispatcher = function() {
-        function EventDispatcher(_sink, _serializer) {
-          this._sink = _sink, this._serializer = _serializer;
-        }
-        return EventDispatcher.prototype.dispatchRenderEvent = function(element, eventTarget, eventName, event) {
-          var serializedEvent;
-          switch (event.type) {
-            case "click":
-            case "mouseup":
-            case "mousedown":
-            case "dblclick":
-            case "contextmenu":
-            case "mouseenter":
-            case "mouseleave":
-            case "mousemove":
-            case "mouseout":
-            case "mouseover":
-            case "show":
-              serializedEvent = serializeMouseEvent(event);
-              break;
-            case "keydown":
-            case "keypress":
-            case "keyup":
-              serializedEvent = serializeKeyboardEvent(event);
-              break;
-            case "input":
-            case "change":
-            case "blur":
-              serializedEvent = serializeEventWithTarget(event);
-              break;
-            case "abort":
-            case "afterprint":
-            case "beforeprint":
-            case "cached":
-            case "canplay":
-            case "canplaythrough":
-            case "chargingchange":
-            case "chargingtimechange":
-            case "close":
-            case "dischargingtimechange":
-            case "DOMContentLoaded":
-            case "downloading":
-            case "durationchange":
-            case "emptied":
-            case "ended":
-            case "error":
-            case "fullscreenchange":
-            case "fullscreenerror":
-            case "invalid":
-            case "languagechange":
-            case "levelfchange":
-            case "loadeddata":
-            case "loadedmetadata":
-            case "obsolete":
-            case "offline":
-            case "online":
-            case "open":
-            case "orientatoinchange":
-            case "pause":
-            case "pointerlockchange":
-            case "pointerlockerror":
-            case "play":
-            case "playing":
-            case "ratechange":
-            case "readystatechange":
-            case "reset":
-            case "scroll":
-            case "seeked":
-            case "seeking":
-            case "stalled":
-            case "submit":
-            case "success":
-            case "suspend":
-            case "timeupdate":
-            case "updateready":
-            case "visibilitychange":
-            case "volumechange":
-            case "waiting":
-              serializedEvent = serializeGenericEvent(event);
-              break;
-            case "transitionend":
-              serializedEvent = serializeTransitionEvent(event);
-              break;
-            default:
-              throw new BaseException$1(eventName + " not supported on WebWorkers");
-          }
-          return ObservableWrapper.callEmit(this._sink, {
-            element: this._serializer.serialize(element, RenderStoreObject),
-            eventName: eventName,
-            eventTarget: eventTarget,
-            event: serializedEvent
-          }), !1;
-        }, EventDispatcher;
-      }(),
-      MessageBasedRenderer = function() {
-        function MessageBasedRenderer(_brokerFactory, _bus, _serializer, _renderStore, _rootRenderer) {
-          this._brokerFactory = _brokerFactory, this._bus = _bus, this._serializer = _serializer, this._renderStore = _renderStore, this._rootRenderer = _rootRenderer;
-        }
-        return MessageBasedRenderer.prototype.start = function() {
-          var broker = this._brokerFactory.createMessageBroker(RENDERER_CHANNEL);
-          this._bus.initChannel(EVENT_CHANNEL), this._eventDispatcher = new EventDispatcher(this._bus.to(EVENT_CHANNEL), this._serializer), broker.registerMethod("renderComponent", [_angular_core.RenderComponentType, PRIMITIVE], FunctionWrapper.bind(this._renderComponent, this)), broker.registerMethod("selectRootElement", [RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._selectRootElement, this)), broker.registerMethod("createElement", [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._createElement, this)), broker.registerMethod("createViewRoot", [RenderStoreObject, RenderStoreObject, PRIMITIVE], FunctionWrapper.bind(this._createViewRoot, this)), broker.registerMethod("createTemplateAnchor", [RenderStoreObject, RenderStoreObject, PRIMITIVE], FunctionWrapper.bind(this._createTemplateAnchor, this)), broker.registerMethod("createText", [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._createText, this)), broker.registerMethod("projectNodes", [RenderStoreObject, RenderStoreObject, RenderStoreObject], FunctionWrapper.bind(this._projectNodes, this)), broker.registerMethod("attachViewAfter", [RenderStoreObject, RenderStoreObject, RenderStoreObject], FunctionWrapper.bind(this._attachViewAfter, this)), broker.registerMethod("detachView", [RenderStoreObject, RenderStoreObject], FunctionWrapper.bind(this._detachView, this)), broker.registerMethod("destroyView", [RenderStoreObject, RenderStoreObject, RenderStoreObject], FunctionWrapper.bind(this._destroyView, this)), broker.registerMethod("setElementProperty", [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._setElementProperty, this)), broker.registerMethod("setElementAttribute", [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._setElementAttribute, this)), broker.registerMethod("setBindingDebugInfo", [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._setBindingDebugInfo, this)), broker.registerMethod("setElementClass", [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._setElementClass, this)), broker.registerMethod("setElementStyle", [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._setElementStyle, this)), broker.registerMethod("invokeElementMethod", [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._invokeElementMethod, this)), broker.registerMethod("setText", [RenderStoreObject, RenderStoreObject, PRIMITIVE], FunctionWrapper.bind(this._setText, this)), broker.registerMethod("listen", [RenderStoreObject, RenderStoreObject, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._listen, this)), broker.registerMethod("listenGlobal", [RenderStoreObject, PRIMITIVE, PRIMITIVE, PRIMITIVE], FunctionWrapper.bind(this._listenGlobal, this)), broker.registerMethod("listenDone", [RenderStoreObject, RenderStoreObject], FunctionWrapper.bind(this._listenDone, this));
-        }, MessageBasedRenderer.prototype._renderComponent = function(renderComponentType, rendererId) {
-          var renderer = this._rootRenderer.renderComponent(renderComponentType);
-          this._renderStore.store(renderer, rendererId);
-        }, MessageBasedRenderer.prototype._selectRootElement = function(renderer, selector, elId) {
-          this._renderStore.store(renderer.selectRootElement(selector, null), elId);
-        }, MessageBasedRenderer.prototype._createElement = function(renderer, parentElement, name, elId) {
-          this._renderStore.store(renderer.createElement(parentElement, name, null), elId);
-        }, MessageBasedRenderer.prototype._createViewRoot = function(renderer, hostElement, elId) {
-          var viewRoot = renderer.createViewRoot(hostElement);
-          this._renderStore.serialize(hostElement) !== elId && this._renderStore.store(viewRoot, elId);
-        }, MessageBasedRenderer.prototype._createTemplateAnchor = function(renderer, parentElement, elId) {
-          this._renderStore.store(renderer.createTemplateAnchor(parentElement, null), elId);
-        }, MessageBasedRenderer.prototype._createText = function(renderer, parentElement, value, elId) {
-          this._renderStore.store(renderer.createText(parentElement, value, null), elId);
-        }, MessageBasedRenderer.prototype._projectNodes = function(renderer, parentElement, nodes) {
-          renderer.projectNodes(parentElement, nodes);
-        }, MessageBasedRenderer.prototype._attachViewAfter = function(renderer, node, viewRootNodes) {
-          renderer.attachViewAfter(node, viewRootNodes);
-        }, MessageBasedRenderer.prototype._detachView = function(renderer, viewRootNodes) {
-          renderer.detachView(viewRootNodes);
-        }, MessageBasedRenderer.prototype._destroyView = function(renderer, hostElement, viewAllNodes) {
-          renderer.destroyView(hostElement, viewAllNodes);
-          for (var i = 0; i < viewAllNodes.length; i++)
-            this._renderStore.remove(viewAllNodes[i]);
-        }, MessageBasedRenderer.prototype._setElementProperty = function(renderer, renderElement, propertyName, propertyValue) {
-          renderer.setElementProperty(renderElement, propertyName, propertyValue);
-        }, MessageBasedRenderer.prototype._setElementAttribute = function(renderer, renderElement, attributeName, attributeValue) {
-          renderer.setElementAttribute(renderElement, attributeName, attributeValue);
-        }, MessageBasedRenderer.prototype._setBindingDebugInfo = function(renderer, renderElement, propertyName, propertyValue) {
-          renderer.setBindingDebugInfo(renderElement, propertyName, propertyValue);
-        }, MessageBasedRenderer.prototype._setElementClass = function(renderer, renderElement, className, isAdd) {
-          renderer.setElementClass(renderElement, className, isAdd);
-        }, MessageBasedRenderer.prototype._setElementStyle = function(renderer, renderElement, styleName, styleValue) {
-          renderer.setElementStyle(renderElement, styleName, styleValue);
-        }, MessageBasedRenderer.prototype._invokeElementMethod = function(renderer, renderElement, methodName, args) {
-          renderer.invokeElementMethod(renderElement, methodName, args);
-        }, MessageBasedRenderer.prototype._setText = function(renderer, renderNode, text) {
-          renderer.setText(renderNode, text);
-        }, MessageBasedRenderer.prototype._listen = function(renderer, renderElement, eventName, unlistenId) {
-          var _this = this,
-              unregisterCallback = renderer.listen(renderElement, eventName, function(event) {
-                return _this._eventDispatcher.dispatchRenderEvent(renderElement, null, eventName, event);
-              });
-          this._renderStore.store(unregisterCallback, unlistenId);
-        }, MessageBasedRenderer.prototype._listenGlobal = function(renderer, eventTarget, eventName, unlistenId) {
-          var _this = this,
-              unregisterCallback = renderer.listenGlobal(eventTarget, eventName, function(event) {
-                return _this._eventDispatcher.dispatchRenderEvent(null, eventTarget, eventName, event);
-              });
-          this._renderStore.store(unregisterCallback, unlistenId);
-        }, MessageBasedRenderer.prototype._listenDone = function(renderer, unlistenCallback) {
-          unlistenCallback();
-        }, MessageBasedRenderer;
-      }();
-  MessageBasedRenderer.decorators = [{type: _angular_core.Injectable}], MessageBasedRenderer.ctorParameters = [{type: ServiceMessageBrokerFactory}, {type: MessageBus}, {type: Serializer}, {type: RenderStore}, {type: _angular_core.RootRenderer}];
-  var WORKER_RENDER_PLATFORM_MARKER = new _angular_core.OpaqueToken("WorkerRenderPlatformMarker"),
-      WebWorkerInstance = function() {
-        function WebWorkerInstance() {}
-        return WebWorkerInstance.prototype.init = function(worker, bus) {
-          this.worker = worker, this.bus = bus;
-        }, WebWorkerInstance;
-      }();
-  WebWorkerInstance.decorators = [{type: _angular_core.Injectable}];
-  var WORKER_SCRIPT = new _angular_core.OpaqueToken("WebWorkerScript"),
-      WORKER_UI_STARTABLE_MESSAGING_SERVICE = new _angular_core.OpaqueToken("WorkerRenderStartableMsgService"),
-      WORKER_UI_PLATFORM_PROVIDERS = [_angular_core.PLATFORM_COMMON_PROVIDERS, {
-        provide: WORKER_RENDER_PLATFORM_MARKER,
-        useValue: !0
-      }, {
-        provide: _angular_core.PLATFORM_INITIALIZER,
-        useValue: initWebWorkerRenderPlatform,
-        multi: !0
-      }],
-      WORKER_UI_APPLICATION_PROVIDERS = [_angular_core.APPLICATION_COMMON_PROVIDERS, MessageBasedRenderer, {
-        provide: WORKER_UI_STARTABLE_MESSAGING_SERVICE,
-        useExisting: MessageBasedRenderer,
-        multi: !0
-      }, BROWSER_SANITIZATION_PROVIDERS, {
-        provide: _angular_core.ExceptionHandler,
-        useFactory: _exceptionHandler$1,
-        deps: []
-      }, {
-        provide: DOCUMENT,
-        useFactory: _document$1,
-        deps: []
-      }, {
-        provide: EVENT_MANAGER_PLUGINS,
-        useClass: DomEventsPlugin,
-        multi: !0
-      }, {
-        provide: EVENT_MANAGER_PLUGINS,
-        useClass: KeyEventsPlugin,
-        multi: !0
-      }, {
-        provide: EVENT_MANAGER_PLUGINS,
-        useClass: HammerGesturesPlugin,
-        multi: !0
-      }, {
-        provide: HAMMER_GESTURE_CONFIG,
-        useClass: HammerGestureConfig
-      }, {
-        provide: DomRootRenderer,
-        useClass: DomRootRenderer_
-      }, {
-        provide: _angular_core.RootRenderer,
-        useExisting: DomRootRenderer
-      }, {
-        provide: SharedStylesHost,
-        useExisting: DomSharedStylesHost
-      }, {
-        provide: ServiceMessageBrokerFactory,
-        useClass: ServiceMessageBrokerFactory_
-      }, {
-        provide: ClientMessageBrokerFactory,
-        useClass: ClientMessageBrokerFactory_
-      }, {
-        provide: AnimationDriver,
-        useFactory: _resolveDefaultAnimationDriver$1
-      }, Serializer, {
-        provide: ON_WEB_WORKER,
-        useValue: !1
-      }, RenderStore, DomSharedStylesHost, _angular_core.Testability, EventManager, WebWorkerInstance, {
-        provide: _angular_core.APP_INITIALIZER,
-        useFactory: initWebWorkerAppFn,
-        multi: !0,
-        deps: [_angular_core.Injector]
-      }, {
-        provide: MessageBus,
-        useFactory: messageBusFactory,
-        deps: [WebWorkerInstance]
-      }],
-      WebWorkerRootRenderer = function() {
-        function WebWorkerRootRenderer(messageBrokerFactory, bus, _serializer, _renderStore) {
-          var _this = this;
-          this._serializer = _serializer, this._renderStore = _renderStore, this.globalEvents = new NamedEventEmitter, this._componentRenderers = new Map, this._messageBroker = messageBrokerFactory.createMessageBroker(RENDERER_CHANNEL), bus.initChannel(EVENT_CHANNEL);
-          var source = bus.from(EVENT_CHANNEL);
-          ObservableWrapper.subscribe(source, function(message) {
-            return _this._dispatchEvent(message);
-          });
-        }
-        return WebWorkerRootRenderer.prototype._dispatchEvent = function(message) {
-          var eventName = message.eventName,
-              target = message.eventTarget,
-              event = deserializeGenericEvent(message.event);
-          if (isPresent(target))
-            this.globalEvents.dispatchEvent(eventNameWithTarget(target, eventName), event);
-          else {
-            var element = this._serializer.deserialize(message.element, RenderStoreObject);
-            element.events.dispatchEvent(eventName, event);
-          }
-        }, WebWorkerRootRenderer.prototype.renderComponent = function(componentType) {
-          var result = this._componentRenderers.get(componentType.id);
-          if (isBlank(result)) {
-            result = new WebWorkerRenderer(this, componentType), this._componentRenderers.set(componentType.id, result);
-            var id = this._renderStore.allocateId();
-            this._renderStore.store(result, id), this.runOnService("renderComponent", [new FnArg(componentType, _angular_core.RenderComponentType), new FnArg(result, RenderStoreObject)]);
-          }
-          return result;
-        }, WebWorkerRootRenderer.prototype.runOnService = function(fnName, fnArgs) {
-          var args = new UiArguments(fnName, fnArgs);
-          this._messageBroker.runOnService(args, null);
-        }, WebWorkerRootRenderer.prototype.allocateNode = function() {
-          var result = new WebWorkerRenderNode,
-              id = this._renderStore.allocateId();
-          return this._renderStore.store(result, id), result;
-        }, WebWorkerRootRenderer.prototype.allocateId = function() {
-          return this._renderStore.allocateId();
-        }, WebWorkerRootRenderer.prototype.destroyNodes = function(nodes) {
-          for (var i = 0; i < nodes.length; i++)
-            this._renderStore.remove(nodes[i]);
-        }, WebWorkerRootRenderer;
-      }();
-  WebWorkerRootRenderer.decorators = [{type: _angular_core.Injectable}], WebWorkerRootRenderer.ctorParameters = [{type: ClientMessageBrokerFactory}, {type: MessageBus}, {type: Serializer}, {type: RenderStore}];
-  var WebWorkerRenderer = function() {
-    function WebWorkerRenderer(_rootRenderer, _componentType) {
-      this._rootRenderer = _rootRenderer, this._componentType = _componentType;
-    }
-    return WebWorkerRenderer.prototype._runOnService = function(fnName, fnArgs) {
-      var fnArgsWithRenderer = [new FnArg(this, RenderStoreObject)].concat(fnArgs);
-      this._rootRenderer.runOnService(fnName, fnArgsWithRenderer);
-    }, WebWorkerRenderer.prototype.selectRootElement = function(selectorOrNode, debugInfo) {
-      var node = this._rootRenderer.allocateNode();
-      return this._runOnService("selectRootElement", [new FnArg(selectorOrNode, null), new FnArg(node, RenderStoreObject)]), node;
-    }, WebWorkerRenderer.prototype.createElement = function(parentElement, name, debugInfo) {
-      var node = this._rootRenderer.allocateNode();
-      return this._runOnService("createElement", [new FnArg(parentElement, RenderStoreObject), new FnArg(name, null), new FnArg(node, RenderStoreObject)]), node;
-    }, WebWorkerRenderer.prototype.createViewRoot = function(hostElement) {
-      var viewRoot = this._componentType.encapsulation === _angular_core.ViewEncapsulation.Native ? this._rootRenderer.allocateNode() : hostElement;
-      return this._runOnService("createViewRoot", [new FnArg(hostElement, RenderStoreObject), new FnArg(viewRoot, RenderStoreObject)]), viewRoot;
-    }, WebWorkerRenderer.prototype.createTemplateAnchor = function(parentElement, debugInfo) {
-      var node = this._rootRenderer.allocateNode();
-      return this._runOnService("createTemplateAnchor", [new FnArg(parentElement, RenderStoreObject), new FnArg(node, RenderStoreObject)]), node;
-    }, WebWorkerRenderer.prototype.createText = function(parentElement, value, debugInfo) {
-      var node = this._rootRenderer.allocateNode();
-      return this._runOnService("createText", [new FnArg(parentElement, RenderStoreObject), new FnArg(value, null), new FnArg(node, RenderStoreObject)]), node;
-    }, WebWorkerRenderer.prototype.projectNodes = function(parentElement, nodes) {
-      this._runOnService("projectNodes", [new FnArg(parentElement, RenderStoreObject), new FnArg(nodes, RenderStoreObject)]);
-    }, WebWorkerRenderer.prototype.attachViewAfter = function(node, viewRootNodes) {
-      this._runOnService("attachViewAfter", [new FnArg(node, RenderStoreObject), new FnArg(viewRootNodes, RenderStoreObject)]);
-    }, WebWorkerRenderer.prototype.detachView = function(viewRootNodes) {
-      this._runOnService("detachView", [new FnArg(viewRootNodes, RenderStoreObject)]);
-    }, WebWorkerRenderer.prototype.destroyView = function(hostElement, viewAllNodes) {
-      this._runOnService("destroyView", [new FnArg(hostElement, RenderStoreObject), new FnArg(viewAllNodes, RenderStoreObject)]), this._rootRenderer.destroyNodes(viewAllNodes);
-    }, WebWorkerRenderer.prototype.setElementProperty = function(renderElement, propertyName, propertyValue) {
-      this._runOnService("setElementProperty", [new FnArg(renderElement, RenderStoreObject), new FnArg(propertyName, null), new FnArg(propertyValue, null)]);
-    }, WebWorkerRenderer.prototype.setElementAttribute = function(renderElement, attributeName, attributeValue) {
-      this._runOnService("setElementAttribute", [new FnArg(renderElement, RenderStoreObject), new FnArg(attributeName, null), new FnArg(attributeValue, null)]);
-    }, WebWorkerRenderer.prototype.setBindingDebugInfo = function(renderElement, propertyName, propertyValue) {
-      this._runOnService("setBindingDebugInfo", [new FnArg(renderElement, RenderStoreObject), new FnArg(propertyName, null), new FnArg(propertyValue, null)]);
-    }, WebWorkerRenderer.prototype.setElementClass = function(renderElement, className, isAdd) {
-      this._runOnService("setElementClass", [new FnArg(renderElement, RenderStoreObject), new FnArg(className, null), new FnArg(isAdd, null)]);
-    }, WebWorkerRenderer.prototype.setElementStyle = function(renderElement, styleName, styleValue) {
-      this._runOnService("setElementStyle", [new FnArg(renderElement, RenderStoreObject), new FnArg(styleName, null), new FnArg(styleValue, null)]);
-    }, WebWorkerRenderer.prototype.invokeElementMethod = function(renderElement, methodName, args) {
-      this._runOnService("invokeElementMethod", [new FnArg(renderElement, RenderStoreObject), new FnArg(methodName, null), new FnArg(args, null)]);
-    }, WebWorkerRenderer.prototype.setText = function(renderNode, text) {
-      this._runOnService("setText", [new FnArg(renderNode, RenderStoreObject), new FnArg(text, null)]);
-    }, WebWorkerRenderer.prototype.listen = function(renderElement, name, callback) {
-      var _this = this;
-      renderElement.events.listen(name, callback);
-      var unlistenCallbackId = this._rootRenderer.allocateId();
-      return this._runOnService("listen", [new FnArg(renderElement, RenderStoreObject), new FnArg(name, null), new FnArg(unlistenCallbackId, null)]), function() {
-        renderElement.events.unlisten(name, callback), _this._runOnService("listenDone", [new FnArg(unlistenCallbackId, null)]);
-      };
-    }, WebWorkerRenderer.prototype.listenGlobal = function(target, name, callback) {
-      var _this = this;
-      this._rootRenderer.globalEvents.listen(eventNameWithTarget(target, name), callback);
-      var unlistenCallbackId = this._rootRenderer.allocateId();
-      return this._runOnService("listenGlobal", [new FnArg(target, null), new FnArg(name, null), new FnArg(unlistenCallbackId, null)]), function() {
-        _this._rootRenderer.globalEvents.unlisten(eventNameWithTarget(target, name), callback), _this._runOnService("listenDone", [new FnArg(unlistenCallbackId, null)]);
-      };
-    }, WebWorkerRenderer.prototype.animate = function(element, startingStyles, keyframes, duration, delay, easing) {
-      return null;
-    }, WebWorkerRenderer;
-  }(),
-      NamedEventEmitter = function() {
-        function NamedEventEmitter() {}
-        return NamedEventEmitter.prototype._getListeners = function(eventName) {
-          isBlank(this._listeners) && (this._listeners = new Map);
-          var listeners = this._listeners.get(eventName);
-          return isBlank(listeners) && (listeners = [], this._listeners.set(eventName, listeners)), listeners;
-        }, NamedEventEmitter.prototype.listen = function(eventName, callback) {
-          this._getListeners(eventName).push(callback);
-        }, NamedEventEmitter.prototype.unlisten = function(eventName, callback) {
-          ListWrapper.remove(this._getListeners(eventName), callback);
-        }, NamedEventEmitter.prototype.dispatchEvent = function(eventName, event) {
-          for (var listeners = this._getListeners(eventName),
-              i = 0; i < listeners.length; i++)
-            listeners[i](event);
-        }, NamedEventEmitter;
-      }(),
-      WebWorkerRenderNode = function() {
-        function WebWorkerRenderNode() {
-          this.events = new NamedEventEmitter;
-        }
-        return WebWorkerRenderNode;
-      }(),
-      WorkerDomAdapter = function(_super) {
-        function WorkerDomAdapter() {
-          _super.apply(this, arguments);
-        }
-        return __extends(WorkerDomAdapter, _super), WorkerDomAdapter.makeCurrent = function() {
-          setRootDomAdapter(new WorkerDomAdapter);
-        }, WorkerDomAdapter.prototype.logError = function(error) {
-          console.error ? console.error(error) : console.log(error);
-        }, WorkerDomAdapter.prototype.log = function(error) {
-          console.log(error);
-        }, WorkerDomAdapter.prototype.logGroup = function(error) {
-          console.group ? (console.group(error), this.logError(error)) : console.log(error);
-        }, WorkerDomAdapter.prototype.logGroupEnd = function() {
-          console.groupEnd && console.groupEnd();
-        }, WorkerDomAdapter.prototype.hasProperty = function(element, name) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.setProperty = function(el, name, value) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getProperty = function(el, name) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.invoke = function(el, methodName, args) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getXHR = function() {
-          throw "not implemented";
-        }, Object.defineProperty(WorkerDomAdapter.prototype, "attrToPropMap", {
-          get: function() {
-            throw "not implemented";
-          },
-          set: function(value) {
-            throw "not implemented";
-          },
-          enumerable: !0,
-          configurable: !0
-        }), WorkerDomAdapter.prototype.parse = function(templateHtml) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.query = function(selector) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.querySelector = function(el, selector) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.querySelectorAll = function(el, selector) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.on = function(el, evt, listener) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.onAndCancel = function(el, evt, listener) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.dispatchEvent = function(el, evt) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.createMouseEvent = function(eventType) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.createEvent = function(eventType) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.preventDefault = function(evt) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.isPrevented = function(evt) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getInnerHTML = function(el) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getTemplateContent = function(el) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getOuterHTML = function(el) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.nodeName = function(node) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.nodeValue = function(node) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.type = function(node) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.content = function(node) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.firstChild = function(el) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.nextSibling = function(el) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.parentElement = function(el) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.childNodes = function(el) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.childNodesAsList = function(el) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.clearNodes = function(el) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.appendChild = function(el, node) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.removeChild = function(el, node) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.replaceChild = function(el, newNode, oldNode) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.remove = function(el) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.insertBefore = function(el, node) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.insertAllBefore = function(el, nodes) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.insertAfter = function(el, node) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.setInnerHTML = function(el, value) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getText = function(el) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.setText = function(el, value) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getValue = function(el) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.setValue = function(el, value) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getChecked = function(el) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.setChecked = function(el, value) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.createComment = function(text) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.createTemplate = function(html) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.createElement = function(tagName, doc) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.createElementNS = function(ns, tagName, doc) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.createTextNode = function(text, doc) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.createScriptTag = function(attrName, attrValue, doc) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.createStyleElement = function(css, doc) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.createShadowRoot = function(el) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getShadowRoot = function(el) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getHost = function(el) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getDistributedNodes = function(el) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.clone = function(node) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getElementsByClassName = function(element, name) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getElementsByTagName = function(element, name) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.classList = function(element) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.addClass = function(element, className) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.removeClass = function(element, className) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.hasClass = function(element, className) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.setStyle = function(element, styleName, styleValue) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.removeStyle = function(element, styleName) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getStyle = function(element, styleName) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.hasStyle = function(element, styleName, styleValue) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.tagName = function(element) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.attributeMap = function(element) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.hasAttribute = function(element, attribute) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.hasAttributeNS = function(element, ns, attribute) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getAttribute = function(element, attribute) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getAttributeNS = function(element, ns, attribute) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.setAttribute = function(element, name, value) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.setAttributeNS = function(element, ns, name, value) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.removeAttribute = function(element, attribute) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.removeAttributeNS = function(element, ns, attribute) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.templateAwareRoot = function(el) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.createHtmlDocument = function() {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.defaultDoc = function() {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getBoundingClientRect = function(el) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getTitle = function() {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.setTitle = function(newTitle) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.elementMatches = function(n, selector) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.isTemplateElement = function(el) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.isTextNode = function(node) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.isCommentNode = function(node) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.isElementNode = function(node) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.hasShadowRoot = function(node) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.isShadowRoot = function(node) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.importIntoDoc = function(node) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.adoptNode = function(node) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getHref = function(element) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getEventKey = function(event) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.resolveAndSetHref = function(element, baseUrl, href) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.supportsDOMEvents = function() {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.supportsNativeShadowDOM = function() {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getGlobalEventTarget = function(target) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getHistory = function() {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getLocation = function() {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getBaseHref = function() {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.resetBaseElement = function() {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getUserAgent = function() {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.setData = function(element, name, value) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getComputedStyle = function(element) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getData = function(element, name) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.setGlobalVar = function(name, value) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.requestAnimationFrame = function(callback) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.cancelAnimationFrame = function(id) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.performanceNow = function() {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getAnimationPrefix = function() {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.getTransitionEnd = function() {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.supportsAnimation = function() {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.supportsWebAnimation = function() {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.supportsCookies = function() {
-          return !1;
-        }, WorkerDomAdapter.prototype.getCookie = function(name) {
-          throw "not implemented";
-        }, WorkerDomAdapter.prototype.setCookie = function(name, value) {
-          throw "not implemented";
-        }, WorkerDomAdapter;
-      }(DomAdapter),
-      PrintLogger = function() {
-        function PrintLogger() {
-          this.log = print, this.logError = print, this.logGroup = print;
-        }
-        return PrintLogger.prototype.logGroupEnd = function() {}, PrintLogger;
-      }(),
-      WORKER_APP_PLATFORM_MARKER = new _angular_core.OpaqueToken("WorkerAppPlatformMarker"),
-      WORKER_APP_PLATFORM_PROVIDERS = [_angular_core.PLATFORM_COMMON_PROVIDERS, {
-        provide: WORKER_APP_PLATFORM_MARKER,
-        useValue: !0
-      }],
-      WORKER_APP_APPLICATION_PROVIDERS = [_angular_core.APPLICATION_COMMON_PROVIDERS, _angular_common.FORM_PROVIDERS, BROWSER_SANITIZATION_PROVIDERS, Serializer, {
-        provide: ClientMessageBrokerFactory,
-        useClass: ClientMessageBrokerFactory_
-      }, {
-        provide: ServiceMessageBrokerFactory,
-        useClass: ServiceMessageBrokerFactory_
-      }, WebWorkerRootRenderer, {
-        provide: _angular_core.RootRenderer,
-        useExisting: WebWorkerRootRenderer
-      }, {
-        provide: ON_WEB_WORKER,
-        useValue: !0
-      }, RenderStore, {
-        provide: _angular_core.ExceptionHandler,
-        useFactory: _exceptionHandler$2,
-        deps: []
-      }, {
-        provide: MessageBus,
-        useFactory: createMessageBus,
-        deps: [_angular_core.NgZone]
-      }, {
-        provide: _angular_core.APP_INITIALIZER,
-        useValue: setupWebWorker,
-        multi: !0
-      }],
-      _postMessage = {postMessage: function(message, transferrables) {
-          postMessage(message, transferrables);
-        }},
-      __platform_browser_private__ = {
-        DomAdapter: DomAdapter,
-        getDOM: getDOM,
-        setRootDomAdapter: setRootDomAdapter,
-        DomRootRenderer: DomRootRenderer,
-        DomRootRenderer_: DomRootRenderer_,
-        DomSharedStylesHost: DomSharedStylesHost,
-        SharedStylesHost: SharedStylesHost,
-        ELEMENT_PROBE_PROVIDERS: ELEMENT_PROBE_PROVIDERS,
-        DomEventsPlugin: DomEventsPlugin
-      };
-  exports.BrowserPlatformLocation = BrowserPlatformLocation, exports.Title = Title, exports.disableDebugTools = disableDebugTools, exports.enableDebugTools = enableDebugTools, exports.By = By, exports.DOCUMENT = DOCUMENT, exports.EVENT_MANAGER_PLUGINS = EVENT_MANAGER_PLUGINS, exports.EventManager = EventManager, exports.HAMMER_GESTURE_CONFIG = HAMMER_GESTURE_CONFIG, exports.HammerGestureConfig = HammerGestureConfig, exports.DomSanitizationService = DomSanitizationService, exports.SecurityContext = SecurityContext, exports.ClientMessageBroker = ClientMessageBroker, exports.ClientMessageBrokerFactory = ClientMessageBrokerFactory, exports.FnArg = FnArg, exports.UiArguments = UiArguments, exports.ReceivedMessage = ReceivedMessage, exports.ServiceMessageBroker = ServiceMessageBroker, exports.ServiceMessageBrokerFactory = ServiceMessageBrokerFactory, exports.PRIMITIVE = PRIMITIVE, exports.WORKER_APP_LOCATION_PROVIDERS = WORKER_APP_LOCATION_PROVIDERS, exports.WORKER_UI_LOCATION_PROVIDERS = WORKER_UI_LOCATION_PROVIDERS, exports.BROWSER_PLATFORM_PROVIDERS = BROWSER_PLATFORM_PROVIDERS, exports.BROWSER_SANITIZATION_PROVIDERS = BROWSER_SANITIZATION_PROVIDERS, exports.BROWSER_APP_PROVIDERS = BROWSER_APP_PROVIDERS, exports.browserPlatform = browserPlatform, exports.MessageBus = MessageBus, exports.WebWorkerInstance = WebWorkerInstance, exports.WORKER_SCRIPT = WORKER_SCRIPT, exports.WORKER_UI_STARTABLE_MESSAGING_SERVICE = WORKER_UI_STARTABLE_MESSAGING_SERVICE, exports.WORKER_UI_PLATFORM_PROVIDERS = WORKER_UI_PLATFORM_PROVIDERS, exports.WORKER_UI_APPLICATION_PROVIDERS = WORKER_UI_APPLICATION_PROVIDERS, exports.workerUiPlatform = workerUiPlatform, exports.WORKER_APP_PLATFORM_PROVIDERS = WORKER_APP_PLATFORM_PROVIDERS, exports.WORKER_APP_APPLICATION_PROVIDERS = WORKER_APP_APPLICATION_PROVIDERS, exports.workerAppPlatform = workerAppPlatform, exports.__platform_browser_private__ = __platform_browser_private__;
-});
-
-})();
-$__System.registerDynamic("11", ["12"], true, function($__require, exports, module) {
+$__System.registerDynamic("11f", ["3"], true, function($__require, exports, module) {
   "use strict";
   ;
   var define,
       global = this,
       GLOBAL = this;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var Subscription_1 = $__require('12');
-  var SubjectSubscription = (function(_super) {
-    __extends(SubjectSubscription, _super);
-    function SubjectSubscription(subject, observer) {
-      _super.call(this);
-      this.subject = subject;
-      this.observer = observer;
-      this.isUnsubscribed = false;
-    }
-    SubjectSubscription.prototype.unsubscribe = function() {
-      if (this.isUnsubscribed) {
-        return;
-      }
-      this.isUnsubscribed = true;
-      var subject = this.subject;
-      var observers = subject.observers;
-      this.subject = null;
-      if (!observers || observers.length === 0 || subject.isUnsubscribed) {
-        return;
-      }
-      var subscriberIndex = observers.indexOf(this.observer);
-      if (subscriberIndex !== -1) {
-        observers.splice(subscriberIndex, 1);
-      }
-    };
-    return SubjectSubscription;
-  }(Subscription_1.Subscription));
-  exports.SubjectSubscription = SubjectSubscription;
-  return module.exports;
-});
-
-$__System.registerDynamic("13", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  function throwError(e) {
-    throw e;
-  }
-  exports.throwError = throwError;
-  return module.exports;
-});
-
-$__System.registerDynamic("14", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var ObjectUnsubscribedError = (function(_super) {
-    __extends(ObjectUnsubscribedError, _super);
-    function ObjectUnsubscribedError() {
-      _super.call(this, 'object unsubscribed');
-      this.name = 'ObjectUnsubscribedError';
-    }
-    return ObjectUnsubscribedError;
-  }(Error));
-  exports.ObjectUnsubscribedError = ObjectUnsubscribedError;
-  return module.exports;
-});
-
-$__System.registerDynamic("c", ["f", "15", "12", "11", "16", "13", "14"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var Observable_1 = $__require('f');
-  var Subscriber_1 = $__require('15');
-  var Subscription_1 = $__require('12');
-  var SubjectSubscription_1 = $__require('11');
-  var rxSubscriber_1 = $__require('16');
-  var throwError_1 = $__require('13');
-  var ObjectUnsubscribedError_1 = $__require('14');
-  var Subject = (function(_super) {
-    __extends(Subject, _super);
-    function Subject(destination, source) {
-      _super.call(this);
-      this.destination = destination;
-      this.source = source;
-      this.observers = [];
-      this.isUnsubscribed = false;
-      this.isStopped = false;
-      this.hasErrored = false;
-      this.dispatching = false;
-      this.hasCompleted = false;
-      this.source = source;
-    }
-    Subject.prototype.lift = function(operator) {
-      var subject = new Subject(this.destination || this, this);
-      subject.operator = operator;
-      return subject;
-    };
-    Subject.prototype.add = function(subscription) {
-      return Subscription_1.Subscription.prototype.add.call(this, subscription);
-    };
-    Subject.prototype.remove = function(subscription) {
-      Subscription_1.Subscription.prototype.remove.call(this, subscription);
-    };
-    Subject.prototype.unsubscribe = function() {
-      Subscription_1.Subscription.prototype.unsubscribe.call(this);
-    };
-    Subject.prototype._subscribe = function(subscriber) {
-      if (this.source) {
-        return this.source.subscribe(subscriber);
-      } else {
-        if (subscriber.isUnsubscribed) {
-          return;
-        } else if (this.hasErrored) {
-          return subscriber.error(this.errorValue);
-        } else if (this.hasCompleted) {
-          return subscriber.complete();
-        }
-        this.throwIfUnsubscribed();
-        var subscription = new SubjectSubscription_1.SubjectSubscription(this, subscriber);
-        this.observers.push(subscriber);
-        return subscription;
-      }
-    };
-    Subject.prototype._unsubscribe = function() {
-      this.source = null;
-      this.isStopped = true;
-      this.observers = null;
-      this.destination = null;
-    };
-    Subject.prototype.next = function(value) {
-      this.throwIfUnsubscribed();
-      if (this.isStopped) {
-        return;
-      }
-      this.dispatching = true;
-      this._next(value);
-      this.dispatching = false;
-      if (this.hasErrored) {
-        this._error(this.errorValue);
-      } else if (this.hasCompleted) {
-        this._complete();
-      }
-    };
-    Subject.prototype.error = function(err) {
-      this.throwIfUnsubscribed();
-      if (this.isStopped) {
-        return;
-      }
-      this.isStopped = true;
-      this.hasErrored = true;
-      this.errorValue = err;
-      if (this.dispatching) {
-        return;
-      }
-      this._error(err);
-    };
-    Subject.prototype.complete = function() {
-      this.throwIfUnsubscribed();
-      if (this.isStopped) {
-        return;
-      }
-      this.isStopped = true;
-      this.hasCompleted = true;
-      if (this.dispatching) {
-        return;
-      }
-      this._complete();
-    };
-    Subject.prototype.asObservable = function() {
-      var observable = new SubjectObservable(this);
-      return observable;
-    };
-    Subject.prototype._next = function(value) {
-      if (this.destination) {
-        this.destination.next(value);
-      } else {
-        this._finalNext(value);
-      }
-    };
-    Subject.prototype._finalNext = function(value) {
-      var index = -1;
-      var observers = this.observers.slice(0);
-      var len = observers.length;
-      while (++index < len) {
-        observers[index].next(value);
-      }
-    };
-    Subject.prototype._error = function(err) {
-      if (this.destination) {
-        this.destination.error(err);
-      } else {
-        this._finalError(err);
-      }
-    };
-    Subject.prototype._finalError = function(err) {
-      var index = -1;
-      var observers = this.observers;
-      this.observers = null;
-      this.isUnsubscribed = true;
-      if (observers) {
-        var len = observers.length;
-        while (++index < len) {
-          observers[index].error(err);
-        }
-      }
-      this.isUnsubscribed = false;
-      this.unsubscribe();
-    };
-    Subject.prototype._complete = function() {
-      if (this.destination) {
-        this.destination.complete();
-      } else {
-        this._finalComplete();
-      }
-    };
-    Subject.prototype._finalComplete = function() {
-      var index = -1;
-      var observers = this.observers;
-      this.observers = null;
-      this.isUnsubscribed = true;
-      if (observers) {
-        var len = observers.length;
-        while (++index < len) {
-          observers[index].complete();
-        }
-      }
-      this.isUnsubscribed = false;
-      this.unsubscribe();
-    };
-    Subject.prototype.throwIfUnsubscribed = function() {
-      if (this.isUnsubscribed) {
-        throwError_1.throwError(new ObjectUnsubscribedError_1.ObjectUnsubscribedError());
-      }
-    };
-    Subject.prototype[rxSubscriber_1.$$rxSubscriber] = function() {
-      return new Subscriber_1.Subscriber(this);
-    };
-    Subject.create = function(destination, source) {
-      return new Subject(destination, source);
-    };
-    return Subject;
-  }(Observable_1.Observable));
-  exports.Subject = Subject;
-  var SubjectObservable = (function(_super) {
-    __extends(SubjectObservable, _super);
-    function SubjectObservable(source) {
-      _super.call(this);
-      this.source = source;
-    }
-    return SubjectObservable;
-  }(Observable_1.Observable));
-  return module.exports;
-});
-
-$__System.registerDynamic("d", ["17", "f"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var root_1 = $__require('17');
-  var Observable_1 = $__require('f');
-  var PromiseObservable = (function(_super) {
-    __extends(PromiseObservable, _super);
-    function PromiseObservable(promise, scheduler) {
-      if (scheduler === void 0) {
-        scheduler = null;
-      }
-      _super.call(this);
-      this.promise = promise;
-      this.scheduler = scheduler;
-    }
-    PromiseObservable.create = function(promise, scheduler) {
-      if (scheduler === void 0) {
-        scheduler = null;
-      }
-      return new PromiseObservable(promise, scheduler);
-    };
-    PromiseObservable.prototype._subscribe = function(subscriber) {
-      var _this = this;
-      var promise = this.promise;
-      var scheduler = this.scheduler;
-      if (scheduler == null) {
-        if (this._isScalar) {
-          if (!subscriber.isUnsubscribed) {
-            subscriber.next(this.value);
-            subscriber.complete();
-          }
-        } else {
-          promise.then(function(value) {
-            _this.value = value;
-            _this._isScalar = true;
-            if (!subscriber.isUnsubscribed) {
-              subscriber.next(value);
-              subscriber.complete();
-            }
-          }, function(err) {
-            if (!subscriber.isUnsubscribed) {
-              subscriber.error(err);
-            }
-          }).then(null, function(err) {
-            root_1.root.setTimeout(function() {
-              throw err;
-            });
-          });
-        }
-      } else {
-        if (this._isScalar) {
-          if (!subscriber.isUnsubscribed) {
-            return scheduler.schedule(dispatchNext, 0, {
-              value: this.value,
-              subscriber: subscriber
-            });
-          }
-        } else {
-          promise.then(function(value) {
-            _this.value = value;
-            _this._isScalar = true;
-            if (!subscriber.isUnsubscribed) {
-              subscriber.add(scheduler.schedule(dispatchNext, 0, {
-                value: value,
-                subscriber: subscriber
-              }));
-            }
-          }, function(err) {
-            if (!subscriber.isUnsubscribed) {
-              subscriber.add(scheduler.schedule(dispatchError, 0, {
-                err: err,
-                subscriber: subscriber
-              }));
-            }
-          }).then(null, function(err) {
-            root_1.root.setTimeout(function() {
-              throw err;
-            });
-          });
-        }
-      }
-    };
-    return PromiseObservable;
-  }(Observable_1.Observable));
-  exports.PromiseObservable = PromiseObservable;
-  function dispatchNext(arg) {
-    var value = arg.value,
-        subscriber = arg.subscriber;
-    if (!subscriber.isUnsubscribed) {
-      subscriber.next(value);
-      subscriber.complete();
-    }
-  }
-  function dispatchError(arg) {
-    var err = arg.err,
-        subscriber = arg.subscriber;
-    if (!subscriber.isUnsubscribed) {
-      subscriber.error(err);
-    }
-  }
-  return module.exports;
-});
-
-$__System.registerDynamic("e", ["17"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var root_1 = $__require('17');
-  function toPromise(PromiseCtor) {
-    var _this = this;
-    if (!PromiseCtor) {
-      if (root_1.root.Rx && root_1.root.Rx.config && root_1.root.Rx.config.Promise) {
-        PromiseCtor = root_1.root.Rx.config.Promise;
-      } else if (root_1.root.Promise) {
-        PromiseCtor = root_1.root.Promise;
-      }
-    }
-    if (!PromiseCtor) {
-      throw new Error('no Promise impl found');
-    }
-    return new PromiseCtor(function(resolve, reject) {
-      var value;
-      _this.subscribe(function(x) {
-        return value = x;
-      }, function(err) {
-        return reject(err);
-      }, function() {
-        return resolve(value);
-      });
-    });
-  }
-  exports.toPromise = toPromise;
-  return module.exports;
-});
-
-$__System.registerDynamic("18", ["17"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var root_1 = $__require('17');
-  var Symbol = root_1.root.Symbol;
-  if (typeof Symbol === 'function') {
-    if (Symbol.observable) {
-      exports.$$observable = Symbol.observable;
-    } else {
-      if (typeof Symbol.for === 'function') {
-        exports.$$observable = Symbol.for('observable');
-      } else {
-        exports.$$observable = Symbol('observable');
-      }
-      Symbol.observable = exports.$$observable;
-    }
-  } else {
-    exports.$$observable = '@@observable';
-  }
-  return module.exports;
-});
-
-$__System.registerDynamic("19", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  exports.isArray = Array.isArray || (function(x) {
-    return x && typeof x.length === 'number';
-  });
-  return module.exports;
-});
-
-$__System.registerDynamic("1a", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  function isObject(x) {
-    return x != null && typeof x === 'object';
-  }
-  exports.isObject = isObject;
-  return module.exports;
-});
-
-$__System.registerDynamic("1b", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  function isFunction(x) {
-    return typeof x === 'function';
-  }
-  exports.isFunction = isFunction;
-  return module.exports;
-});
-
-$__System.registerDynamic("1c", ["1d"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var errorObject_1 = $__require('1d');
-  var tryCatchTarget;
-  function tryCatcher() {
-    try {
-      return tryCatchTarget.apply(this, arguments);
-    } catch (e) {
-      errorObject_1.errorObject.e = e;
-      return errorObject_1.errorObject;
-    }
-  }
-  function tryCatch(fn) {
-    tryCatchTarget = fn;
-    return tryCatcher;
-  }
-  exports.tryCatch = tryCatch;
-  ;
-  return module.exports;
-});
-
-$__System.registerDynamic("1d", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  exports.errorObject = {e: {}};
-  return module.exports;
-});
-
-$__System.registerDynamic("1e", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var UnsubscriptionError = (function(_super) {
-    __extends(UnsubscriptionError, _super);
-    function UnsubscriptionError(errors) {
-      _super.call(this);
-      this.errors = errors;
-      this.name = 'UnsubscriptionError';
-      this.message = errors ? errors.length + " errors occurred during unsubscription:\n" + errors.map(function(err, i) {
-        return ((i + 1) + ") " + err.toString());
-      }).join('\n') : '';
-    }
-    return UnsubscriptionError;
-  }(Error));
-  exports.UnsubscriptionError = UnsubscriptionError;
-  return module.exports;
-});
-
-$__System.registerDynamic("12", ["19", "1a", "1b", "1c", "1d", "1e"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var isArray_1 = $__require('19');
-  var isObject_1 = $__require('1a');
-  var isFunction_1 = $__require('1b');
-  var tryCatch_1 = $__require('1c');
-  var errorObject_1 = $__require('1d');
-  var UnsubscriptionError_1 = $__require('1e');
-  var Subscription = (function() {
-    function Subscription(unsubscribe) {
-      this.isUnsubscribed = false;
-      if (unsubscribe) {
-        this._unsubscribe = unsubscribe;
-      }
-    }
-    Subscription.prototype.unsubscribe = function() {
-      var hasErrors = false;
-      var errors;
-      if (this.isUnsubscribed) {
-        return;
-      }
-      this.isUnsubscribed = true;
-      var _a = this,
-          _unsubscribe = _a._unsubscribe,
-          _subscriptions = _a._subscriptions;
-      this._subscriptions = null;
-      if (isFunction_1.isFunction(_unsubscribe)) {
-        var trial = tryCatch_1.tryCatch(_unsubscribe).call(this);
-        if (trial === errorObject_1.errorObject) {
-          hasErrors = true;
-          (errors = errors || []).push(errorObject_1.errorObject.e);
-        }
-      }
-      if (isArray_1.isArray(_subscriptions)) {
-        var index = -1;
-        var len = _subscriptions.length;
-        while (++index < len) {
-          var sub = _subscriptions[index];
-          if (isObject_1.isObject(sub)) {
-            var trial = tryCatch_1.tryCatch(sub.unsubscribe).call(sub);
-            if (trial === errorObject_1.errorObject) {
-              hasErrors = true;
-              errors = errors || [];
-              var err = errorObject_1.errorObject.e;
-              if (err instanceof UnsubscriptionError_1.UnsubscriptionError) {
-                errors = errors.concat(err.errors);
-              } else {
-                errors.push(err);
-              }
-            }
-          }
-        }
-      }
-      if (hasErrors) {
-        throw new UnsubscriptionError_1.UnsubscriptionError(errors);
-      }
-    };
-    Subscription.prototype.add = function(teardown) {
-      if (!teardown || (teardown === this) || (teardown === Subscription.EMPTY)) {
-        return;
-      }
-      var sub = teardown;
-      switch (typeof teardown) {
-        case 'function':
-          sub = new Subscription(teardown);
-        case 'object':
-          if (sub.isUnsubscribed || typeof sub.unsubscribe !== 'function') {
-            break;
-          } else if (this.isUnsubscribed) {
-            sub.unsubscribe();
-          } else {
-            (this._subscriptions || (this._subscriptions = [])).push(sub);
-          }
-          break;
-        default:
-          throw new Error('Unrecognized teardown ' + teardown + ' added to Subscription.');
-      }
-      return sub;
-    };
-    Subscription.prototype.remove = function(subscription) {
-      if (subscription == null || (subscription === this) || (subscription === Subscription.EMPTY)) {
-        return;
-      }
-      var subscriptions = this._subscriptions;
-      if (subscriptions) {
-        var subscriptionIndex = subscriptions.indexOf(subscription);
-        if (subscriptionIndex !== -1) {
-          subscriptions.splice(subscriptionIndex, 1);
-        }
-      }
-    };
-    Subscription.EMPTY = (function(empty) {
-      empty.isUnsubscribed = true;
-      return empty;
-    }(new Subscription()));
-    return Subscription;
-  }());
-  exports.Subscription = Subscription;
-  return module.exports;
-});
-
-$__System.registerDynamic("1f", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  exports.empty = {
-    isUnsubscribed: true,
-    next: function(value) {},
-    error: function(err) {
-      throw err;
-    },
-    complete: function() {}
-  };
-  return module.exports;
-});
-
-$__System.registerDynamic("15", ["1b", "12", "16", "1f"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var __extends = (this && this.__extends) || function(d, b) {
-    for (var p in b)
-      if (b.hasOwnProperty(p))
-        d[p] = b[p];
-    function __() {
-      this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-  };
-  var isFunction_1 = $__require('1b');
-  var Subscription_1 = $__require('12');
-  var rxSubscriber_1 = $__require('16');
-  var Observer_1 = $__require('1f');
-  var Subscriber = (function(_super) {
-    __extends(Subscriber, _super);
-    function Subscriber(destinationOrNext, error, complete) {
-      _super.call(this);
-      this.syncErrorValue = null;
-      this.syncErrorThrown = false;
-      this.syncErrorThrowable = false;
-      this.isStopped = false;
-      switch (arguments.length) {
-        case 0:
-          this.destination = Observer_1.empty;
-          break;
-        case 1:
-          if (!destinationOrNext) {
-            this.destination = Observer_1.empty;
-            break;
-          }
-          if (typeof destinationOrNext === 'object') {
-            if (destinationOrNext instanceof Subscriber) {
-              this.destination = destinationOrNext;
-              this.destination.add(this);
-            } else {
-              this.syncErrorThrowable = true;
-              this.destination = new SafeSubscriber(this, destinationOrNext);
-            }
-            break;
-          }
-        default:
-          this.syncErrorThrowable = true;
-          this.destination = new SafeSubscriber(this, destinationOrNext, error, complete);
-          break;
-      }
-    }
-    Subscriber.create = function(next, error, complete) {
-      var subscriber = new Subscriber(next, error, complete);
-      subscriber.syncErrorThrowable = false;
-      return subscriber;
-    };
-    Subscriber.prototype.next = function(value) {
-      if (!this.isStopped) {
-        this._next(value);
-      }
-    };
-    Subscriber.prototype.error = function(err) {
-      if (!this.isStopped) {
-        this.isStopped = true;
-        this._error(err);
-      }
-    };
-    Subscriber.prototype.complete = function() {
-      if (!this.isStopped) {
-        this.isStopped = true;
-        this._complete();
-      }
-    };
-    Subscriber.prototype.unsubscribe = function() {
-      if (this.isUnsubscribed) {
-        return;
-      }
-      this.isStopped = true;
-      _super.prototype.unsubscribe.call(this);
-    };
-    Subscriber.prototype._next = function(value) {
-      this.destination.next(value);
-    };
-    Subscriber.prototype._error = function(err) {
-      this.destination.error(err);
-      this.unsubscribe();
-    };
-    Subscriber.prototype._complete = function() {
-      this.destination.complete();
-      this.unsubscribe();
-    };
-    Subscriber.prototype[rxSubscriber_1.$$rxSubscriber] = function() {
-      return this;
-    };
-    return Subscriber;
-  }(Subscription_1.Subscription));
-  exports.Subscriber = Subscriber;
-  var SafeSubscriber = (function(_super) {
-    __extends(SafeSubscriber, _super);
-    function SafeSubscriber(_parent, observerOrNext, error, complete) {
-      _super.call(this);
-      this._parent = _parent;
-      var next;
-      var context = this;
-      if (isFunction_1.isFunction(observerOrNext)) {
-        next = observerOrNext;
-      } else if (observerOrNext) {
-        context = observerOrNext;
-        next = observerOrNext.next;
-        error = observerOrNext.error;
-        complete = observerOrNext.complete;
-        if (isFunction_1.isFunction(context.unsubscribe)) {
-          this.add(context.unsubscribe.bind(context));
-        }
-        context.unsubscribe = this.unsubscribe.bind(this);
-      }
-      this._context = context;
-      this._next = next;
-      this._error = error;
-      this._complete = complete;
-    }
-    SafeSubscriber.prototype.next = function(value) {
-      if (!this.isStopped && this._next) {
-        var _parent = this._parent;
-        if (!_parent.syncErrorThrowable) {
-          this.__tryOrUnsub(this._next, value);
-        } else if (this.__tryOrSetError(_parent, this._next, value)) {
-          this.unsubscribe();
-        }
-      }
-    };
-    SafeSubscriber.prototype.error = function(err) {
-      if (!this.isStopped) {
-        var _parent = this._parent;
-        if (this._error) {
-          if (!_parent.syncErrorThrowable) {
-            this.__tryOrUnsub(this._error, err);
-            this.unsubscribe();
-          } else {
-            this.__tryOrSetError(_parent, this._error, err);
-            this.unsubscribe();
-          }
-        } else if (!_parent.syncErrorThrowable) {
-          this.unsubscribe();
-          throw err;
-        } else {
-          _parent.syncErrorValue = err;
-          _parent.syncErrorThrown = true;
-          this.unsubscribe();
-        }
-      }
-    };
-    SafeSubscriber.prototype.complete = function() {
-      if (!this.isStopped) {
-        var _parent = this._parent;
-        if (this._complete) {
-          if (!_parent.syncErrorThrowable) {
-            this.__tryOrUnsub(this._complete);
-            this.unsubscribe();
-          } else {
-            this.__tryOrSetError(_parent, this._complete);
-            this.unsubscribe();
-          }
-        } else {
-          this.unsubscribe();
-        }
-      }
-    };
-    SafeSubscriber.prototype.__tryOrUnsub = function(fn, value) {
-      try {
-        fn.call(this._context, value);
-      } catch (err) {
-        this.unsubscribe();
-        throw err;
-      }
-    };
-    SafeSubscriber.prototype.__tryOrSetError = function(parent, fn, value) {
-      try {
-        fn.call(this._context, value);
-      } catch (err) {
-        parent.syncErrorValue = err;
-        parent.syncErrorThrown = true;
-        return true;
-      }
-      return false;
-    };
-    SafeSubscriber.prototype._unsubscribe = function() {
-      var _parent = this._parent;
-      this._context = null;
-      this._parent = null;
-      _parent.unsubscribe();
-    };
-    return SafeSubscriber;
-  }(Subscriber));
-  return module.exports;
-});
-
-$__System.registerDynamic("17", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var objectTypes = {
-    'boolean': false,
-    'function': true,
-    'object': true,
-    'number': false,
-    'string': false,
-    'undefined': false
-  };
-  exports.root = (objectTypes[typeof self] && self) || (objectTypes[typeof window] && window);
-  var freeExports = objectTypes[typeof exports] && exports && !exports.nodeType && exports;
-  var freeModule = objectTypes[typeof module] && module && !module.nodeType && module;
-  var freeGlobal = objectTypes[typeof global] && global;
-  if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal)) {
-    exports.root = freeGlobal;
-  }
-  return module.exports;
-});
-
-$__System.registerDynamic("16", ["17"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var root_1 = $__require('17');
-  var Symbol = root_1.root.Symbol;
-  exports.$$rxSubscriber = (typeof Symbol === 'function' && typeof Symbol.for === 'function') ? Symbol.for('rxSubscriber') : '@@rxSubscriber';
-  return module.exports;
-});
-
-$__System.registerDynamic("20", ["15", "16"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var Subscriber_1 = $__require('15');
-  var rxSubscriber_1 = $__require('16');
-  function toSubscriber(nextOrObserver, error, complete) {
-    if (nextOrObserver && typeof nextOrObserver === 'object') {
-      if (nextOrObserver instanceof Subscriber_1.Subscriber) {
-        return nextOrObserver;
-      } else if (typeof nextOrObserver[rxSubscriber_1.$$rxSubscriber] === 'function') {
-        return nextOrObserver[rxSubscriber_1.$$rxSubscriber]();
-      }
-    }
-    return new Subscriber_1.Subscriber(nextOrObserver, error, complete);
-  }
-  exports.toSubscriber = toSubscriber;
-  return module.exports;
-});
-
-$__System.registerDynamic("f", ["17", "18", "20"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var define,
-      global = this,
-      GLOBAL = this;
-  var root_1 = $__require('17');
-  var observable_1 = $__require('18');
-  var toSubscriber_1 = $__require('20');
-  var Observable = (function() {
-    function Observable(subscribe) {
-      this._isScalar = false;
-      if (subscribe) {
-        this._subscribe = subscribe;
-      }
-    }
-    Observable.prototype.lift = function(operator) {
-      var observable = new Observable();
-      observable.source = this;
-      observable.operator = operator;
-      return observable;
-    };
-    Observable.prototype.subscribe = function(observerOrNext, error, complete) {
-      var operator = this.operator;
-      var sink = toSubscriber_1.toSubscriber(observerOrNext, error, complete);
-      sink.add(operator ? operator.call(sink, this) : this._subscribe(sink));
-      if (sink.syncErrorThrowable) {
-        sink.syncErrorThrowable = false;
-        if (sink.syncErrorThrown) {
-          throw sink.syncErrorValue;
-        }
-      }
-      return sink;
-    };
-    Observable.prototype.forEach = function(next, PromiseCtor) {
-      var _this = this;
-      if (!PromiseCtor) {
-        if (root_1.root.Rx && root_1.root.Rx.config && root_1.root.Rx.config.Promise) {
-          PromiseCtor = root_1.root.Rx.config.Promise;
-        } else if (root_1.root.Promise) {
-          PromiseCtor = root_1.root.Promise;
-        }
-      }
-      if (!PromiseCtor) {
-        throw new Error('no Promise impl found');
-      }
-      return new PromiseCtor(function(resolve, reject) {
-        var subscription = _this.subscribe(function(value) {
-          if (subscription) {
-            try {
-              next(value);
-            } catch (err) {
-              reject(err);
-              subscription.unsubscribe();
-            }
-          } else {
-            next(value);
-          }
-        }, reject, resolve);
-      });
-    };
-    Observable.prototype._subscribe = function(subscriber) {
-      return this.source.subscribe(subscriber);
-    };
-    Observable.prototype[observable_1.$$observable] = function() {
-      return this;
-    };
-    Observable.create = function(subscribe) {
-      return new Observable(subscribe);
-    };
-    return Observable;
-  }());
-  exports.Observable = Observable;
-  return module.exports;
-});
-
-(function() {
-var define = $__System.amdDefine;
-var __extends = this && this.__extends || function(d, b) {
-  function __() {
-    this.constructor = d;
-  }
-  for (var p in b)
-    b.hasOwnProperty(p) && (d[p] = b[p]);
-  d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, new __);
-};
-!function(global, factory) {
-  "object" == typeof exports && "undefined" != typeof module ? factory(exports, require("@angular/common"), require("@angular/compiler"), require("@angular/core"), require("@angular/platform-browser"), require("rxjs/Subject"), require("rxjs/observable/PromiseObservable"), require("rxjs/operator/toPromise"), require("rxjs/Observable")) : "function" == typeof define && define.amd ? define("21", ["exports", "10", "b", "3", "6", "c", "d", "e", "f"], factory) : factory((global.ng = global.ng || {}, global.ng.platformBrowserDynamic = global.ng.platformBrowserDynamic || {}), global.ng.common, global.ng.compiler, global.ng.core, global.ng.platformBrowser, global.Rx, global.Rx, global.Rx.Observable.prototype, global.Rx);
-}(this, function(exports, _angular_common, _angular_compiler, _angular_core, _angular_platformBrowser, rxjs_Subject, rxjs_observable_PromiseObservable, rxjs_operator_toPromise, rxjs_Observable) {
-  "use strict";
-  function isPresent(obj) {
-    return void 0 !== obj && null !== obj;
-  }
-  function isBlank(obj) {
-    return void 0 === obj || null === obj;
-  }
-  function isArray(obj) {
-    return Array.isArray(obj);
-  }
-  function _flattenArray(source, target) {
-    if (isPresent(source))
-      for (var i = 0; i < source.length; i++) {
-        var item = source[i];
-        isArray(item) ? _flattenArray(item, target) : target.push(item);
-      }
-    return target;
-  }
-  function bootstrap(appComponentType, customProviders) {
-    reflector.reflectionCapabilities = new ReflectionCapabilities;
-    var providers = [_angular_platformBrowser.BROWSER_APP_PROVIDERS, BROWSER_APP_COMPILER_PROVIDERS, isPresent(customProviders) ? customProviders : []],
-        appInjector = _angular_core.ReflectiveInjector.resolveAndCreate(providers, _angular_platformBrowser.browserPlatform().injector);
-    return _angular_core.coreLoadAndBootstrap(appComponentType, appInjector);
-  }
-  function bootstrapWorkerUi(workerScriptUri, customProviders) {
-    var app = _angular_core.ReflectiveInjector.resolveAndCreate([_angular_platformBrowser.WORKER_UI_APPLICATION_PROVIDERS, BROWSER_APP_COMPILER_PROVIDERS, {
-      provide: _angular_platformBrowser.WORKER_SCRIPT,
-      useValue: workerScriptUri
-    }, isPresent(customProviders) ? customProviders : []], _angular_platformBrowser.workerUiPlatform().injector);
-    return PromiseWrapper.resolve(app.get(_angular_core.ApplicationRef));
-  }
-  function bootstrapWorkerApp(appComponentType, customProviders) {
-    var appInjector = _angular_core.ReflectiveInjector.resolveAndCreate([_angular_platformBrowser.WORKER_APP_APPLICATION_PROVIDERS, WORKER_APP_COMPILER_PROVIDERS, isPresent(customProviders) ? customProviders : []], _angular_platformBrowser.workerAppPlatform().injector);
-    return _angular_core.coreLoadAndBootstrap(appComponentType, appInjector);
-  }
-  var globalScope,
-      ReflectionCapabilities = _angular_core.__core_private__.ReflectionCapabilities,
-      reflector = _angular_core.__core_private__.reflector;
-  globalScope = "undefined" == typeof window ? "undefined" != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope ? self : global : window;
-  var global$1 = globalScope;
-  global$1.assert = function(condition) {};
-  var PromiseCompleter = function() {
-    function PromiseCompleter() {
-      var _this = this;
-      this.promise = new Promise(function(res, rej) {
-        _this.resolve = res, _this.reject = rej;
-      });
-    }
-    return PromiseCompleter;
-  }(),
-      PromiseWrapper = function() {
-        function PromiseWrapper() {}
-        return PromiseWrapper.resolve = function(obj) {
-          return Promise.resolve(obj);
-        }, PromiseWrapper.reject = function(obj, _) {
-          return Promise.reject(obj);
-        }, PromiseWrapper.catchError = function(promise, onError) {
-          return promise.catch(onError);
-        }, PromiseWrapper.all = function(promises) {
-          return 0 == promises.length ? Promise.resolve([]) : Promise.all(promises);
-        }, PromiseWrapper.then = function(promise, success, rejection) {
-          return promise.then(success, rejection);
-        }, PromiseWrapper.wrap = function(computation) {
-          return new Promise(function(res, rej) {
-            try {
-              res(computation());
-            } catch (e) {
-              rej(e);
-            }
-          });
-        }, PromiseWrapper.scheduleMicrotask = function(computation) {
-          PromiseWrapper.then(PromiseWrapper.resolve(null), computation, function(_) {});
-        }, PromiseWrapper.completer = function() {
-          return new PromiseCompleter;
-        }, PromiseWrapper;
-      }(),
-      Map$1 = global$1.Map,
-      Set = global$1.Set,
-      ListWrapper = (function() {
-        try {
-          if (1 === new Map$1([[1, 2]]).size)
-            return function(pairs) {
-              return new Map$1(pairs);
-            };
-        } catch (e) {}
-        return function(pairs) {
-          for (var map = new Map$1,
-              i = 0; i < pairs.length; i++) {
-            var pair = pairs[i];
-            map.set(pair[0], pair[1]);
-          }
-          return map;
-        };
-      }(), function() {
-        try {
-          if (new Map$1(new Map$1))
-            return function(m) {
-              return new Map$1(m);
-            };
-        } catch (e) {}
-        return function(m) {
-          var map = new Map$1;
-          return m.forEach(function(v, k) {
-            map.set(k, v);
-          }), map;
-        };
-      }(), function() {
-        return (new Map$1).keys().next ? function(m) {
-          for (var k,
-              keyIterator = m.keys(); !(k = keyIterator.next()).done; )
-            m.set(k.value, null);
-        } : function(m) {
-          m.forEach(function(v, k) {
-            m.set(k, null);
-          });
-        };
-      }(), function() {
-        try {
-          if ((new Map$1).values().next)
-            return function(m, getValues) {
-              return getValues ? Array.from(m.values()) : Array.from(m.keys());
-            };
-        } catch (e) {}
-        return function(m, getValues) {
-          var res = ListWrapper.createFixedSize(m.size),
-              i = 0;
-          return m.forEach(function(v, k) {
-            res[i] = getValues ? v : k, i++;
-          }), res;
-        };
-      }(), function() {
-        function ListWrapper() {}
-        return ListWrapper.createFixedSize = function(size) {
-          return new Array(size);
-        }, ListWrapper.createGrowableSize = function(size) {
-          return new Array(size);
-        }, ListWrapper.clone = function(array) {
-          return array.slice(0);
-        }, ListWrapper.forEachWithIndex = function(array, fn) {
-          for (var i = 0; i < array.length; i++)
-            fn(array[i], i);
-        }, ListWrapper.first = function(array) {
-          return array ? array[0] : null;
-        }, ListWrapper.last = function(array) {
-          return array && 0 != array.length ? array[array.length - 1] : null;
-        }, ListWrapper.indexOf = function(array, value, startIndex) {
-          return void 0 === startIndex && (startIndex = 0), array.indexOf(value, startIndex);
-        }, ListWrapper.contains = function(list, el) {
-          return list.indexOf(el) !== -1;
-        }, ListWrapper.reversed = function(array) {
-          var a = ListWrapper.clone(array);
-          return a.reverse();
-        }, ListWrapper.concat = function(a, b) {
-          return a.concat(b);
-        }, ListWrapper.insert = function(list, index, value) {
-          list.splice(index, 0, value);
-        }, ListWrapper.removeAt = function(list, index) {
-          var res = list[index];
-          return list.splice(index, 1), res;
-        }, ListWrapper.removeAll = function(list, items) {
-          for (var i = 0; i < items.length; ++i) {
-            var index = list.indexOf(items[i]);
-            list.splice(index, 1);
-          }
-        }, ListWrapper.remove = function(list, el) {
-          var index = list.indexOf(el);
-          return index > -1 && (list.splice(index, 1), !0);
-        }, ListWrapper.clear = function(list) {
-          list.length = 0;
-        }, ListWrapper.isEmpty = function(list) {
-          return 0 == list.length;
-        }, ListWrapper.fill = function(list, value, start, end) {
-          void 0 === start && (start = 0), void 0 === end && (end = null), list.fill(value, start, null === end ? list.length : end);
-        }, ListWrapper.equals = function(a, b) {
-          if (a.length != b.length)
-            return !1;
-          for (var i = 0; i < a.length; ++i)
-            if (a[i] !== b[i])
-              return !1;
-          return !0;
-        }, ListWrapper.slice = function(l, from, to) {
-          return void 0 === from && (from = 0), void 0 === to && (to = null), l.slice(from, null === to ? void 0 : to);
-        }, ListWrapper.splice = function(l, from, length) {
-          return l.splice(from, length);
-        }, ListWrapper.sort = function(l, compareFn) {
-          isPresent(compareFn) ? l.sort(compareFn) : l.sort();
-        }, ListWrapper.toString = function(l) {
-          return l.toString();
-        }, ListWrapper.toJSON = function(l) {
-          return JSON.stringify(l);
-        }, ListWrapper.maximum = function(list, predicate) {
-          if (0 == list.length)
-            return null;
-          for (var solution = null,
-              maxValue = -(1 / 0),
-              index = 0; index < list.length; index++) {
-            var candidate = list[index];
-            if (!isBlank(candidate)) {
-              var candidateValue = predicate(candidate);
-              candidateValue > maxValue && (solution = candidate, maxValue = candidateValue);
-            }
-          }
-          return solution;
-        }, ListWrapper.flatten = function(list) {
-          var target = [];
-          return _flattenArray(list, target), target;
-        }, ListWrapper.addAll = function(list, source) {
-          for (var i = 0; i < source.length; i++)
-            list.push(source[i]);
-        }, ListWrapper;
-      }()),
-      BaseException = (function() {
-        var test = new Set([1, 2, 3]);
-        return 3 === test.size ? function(lst) {
-          return new Set(lst);
-        } : function(lst) {
-          var res = new Set(lst);
-          if (res.size !== lst.length)
-            for (var i = 0; i < lst.length; i++)
-              res.add(lst[i]);
-          return res;
-        };
-      }(), function(_super) {
-        function BaseException(message) {
-          void 0 === message && (message = "--"), _super.call(this, message), this.message = message, this.stack = new Error(message).stack;
-        }
-        return __extends(BaseException, _super), BaseException.prototype.toString = function() {
-          return this.message;
-        }, BaseException;
-      }(Error)),
-      CachedXHR = function(_super) {
-        function CachedXHR() {
-          if (_super.call(this), this._cache = global$1.$templateCache, null == this._cache)
-            throw new BaseException("CachedXHR: Template cache was not found in $templateCache.");
-        }
-        return __extends(CachedXHR, _super), CachedXHR.prototype.get = function(url) {
-          return this._cache.hasOwnProperty(url) ? PromiseWrapper.resolve(this._cache[url]) : PromiseWrapper.reject("CachedXHR: Did not find cached template for " + url, null);
-        }, CachedXHR;
-      }(_angular_compiler.XHR),
-      XHRImpl = function(_super) {
-        function XHRImpl() {
-          _super.apply(this, arguments);
-        }
-        return __extends(XHRImpl, _super), XHRImpl.prototype.get = function(url) {
-          var completer = PromiseWrapper.completer(),
-              xhr = new XMLHttpRequest;
-          return xhr.open("GET", url, !0), xhr.responseType = "text", xhr.onload = function() {
-            var response = isPresent(xhr.response) ? xhr.response : xhr.responseText,
-                status = 1223 === xhr.status ? 204 : xhr.status;
-            0 === status && (status = response ? 200 : 0), 200 <= status && status <= 300 ? completer.resolve(response) : completer.reject("Failed to load " + url, null);
-          }, xhr.onerror = function() {
-            completer.reject("Failed to load " + url, null);
-          }, xhr.send(), completer.promise;
-        }, XHRImpl;
-      }(_angular_compiler.XHR),
-      BROWSER_APP_COMPILER_PROVIDERS = [_angular_compiler.COMPILER_PROVIDERS, {
-        provide: _angular_compiler.CompilerConfig,
-        useFactory: function(platformDirectives, platformPipes) {
-          return new _angular_compiler.CompilerConfig({
-            platformDirectives: platformDirectives,
-            platformPipes: platformPipes
-          });
-        },
-        deps: [_angular_core.PLATFORM_DIRECTIVES, _angular_core.PLATFORM_PIPES]
-      }, {
-        provide: _angular_compiler.XHR,
-        useClass: XHRImpl
-      }, {
-        provide: _angular_core.PLATFORM_DIRECTIVES,
-        useValue: _angular_common.COMMON_DIRECTIVES,
-        multi: !0
-      }, {
-        provide: _angular_core.PLATFORM_PIPES,
-        useValue: _angular_common.COMMON_PIPES,
-        multi: !0
-      }],
-      CACHED_TEMPLATE_PROVIDER = [{
-        provide: _angular_compiler.XHR,
-        useClass: CachedXHR
-      }],
-      WORKER_APP_COMPILER_PROVIDERS = [_angular_compiler.COMPILER_PROVIDERS, {
-        provide: _angular_compiler.CompilerConfig,
-        useFactory: function(platformDirectives, platformPipes) {
-          return new _angular_compiler.CompilerConfig({
-            platformDirectives: platformDirectives,
-            platformPipes: platformPipes
-          });
-        },
-        deps: [_angular_core.PLATFORM_DIRECTIVES, _angular_core.PLATFORM_PIPES]
-      }, {
-        provide: _angular_compiler.XHR,
-        useClass: XHRImpl
-      }, {
-        provide: _angular_core.PLATFORM_DIRECTIVES,
-        useValue: _angular_common.COMMON_DIRECTIVES,
-        multi: !0
-      }, {
-        provide: _angular_core.PLATFORM_PIPES,
-        useValue: _angular_common.COMMON_PIPES,
-        multi: !0
-      }];
-  exports.BROWSER_APP_COMPILER_PROVIDERS = BROWSER_APP_COMPILER_PROVIDERS, exports.CACHED_TEMPLATE_PROVIDER = CACHED_TEMPLATE_PROVIDER, exports.bootstrap = bootstrap, exports.bootstrapWorkerUi = bootstrapWorkerUi, exports.bootstrapWorkerApp = bootstrapWorkerApp;
-});
-
-})();
-$__System.register("1", ["3", "a", "21"], function(exports_1, context_1) {
-  "use strict";
-  var __moduleName = context_1 && context_1.id;
   var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
     var c = arguments.length,
         r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
@@ -23284,100 +33670,189 @@ $__System.register("1", ["3", "a", "21"], function(exports_1, context_1) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
       return Reflect.metadata(k, v);
   };
-  var core_1,
-      notifications_1,
-      platform_browser_dynamic_1;
-  var AppComponent;
-  return {
-    setters: [function(core_1_1) {
-      core_1 = core_1_1;
-    }, function(notifications_1_1) {
-      notifications_1 = notifications_1_1;
-    }, function(platform_browser_dynamic_1_1) {
-      platform_browser_dynamic_1 = platform_browser_dynamic_1_1;
-    }],
-    execute: function() {
-      AppComponent = (function() {
-        function AppComponent(_service) {
-          this._service = _service;
-          this.options = {
-            timeOut: 5000,
-            lastOnBottom: true,
-            clickToClose: true,
-            maxLength: 0,
-            maxStack: 7,
-            showProgressBar: true,
-            pauseOnHover: true,
-            preventDuplicates: false,
-            preventLastDuplicates: false
-          };
-          this.title = 'just a title';
-          this.content = 'just content';
-          this.type = 'success';
-          this.logs = [];
-          this.over = {
-            timeOut: 5000,
-            clickToClose: true,
-            maxLength: 100,
-            showProgressBar: true,
-            pauseOnHover: true
-          };
-        }
-        AppComponent.prototype.create = function() {
-          switch (this.type) {
-            case 'success':
-              this._service.success(this.title, this.content);
-              break;
-            case 'alert':
-              this._service.alert(this.title, this.content);
-              break;
-            case 'error':
-              this._service.error(this.title, this.content);
-              break;
-            case 'info':
-              this._service.info(this.title, this.content);
-              break;
-            case 'html':
-              this._service.html(this.content, 'bare');
-              break;
-            case 'bare':
-              this._service.bare(this.title, this.content);
-              break;
-          }
-        };
-        AppComponent.prototype.removeAll = function() {
-          this._service.remove();
-        };
-        AppComponent.prototype.override = function() {
-          this._service.set({
-            title: 'Override',
-            content: 'This notification has overridden options',
-            type: 'alert',
-            override: {
-              timeOut: this.over.timeOut,
-              clickToClose: this.over.clickToClose,
-              maxLength: this.over.maxLength,
-              showProgressBar: this.over.showProgressBar,
-              pauseOnHover: this.over.pauseOnHover
-            }
-          }, true);
-        };
-        AppComponent.prototype.loger = function(event) {
-          this.logs.push(event);
-        };
-        AppComponent = __decorate([core_1.Component({
-          moduleId: module.id,
-          selector: 'app',
-          template: '<simple-notifications [options]="options" (onCreate)="loger($event)" (onDestroy)="loger($event)"></simple-notifications><div class="container"><div class="row"><h1 class="center">Angular2 Notifications Library</h1><p class="center sub">A light and easy to use notifications library for Angular 2.</p></div><div class="row"><div class="columns six"><div class="row"><h3>Create a Notification</h3><p class="sub">Notifications created using this form will use the standard settings set in the component.</p><pre><code>\r\n                    public options = {\r\n                    timeOut: 5000,\r\n                    lastOnBottom: true,\r\n                    clickToClose: true,\r\n                    maxLength: 0,\r\n                    maxStack: 7,\r\n                    showProgressBar: true,\r\n                    pauseOnHover: true\r\n                    };\r\n                </code></pre><form (ngSubmit)="create()"><div class="row"><label for="type">Type</label><select class="u-full-width" [(ngModel)]="type" id="type"><option value="success" selected>Success</option><option value="error">Error</option><option value="alert">Alert</option><option value="info">Info</option><option value="bare">Bare</option><option value="html">HTML</option></select></div><div class="row" *ngIf="type != \'html\'"><label for="title">Title</label> <input type="text" id="title" class="u-full-width" [(ngModel)]="title"></div><div class="row"><label for="content" *ngIf="type == \'html\'">HTML</label> <label for="content" *ngIf="type != \'html\'">Message</label> <textarea class="u-full-width" id="content" [(ngModel)]="content"></textarea></div><div class="row"><div class="row"><button class="button-primary" type="submit">Create</button></div></div></form></div><div class="row"><p>You can also clear all notifications from with in the component by calling:</p></div><div class="row"><div class="columns four"><pre><code>this._service.remove()</code></pre></div></div><div class="row"><p>If you pass an id to the remove() method you can remove a single notification.</p></div><div class="row"><button (click)="removeAll()">Clear all notifications</button></div></div><div class="columns six"><div class="row"><h3>With overrides</h3><p class="sub">With this form you can create a notification with custom options.</p><form (ngSubmit)="override()"><div class="row"><div class="six columns"><label for="timeOut">Time Out</label> <input type="number" id="timeOut" class="u-full-width" [(ngModel)]="over.timeOut"></div><div class="six columns"><label for="maxLength">Maximum Length</label> <input type="number" id="maxLength" class="u-full-width" [(ngModel)]="over.maxLength"></div></div><div class="row"><div class="columns four"><input type="checkbox" [(ngModel)]="over.showProgressBar"> <span class="label-body">Show Progress Bar?</span></div><div class="columns four"><input type="checkbox" [(ngModel)]="over.clickToClose"> <span class="label-body">Click To Close?</span></div><div class="columns four"><input type="checkbox" [(ngModel)]="over.pauseOnHover"> <span class="label-body">Pause On Hover?</span></div></div><div class="row"><button class="button-primary" type="submit">Create</button></div></form></div><div class="row"><h3>Logs</h3><p>Keeps Track of all created and destroyed notifications. It uses the onCreate and onDestroy Event Emitters.</p><div class="logs" *ngIf="logs.length > 0"><div class="log" *ngFor="#log of logs" [ngClass]="{\'destroyed\': log.destroyedOn}"><span>{{log.title}}</span> <span>{{log.html}}</span> <span>CreatedOn: {{log.createdOn | date:\'mediumTime\'}}</span> <span *ngIf="log.destroyedOn">DestroyedOn: {{log.destroyedOn | date:\'mediumTime\'}}</span></div></div></div></div></div></div>',
-          directives: [notifications_1.SimpleNotificationsComponent],
-          providers: [notifications_1.NotificationsService]
-        }), __metadata('design:paramtypes', [(typeof(_a = typeof notifications_1.NotificationsService !== 'undefined' && notifications_1.NotificationsService) === 'function' && _a) || Object])], AppComponent);
-        return AppComponent;
-        var _a;
-      }());
-      platform_browser_dynamic_1.bootstrap(AppComponent);
+  var core_1 = $__require('3');
+  var PushNotificationsService = (function() {
+    function PushNotificationsService() {
+      this.canActivate = false;
     }
+    PushNotificationsService.prototype.activate = function() {
+      var _this = this;
+      if (!("Notification" in window))
+        return {
+          success: false,
+          message: "This browser does not support desktop notification."
+        };
+      if (Notification.permission === "granted")
+        return {
+          success: true,
+          message: "Permission already granted."
+        };
+      else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then(function(a) {
+          if (a === "denied")
+            console.log("Permission wasn't granted");
+          else if (a === "default")
+            console.log("The permission request was dismissed.");
+          else
+            _this.createBuffered();
+        });
+      }
+    };
+    PushNotificationsService = __decorate([core_1.Injectable(), __metadata('design:paramtypes', [])], PushNotificationsService);
+    return PushNotificationsService;
+  }());
+  exports.PushNotificationsService = PushNotificationsService;
+  return module.exports;
+});
+
+$__System.registerDynamic("f", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  exports.defaultIcons = {
+    alert: "\n        <svg class=\"simple-notification-svg\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\">\n            <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n            <path d=\"M22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86L22 5.72zM7.88 3.39L6.6 1.86 2 5.71l1.29 1.53 4.59-3.85zM12.5 8H11v6l4.75 2.85.75-1.23-4-2.37V8zM12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z\"/>\n        </svg>",
+    error: "\n        <svg class=\"simple-notification-svg\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\">\n            <path d=\"M0 0h24v24H0V0z\" fill=\"none\"/>\n            <path d=\"M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z\"/>\n        </svg>\n    ",
+    info: "\n        <svg class=\"simple-notification-svg\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\">\n            <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n            <path d=\"M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z\"/>\n        </svg>\n    ",
+    success: "\n        <svg class=\"simple-notification-svg\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\">\n            <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n            <path d=\"M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z\"/>\n        </svg>\n    "
   };
+  return module.exports;
+});
+
+$__System.registerDynamic("120", [], false, function ($__require, $__exports, $__module) {
+  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal($__module.id, null, null);
+
+  (function ($__global) {})(this);
+
+  return _retrieveGlobal();
+});
+$__System.registerDynamic("121", [], false, function ($__require, $__exports, $__module) {
+  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal($__module.id, null, null);
+
+  (function ($__global) {})(this);
+
+  return _retrieveGlobal();
+});
+$__System.registerDynamic("122", ["e", "d", "11f", "f", "120", "121"], true, function($__require, exports, module) {
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  exports.SimpleNotificationsComponent = $__require('e').SimpleNotificationsComponent;
+  exports.NotificationsService = $__require('d').NotificationsService;
+  exports.PushNotificationsService = $__require('11f').PushNotificationsService;
+  exports.Icons = $__require('f').Icons;
+  exports.Options = $__require('120').Options;
+  exports.Notification = $__require('121').Notification;
+  return module.exports;
+});
+
+$__System.registerDynamic("1", ["3", "8", "122"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var define,
+      global = this,
+      GLOBAL = this;
+  var __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var __metadata = (this && this.__metadata) || function(k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(k, v);
+  };
+  var core_1 = $__require('3');
+  var platform_browser_dynamic_1 = $__require('8');
+  var notifications_1 = $__require('122');
+  var AppComponent = (function() {
+    function AppComponent(_service) {
+      this._service = _service;
+      this.options = {
+        timeOut: 5000,
+        lastOnBottom: true,
+        clickToClose: true,
+        maxLength: 0,
+        maxStack: 7,
+        showProgressBar: true,
+        pauseOnHover: true,
+        preventDuplicates: false,
+        preventLastDuplicates: false
+      };
+      this.title = 'just a title';
+      this.content = 'just content';
+      this.type = 'success';
+      this.logs = [];
+      this.over = {
+        timeOut: 5000,
+        clickToClose: true,
+        maxLength: 100,
+        showProgressBar: true,
+        pauseOnHover: true
+      };
+    }
+    AppComponent.prototype.create = function() {
+      switch (this.type) {
+        case 'success':
+          this._service.success(this.title, this.content);
+          break;
+        case 'alert':
+          this._service.alert(this.title, this.content);
+          break;
+        case 'error':
+          this._service.error(this.title, this.content);
+          break;
+        case 'info':
+          this._service.info(this.title, this.content);
+          break;
+        case 'html':
+          this._service.html(this.content, 'bare');
+          break;
+        case 'bare':
+          this._service.bare(this.title, this.content);
+          break;
+      }
+    };
+    AppComponent.prototype.removeAll = function() {
+      this._service.remove();
+    };
+    AppComponent.prototype.override = function() {
+      this._service.set({
+        title: 'Override',
+        content: 'This notification has overridden options',
+        type: 'alert',
+        override: {
+          timeOut: this.over.timeOut,
+          clickToClose: this.over.clickToClose,
+          maxLength: this.over.maxLength,
+          showProgressBar: this.over.showProgressBar,
+          pauseOnHover: this.over.pauseOnHover
+        }
+      }, true);
+    };
+    AppComponent.prototype.loger = function(event) {
+      this.logs.push(event);
+    };
+    AppComponent = __decorate([core_1.Component({
+      moduleId: module.id,
+      selector: 'app',
+      templateUrl: 'app.html',
+      directives: [notifications_1.SimpleNotificationsComponent],
+      providers: [notifications_1.NotificationsService]
+    }), __metadata('design:paramtypes', [(typeof(_a = typeof notifications_1.NotificationsService !== 'undefined' && notifications_1.NotificationsService) === 'function' && _a) || Object])], AppComponent);
+    return AppComponent;
+    var _a;
+  }());
+  platform_browser_dynamic_1.bootstrap(AppComponent);
+  return module.exports;
 });
 
 })
