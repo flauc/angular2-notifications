@@ -28,12 +28,12 @@ import {Icons} from "./icons"
             state("enter", style({opacity: 1, transform: "translateX(0)"})),
             transition("* => enter", [
                 style({opacity: 0, transform: "translateX(5%)"}),
-                animate("200ms ease-in-out")
+                animate("400ms ease-in-out")
             ]),
             state("leave", style({opacity: 0, transform: "translateX(-5%)"})),
             transition("* => leave", [
                 style({opacity: 1, transform: "translateX(0)"}),
-                animate("200ms ease-in-out")
+                animate("300ms ease-in-out")
             ]),
         ])
     ],
@@ -234,7 +234,7 @@ export class NotificationComponent implements OnInit, AfterViewInit, OnDestroy {
     private _remove() {
         if (this.animate) {
             this.item["state"] = "leave";
-            setTimeout(() => this._service.set(this.item, false), 210)
+            setTimeout(() => this._service.set(this.item, false), 310)
         }
 
         else this._service.set(this.item, false)
