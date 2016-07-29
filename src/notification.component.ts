@@ -1,5 +1,5 @@
+import {Component, OnInit, AfterViewInit, OnDestroy, ViewEncapsulation, trigger, state, style, transition, animate} from "@angular/core"
 import {DomSanitizationService, SafeHtml} from '@angular/platform-browser';
-import {Component, OnInit, OnDestroy, ViewEncapsulation, trigger, state, style, transition, animate} from "@angular/core"
 import {Notification} from "./notification"
 import {NotificationsService} from "./notifications.service"
 import {MaxPipe} from "./max.pipe"
@@ -146,7 +146,7 @@ import {Icons} from "./icons"
     `]
 })
 
-export class NotificationComponent implements OnInit, OnDestroy {
+export class NotificationComponent implements OnInit, AfterViewInit, OnDestroy {
     constructor(
         private _service: NotificationsService,
         private _sanitizer: DomSanitizationService
@@ -234,7 +234,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     private _remove() {
         if (this.animate) {
             this.item["state"] = "leave";
-            setTimeout(() => this._service.set(this.item, false), 200)
+            setTimeout(() => this._service.set(this.item, false), 210)
         }
 
         else this._service.set(this.item, false)
