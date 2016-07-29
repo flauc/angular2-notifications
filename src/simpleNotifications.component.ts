@@ -81,7 +81,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     private pauseOnHover: boolean = true;
     private theClass: string;
     private rtl: boolean = false;
-    private animate: boolean = true;
+    private animate: "fromRight" | "fromLeft" | "rotate" = "fromRight";
     private expand: string;
     private icons: Icons = defaultIcons;
 

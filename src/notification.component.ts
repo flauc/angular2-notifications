@@ -25,15 +25,29 @@ import {Icons} from "./icons"
     encapsulation: ViewEncapsulation.None,
     animations: [
         trigger("enterLeave", [
-            state("enter", style({opacity: 1, transform: "translateX(0)"})),
-            transition("* => enter", [
+
+            // Enter from right
+            state("fromRight", style({opacity: 1, transform: "translateX(0)"})),
+            transition("* => fromRight", [
                 style({opacity: 0, transform: "translateX(5%)"}),
                 animate("400ms ease-in-out")
             ]),
-            state("leave", style({opacity: 0, transform: "translateX(-5%)"})),
-            transition("* => leave", [
+            state("fromRightOut", style({opacity: 0, transform: "translateX(-5%)"})),
+            transition("fromRight => fromRightOut", [
                 style({opacity: 1, transform: "translateX(0)"}),
                 animate("300ms ease-in-out")
+            ]),
+
+            // Rotate
+            state("rotate", style({opacity: 1, transform: "rotate(0deg)"})),
+            transition("* => rotate", [
+                style({opacity: 0, transform: "rotate(45deg)", perspective: "500px"}),
+                animate("400ms ease-in-out")
+            ]),
+            state("rotateOut", style({opacity: 0, transform: "rotate(-90deg)"})),
+            transition("rotate => rotateOut", [
+                style({opacity: 1, transform: "rotate(0deg)"}),
+                animate("400ms ease-in-out")
             ]),
         ])
     ],
@@ -161,7 +175,7 @@ export class NotificationComponent implements OnInit, AfterViewInit, OnDestroy {
     public showProgressBar: boolean;
     public theClass: string;
     public rtl: boolean;
-    public animate: boolean;
+    public animate: string;
 
     public overrides: any;
 
@@ -183,7 +197,8 @@ export class NotificationComponent implements OnInit, AfterViewInit, OnDestroy {
     private pauseOnHover: boolean;
 
     ngOnInit(): void {
-        if (this.animate) this.item["state"] = "enter";
+        console.log(this.animate);
+        if (this.animate) this.item["state"] = this.animate;
         if (this.item.override) this.attachOverrides();
         if (this.timeOut !== 0) this.startTimeOut();
         this.safeSvg = this._sanitizer.bypassSecurityTrustHtml(this.icons[this.item.type]);
@@ -233,7 +248,7 @@ export class NotificationComponent implements OnInit, AfterViewInit, OnDestroy {
 
     private _remove() {
         if (this.animate) {
-            this.item["state"] = "leave";
+            this.item["state"] = this.animate + "Out";
             setTimeout(() => this._service.set(this.item, false), 310)
         }
 

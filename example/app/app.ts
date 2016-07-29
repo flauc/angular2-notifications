@@ -72,7 +72,7 @@ export class AppComponent {
         preventDuplicates: false,
         preventLastDuplicates: "visible",
         rtl: true,
-        animate: true,
+        animate: "rotate",
         position: ["right", "bottom"]
     };
 
