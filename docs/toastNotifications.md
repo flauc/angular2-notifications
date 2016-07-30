@@ -59,7 +59,7 @@ __preventDuplicates__ | boolean | false | If true prevents duplicates of open no
 __preventLastDuplicates__ | boolean or string | false | If set to "all" prevents duplicates of the latest notification shown ( even if it isn't on screen any more ). If set to "visible" only prevents duplicates of the last created notification if the notification is currently visible.
 __theClass__ | string | null | A class that should be attached to the notification. (It doesn't exactly get attached to the selector but to the first div of the template.)
 __rtl__ | boolean | false | Adds the class `.rtl-mode` to the notification aligning the icon to the left and adding `direction: rtl`
-__animate__ | boolean | true | Determines if the notifications should have entering and leaving animations.
+__animate__ | "fromRight" or "fromLeft" or "scale" or "rotate" or null | "fromRight" | Choose the type of animation or set the value to null not to display animations.
 __icons__ | Icons | DefaultIcons | Overrides the default icons
 
 ## Icons
