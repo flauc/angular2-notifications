@@ -12,7 +12,7 @@ export interface Options {
     preventLastDuplicates?: boolean | string;
     theClass?: string;
     rtl?: boolean;
-    animate?: boolean;
+    animate?: "fromRight" | "fromLeft" | "rotate" | "scale";
     icons?: Icons;
     position?: ["top" | "bottom", "right" | "left"];
 }

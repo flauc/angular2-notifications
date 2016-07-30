@@ -31,6 +31,7 @@
   "devDependencies": {
     "@angular/core": "^2.0.0-rc.4",
     "@angular/platform-browser": "2.0.0-rc.4",
+    "del": "^2.2.1",
     "es6-shim": "^0.35.0",
     "gulp": "^3.9.1",
     "reflect-metadata": "0.1.2",
