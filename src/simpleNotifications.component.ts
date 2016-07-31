@@ -92,8 +92,6 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
         // Listen for changes in the service
         this.listener = this._service.getChangeEmitter()
             .subscribe(item => {
-
-
                 switch (item.command) {
                     case "cleanAll":
                         this.notifications = [];
