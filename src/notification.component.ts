@@ -221,7 +221,6 @@ export class NotificationComponent implements OnInit, AfterViewInit, OnDestroy {
     private pauseOnHover: boolean;
 
     ngOnInit(): void {
-        console.log(this.animate);
         if (this.animate) this.item["state"] = this.animate;
         if (this.item.override) this.attachOverrides();
         if (this.timeOut !== 0) this.startTimeOut();

@@ -3,6 +3,13 @@ Toast notifications are regular on-page notifications.
 
 ## Setup
 
+You need to register the provider for the `NotificationsService`. A good place to do this is when bootstrapping the application or in your top level component.
+```js
+bootstrap(AppComponent, [
+    NotificationsService
+]);
+```
+
 Add the SimpleNotificationsComponent in to the component where you want to use the notifications.
 ```js
 ...
@@ -11,18 +18,16 @@ template: '<simple-notifications [options]="options"></simple-notifications>'
 ...
 ```
 
-The onCreate and onDestroy Event Emitters emit the notification that was created or destroyed you can utilise this functionality like this:
-```js
-<simple-notifications [options]="options" (onCreate)="created($event)" (onDestroy)="destroyed($event)"></simple-notifications>
-```
-
 You will also need to use the NotificationsService in your component to create or remove the notifications.
 ```js
 ...
-providers: [NotificationsService]
-...
 constructor( private _service: NotificationsService ) {}
 ...
+```
+
+The onCreate and onDestroy Event Emitters emit the notification that was created or destroyed you can utilise this functionality like this:
+```js
+<simple-notifications [options]="options" (onCreate)="created($event)" (onDestroy)="destroyed($event)"></simple-notifications>
 ```
 
 ## Creating Notifications
