@@ -1,5 +1,5 @@
 import {Component, OnInit, AfterViewInit, OnDestroy, ViewEncapsulation, trigger, state, style, transition, animate} from "@angular/core"
-import {DomSanitizationService, SafeHtml} from '@angular/platform-browser';
+import {DomSanitizationService, SafeHtml} from "@angular/platform-browser";
 import {Notification} from "./notification"
 import {NotificationsService} from "./notifications.service"
 import {MaxPipe} from "./max.pipe"
@@ -77,7 +77,7 @@ import {Icons} from "./icons"
     ],
     template: `
         <div class="simple-notification"
-            @enterLeave="item.state"
+            [@enterLeave]="item.state"
             (click)="removeOnClick()"
             [class]="theClass"
 

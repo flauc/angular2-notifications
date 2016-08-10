@@ -24,13 +24,13 @@
   },
   "homepage": "https://github.com/flauc/angular2-notifications",
   "peerDependencies": {
-    "@angular/core": "^2.0.0-rc.4",
-    "@angular/platform-browser": "2.0.0-rc.4",
+    "@angular/core": "^2.0.0-rc.5",
+    "@angular/platform-browser": "2.0.0-rc.5",
     "rxjs": "5.0.0-beta.6"
   },
   "devDependencies": {
-    "@angular/core": "^2.0.0-rc.4",
-    "@angular/platform-browser": "2.0.0-rc.4",
+    "@angular/core": "^2.0.0-rc.5",
+    "@angular/platform-browser": "2.0.0-rc.5",
     "del": "^2.2.1",
     "es6-shim": "^0.35.0",
     "gulp": "^3.9.1",

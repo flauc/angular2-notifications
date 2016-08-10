@@ -32,6 +32,8 @@ export interface Icons {
     success: string;
 }
 
+export declare class SimpleNotificationsModule {}
+
 export declare class SimpleNotificationsComponent {}
 
 export declare class NotificationsService {
