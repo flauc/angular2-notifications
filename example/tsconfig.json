@@ -11,6 +11,8 @@
   },
   "files": [
     "app/app.ts",
+    "app/main.ts",
+    "app/app.module.ts",
     "app/pusnNotifications.service.ts"
   ]
 }

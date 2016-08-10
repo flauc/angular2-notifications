@@ -1,29 +1,26 @@
 import "rxjs/Rx";
 import {Component} from "@angular/core";
-import {bootstrap} from "@angular/platform-browser-dynamic"
 import {NotificationsService, SimpleNotificationsComponent} from "notifications"
 import {PushNotificationsService} from "./pusnNotifications.service"
 
 @Component({
     selector: "app",
-    directives: [SimpleNotificationsComponent],
-    providers: [NotificationsService, PushNotificationsService],
     template: `
         <form>
             <div>
                 <label>Title</label>
                 <p>The title of the notification.</p>
-                <input type="text" [(ngModel)]="title">
+                <input type="text" [(ngModel)]="title" name="title">
             </div>
             <div>
                 <label>Content</label>
                 <p>The content of the notification.</p>
-                <input type="text" [(ngModel)]="content">
+                <input type="text" [(ngModel)]="content" name="content">
             </div>
             <div>
                 <label>Type</label>
                 <p>The type of the notification.</p>
-                <select [(ngModel)]="type">
+                <select [(ngModel)]="type" name="type">
                     <option value="success" selected>Success</option>
                     <option value="error">Error</option>
                     <option value="alert">Alert</option>
@@ -39,7 +36,7 @@ import {PushNotificationsService} from "./pusnNotifications.service"
         <button (click)="withHtml()">with html</button>
         
         <form (ngSubmit)="cleanSingle()">
-            <input type="text" [(ngModel)]="deleteId">
+            <input type="text" [(ngModel)]="deleteId" name="bla">
             <button type="submit">Delete</button>
         </form>
         
@@ -49,8 +46,7 @@ import {PushNotificationsService} from "./pusnNotifications.service"
 
 export class AppComponent {
     constructor(
-        private _service: NotificationsService,
-        private _push: PushNotificationsService
+        private _service: NotificationsService
     ) {}
 
     public title: string = "just a title";
@@ -78,9 +74,9 @@ export class AppComponent {
 
     private html = `<p>Test</p><p>A nother test</p>`;
 
-    createPush() {
-        this._push.create({title: "test", body: "bla"})
-    }
+    // createPush() {
+    //     this._push.create({title: "test", body: "bla"})
+    // }
 
     create() {
         switch (this.type) {
@@ -102,7 +98,7 @@ export class AppComponent {
         }
     }
 
-    withOverride() { this._service.create("pero", "peric", "success", {timeOut: 0, clickToClose:false, maxLength: 3, showProgressBar: true, theClass: "overrideTest"}) }
+    withOverride() { this._service.create("pero", "peric", "success", {timeOut: 0, clickToClose: false, maxLength: 3, showProgressBar: true, theClass: "overrideTest"}) }
 
     withHtml() {this._service.html(this.html, "success") }
 
@@ -121,5 +117,3 @@ export class AppComponent {
         this._service.remove(this.deleteId);
     }
 }
-
-bootstrap(AppComponent, []);

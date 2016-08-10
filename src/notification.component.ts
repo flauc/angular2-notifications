@@ -2,7 +2,6 @@ import {Component, OnInit, AfterViewInit, OnDestroy, ViewEncapsulation, trigger,
 import {DomSanitizationService, SafeHtml} from "@angular/platform-browser";
 import {Notification} from "./notification"
 import {NotificationsService} from "./notifications.service"
-import {MaxPipe} from "./max.pipe"
 import {Icons} from "./icons"
 
 @Component({
@@ -21,7 +20,6 @@ import {Icons} from "./icons"
         "animate",
         "icons"
     ],
-    pipes: [MaxPipe],
     encapsulation: ViewEncapsulation.None,
     animations: [
         trigger("enterLeave", [

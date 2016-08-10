@@ -18,10 +18,11 @@
     "src/notification.component.ts",
     "src/notification.ts",
     "src/notifications.service.ts",
-    "src/notificationType.ts",
-    "src/simpleNotifications.component.ts",
-    "src/pushNotifications.service.ts",
-    "src/notificationEvent",
-    "src/options"
+    "src/notification-type.ts",
+    "src/simple-notifications.component.ts",
+    "src/push-notifications.service.ts",
+    "src/notification-event",
+    "src/options",
+    "src/simple-notifications.module.ts"
   ]
 }

@@ -8,7 +8,7 @@
         'notifications': 'node_modules/angular2-notifications'
     },
         packages = {
-            'app': { main: 'app.js',  defaultExtension: 'js' },
+            'app': { main: 'main.js',  defaultExtension: 'js' },
             'rxjs': { defaultExtension: 'js' },
             'angular2-in-memory-web-api': { defaultExtension: 'js' },
             'notifications': { main: 'components.js', defaultExtension: 'js' }
@@ -18,6 +18,7 @@
             '@angular/common',
             '@angular/compiler',
             '@angular/core',
+            '@angular/forms',
             '@angular/platform-browser',
             '@angular/platform-browser-dynamic'
         ];

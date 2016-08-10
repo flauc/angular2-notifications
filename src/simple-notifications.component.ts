@@ -1,13 +1,11 @@
-import {Component, EventEmitter, OnInit, OnDestroy, ViewEncapsulation, Input, Output} from "@angular/core"
+import {Component, EventEmitter, OnInit, OnDestroy, ViewEncapsulation, Input, Output} from "@angular/core";
 import {Notification} from "./notification"
 import {NotificationsService} from "./notifications.service"
-import {NotificationComponent} from "./notification.component"
 import {defaultIcons, Icons} from "./icons"
 import {Options} from "./options";
 
 @Component({
     selector: "simple-notifications",
-    directives: [NotificationComponent],
     encapsulation: ViewEncapsulation.None,
     template: `
         <div class="simple-notification-wrapper" [ngClass]="position">
