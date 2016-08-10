@@ -3,17 +3,19 @@ Toast notifications are regular on-page notifications.
 
 ## Setup
 
-You need to register the provider for the `NotificationsService`. A good place to do this is when bootstrapping the application or in your top level component.
-```js
-bootstrap(AppComponent, [
-    NotificationsService
-]);
+Import the `SimpleNotificationsModule` in to your `AppModule`
+```ts
+@NgModule({
+    imports: [BrowserModule, SimpleNotificationsModule],
+    declarations: [AppComponent],
+    bootstrap: [AppComponent]
+})
+export class AppModule { }
 ```
 
-Add the SimpleNotificationsComponent in to the component where you want to use the notifications.
+Add the SimpleNotificationsComponent in to the component where you want to use the notifications. Or in your top level component for use in child components.
 ```js
 ...
-directives: [SimpleNotificationsComponent],
 template: '<simple-notifications [options]="options"></simple-notifications>'
 ...
 ```
