@@ -147,7 +147,7 @@ import {Icons} from "./icons"
             direction: rtl;
         }
 
-        .simple-notification.rtl-mode .content {
+        .simple-notification.rtl-mode .sn-content {
             padding: 0 0 0 50px;
         }
 

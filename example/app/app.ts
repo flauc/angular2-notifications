@@ -67,7 +67,7 @@ export class AppComponent {
         pauseOnHover: true,
         preventDuplicates: false,
         preventLastDuplicates: "visible",
-        rtl: true,
+        rtl: false,
         animate: "scale",
         position: ["right", "bottom"]
     };
