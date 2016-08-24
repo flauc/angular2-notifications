@@ -137,7 +137,7 @@ import {Icons} from "./icons"
             box-sizing: border-box;
             top: 0;
             right: 0;
-            width: auto;
+            width: 70px;
             height: 70px;
             padding: 10px;
             fill: #fff;
