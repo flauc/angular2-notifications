@@ -14,11 +14,11 @@ npm install --save angular2-notifications
 Map the library in your `system.config.js` if you're using SystemJs.
 ```js
 var map = {
-    'notifications': 'node_modules/angular2-notifications'
+    'angular2-notifications': 'node_modules/angular2-notifications'
 }
 
 var packages = {
-    'notifications': { main: 'components.js', defaultExtension: 'js' }
+    'angular2-notifications': { main: 'components.js', defaultExtension: 'js' }
 }
 ```
 
