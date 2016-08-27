@@ -13,6 +13,7 @@ Import the `SimpleNotificationsModule` in to your `AppModule`
 export class AppModule { }
 ```
 
+
 Add the SimpleNotificationsComponent in to the component where you want to use the notifications. Or in your top level component for use in child components.
 ```js
 ...
@@ -30,6 +31,13 @@ constructor( private _service: NotificationsService ) {}
 The onCreate and onDestroy Event Emitters emit the notification that was created or destroyed you can utilise this functionality like this:
 ```js
 <simple-notifications [options]="options" (onCreate)="created($event)" (onDestroy)="destroyed($event)"></simple-notifications>
+```
+
+**If your app cannot find the built JS files for this package,** you may need to tell your build script to scan the `angular2-notifications` directory. See the related issue #25. Example:
+
+```js
+'angular2-notifications/*.+(js|js.map)',
+'angular2-notifications/lib/*.+(js|js.map)'
 ```
 
 ## Creating Notifications
