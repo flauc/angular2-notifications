@@ -1,40 +1,28 @@
 (function(global) {
-
     var map = {
-        'app': 'app',
-        'rxjs': 'node_modules/rxjs',
-        'angular2-in-memory-web-api':'node_modules/angular2-in-memory-web-api',
-        '@angular': 'node_modules/@angular',
-        'notifications': 'node_modules/angular2-notifications'
-    },
+            'app': 'app',
+            '@angular': 'node_modules/@angular',
+            'rxjs': 'node_modules/rxjs',
+            'angular2-notifications': 'node_modules/angular2-notifications'
+        },
         packages = {
             'app': { main: 'main.js',  defaultExtension: 'js' },
             'rxjs': { defaultExtension: 'js' },
-            'angular2-in-memory-web-api': { defaultExtension: 'js' },
-            'notifications': { main: 'components.js', defaultExtension: 'js' }
+            'angular2-notifications': {main: 'components.js', defaultExtension: 'js'}
         },
-
-        packageNames = [
-            '@angular/common',
-            '@angular/compiler',
-            '@angular/core',
-            '@angular/forms',
-            '@angular/platform-browser',
-            '@angular/platform-browser-dynamic'
+        ngPackageNames = [
+            'common',
+            'compiler',
+            'core',
+            'platform-browser',
+            'platform-browser-dynamic',
+            'forms'
         ];
 
-    packageNames.forEach(function(pkgName) {
-        packages[pkgName] = { main: 'index.js', defaultExtension: 'js' };
-    });
+    function packIndex(pkgName) {packages['@angular/'+pkgName] = { main: 'index.js', defaultExtension: 'js' }}
+    function packUmd(pkgName) {packages['@angular/'+pkgName] = { main: 'bundles/' + pkgName + '.umd.js', defaultExtension: 'js' }}
 
-    var config = {
-        map: map,
-        packages: packages
-    };
-
-
-    if (global.filterSystemConfig) { global.filterSystemConfig(config); }
-
-    System.config(config);
+    ngPackageNames.forEach(packUmd);
+    System.config({map: map, packages: packages});
 
 })(this);

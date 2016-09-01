@@ -1,12 +1,12 @@
-import {Injectable} from "@angular/core"
-import {Subject} from 'rxjs/Rx';
-import {Notification} from './notification';
-import {NotificationEvent} from './notification-event';
+import {Injectable} from "@angular/core";
+import {Subject} from "rxjs/Rx";
+import {NotificationEvent} from "./notification-event";
+import {Notification} from "./notification";
 
 @Injectable()
 export class NotificationsService {
 
-    private _emitter: Subject<NotificationEvent> = new Subject();
+    private _emitter: Subject<NotificationEvent> = new Subject<NotificationEvent>();
 
     set(notification: Notification, to: boolean) {
         notification.id = notification.override && notification.override.id ? notification.override.id : Math.random().toString(36).substring(3);

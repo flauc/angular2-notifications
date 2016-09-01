@@ -9,7 +9,6 @@ import {MaxPipe} from "./max.pipe";
     imports: [BrowserModule],
     declarations: [SimpleNotificationsComponent, NotificationComponent, MaxPipe],
     providers: [NotificationsService],
-    exports: [SimpleNotificationsComponent],
-    bootstrap: [SimpleNotificationsComponent]
+    exports: [SimpleNotificationsComponent]
 })
 export class SimpleNotificationsModule {}

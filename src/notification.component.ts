@@ -1,5 +1,5 @@
-import {Component, OnInit, AfterViewInit, OnDestroy, ViewEncapsulation, trigger, state, style, transition, animate} from "@angular/core"
-import {DomSanitizationService, SafeHtml} from "@angular/platform-browser";
+import {Component, OnInit, OnDestroy, ViewEncapsulation, trigger, state, style, transition, animate} from "@angular/core"
+import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {Notification} from "./notification"
 import {NotificationsService} from "./notifications.service"
 import {Icons} from "./icons"
@@ -182,10 +182,10 @@ import {Icons} from "./icons"
     `]
 })
 
-export class NotificationComponent implements OnInit, AfterViewInit, OnDestroy {
+export class NotificationComponent implements OnInit, OnDestroy {
     constructor(
         private _service: NotificationsService,
-        private _sanitizer: DomSanitizationService
+        private _sanitizer: DomSanitizer
     ) {}
 
     public icons: Icons;

@@ -1,7 +1,6 @@
 import "rxjs/Rx";
 import {Component} from "@angular/core";
-import {NotificationsService, SimpleNotificationsComponent} from "notifications"
-import {PushNotificationsService} from "./pusnNotifications.service"
+import {NotificationsService, SimpleNotificationsComponent} from "angular2-notifications"
 
 @Component({
     selector: "app",
