@@ -1,8 +1,8 @@
-exports.SimpleNotificationsModule = require('./lib/simple-notifications.module').SimpleNotificationsModule;
-exports.SimpleNotificationsComponent = require('./lib/simple-notifications.component').SimpleNotificationsComponent;
-exports.NotificationsService = require('./lib/notifications.service').NotificationsService;
-exports.PushNotificationsService = require('./lib/push-notifications.service').PushNotificationsService;
-exports.Icons = require('./lib/icons').Icons;
-exports.Options = require('./lib/options').Options;
-exports.Notification = require('./lib/notification').Notification;
+exports.SimpleNotificationsModule = require('./src/simple-notifications.module').SimpleNotificationsModule;
+exports.SimpleNotificationsComponent = require('./src/simple-notifications.component').SimpleNotificationsComponent;
+exports.NotificationsService = require('./src/notifications.service').NotificationsService;
+exports.PushNotificationsService = require('./src/push-notifications.service').PushNotificationsService;
+exports.Icons = require('./src/icons').Icons;
+exports.Options = require('./src/options').Options;
+exports.Notification = require('./src/notification').Notification;
 
