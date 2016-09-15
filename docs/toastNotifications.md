@@ -69,7 +69,7 @@ __pauseOnHover__ | boolean | true | Determines if the timeOut should be paused w
 __lastOnBottom__ | boolean | true | Determines if new notifications should appear at the bottom or top of the list.
 __clickToClose__ | boolean | true | Determines if notifications should close on click.
 __maxLength__ | int | 0 | Set the maximum allowed length of the content string. If set to 0 or not defined there is no maximum length.
-__maxStacks__ | int | 8 | Set the maximum number of notifications that can be on the screen at once.
+__maxStack__ | int | 8 | Set the maximum number of notifications that can be on the screen at once.
 __preventDuplicates__ | boolean | false | If true prevents duplicates of open notifications.
 __preventLastDuplicates__ | boolean or string | false | If set to "all" prevents duplicates of the latest notification shown ( even if it isn't on screen any more ). If set to "visible" only prevents duplicates of the last created notification if the notification is currently visible.
 __theClass__ | string | null | A class that should be attached to the notification. (It doesn't exactly get attached to the selector but to the first div of the template.)
