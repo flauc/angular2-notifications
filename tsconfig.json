@@ -16,13 +16,13 @@
     "src/icons.ts",
     "src/max.pipe.ts",
     "src/notification.component.ts",
-    "src/notification.ts",
     "src/notifications.service.ts",
-    "src/notification-type.ts",
     "src/simple-notifications.component.ts",
     "src/push-notifications.service.ts",
-    "src/notification-event",
-    "src/options",
     "src/simple-notifications.module.ts"
+    "src/options.type.ts",
+    "src/notification.type.ts",
+    "src/notification-event.type.ts",
+    "src/notification-type.type.ts",
   ]
 }
