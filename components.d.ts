@@ -1,5 +1,6 @@
-import { EventEmitter, OnInit, OnDestroy, PipeTransform } from '@angular/core';
+import { EventEmitter, PipeTransform, OnInit, OnDestroy } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Subject } from 'rxjs/Rx';
 
 export interface Icons {
     alert: string;
@@ -16,13 +17,6 @@ export declare let defaultIcons: {
 
 export declare class MaxPipe implements PipeTransform {
     transform(value: string, ...args: any[]): any;
-}
-
-export interface NotificationEvent {
-    add?: boolean;
-    command: string;
-    id?: string;
-    notification?: Notification;
 }
 
 export interface NotificationEvent {
@@ -77,16 +71,6 @@ export declare class NotificationComponent implements OnInit, OnDestroy {
 export interface Notification {
     id?: string;
     type: string;
-    createdOn?: Date;
-    title?: string;
-    content?: string;
-    override?: any;
-    html?: any;
-}
-
-export interface Notification {
-    id?: string;
-    type: string;
     title?: string;
     content?: string;
     override?: any;
@@ -108,23 +92,6 @@ export declare class NotificationsService {
     create(title: string, content: string, type: string, override?: any): Notification;
     html(html: any, type: string, override?: any): Notification;
     remove(id?: string): void;
-}
-
-export interface Options {
-    timeOut?: number;
-    showProgressBar?: boolean;
-    pauseOnHover?: boolean;
-    lastOnBottom?: boolean;
-    clickToClose?: boolean;
-    maxLength?: number;
-    maxStacks?: number;
-    preventDuplicates?: number;
-    preventLastDuplicates?: boolean | string;
-    theClass?: string;
-    rtl?: boolean;
-    animate?: "fromRight" | "fromLeft" | "rotate" | "scale";
-    icons?: Icons;
-    position?: ["top" | "bottom", "right" | "left"];
 }
 
 export interface Options {
