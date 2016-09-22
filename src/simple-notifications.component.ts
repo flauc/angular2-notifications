@@ -1,13 +1,13 @@
-import {Component, EventEmitter, OnInit, OnDestroy, ViewEncapsulation, Input, Output} from "@angular/core";
-import {Notification} from "./notification"
-import {NotificationsService} from "./notifications.service"
-import {defaultIcons, Icons} from "./icons"
-import {Options} from "./options";
+import {Component, EventEmitter, OnInit, OnDestroy, ViewEncapsulation, Input, Output} from '@angular/core';
+import {Notification} from './notification.type';
+import {NotificationsService} from './notifications.service';
+import {defaultIcons, Icons} from './icons';
+import {Options} from './options.type';
 
 @Component({
-    selector: "simple-notifications",
-    encapsulation: ViewEncapsulation.None,
-    template: `
+  selector: 'simple-notifications',
+  encapsulation: ViewEncapsulation.None,
+  template: `
         <div class="simple-notification-wrapper" [ngClass]="position">
             <simple-notification
                 *ngFor="let a of notifications; let i = index"
@@ -26,7 +26,7 @@ import {Options} from "./options";
             </simple-notification>
         </div>
     `,
-    styles: [`
+  styles: [`
         .simple-notification-wrapper {
             position: fixed;
             width: 300px;
@@ -49,170 +49,191 @@ import {Options} from "./options";
 })
 
 export class SimpleNotificationsComponent implements OnInit, OnDestroy {
-    constructor(
-        private _service: NotificationsService
-    ) {}
 
-    @Input() set options(opt: Options) {
-        this.attachChanges(opt)
-    }
+  @Input() set options(opt: Options) {
+    this.attachChanges(opt);
+  }
 
-    @Output() onCreate = new EventEmitter();
-    @Output() onDestroy = new EventEmitter();
+  @Output() onCreate = new EventEmitter();
+  @Output() onDestroy = new EventEmitter();
 
-    public notifications: Notification[] = [];
-    public position: ["top" | "bottom", "right" | "left"] = ["bottom", "right"];
+  public notifications: Notification[] = [];
+  public position: ['top' | 'bottom', 'right' | 'left'] = ['bottom', 'right'];
 
-    private listener: any;
+  private listener: any;
 
-    // Received values
-    private lastOnBottom: boolean = true;
-    private maxStack: number = 8;
-    private preventLastDuplicates: any = false;
-    private preventDuplicates: boolean = false;
+  // Received values
+  private lastOnBottom: boolean = true;
+  private maxStack: number = 8;
+  private preventLastDuplicates: any = false;
+  private preventDuplicates: boolean = false;
 
-    // Sent values
-    private timeOut: number = 0;
-    private maxLength: number = 0;
-    private clickToClose: boolean = true;
-    private showProgressBar: boolean = true;
-    private pauseOnHover: boolean = true;
-    private theClass: string;
-    private rtl: boolean = false;
-    private animate: "fromRight" | "fromLeft" | "rotate" | "scale" = "fromRight";
-    private expand: string;
-    private icons: Icons = defaultIcons;
+  // Sent values
+  private timeOut: number = 0;
+  private maxLength: number = 0;
+  private clickToClose: boolean = true;
+  private showProgressBar: boolean = true;
+  private pauseOnHover: boolean = true;
+  private theClass: string;
+  private rtl: boolean = false;
+  private animate: 'fromRight' | 'fromLeft' | 'rotate' | 'scale' = 'fromRight';
+  private expand: string;
+  private icons: Icons = defaultIcons;
 
-    private lastNotificationCreated: Notification;
+  private lastNotificationCreated: Notification;
 
+  constructor(private _service: NotificationsService) {
+  }
 
-    ngOnInit(): void {
-        // Listen for changes in the service
-        this.listener = this._service.getChangeEmitter()
-            .subscribe(item => {
-                switch (item.command) {
-                    case "cleanAll":
-                        this.notifications = [];
-                        break;
+  ngOnInit(): void {
+    // Listen for changes in the service
+    this.listener = this._service.getChangeEmitter()
+      .subscribe(item => {
+        switch (item.command) {
+          case 'cleanAll':
+            this.notifications = [];
+            break;
 
-                    case "clean":
-                        this.cleanSingle(item.id);
-                        break;
+          case 'clean':
+            this.cleanSingle(item.id);
+            break;
 
-                    case "set":
-                        if (item.add) this.add(item.notification);
-                        else this.defaultBehavior(item);
-                        break;
-
-                    default:
-                        this.defaultBehavior(item);
-                        break;
-                }
-            });
-    }
-
-    // Default behavior on event
-    defaultBehavior(value): void {
-        this.notifications.splice(this.notifications.indexOf(value.notification), 1);
-        this.onDestroy.emit(this.buildEmit(value.notification, false));
-    }
-
-
-    // Add the new notification to the notification array
-    add(item): void {
-        item.createdOn = new Date();
-
-        let toBlock = this.preventLastDuplicates || this.preventDuplicates ? this.block(item) : false;
-
-        // Save this as the last created notification
-        this.lastNotificationCreated = item;
-
-        if (!toBlock) {
-            // Check if the notification should be added at the start or the end of the array
-            if (this.lastOnBottom) {
-                if (this.notifications.length >= this.maxStack) this.notifications.splice(0, 1);
-                this.notifications.push(item);
+          case 'set':
+            if (item.add) {
+              this.add(item.notification);
             } else {
-                if (this.notifications.length >= this.maxStack) this.notifications.splice(this.notifications.length - 1, 1);
-                this.notifications.splice(0, 0, item);
+              this.defaultBehavior(item);
             }
+            break;
 
-            this.onCreate.emit(this.buildEmit(item, true));
+          default:
+            this.defaultBehavior(item);
+            break;
         }
+      });
+  }
+
+  // Default behavior on event
+  defaultBehavior(value: any): void {
+    this.notifications.splice(this.notifications.indexOf(value.notification), 1);
+    this.onDestroy.emit(this.buildEmit(value.notification, false));
+  }
+
+
+  // Add the new notification to the notification array
+  add(item: Notification): void {
+    item.createdOn = new Date();
+
+    let toBlock: boolean = this.preventLastDuplicates || this.preventDuplicates ? this.block(item) : false;
+
+    // Save this as the last created notification
+    this.lastNotificationCreated = item;
+
+    if (!toBlock) {
+      // Check if the notification should be added at the start or the end of the array
+      if (this.lastOnBottom) {
+        if (this.notifications.length >= this.maxStack) this.notifications.splice(0, 1);
+        this.notifications.push(item);
+      } else {
+        if (this.notifications.length >= this.maxStack) this.notifications.splice(this.notifications.length - 1, 1);
+        this.notifications.splice(0, 0, item);
+      }
+
+      this.onCreate.emit(this.buildEmit(item, true));
+    }
+  }
+
+  // Check if notifications should be prevented
+  block(item: Notification): boolean {
+
+    let toCheck = item.html ? this.checkHtml : this.checkStandard;
+
+    if (this.preventDuplicates && this.notifications.length > 0) {
+      for (let i = 0; i < this.notifications.length; i++) {
+        if (toCheck(this.notifications[i], item)) {
+          return true;
+        }
+      }
     }
 
-    // Check if notifications should be prevented
-    block(item): boolean {
+    if (this.preventLastDuplicates) {
 
-        let checkHtml = (checker) => checker.html ? checker.type === item.type && checker.title === item.title && checker.content === item.content && checker.html === item.html : false,
-            checkStandard = (checker) => checker.type === item.type && checker.title === item.title && checker.content === item.content,
-            toCheck = item.html ? checkHtml : checkStandard;
+      let comp: Notification;
 
-        if (this.preventDuplicates && this.notifications.length > 0)
-            for (let i = 0; i < this.notifications.length; i++)
-                if (toCheck(this.notifications[i])) return true;
-
-
-
-        if (this.preventLastDuplicates) {
-
-            let comp: any;
-
-            if (this.preventLastDuplicates === "visible" && this.notifications.length > 0) {
-                if (this.lastOnBottom) comp = this.notifications[this.notifications.length - 1];
-                else comp = this.notifications[0];
-            }
-
-            else if (this.preventLastDuplicates === "all" && this.lastNotificationCreated) comp = this.lastNotificationCreated;
-            else return false;
-            return toCheck(comp);
-
+      if (this.preventLastDuplicates === 'visible' && this.notifications.length > 0) {
+        if (this.lastOnBottom) {
+          comp = this.notifications[this.notifications.length - 1];
+        } else {
+          comp = this.notifications[0];
         }
-
+      } else if (this.preventLastDuplicates === 'all' && this.lastNotificationCreated) {
+        comp = this.lastNotificationCreated;
+      } else {
         return false;
+      }
+      return toCheck(comp, item);
     }
 
-    // Attach all the changes received in the options object
-    attachChanges(options): void {
-        Object.keys(options).forEach(a => {
-            if (this.hasOwnProperty(a)) this[a] = options[a]
-        })
+    return false;
+  }
+
+  checkStandard(checker: Notification, item: Notification): boolean {
+    return checker.type === item.type && checker.title === item.title && checker.content === item.content;
+  }
+
+  checkHtml(checker: Notification, item: Notification): boolean {
+    return checker.html ? checker.type === item.type && checker.title === item.title && checker.content === item.content && checker.html === item.html : false;
+  }
+
+  // Attach all the changes received in the options object
+  attachChanges(options: any): void {
+    Object.keys(options).forEach(a => {
+      if (this.hasOwnProperty(a)) {
+        this[a] = options[a];
+      }
+    });
+  }
+
+  buildEmit(notification: Notification, to: boolean) {
+    let toEmit: Notification = {
+      createdOn: notification.createdOn,
+      type: notification.type,
+      id: notification.id
+    };
+
+    if (notification.html) {
+      toEmit.html = notification.html;
+    } else {
+      toEmit.title = notification.title;
+      toEmit.content = notification.content;
     }
 
-    buildEmit(notification: Notification, to: boolean) {
-        let toEmit = {
-            createdOn: notification.createdOn,
-            type: notification.type,
-            id: notification.id
-        };
-
-        if (notification.html) toEmit["html"] = notification.html;
-
-        else {
-            toEmit["title"] = notification.title;
-            toEmit["content"] = notification.content;
-        }
-
-        if (!to) toEmit["destroyedOn"] = new Date();
-
-        return toEmit;
+    if (!to) {
+      toEmit.destroyedOn = new Date();
     }
 
-    cleanSingle(id: string): void {
-        let indexOfDelete: number,
-            doDelete: boolean = false;
+    return toEmit;
+  }
 
-        this.notifications.forEach((a, idx) => {
-            if (a.id === id) {
-                indexOfDelete = idx;
-                doDelete = true;
-            }
-        });
+  cleanSingle(id: string): void {
+    let indexOfDelete: number;
+    let doDelete: boolean = false;
 
-        if (doDelete) this.notifications.splice(indexOfDelete, 1);
+    this.notifications.forEach((a, idx) => {
+      if (a.id === id) {
+        indexOfDelete = idx;
+        doDelete = true;
+      }
+    });
+
+    if (doDelete) {
+      this.notifications.splice(indexOfDelete, 1);
     }
+  }
 
-    ngOnDestroy(): void {
-        if (this.listener) this.listener.unsubscribe()
+  ngOnDestroy(): void {
+    if (this.listener) {
+      this.listener.unsubscribe();
     }
+  }
 }

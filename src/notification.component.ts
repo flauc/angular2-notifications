@@ -1,79 +1,76 @@
-import {Component, OnInit, OnDestroy, ViewEncapsulation, trigger, state, style, transition, animate} from "@angular/core"
-import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
-import {Notification} from "./notification"
-import {NotificationsService} from "./notifications.service"
-import {Icons} from "./icons"
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewEncapsulation,
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+  Input
+} from '@angular/core';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import {Notification} from './notification.type';
+import {NotificationsService} from './notifications.service';
+import {Icons} from './icons';
 
 @Component({
-    selector: "simple-notification",
+  selector: 'simple-notification',
+  encapsulation: ViewEncapsulation.None,
+  animations: [
+    trigger('enterLeave', [
 
-    inputs: [
-        "item",
-        "timeOut",
-        "position",
-        "clickToClose",
-        "maxLength",
-        "showProgressBar",
-        "pauseOnHover",
-        "theClass",
-        "rtl",
-        "animate",
-        "icons"
-    ],
-    encapsulation: ViewEncapsulation.None,
-    animations: [
-        trigger("enterLeave", [
+      // Enter from right
+      state('fromRight', style({opacity: 1, transform: 'translateX(0)'})),
+      transition('* => fromRight', [
+        style({opacity: 0, transform: 'translateX(5%)'}),
+        animate('400ms ease-in-out')
+      ]),
+      state('fromRightOut', style({opacity: 0, transform: 'translateX(-5%)'})),
+      transition('fromRight => fromRightOut', [
+        style({opacity: 1, transform: 'translateX(0)'}),
+        animate('300ms ease-in-out')
+      ]),
 
-            // Enter from right
-            state("fromRight", style({opacity: 1, transform: "translateX(0)"})),
-            transition("* => fromRight", [
-                style({opacity: 0, transform: "translateX(5%)"}),
-                animate("400ms ease-in-out")
-            ]),
-            state("fromRightOut", style({opacity: 0, transform: "translateX(-5%)"})),
-            transition("fromRight => fromRightOut", [
-                style({opacity: 1, transform: "translateX(0)"}),
-                animate("300ms ease-in-out")
-            ]),
+      // Enter from left
+      state('fromLeft', style({opacity: 1, transform: 'translateX(0)'})),
+      transition('* => fromLeft', [
+        style({opacity: 0, transform: 'translateX(-5%)'}),
+        animate('400ms ease-in-out')
+      ]),
+      state('fromLeftOut', style({opacity: 0, transform: 'translateX(5%)'})),
+      transition('fromLeft => fromLeftOut', [
+        style({opacity: 1, transform: 'translateX(0)'}),
+        animate('300ms ease-in-out')
+      ]),
 
-            // Enter from left
-            state("fromLeft", style({opacity: 1, transform: "translateX(0)"})),
-            transition("* => fromLeft", [
-                style({opacity: 0, transform: "translateX(-5%)"}),
-                animate("400ms ease-in-out")
-            ]),
-            state("fromLeftOut", style({opacity: 0, transform: "translateX(5%)"})),
-            transition("fromLeft => fromLeftOut", [
-                style({opacity: 1, transform: "translateX(0)"}),
-                animate("300ms ease-in-out")
-            ]),
+      // Rotate
+      state('scale', style({opacity: 1, transform: 'scale(1)'})),
+      transition('* => scale', [
+        style({opacity: 0, transform: 'scale(0)'}),
+        animate('400ms ease-in-out')
+      ]),
+      state('scaleOut', style({opacity: 0, transform: 'scale(0)'})),
+      transition('scale => scaleOut', [
+        style({opacity: 1, transform: 'scale(1)'}),
+        animate('400ms ease-in-out')
+      ]),
 
-            // Rotate
-            state("scale", style({opacity: 1, transform: "scale(1)"})),
-            transition("* => scale", [
-                style({opacity: 0, transform: "scale(0)"}),
-                animate("400ms ease-in-out")
-            ]),
-            state("scaleOut", style({opacity: 0, transform: "scale(0)"})),
-            transition("scale => scaleOut", [
-                style({opacity: 1, transform: "scale(1)"}),
-                animate("400ms ease-in-out")
-            ]),
-
-            // Scale
-            state("rotate", style({opacity: 1, transform: "rotate(0deg)"})),
-            transition("* => rotate", [
-                style({opacity: 0, transform: "rotate(5deg)"}),
-                animate("400ms ease-in-out")
-            ]),
-            state("rotateOut", style({opacity: 0, transform: "rotate(-5deg)"})),
-            transition("rotate => rotateOut", [
-                style({opacity: 1, transform: "rotate(0deg)"}),
-                animate("400ms ease-in-out")
-            ])
-        ])
-    ],
-    template: `
+      // Scale
+      state('rotate', style({opacity: 1, transform: 'rotate(0deg)'})),
+      transition('* => rotate', [
+        style({opacity: 0, transform: 'rotate(5deg)'}),
+        animate('400ms ease-in-out')
+      ]),
+      state('rotateOut', style({opacity: 0, transform: 'rotate(-5deg)'})),
+      transition('rotate => rotateOut', [
+        style({opacity: 1, transform: 'rotate(0deg)'}),
+        animate('400ms ease-in-out')
+      ])
+    ])
+  ],
+  template: `
         <div class="simple-notification"
             [@enterLeave]="item.state"
             (click)="removeOnClick()"
@@ -105,7 +102,7 @@ import {Icons} from "./icons"
 
         </div>
     `,
-    styles: [`
+  styles: [`
         .simple-notification {
             width: 100%;
             padding: 10px 20px;
@@ -183,96 +180,128 @@ import {Icons} from "./icons"
 })
 
 export class NotificationComponent implements OnInit, OnDestroy {
-    constructor(
-        private _service: NotificationsService,
-        private _sanitizer: DomSanitizer
-    ) {}
 
-    public icons: Icons;
+  @Input()
+  public icons: Icons;
 
-    ////// Inputs
-    public safeSvg: SafeHtml;
-    public item: Notification;
-    public maxLength: number;
-    public showProgressBar: boolean;
-    public theClass: string;
-    public rtl: boolean;
-    public animate: string;
+  @Input()
+  public item: Notification;
 
-    public overrides: any;
+  @Input()
+  public maxLength: number;
 
-    ////// Locals
+  @Input()
+  public showProgressBar: boolean;
 
-    // Progress bar variables
-    public progressWidth: number = 0;
-    private stopTime: boolean = false;
-    private timer: any;
-    private steps: number;
-    private speed: number;
-    private count: number = 0;
-    private start: any;
-    private diff: any;
+  @Input()
+  public theClass: string;
 
-    private timeOut: number;
-    private position: number;
-    private clickToClose: boolean;
-    private pauseOnHover: boolean;
+  @Input()
+  public rtl: boolean;
 
-    ngOnInit(): void {
-        if (this.animate) this.item["state"] = this.animate;
-        if (this.item.override) this.attachOverrides();
-        if (this.timeOut !== 0) this.startTimeOut();
-        this.safeSvg = this._sanitizer.bypassSecurityTrustHtml(this.icons[this.item.type]);
+  @Input()
+  public animate: string;
+
+  @Input()
+  public timeOut: number;
+
+  @Input()
+  public position: number;
+
+  @Input()
+  public clickToClose: boolean;
+
+  @Input()
+  public pauseOnHover: boolean;
+
+  public overrides: any;
+
+
+  // Progress bar variables
+  public progressWidth: number = 0;
+  private stopTime: boolean = false;
+  private timer: any;
+  private steps: number;
+  private speed: number;
+  private count: number = 0;
+  private start: any;
+  private diff: any;
+
+  private safeSvg: SafeHtml;
+
+  constructor(private notificationService: NotificationsService,
+              private domSanitizer: DomSanitizer) {
+  }
+
+  ngOnInit(): void {
+    if (this.animate) {
+      this.item.state = this.animate;
+    }
+    if (this.item.override) {
+      this.attachOverrides();
+    }
+    if (this.timeOut !== 0) {
+      this.startTimeOut();
     }
 
-    startTimeOut(): void {
-        this.steps = this.timeOut / 10;
-        this.speed = this.timeOut / this.steps;
-        this.start = new Date().getTime();
-        this.timer = setTimeout(this.instance, this.speed);
+    this.safeSvg = this.domSanitizer.bypassSecurityTrustHtml(this.icons[this.item.type]);
+  }
+
+  startTimeOut(): void {
+    this.steps = this.timeOut / 10;
+    this.speed = this.timeOut / this.steps;
+    this.start = new Date().getTime();
+    this.timer = setTimeout(this.instance, this.speed);
+  }
+
+  onEnter(): void {
+    if (this.pauseOnHover) {
+      this.stopTime = true;
     }
+  }
 
-    onEnter(): void {
-        if (this.pauseOnHover) this.stopTime = true
+  onLeave(): void {
+    if (this.pauseOnHover) {
+      this.stopTime = false;
+      setTimeout(this.instance, (this.speed - this.diff));
     }
+  }
 
-    onLeave(): void {
-        if (this.pauseOnHover) {
-            this.stopTime = false;
-            setTimeout(this.instance, (this.speed - this.diff));
-        }
+  setPosition(): number {
+    return this.position !== 0 ? this.position * 90 : 0;
+  }
+
+  removeOnClick(): void {
+    if (this.clickToClose) {
+      this.remove();
     }
+  }
 
-    setPosition(): number {
-        return this.position !== 0 ? this.position * 90 : 0;
+  // Attach all the overrides
+  attachOverrides(): void {
+    Object.keys(this.item.override).forEach(a => this[a] = this.item.override[a]);
+  }
+
+  ngOnDestroy(): void {
+    clearTimeout(this.timer);
+  }
+
+  private instance = () => {
+    this.diff = (new Date().getTime() - this.start) - (this.count * this.speed);
+    if (this.count++ === this.steps) {
+      this.remove();
+    } else if (!this.stopTime) {
+      if (this.showProgressBar) this.progressWidth += 100 / this.steps;
+      this.timer = setTimeout(this.instance, (this.speed - this.diff));
     }
+  };
 
-    removeOnClick(): void {
-        if (this.clickToClose) this._remove()
+  private remove() {
+    if (this.animate) {
+      this.item.state = this.animate + 'Out';
+      setTimeout(() => this.notificationService.set(this.item, false), 310);
+    } else {
+      this.notificationService.set(this.item, false);
     }
-
-    // Attach all the overrides
-    attachOverrides(): void {
-        Object.keys(this.item.override).forEach(a => this[a] = this.item.override[a])
-    }
-
-    ngOnDestroy(): void { clearTimeout(this.timer) }
-
-    private instance = () => {
-        this.diff = (new Date().getTime() - this.start) - (this.count * this.speed);
-        if (this.count++ === this.steps) this._remove();
-        else if (!this.stopTime) {
-            if (this.showProgressBar) this.progressWidth += 100 / this.steps;
-            this.timer = setTimeout(this.instance, (this.speed - this.diff));
-        }
-    };
-
-    private _remove() {
-        if (this.animate) {
-            this.item["state"] = this.animate + "Out";
-            setTimeout(() => this._service.set(this.item, false), 310)
-        }
-
-        else this._service.set(this.item, false)
-    }
+  }
 }
