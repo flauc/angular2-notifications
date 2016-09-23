@@ -1,6 +1,7 @@
-import "rxjs/Rx";
-import {Component} from "@angular/core";
-import {NotificationsService, SimpleNotificationsComponent} from "angular2-notifications"
+import 'rxjs/Rx';
+import {Component, OnInit} from '@angular/core';
+import {NotificationsService, SimpleNotificationsComponent} from 'angular2-notifications';
+import {Options} from '../../src/options.type';
 
 @Component({
     selector: "app",
@@ -43,7 +44,7 @@ import {NotificationsService, SimpleNotificationsComponent} from "angular2-notif
     `
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit{
     constructor(
         private _service: NotificationsService
     ) {}
@@ -56,26 +57,18 @@ export class AppComponent {
 
     public temp: boolean[] = [true, false];
 
-    public options = {
-        timeOut: 5000,
-        lastOnBottom: true,
-        clickToClose: true,
-        maxLength: 0,
-        maxStack: 7,
-        showProgressBar: true,
-        pauseOnHover: true,
-        preventDuplicates: false,
-        preventLastDuplicates: "visible",
-        rtl: false,
-        animate: "scale",
-        position: ["right", "bottom"]
-    };
+    public options: Options;
 
     private html = `<p>Test</p><p>A nother test</p>`;
 
     // createPush() {
     //     this._push.create({title: "test", body: "bla"})
     // }
+
+    ngOnInit(): void {
+        this.options = new Options();
+        this.options.animate = 'scale'
+    }
 
     create() {
         switch (this.type) {
