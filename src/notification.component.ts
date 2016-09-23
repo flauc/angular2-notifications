@@ -2,18 +2,17 @@ import {
   Component,
   OnInit,
   OnDestroy,
-  ViewEncapsulation,
   trigger,
   state,
   style,
   transition,
   animate,
-  Input
+  Input,
+  ViewEncapsulation
 } from '@angular/core';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {Notification} from './notification.type';
 import {NotificationsService} from './notifications.service';
-import {Icons} from './icons';
 
 @Component({
   selector: 'simple-notification',
@@ -182,16 +181,19 @@ import {Icons} from './icons';
 export class NotificationComponent implements OnInit, OnDestroy {
 
   @Input()
-  public icons: Icons;
-
-  @Input()
-  public item: Notification;
-
-  @Input()
-  public maxLength: number;
+  public timeOut: number;
 
   @Input()
   public showProgressBar: boolean;
+
+  @Input()
+  public pauseOnHover: boolean;
+
+  @Input()
+  public clickToClose: boolean;
+
+  @Input()
+  public maxLength: number;
 
   @Input()
   public theClass: string;
@@ -203,18 +205,10 @@ export class NotificationComponent implements OnInit, OnDestroy {
   public animate: string;
 
   @Input()
-  public timeOut: number;
-
-  @Input()
   public position: number;
 
   @Input()
-  public clickToClose: boolean;
-
-  @Input()
-  public pauseOnHover: boolean;
-
-  public overrides: any;
+  public item: Notification;
 
 
   // Progress bar variables
@@ -237,14 +231,15 @@ export class NotificationComponent implements OnInit, OnDestroy {
     if (this.animate) {
       this.item.state = this.animate;
     }
-    if (this.item.override) {
-      this.attachOverrides();
-    }
+    // Is it need? The variable of Notification class is not the same of the nofitication.component
+    // if (this.item.override) {
+    //   this.attachOverrides();
+    // }
     if (this.timeOut !== 0) {
       this.startTimeOut();
     }
 
-    this.safeSvg = this.domSanitizer.bypassSecurityTrustHtml(this.icons[this.item.type]);
+    this.safeSvg = this.domSanitizer.bypassSecurityTrustHtml(this.item.icon);
   }
 
   startTimeOut(): void {
@@ -278,9 +273,13 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   // Attach all the overrides
-  attachOverrides(): void {
-    Object.keys(this.item.override).forEach(a => this[a] = this.item.override[a]);
-  }
+  // attachOverrides(): void {
+  //   Object.keys(this.item.override).forEach(a => {
+  //     if (this.hasOwnProperty(a)) {
+  //       this[a] = this.item.override[a];
+  //     }
+  //   });
+  // }
 
   ngOnDestroy(): void {
     clearTimeout(this.timer);

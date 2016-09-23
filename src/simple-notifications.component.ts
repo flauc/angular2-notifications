@@ -1,27 +1,26 @@
-import {Component, EventEmitter, OnInit, OnDestroy, ViewEncapsulation, Input, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, OnDestroy, Input, Output, ViewEncapsulation} from '@angular/core';
 import {Notification} from './notification.type';
 import {NotificationsService} from './notifications.service';
-import {defaultIcons, Icons} from './icons';
 import {Options} from './options.type';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'simple-notifications',
   encapsulation: ViewEncapsulation.None,
   template: `
-        <div class="simple-notification-wrapper" [ngClass]="position">
+        <div class="simple-notification-wrapper" [ngClass]="options.position">
             <simple-notification
-                *ngFor="let a of notifications; let i = index"
-                [item]="a"
-                [timeOut]="timeOut"
-                [clickToClose]="clickToClose"
-                [maxLength]="maxLength"
-                [showProgressBar]="showProgressBar"
-                [pauseOnHover]="pauseOnHover"
-                [theClass]="theClass"
-                [rtl]="rtl"
-                [animate]="animate"
+                *ngFor="let notification of notifications; let i = index"
+                [item]="notification"
+                [timeOut]="options.timeOut"
+                [clickToClose]="options.clickToClose"
+                [maxLength]="options.maxLength"
+                [showProgressBar]="options.showProgressBar"
+                [pauseOnHover]="options.pauseOnHover"
+                [theClass]="options.theClass"
+                [rtl]="options.rtl"
+                [animate]="options.animate"
                 [position]="i"
-                [icons]="icons"
                 >
             </simple-notification>
         </div>
@@ -50,44 +49,23 @@ import {Options} from './options.type';
 
 export class SimpleNotificationsComponent implements OnInit, OnDestroy {
 
-  @Input() set options(opt: Options) {
-    this.attachChanges(opt);
-  }
+  @Input()
+  public options: Options = new Options();
 
   @Output() onCreate = new EventEmitter();
   @Output() onDestroy = new EventEmitter();
 
-  public notifications: Notification[] = [];
-  public position: ['top' | 'bottom', 'right' | 'left'] = ['bottom', 'right'];
 
-  private listener: any;
-
-  // Received values
-  private lastOnBottom: boolean = true;
-  private maxStack: number = 8;
-  private preventLastDuplicates: any = false;
-  private preventDuplicates: boolean = false;
-
-  // Sent values
-  private timeOut: number = 0;
-  private maxLength: number = 0;
-  private clickToClose: boolean = true;
-  private showProgressBar: boolean = true;
-  private pauseOnHover: boolean = true;
-  private theClass: string;
-  private rtl: boolean = false;
-  private animate: 'fromRight' | 'fromLeft' | 'rotate' | 'scale' = 'fromRight';
-  private expand: string;
-  private icons: Icons = defaultIcons;
-
+  private listener: Subscription;
   private lastNotificationCreated: Notification;
+  public notifications: Notification[] = [];
 
-  constructor(private _service: NotificationsService) {
+  constructor(private notificationsService: NotificationsService) {
   }
 
   ngOnInit(): void {
     // Listen for changes in the service
-    this.listener = this._service.getChangeEmitter()
+    this.listener = this.notificationsService.getChangeEmitter()
       .subscribe(item => {
         switch (item.command) {
           case 'cleanAll':
@@ -124,18 +102,18 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
   add(item: Notification): void {
     item.createdOn = new Date();
 
-    let toBlock: boolean = this.preventLastDuplicates || this.preventDuplicates ? this.block(item) : false;
+    let toBlock: boolean = this.options.preventLastDuplicates || this.options.preventDuplicates ? this.block(item) : false;
 
     // Save this as the last created notification
     this.lastNotificationCreated = item;
 
     if (!toBlock) {
       // Check if the notification should be added at the start or the end of the array
-      if (this.lastOnBottom) {
-        if (this.notifications.length >= this.maxStack) this.notifications.splice(0, 1);
+      if (this.options.lastOnBottom) {
+        if (this.notifications.length >= this.options.maxStacks) this.notifications.splice(0, 1);
         this.notifications.push(item);
       } else {
-        if (this.notifications.length >= this.maxStack) this.notifications.splice(this.notifications.length - 1, 1);
+        if (this.notifications.length >= this.options.maxStacks) this.notifications.splice(this.notifications.length - 1, 1);
         this.notifications.splice(0, 0, item);
       }
 
@@ -148,7 +126,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
 
     let toCheck = item.html ? this.checkHtml : this.checkStandard;
 
-    if (this.preventDuplicates && this.notifications.length > 0) {
+    if (this.options.preventDuplicates && this.notifications.length > 0) {
       for (let i = 0; i < this.notifications.length; i++) {
         if (toCheck(this.notifications[i], item)) {
           return true;
@@ -156,17 +134,17 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
       }
     }
 
-    if (this.preventLastDuplicates) {
+    if (this.options.preventLastDuplicates) {
 
       let comp: Notification;
 
-      if (this.preventLastDuplicates === 'visible' && this.notifications.length > 0) {
-        if (this.lastOnBottom) {
+      if (this.options.preventLastDuplicates === 'visible' && this.notifications.length > 0) {
+        if (this.options.lastOnBottom) {
           comp = this.notifications[this.notifications.length - 1];
         } else {
           comp = this.notifications[0];
         }
-      } else if (this.preventLastDuplicates === 'all' && this.lastNotificationCreated) {
+      } else if (this.options.preventLastDuplicates === 'all' && this.lastNotificationCreated) {
         comp = this.lastNotificationCreated;
       } else {
         return false;
@@ -185,19 +163,11 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     return checker.html ? checker.type === item.type && checker.title === item.title && checker.content === item.content && checker.html === item.html : false;
   }
 
-  // Attach all the changes received in the options object
-  attachChanges(options: any): void {
-    Object.keys(options).forEach(a => {
-      if (this.hasOwnProperty(a)) {
-        this[a] = options[a];
-      }
-    });
-  }
-
   buildEmit(notification: Notification, to: boolean) {
     let toEmit: Notification = {
       createdOn: notification.createdOn,
       type: notification.type,
+      icon: notification.icon,
       id: notification.id
     };
 
@@ -216,11 +186,11 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
   }
 
   cleanSingle(id: string): void {
-    let indexOfDelete: number;
+    let indexOfDelete: number = 0;
     let doDelete: boolean = false;
 
-    this.notifications.forEach((a, idx) => {
-      if (a.id === id) {
+    this.notifications.forEach((notification, idx) => {
+      if (notification.id === id) {
         indexOfDelete = idx;
         doDelete = true;
       }
