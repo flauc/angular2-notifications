@@ -1,5 +1,6 @@
-import { OnInit, OnDestroy, PipeTransform } from "@angular/core";
-import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
+import { EventEmitter, PipeTransform, OnInit, OnDestroy } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Subject } from 'rxjs/Rx';
 
 export interface Icons {
     alert: string;
@@ -15,7 +16,7 @@ export declare let defaultIcons: {
 };
 
 export declare class MaxPipe implements PipeTransform {
-    transform(value: any, args: any): any;
+    transform(value: string, ...args: any[]): any;
 }
 
 export interface NotificationEvent {
@@ -31,17 +32,19 @@ export interface NotificationType {
 }
 
 export declare class NotificationComponent implements OnInit, OnDestroy {
-    private _service;
-    private _sanitizer;
-    constructor(_service: NotificationsService, _sanitizer: DomSanitizer);
+    private notificationService;
+    private domSanitizer;
     icons: Icons;
-    safeSvg: SafeHtml;
     item: Notification;
     maxLength: number;
     showProgressBar: boolean;
     theClass: string;
     rtl: boolean;
     animate: string;
+    timeOut: number;
+    position: number;
+    clickToClose: boolean;
+    pauseOnHover: boolean;
     overrides: any;
     progressWidth: number;
     private stopTime;
@@ -51,10 +54,8 @@ export declare class NotificationComponent implements OnInit, OnDestroy {
     private count;
     private start;
     private diff;
-    private timeOut;
-    private position;
-    private clickToClose;
-    private pauseOnHover;
+    private safeSvg;
+    constructor(notificationService: NotificationsService, domSanitizer: DomSanitizer);
     ngOnInit(): void;
     startTimeOut(): void;
     onEnter(): void;
@@ -64,23 +65,25 @@ export declare class NotificationComponent implements OnInit, OnDestroy {
     attachOverrides(): void;
     ngOnDestroy(): void;
     private instance;
-    private _remove();
+    private remove();
 }
 
 export interface Notification {
     id?: string;
     type: string;
-    createdOn?: Date;
     title?: string;
     content?: string;
     override?: any;
     html?: any;
+    state?: string;
+    createdOn?: Date;
+    destroyedOn?: Date;
 }
 
 export declare class NotificationsService {
-    private _emitter;
+    private emitter;
     set(notification: Notification, to: boolean): Notification;
-    getChangeEmitter(): any;
+    getChangeEmitter(): Subject<any>;
     success(title: string, content: string, override?: any): Notification;
     error(title: string, content: string, override?: any): Notification;
     alert(title: string, content: string, override?: any): Notification;
@@ -103,17 +106,12 @@ export interface Options {
     preventLastDuplicates?: boolean | string;
     theClass?: string;
     rtl?: boolean;
-    animate?: "fromRight" | "fromLeft" | "rotate" | "scale";
+    animate?: 'fromRight' | 'fromLeft' | 'rotate' | 'scale';
     icons?: Icons;
-    position?: ["top" | "bottom", "right" | "left"];
+    position?: ['top' | 'bottom', 'right' | 'left'];
 }
 
 export declare class PushNotificationsService {
-    canActivate: boolean;
-    activate(): {
-        success: boolean;
-        message?: string;
-    };
 }
 export interface PushNotification {
     title: string;
@@ -122,12 +120,11 @@ export interface PushNotification {
 
 export declare class SimpleNotificationsComponent implements OnInit, OnDestroy {
     private _service;
-    constructor(_service: NotificationsService);
     options: Options;
-    onCreate: any;
-    onDestroy: any;
+    onCreate: EventEmitter<{}>;
+    onDestroy: EventEmitter<{}>;
     notifications: Notification[];
-    position: ["top" | "bottom", "right" | "left"];
+    position: ['top' | 'bottom', 'right' | 'left'];
     private listener;
     private lastOnBottom;
     private maxStack;
@@ -144,16 +141,15 @@ export declare class SimpleNotificationsComponent implements OnInit, OnDestroy {
     private expand;
     private icons;
     private lastNotificationCreated;
+    constructor(_service: NotificationsService);
     ngOnInit(): void;
     defaultBehavior(value: any): void;
-    add(item: any): void;
-    block(item: any): boolean;
+    add(item: Notification): void;
+    block(item: Notification): boolean;
+    checkStandard(checker: Notification, item: Notification): boolean;
+    checkHtml(checker: Notification, item: Notification): boolean;
     attachChanges(options: any): void;
-    buildEmit(notification: Notification, to: boolean): {
-        createdOn: Date;
-        type: string;
-        id: string;
-    };
+    buildEmit(notification: Notification, to: boolean): Notification;
     cleanSingle(id: string): void;
     ngOnDestroy(): void;
 }
