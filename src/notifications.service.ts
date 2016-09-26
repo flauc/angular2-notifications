@@ -12,7 +12,8 @@ export class NotificationsService {
 
   set(notification: Notification, to: boolean) {
     notification.id = notification.override && notification.override.id ? notification.override.id : Math.random().toString(36).substring(3);
-    this.emitter.next({command: 'set', notification: notification, add: to});
+    let notificationEvent: NotificationEvent = {command: 'set', notification: notification, add: to};
+    this.emitter.next(notificationEvent);
     return notification;
   };
 

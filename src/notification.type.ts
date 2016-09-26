@@ -4,7 +4,7 @@ export interface Notification {
   icon: string;
   title?: string;
   content?: string;
-  override?: any;
+  override?: Notification;
   html?: any;
   state?: string;
   createdOn?: Date;

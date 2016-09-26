@@ -3,6 +3,7 @@ import {Notification} from './notification.type';
 import {NotificationsService} from './notifications.service';
 import {Options} from './options.type';
 import {Subscription} from 'rxjs';
+import {NotificationEvent} from './notification-event';
 
 @Component({
   selector: 'simple-notifications',
@@ -56,9 +57,9 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
   @Output() onDestroy = new EventEmitter();
 
 
+  private notifications: Notification[] = [];
   private listener: Subscription;
   private lastNotificationCreated: Notification;
-  public notifications: Notification[] = [];
 
   constructor(private notificationsService: NotificationsService) {
   }
@@ -66,7 +67,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // Listen for changes in the service
     this.listener = this.notificationsService.getChangeEmitter()
-      .subscribe(item => {
+      .subscribe((item: NotificationEvent) => {
         switch (item.command) {
           case 'cleanAll':
             this.notifications = [];
@@ -135,7 +136,6 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     }
 
     if (this.options.preventLastDuplicates) {
-
       let comp: Notification;
 
       if (this.options.preventLastDuplicates === 'visible' && this.notifications.length > 0) {

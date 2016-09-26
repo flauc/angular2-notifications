@@ -89,7 +89,7 @@ import {NotificationsService} from './notifications.service';
 
             <div *ngIf="!item.html">
                 <div class="sn-title">{{item.title}}</div>
-                <div class="sn-content">{{item.content | max:maxLength}}</div>
+                <div class="sn-content">{{item.content | maxCharactere:maxLength}}</div>
 
                 <div *ngIf="item.type !== 'bare'" [innerHTML]="safeSvg"></div>
             </div>
@@ -218,8 +218,8 @@ export class NotificationComponent implements OnInit, OnDestroy {
   private steps: number;
   private speed: number;
   private count: number = 0;
-  private start: any;
-  private diff: any;
+  private start: number;
+  private diff: number;
 
   private safeSvg: SafeHtml;
 

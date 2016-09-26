@@ -6,7 +6,7 @@ export class Options {
   clickToClose?: boolean = true; //true
   maxLength?: number = 0; //0
   maxStacks?: number = 7;
-  preventDuplicates?: boolean = false;
+  preventDuplicates?: boolean = true;
   preventLastDuplicates?: boolean | string = false;
   theClass?: string;
   rtl?: boolean = false;
