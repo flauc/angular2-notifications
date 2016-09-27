@@ -24,11 +24,6 @@ var packages = {
 
 ## Documentation 
 
-I have moved the rest of the documentation in to separate files. Since the implementation of regular page notifications (toasts) and push notifications is quit a bit different.
-
-Im currently working on push notifications, they are already available but its only a basic implementation. 
-They should be fully functional in the next big release which will come in a few days. 
-
 * [Toast Notifications Documentation](https://github.com/flauc/angular2-notifications/tree/master/docs/toastNotifications.md)
 * [Push Notifications Documentation](https://github.com/flauc/angular2-notifications/tree/master/docs/pushNotifications.md)
 
