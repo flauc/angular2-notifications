@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs/Rx';
-import {NotificationEvent} from './notification-event';
 import {Notification} from './notification.type';
 import {Icons, defaultIcons} from './icons';
+import {NotificationEvent} from './notification-event.type';
 
 @Injectable()
 export class NotificationsService {
@@ -22,40 +22,41 @@ export class NotificationsService {
   }
 
   //// Access methods
-  success(title: string, content: string, override?: any) {
-    return this.set({
-      title: title,
-      content: content,
-      type: 'success',
-      icon: this.icons.success,
-      override: override
-    }, true);
+  success(title: string, content: string, override?: Notification): Notification {
+    let notification: Notification = {title: title, content: content, type: 'success', icon: this.icons.success, override: override};
+    return this.set(notification, true);
   }
 
-  error(title: string, content: string, override?: any) {
-    return this.set({title: title, content: content, type: 'error', icon: this.icons.error, override: override}, true);
+  error(title: string, content: string, override?: Notification): Notification {
+    let notification: Notification = {title: title, content: content, type: 'error', icon: this.icons.error, override: override};
+    return this.set(notification, true);
   }
 
-  alert(title: string, content: string, override?: any) {
-    return this.set({title: title, content: content, type: 'alert', icon: this.icons.alert, override: override}, true);
+  alert(title: string, content: string, override?: Notification): Notification {
+    let notification: Notification = {title: title, content: content, type: 'alert', icon: this.icons.alert, override: override};
+    return this.set(notification, true);
   }
 
-  info(title: string, content: string, override?: any) {
-    return this.set({title: title, content: content, type: 'info', icon: this.icons.info, override: override}, true);
+  info(title: string, content: string, override?: Notification): Notification {
+    let notification: Notification = {title: title, content: content, type: 'info', icon: this.icons.info, override: override};
+    return this.set(notification, true);
   }
 
-  bare(title: string, content: string, override?: any) {
-    return this.set({title: title, content: content, type: 'bare', icon: 'bare', override: override}, true);
+  bare(title: string, content: string, override?: Notification): Notification {
+    let notification: Notification = {title: title, content: content, type: 'bare', icon: 'bare', override: override};
+    return this.set(notification, true);
   }
 
   // With type method
-  create(title: string, content: string, type: string, override?: any) {
-    return this.set({title: title, content: content, type: type, icon: 'bare', override: override}, true);
+  create(title: string, content: string, type: string, override?: Notification): Notification {
+    let notification: Notification = {title: title, content: content, type: type, icon: 'bare', override: override};
+    return this.set(notification, true);
   }
 
   // HTML Notification method
-  html(html: any, type: string, override?: any) {
-    return this.set({html: html, type: type, icon: 'bare', override: override, title: null, content: null}, true);
+  html(html: any, type: string, override?: Notification): Notification {
+    let notification: Notification = {html: html, type: type, icon: 'bare', override: override, title: null, content: null};
+    return this.set(notification, true);
   }
 
   // Remove all notifications method

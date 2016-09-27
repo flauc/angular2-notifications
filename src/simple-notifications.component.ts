@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit, OnDestroy, Input, Output, ViewEncapsulation} from '@angular/core';
 import {Notification} from './notification.type';
 import {NotificationsService} from './notifications.service';
-import {Options} from './options.type';
+import {NotificationOptions} from './notification-options.type';
 import {Subscription} from 'rxjs';
-import {NotificationEvent} from './notification-event';
+import {NotificationEvent} from './notification-event.type';
 
 @Component({
   selector: 'simple-notifications',
@@ -51,7 +51,7 @@ import {NotificationEvent} from './notification-event';
 export class SimpleNotificationsComponent implements OnInit, OnDestroy {
 
   @Input()
-  public options: Options = new Options();
+  public options: NotificationOptions = new NotificationOptions();
 
   @Output() onCreate = new EventEmitter();
   @Output() onDestroy = new EventEmitter();
@@ -95,7 +95,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
   // Default behavior on event
   defaultBehavior(value: any): void {
     this.notifications.splice(this.notifications.indexOf(value.notification), 1);
-    this.onDestroy.emit(this.buildEmit(value.notification, false));
+    this.onDestroy.emit(this.buildEmit(value.notification, new Date()));
   }
 
 
@@ -118,13 +118,12 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
         this.notifications.splice(0, 0, item);
       }
 
-      this.onCreate.emit(this.buildEmit(item, true));
+      this.onCreate.emit(this.buildEmit(item));
     }
   }
 
   // Check if notifications should be prevented
   block(item: Notification): boolean {
-
     let toCheck = item.html ? this.checkHtml : this.checkStandard;
 
     if (this.options.preventDuplicates && this.notifications.length > 0) {
@@ -138,13 +137,13 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     if (this.options.preventLastDuplicates) {
       let comp: Notification;
 
-      if (this.options.preventLastDuplicates === 'visible' && this.notifications.length > 0) {
+      if (this.options.preventLastDuplicates && this.notifications.length > 0) {
         if (this.options.lastOnBottom) {
           comp = this.notifications[this.notifications.length - 1];
         } else {
           comp = this.notifications[0];
         }
-      } else if (this.options.preventLastDuplicates === 'all' && this.lastNotificationCreated) {
+      } else if (this.options.preventLastDuplicates && this.lastNotificationCreated) {
         comp = this.lastNotificationCreated;
       } else {
         return false;
@@ -163,7 +162,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     return checker.html ? checker.type === item.type && checker.title === item.title && checker.content === item.content && checker.html === item.html : false;
   }
 
-  buildEmit(notification: Notification, to: boolean) {
+  buildEmit(notification: Notification, destroyedOn?: Date) {
     let toEmit: Notification = {
       createdOn: notification.createdOn,
       type: notification.type,
@@ -178,9 +177,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
       toEmit.content = notification.content;
     }
 
-    if (!to) {
-      toEmit.destroyedOn = new Date();
-    }
+    toEmit.destroyedOn = destroyedOn;
 
     return toEmit;
   }

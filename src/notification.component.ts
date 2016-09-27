@@ -1,18 +1,8 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-  Input,
-  ViewEncapsulation
-} from '@angular/core';
+import {Component, OnInit, OnDestroy, trigger, state, style, transition, animate, Input, ViewEncapsulation} from '@angular/core';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {Notification} from './notification.type';
 import {NotificationsService} from './notifications.service';
+import Timer = NodeJS.Timer;
 
 @Component({
   selector: 'simple-notification',
@@ -214,7 +204,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   // Progress bar variables
   public progressWidth: number = 0;
   private stopTime: boolean = false;
-  private timer: any;
+  private timer: Timer;
   private steps: number;
   private speed: number;
   private count: number = 0;

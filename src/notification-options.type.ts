@@ -1,4 +1,4 @@
-export class Options {
+export class NotificationOptions {
   timeOut?: number = 6000;                         // default 0
   showProgressBar?: boolean = true;                // default true
   pauseOnHover?: boolean = true;                   // default true
@@ -7,7 +7,7 @@ export class Options {
   maxLength?: number = 0; //0
   maxStacks?: number = 7;
   preventDuplicates?: boolean = true;
-  preventLastDuplicates?: boolean | string = false;
+  preventLastDuplicates?: boolean = false;
   theClass?: string;
   rtl?: boolean = false;
   animate?: 'fromRight' | 'fromLeft' | 'rotate' | 'scale' = 'fromRight';  // default 'fromRight';
