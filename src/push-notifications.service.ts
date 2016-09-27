@@ -32,6 +32,7 @@ export class PushNotificationsService {
 
             const n = new Notification(title, options);
 
+            n.onshow = (e) => obs.next({notification: n, event: e});
             n.onclick = (e) => obs.next({notification: n, event: e});
             n.onerror = (e) => obs.error({notification: n, event: e});
             n.onclose = () => obs.complete();
