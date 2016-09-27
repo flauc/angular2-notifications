@@ -1,6 +1,6 @@
 import 'rxjs/Rx';
 import {Component, OnInit} from '@angular/core';
-import {NotificationsService, SimpleNotificationsComponent, Options} from 'angular2-notifications';
+import {NotificationsService, SimpleNotificationsComponent, Options, PushNotificationsService} from 'angular2-notifications';
 
 @Component({
     selector: 'app',
@@ -39,13 +39,15 @@ import {NotificationsService, SimpleNotificationsComponent, Options} from 'angul
             <button type="submit">Delete</button>
         </form>
         
+        <button (click)="getPermission()">Get push permission</button>
         <button (click)="createPush()">Create Push</button>
     `
 })
 
 export class AppComponent {
     constructor(
-        private _service: NotificationsService
+        private _service: NotificationsService,
+        private _push: PushNotificationsService
     ) {}
 
     public title: string = 'just a title';
@@ -110,6 +112,18 @@ export class AppComponent {
 
     onDestroy(event) {
         console.log(event);
+    }
+
+    getPermission() {
+        this._push.getPermission();
+    }
+
+    createPush() {
+        this._push.create('Test', {body: 'bla'}).subscribe(
+            res => console.log(res),
+            err => console.log(err),
+            com => console.log('in complete: ', com)
+        )
     }
     
     cleanSingle() {

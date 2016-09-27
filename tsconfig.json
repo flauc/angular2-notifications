@@ -23,6 +23,9 @@
     "src/options.type.ts",
     "src/notification.type.ts",
     "src/notification-event.type.ts",
-    "src/notification-type.type.ts"
+    "src/notification-type.type.ts",
+    "src/push-notification.type.ts",
+    "src/push-notifications.service.ts",
+    "src/push-notifications.module.ts"
   ]
 }

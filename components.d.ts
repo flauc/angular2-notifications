@@ -1,6 +1,7 @@
-import { EventEmitter, PipeTransform, OnInit, OnDestroy } from '@angular/core';
+import { EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Subject } from 'rxjs/Rx';
+import { PipeTransform } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
 
 export interface Icons {
     alert: string;
@@ -8,12 +9,7 @@ export interface Icons {
     info: string;
     success: string;
 }
-export declare let defaultIcons: {
-    alert: string;
-    error: string;
-    info: string;
-    success: string;
-};
+export declare const defaultIcons: Icons;
 
 export declare class MaxPipe implements PipeTransform {
     transform(value: string, ...args: any[]): any;
@@ -34,18 +30,16 @@ export interface NotificationType {
 export declare class NotificationComponent implements OnInit, OnDestroy {
     private notificationService;
     private domSanitizer;
-    icons: Icons;
-    item: Notification;
-    maxLength: number;
+    timeOut: number;
     showProgressBar: boolean;
+    pauseOnHover: boolean;
+    clickToClose: boolean;
+    maxLength: number;
     theClass: string;
     rtl: boolean;
     animate: string;
-    timeOut: number;
     position: number;
-    clickToClose: boolean;
-    pauseOnHover: boolean;
-    overrides: any;
+    item: Notification;
     progressWidth: number;
     private stopTime;
     private timer;
@@ -71,6 +65,7 @@ export declare class NotificationComponent implements OnInit, OnDestroy {
 export interface Notification {
     id?: string;
     type: string;
+    icon: string;
     title?: string;
     content?: string;
     override?: any;
@@ -82,8 +77,9 @@ export interface Notification {
 
 export declare class NotificationsService {
     private emitter;
+    private icons;
     set(notification: Notification, to: boolean): Notification;
-    getChangeEmitter(): Subject<any>;
+    getChangeEmitter(): Subject<NotificationEvent>;
     success(title: string, content: string, override?: any): Notification;
     error(title: string, content: string, override?: any): Notification;
     alert(title: string, content: string, override?: any): Notification;
@@ -111,11 +107,28 @@ export interface Options {
     position?: ['top' | 'bottom', 'right' | 'left'];
 }
 
-export declare class PushNotificationsService {
-}
+export declare type Permission = 'denied' | 'granted' | 'default';
 export interface PushNotification {
-    title: string;
-    body: string;
+    body?: string;
+    icon?: string;
+    tag?: string;
+    renotify?: boolean;
+    silent?: boolean;
+    sound?: string;
+    noscreen?: boolean;
+    sticky?: boolean;
+    dir?: 'auto' | 'ltr' | 'rtl';
+    lang?: string;
+    vibrate?: number[];
+}
+
+export declare class PushNotificationsModule {
+}
+
+export declare class PushNotificationsService {
+    permission: Permission;
+    getPermission(): void;
+    create(title: string, options?: PushNotification): any;
 }
 
 export declare class SimpleNotificationsComponent implements OnInit, OnDestroy {
@@ -125,6 +138,7 @@ export declare class SimpleNotificationsComponent implements OnInit, OnDestroy {
     onDestroy: EventEmitter<{}>;
     notifications: Notification[];
     position: ['top' | 'bottom', 'right' | 'left'];
+    private lastNotificationCreated;
     private listener;
     private lastOnBottom;
     private maxStack;
@@ -138,9 +152,7 @@ export declare class SimpleNotificationsComponent implements OnInit, OnDestroy {
     private theClass;
     private rtl;
     private animate;
-    private expand;
     private icons;
-    private lastNotificationCreated;
     constructor(_service: NotificationsService);
     ngOnInit(): void;
     defaultBehavior(value: any): void;
