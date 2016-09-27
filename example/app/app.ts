@@ -1,10 +1,9 @@
 import 'rxjs/Rx';
 import {Component, OnInit} from '@angular/core';
-import {NotificationsService, SimpleNotificationsComponent} from 'angular2-notifications';
-import {Options} from '../../src/options.type';
+import {NotificationsService, SimpleNotificationsComponent, Options} from 'angular2-notifications';
 
 @Component({
-    selector: "app",
+    selector: 'app',
     template: `
         <form>
             <div>
@@ -44,20 +43,33 @@ import {Options} from '../../src/options.type';
     `
 })
 
-export class AppComponent implements OnInit{
+export class AppComponent {
     constructor(
         private _service: NotificationsService
     ) {}
 
-    public title: string = "just a title";
-    public content: string = "just content";
-    public type: string = "success";
+    public title: string = 'just a title';
+    public content: string = 'just content';
+    public type: string = 'success';
 
     public deleteId: string;
 
     public temp: boolean[] = [true, false];
 
-    public options: Options;
+    public options = {
+        timeOut: 5000,
+        lastOnBottom: true,
+        clickToClose: true,
+        maxLength: 0,
+        maxStack: 7,
+        showProgressBar: true,
+        pauseOnHover: true,
+        preventDuplicates: false,
+        preventLastDuplicates: 'visible',
+        rtl: false,
+        animate: 'scale',
+        position: ['right', 'bottom']
+    };
 
     private html = `<p>Test</p><p>A nother test</p>`;
 
@@ -65,34 +77,30 @@ export class AppComponent implements OnInit{
     //     this._push.create({title: "test", body: "bla"})
     // }
 
-    ngOnInit(): void {
-        this.options = new Options();
-        this.options.animate = 'scale'
-    }
 
     create() {
         switch (this.type) {
-            case "success":
+            case 'success':
                 let a = this._service.success(this.title, this.content, {id: 123});
                 break;
-            case "alert":
+            case 'alert':
                 this._service.alert(this.title, this.content);
                 break;
-            case "error":
+            case 'error':
                 this._service.error(this.title, this.content);
                 break;
-            case "info":
+            case 'info':
                 this._service.info(this.title, this.content);
                 break;
-            case "bare":
+            case 'bare':
                 this._service.bare(this.title, this.content);
                 break;
         }
     }
 
-    withOverride() { this._service.create("pero", "peric", "success", {timeOut: 0, clickToClose: false, maxLength: 3, showProgressBar: true, theClass: "overrideTest"}) }
+    withOverride() { this._service.create('pero', 'peric', 'success', {timeOut: 0, clickToClose: false, maxLength: 3, showProgressBar: true, theClass: 'overrideTest'}) }
 
-    withHtml() {this._service.html(this.html, "success") }
+    withHtml() {this._service.html(this.html, 'success') }
 
     removeAll() { this._service.remove() }
 

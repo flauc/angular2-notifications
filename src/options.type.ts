@@ -1,15 +1,18 @@
-export class Options {
-  timeOut?: number = 6000;                         // default 0
-  showProgressBar?: boolean = true;                // default true
-  pauseOnHover?: boolean = true;                   // default true
-  lastOnBottom?: boolean = true; //default true
-  clickToClose?: boolean = true; //true
-  maxLength?: number = 0; //0
-  maxStacks?: number = 7;
-  preventDuplicates?: boolean = false;
-  preventLastDuplicates?: boolean | string = false;
+import {Icons} from './icons';
+
+export interface Options {
+  timeOut?: number;
+  showProgressBar?: boolean;
+  pauseOnHover?: boolean;
+  lastOnBottom?: boolean;
+  clickToClose?: boolean;
+  maxLength?: number;
+  maxStacks?: number;
+  preventDuplicates?: number;
+  preventLastDuplicates?: boolean | string;
   theClass?: string;
-  rtl?: boolean = false;
-  animate?: 'fromRight' | 'fromLeft' | 'rotate' | 'scale' = 'fromRight';  // default 'fromRight';
-  position?: ['top' | 'bottom', 'right' | 'left'] = ['bottom', 'right'];
+  rtl?: boolean;
+  animate?: 'fromRight' | 'fromLeft' | 'rotate' | 'scale';
+  icons?: Icons;
+  position?: ['top' | 'bottom', 'right' | 'left'];
 }

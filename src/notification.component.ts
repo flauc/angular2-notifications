@@ -231,10 +231,9 @@ export class NotificationComponent implements OnInit, OnDestroy {
     if (this.animate) {
       this.item.state = this.animate;
     }
-    // Is it need? The variable of Notification class is not the same of the nofitication.component
-    // if (this.item.override) {
-    //   this.attachOverrides();
-    // }
+    if (this.item.override) {
+      this.attachOverrides();
+    }
     if (this.timeOut !== 0) {
       this.startTimeOut();
     }
@@ -273,13 +272,13 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   // Attach all the overrides
-  // attachOverrides(): void {
-  //   Object.keys(this.item.override).forEach(a => {
-  //     if (this.hasOwnProperty(a)) {
-  //       this[a] = this.item.override[a];
-  //     }
-  //   });
-  // }
+  attachOverrides(): void {
+    Object.keys(this.item.override).forEach(a => {
+      if (this.hasOwnProperty(a)) {
+        this[a] = this.item.override[a];
+      }
+    });
+  }
 
   ngOnDestroy(): void {
     clearTimeout(this.timer);
