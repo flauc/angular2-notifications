@@ -1,18 +1,8 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-  Input,
-  ViewEncapsulation
-} from '@angular/core';
+import {Component, OnInit, OnDestroy, trigger, state, style, transition, animate, Input, ViewEncapsulation} from '@angular/core';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {Notification} from './notification.type';
 import {NotificationsService} from './notifications.service';
+import Timer = NodeJS.Timer;
 
 @Component({
   selector: 'simple-notification',
@@ -89,7 +79,7 @@ import {NotificationsService} from './notifications.service';
 
             <div *ngIf="!item.html">
                 <div class="sn-title">{{item.title}}</div>
-                <div class="sn-content">{{item.content | max:maxLength}}</div>
+                <div class="sn-content">{{item.content | maxCharactere:maxLength}}</div>
 
                 <div *ngIf="item.type !== 'bare'" [innerHTML]="safeSvg"></div>
             </div>
@@ -214,12 +204,12 @@ export class NotificationComponent implements OnInit, OnDestroy {
   // Progress bar variables
   public progressWidth: number = 0;
   private stopTime: boolean = false;
-  private timer: any;
+  private timer: Timer;
   private steps: number;
   private speed: number;
   private count: number = 0;
-  private start: any;
-  private diff: any;
+  private start: number;
+  private diff: number;
 
   private safeSvg: SafeHtml;
 

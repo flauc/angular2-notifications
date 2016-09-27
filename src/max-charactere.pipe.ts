@@ -1,9 +1,8 @@
 import {Pipe, PipeTransform} from '@angular/core';
 
-@Pipe({name: 'max'})
-export class MaxPipe implements PipeTransform {
-  transform(value: string, ...args: any[]): any {
-    let allowed = args[0];
+@Pipe({name: 'maxCharactere'})
+export class MaxCharacterePipe implements PipeTransform {
+  transform(value: string, allowed: number): any {
     let received = value.length;
 
     if (received > allowed && allowed !== 0) {

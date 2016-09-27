@@ -3,11 +3,11 @@ import {CommonModule} from '@angular/common';
 import {NotificationsService} from './notifications.service';
 import {SimpleNotificationsComponent} from './simple-notifications.component';
 import {NotificationComponent} from './notification.component';
-import {MaxPipe} from './max.pipe';
+import {MaxCharacterePipe} from './max-charactere.pipe';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [SimpleNotificationsComponent, NotificationComponent, MaxPipe],
+  declarations: [SimpleNotificationsComponent, NotificationComponent, MaxCharacterePipe],
   providers: [NotificationsService],
   exports: [SimpleNotificationsComponent]
 })
