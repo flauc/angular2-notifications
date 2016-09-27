@@ -9,7 +9,7 @@ export class PushNotificationsService {
 
     permission: Permission = 'granted';
 
-    getPermission() {
+    requestPermission() {
         if ('Notification' in window)
             Notification.requestPermission(status => this.permission = status);
     }

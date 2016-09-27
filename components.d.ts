@@ -127,7 +127,7 @@ export declare class PushNotificationsModule {
 
 export declare class PushNotificationsService {
     permission: Permission;
-    getPermission(): void;
+    requestPermission(): void;
     create(title: string, options?: PushNotification): any;
 }
 
