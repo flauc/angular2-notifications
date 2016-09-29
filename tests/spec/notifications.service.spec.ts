@@ -17,6 +17,7 @@ describe('NotificationsService', () => {
         id: '0',
         title: 'Test title',
         type: 'success',
+        icon: defaultIcons.success,
         content: 'Test Content',
         timeOut: 0,
         maxLength: 0,
@@ -26,7 +27,6 @@ describe('NotificationsService', () => {
         theClass: 'initial',
         rtl: false,
         animate: 'fromRight',
-        icons: defaultIcons,
         createdOn: new Date(),
         destroyedOn: new Date()
     };
@@ -40,34 +40,32 @@ describe('NotificationsService', () => {
     it('If override is not set, id is randomly generated',
         inject([NotificationsService], (service: NotificationsService) => {
 
-            let notificationEvent: NotificationEvent = null,
-                notification: Notification = {
-                    id: '0', type: '', icon: '', title: '',
-                    content: '', override: null, html: 'any', state: '',
-                    createdOn: new Date(), destroyedOn: new Date()
-                };
+            let notificationEvent: NotificationEvent = null;
 
             service.getChangeEmitter().subscribe(item => notificationEvent = item);
 
-            service.set(notification, true);
+            service.set(defaultNotification, true);
+
+            console.log(notificationEvent);
 
             expect(notificationEvent.command).toBe('set');
-            expect(notificationEvent.id !== '0').toBeTruthy();
+            expect(notificationEvent.notification.id !== '0').toBeTruthy();
         })
     );
 
-    it('The following options can be overridden: id, animate, timeOut, pauseOnHover, clickToClose, maxLength, theClass, icons',
+    it('The following options can be overridden: id, animate, timeOut, pauseOnHover, clickToClose, maxLength, theClass, icon',
         inject([NotificationsService], (service: NotificationsService) => {
             let notificationEvent: NotificationEvent = null,
                 notificationOverride: Notification = {
-                    id: '2', type: '', icon: '', title: '',
-                    content: '', override: null, html: 'any', state: '',
-                    createdOn: new Date(), destroyedOn: null
-                },
-                notification: Notification = {
-                    id: '0', type: '', icon: '', title: '',
-                    content: '', override: notificationOverride, html: 'any', state: '',
-                    createdOn: new Date(), destroyedOn: null
+                    id: '1',
+                    animate: 'fromLeft',
+                    timeOut: 500,
+                    pauseOnHover: false,
+                    clickToClose: false,
+                    maxLength: 4,
+                    theClass: 'test',
+                    icon: defaultIcons.alert
+
                 };
 
             service.getChangeEmitter().subscribe(item => notificationEvent = item);

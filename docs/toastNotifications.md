@@ -111,7 +111,7 @@ The following options can be overridden:
 * clickToClose
 * maxLength
 * theClass
-* icons
+* icon
 
 This is an example of overriding global options:
 ```js
