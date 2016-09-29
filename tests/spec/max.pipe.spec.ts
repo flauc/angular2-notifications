@@ -1,6 +1,6 @@
 import {MaxPipe} from '../../src/max.pipe';
 
-describe('spec/max.pipe.spec.ts', () => {
+describe('MaxPipe', () => {
     let pipe: MaxPipe,
         testString = 'test';
 

@@ -1,7 +1,6 @@
 import {Component, EventEmitter, OnInit, OnDestroy, ViewEncapsulation, Input, Output} from '@angular/core';
 import {Notification} from './notification.type';
 import {NotificationsService} from './notifications.service';
-import {defaultIcons, Icons} from './icons';
 import {Options} from './options.type';
 import {Subscription} from 'rxjs/Subscription';
 
@@ -78,7 +77,6 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     private theClass: string = '';
     private rtl: boolean = false;
     private animate: 'fromRight' | 'fromLeft' | 'rotate' | 'scale' = 'fromRight';
-    private icons: Icons = defaultIcons;
 
     constructor(private _service: NotificationsService) {
     }
