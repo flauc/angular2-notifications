@@ -1,4 +1,4 @@
-import {MaxPipe} from '../src/max.pipe';
+import {MaxPipe} from '../../src/max.pipe';
 
 describe('spec/max.pipe.spec.ts', () => {
     let pipe: MaxPipe,

@@ -8,10 +8,12 @@
     "removeComments": true,
     "sourceMap": true,
     "outDir": "./lib",
-    "declaration": true
+    "declaration": true,
+    "types": [
+      "node"
+    ]
   },
   "files": [
-    "typings/index.d.ts",
     "components.d.ts",
     "src/icons.ts",
     "src/max.pipe.ts",
@@ -27,5 +29,8 @@
     "src/push-notification.type.ts",
     "src/push-notifications.service.ts",
     "src/push-notifications.module.ts"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }
