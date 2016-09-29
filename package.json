@@ -8,8 +8,9 @@
   },
   "scripts": {
     "lint": "tslint ./src/**.ts -t verbose",
+    "tsc": "tsc",
     "test": "karma start",
-    "tsc": "tsc"
+    "tsc-test": "cd tests && tsc"
   },
   "keywords": [
     "Angular",
