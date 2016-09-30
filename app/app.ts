@@ -1,19 +1,15 @@
 import {Component} from '@angular/core';
-import {bootstrap} from '@angular/platform-browser-dynamic';
-import {NotificationsService, SimpleNotificationsComponent} from 'notifications';
-
+import {NotificationsService, PushNotificationsService} from 'angular2-notifications';
 
 @Component({
     moduleId: module.id,
     selector: 'app',
-    templateUrl: 'app.html',
-    directives: [SimpleNotificationsComponent],
-    providers: [NotificationsService]
+    templateUrl: 'app.html'
 })
-
-class AppComponent {
+export class AppComponent {
     constructor(
-        private _service: NotificationsService
+        private _service: NotificationsService,
+        public push: PushNotificationsService
     ) {}
     public options = {
         timeOut: 5000,
@@ -31,6 +27,13 @@ class AppComponent {
     public content: string = 'just content';
     public type: string = 'success';
     public logs: any = [];
+
+
+    public pushTitle: string = 'Just a Title';
+    public pushOptions: any = {
+        body: 'Just Body',
+        icon: 'https://docs.nativescript.org/img/cli-getting-started/angular/chapter0/Angular_logo.png'
+    };
 
     create(){
         switch (this.type) {
@@ -66,24 +69,20 @@ class AppComponent {
     };
 
     override() {
-        this._service.set({
-            title: 'Override',
-            content: 'This notification has overridden options',
-            type: 'alert',
-            override: {
-                timeOut: this.over.timeOut,
-                clickToClose: this.over.clickToClose,
-                maxLength: this.over.maxLength,
-                showProgressBar: this.over.showProgressBar,
-                pauseOnHover: this.over.pauseOnHover
-            }
-        }, true);
+        this._service.alert('Override', 'This notification has overridden options', {
+            timeOut: this.over.timeOut,
+            clickToClose: this.over.clickToClose,
+            maxLength: this.over.maxLength,
+            showProgressBar: this.over.showProgressBar,
+            pauseOnHover: this.over.pauseOnHover
+        });
+    }
+
+    pushNotification() {
+       this.push.create(this.pushTitle, this.pushOptions).subscribe(a => console.log(a))
     }
 
     loger(event) {
         this.logs.push(event);
     }
 }
-
-
-bootstrap(AppComponent);

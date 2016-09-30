@@ -58,7 +58,6 @@ gulp.task('prod-base', ['system-build'], () => {
 
     return gulp.src(files)
         .pipe(concat('main.js'))
-        .pipe(uglify())
         .pipe(gulp.dest(config.buildDir))
 });
 
@@ -81,24 +80,24 @@ gulp.task('clean-prod', () => {
 });
 
 // Development Build
-gulp.task('dev-build', ['sass'], () => {
+gulp.task('dev-build', () => {
 
     var js = config.vendor.js;
 
-js.push('system.config.js');
-js.push('system.js');
+    js.push('system.config.js');
+    js.push('system.js');
 
-var target = gulp.src('index.html'),
-    cssStream = gulp.src(config.vendor.css, {read: false}),
-    vendorStream = gulp.src(js, {read: false});
+    var target = gulp.src('index.html'),
+        cssStream = gulp.src(config.vendor.css, {read: false}),
+        vendorStream = gulp.src(js, {read: false});
 
-return target
-    .pipe(inject(series(vendorStream, cssStream), {addRootSlash: false}))
-    .pipe(gulp.dest('./'));
+    return target
+        .pipe(inject(series(vendorStream, cssStream), {addRootSlash: false}))
+        .pipe(gulp.dest('./'));
 });
 
 // Static Server + watching scss/html files
-gulp.task('serve', ['sass'], () => {
+gulp.task('serve', () => {
 
     browserSync.init({
     proxy: {
@@ -108,6 +107,6 @@ gulp.task('serve', ['sass'], () => {
 
 });
 
-gulp.watch(config.sass, ['sass']);
-gulp.watch("app/**/**.html").on('change', browserSync.reload);
+    gulp.watch(config.sass, ['sass']);
+    gulp.watch("app/**/**.html").on('change', browserSync.reload);
 });

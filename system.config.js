@@ -4,17 +4,18 @@
             'app': 'app',
             '@angular': 'node_modules/@angular',
             'rxjs': 'node_modules/rxjs',
-            'notifications': 'node_modules/angular2-notifications'
+            'angular2-notifications': 'node_modules/angular2-notifications'
         },
         packages = {
-            'app': { main: 'app.js',  defaultExtension: 'js' },
+            'app': { main: 'main.js',  defaultExtension: 'js' },
             'rxjs': { defaultExtension: 'js' },
-            'notifications': {main: 'components.js', defaultExtension: 'js'}
+            'angular2-notifications': {main: 'components.js', defaultExtension: 'js'}
         },
         ngPackageNames = [
             'common',
             'compiler',
             'core',
+            'forms',
             'platform-browser',
             'platform-browser-dynamic',
             'upgrade'

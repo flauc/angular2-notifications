@@ -1,30 +1,17 @@
 <simple-notifications [options]="options" (onCreate)="loger($event)" (onDestroy)="loger($event)"></simple-notifications>
 <div class="container">
     <div class="row">
-        <h1 class="center">Angular2 Notifications Library</h1>
-        <p class="center sub">A light and easy to use notifications library for Angular 2.</p>
+        <h1 class="center">Toast Notifications</h1>
     </div>
     <div class="row">
         <div class="columns six">
             <div class="row">
-                <h3>Create a Notification</h3>
+                <h3>Create</h3>
                 <p class="sub">Notifications created using this form will use the standard settings set in the component.</p>
-                <pre><code>
-                    public options = {
-                    timeOut: 5000,
-                    lastOnBottom: true,
-                    clickToClose: true,
-                    maxLength: 0,
-                    maxStack: 7,
-                    showProgressBar: true,
-                    pauseOnHover: true
-                    };
-                </code></pre>
-
                 <form (ngSubmit)="create()">
                     <div class="row">
                         <label for="type">Type</label>
-                        <select class="u-full-width" [(ngModel)]="type" id="type">
+                        <select class="u-full-width" [(ngModel)]="type" name="type" id="type">
                             <option value="success" selected>Success</option>
                             <option value="error">Error</option>
                             <option value="alert">Alert</option>
@@ -35,12 +22,12 @@
                     </div>
                     <div class="row" *ngIf="type != 'html'">
                         <label for="title">Title</label>
-                        <input type="text" id="title" class="u-full-width" [(ngModel)]="title">
+                        <input type="text" id="title" class="u-full-width" name="title" [(ngModel)]="title">
                     </div>
                     <div class="row">
                         <label for="content" *ngIf="type == 'html'">HTML</label>
                         <label for="content" *ngIf="type != 'html'">Message</label>
-                        <textarea class="u-full-width" id="content" [(ngModel)]="content"></textarea>
+                        <textarea class="u-full-width" id="content" name="content" [(ngModel)]="content"></textarea>
                     </div>
                     <div class="row">
                         <div class="row">
@@ -72,24 +59,24 @@
                     <div class="row">
                         <div class="six columns">
                             <label for="timeOut">Time Out</label>
-                            <input type="number" id="timeOut" class="u-full-width" [(ngModel)]="over.timeOut">
+                            <input type="number" id="timeOut" class="u-full-width" name="timeOut" [(ngModel)]="over.timeOut">
                         </div>
                         <div class="six columns">
                             <label for="maxLength">Maximum Length</label>
-                            <input type="number" id="maxLength" class="u-full-width" [(ngModel)]="over.maxLength">
+                            <input type="number" id="maxLength" class="u-full-width" name="maxLength" [(ngModel)]="over.maxLength">
                         </div>
                     </div>
                     <div class="row">
                         <div class="columns four">
-                            <input type="checkbox" [(ngModel)]="over.showProgressBar">
+                            <input type="checkbox" name="show" [(ngModel)]="over.showProgressBar">
                             <span class="label-body">Show Progress Bar?</span>
                         </div>
                         <div class="columns four">
-                            <input type="checkbox" [(ngModel)]="over.clickToClose">
+                            <input type="checkbox" name="clickToClose" [(ngModel)]="over.clickToClose">
                             <span class="label-body">Click To Close?</span>
                         </div>
                         <div class="columns four">
-                            <input type="checkbox" [(ngModel)]="over.pauseOnHover">
+                            <input type="checkbox" name="pauseOnHover" [(ngModel)]="over.pauseOnHover">
                             <span class="label-body">Pause On Hover?</span>
                         </div>
                     </div>
@@ -109,6 +96,48 @@
                         <span *ngIf="log.destroyedOn">DestroyedOn: {{log.destroyedOn | date:'mediumTime'}}</span>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h1 class="center">Push Notifications</h1>
+    </div>
+    <div class="row">
+        <div class="columns six">
+            <div class="row">
+                <h3>Request Permission</h3>
+                <p>Before you can create a push notification you need to ask for permission from the user.</p>
+                <p>Read more about this functionality here: <a href="https://developer.mozilla.org/en/docs/Web/API/notification">Mozilla Developer network</a></p>
+                <pre><code>this.pushService.requestPermission()</code></pre>
+                <button class="button-primary" (click)="push.requestPermission()">Request Permission</button>
+            </div>
+        </div>
+        <div class="columns six">
+            <div class="row">
+                <h3>Create</h3>
+                <p>Once you have permission you can send a push notification using the following method:</p>
+                <pre><code>this.pushService.create('Just a title')</code></pre>
+            </div>
+            <div class="row">
+                <form (ngSubmit)="pushNotification()">
+                    <div class="row">
+                        <div class="six columns">
+                            <label for="pushTitle">Title</label>
+                            <input type="text" id="pushTitle" class="u-full-width" name="pushTitle" [(ngModel)]="pushTitle">
+                        </div>
+                        <div class="six columns">
+                            <label for="maxLength">Body</label>
+                            <input type="text" id="pushBody" class="u-full-width" name="pushBody" [(ngModel)]="pushOptions.body">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="maxLength">Icon</label>
+                        <input type="text" id="pushIcon" class="u-full-width" name="pushIcon" [(ngModel)]="pushOptions.icon">
+                    </div>
+                    <div class="row">
+                        <button class="button-primary" type="submit">Create</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
