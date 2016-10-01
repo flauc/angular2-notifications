@@ -14,6 +14,10 @@ export class PushNotificationsService {
             Notification.requestPermission(status => this.permission = status);
     }
 
+    isSupported() {
+        return 'Notification' in window;
+    }
+
     create(title: string, options?: PushNotification): any {
 
         return new Observable(obs => {
