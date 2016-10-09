@@ -116,7 +116,7 @@ import {NotificationsService} from './notifications.service';
 
         .simple-notification .sn-title {
             margin: 0;
-            padding: 0;
+            padding: 0 50px 0 0;
             line-height: 30px;
             font-size: 20px;
         }
