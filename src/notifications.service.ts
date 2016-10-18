@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {NotificationEvent} from './notification-event.type';
 import {Notification} from './notification.type';
@@ -12,6 +12,7 @@ export class NotificationsService {
 
   set(notification: Notification, to: boolean) {
     notification.id = notification.override && notification.override.id ? notification.override.id : Math.random().toString(36).substring(3);
+    notification.click = new EventEmitter<{}>();
     this.emitter.next({command: 'set', notification: notification, add: to});
     return notification;
   };
