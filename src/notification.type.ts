@@ -1,3 +1,5 @@
+import { EventEmitter } from '@angular/core';
+
 export interface Notification {
     id?: string
     type: string
@@ -15,4 +17,5 @@ export interface Notification {
     pauseOnHover?: boolean
     clickToClose?: boolean
     theClass?: string
+    click?: EventEmitter<{}>;
 }

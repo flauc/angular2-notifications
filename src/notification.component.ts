@@ -72,7 +72,7 @@ import {NotificationsService} from './notifications.service';
   template: `
         <div class="simple-notification"
             [@enterLeave]="item.state"
-            (click)="removeOnClick()"
+            (click)="onClick($e)"
             [class]="theClass"
 
             [ngClass]="{
@@ -265,7 +265,9 @@ export class NotificationComponent implements OnInit, OnDestroy {
     return this.position !== 0 ? this.position * 90 : 0;
   }
 
-  removeOnClick(): void {
+  onClick($e): void {
+    this.item.click.emit($e);
+
     if (this.clickToClose) {
       this.remove();
     }

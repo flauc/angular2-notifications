@@ -73,6 +73,7 @@ export interface Notification {
     state?: string;
     createdOn?: Date;
     destroyedOn?: Date;
+    click?: EventEmitter<{}>;
 }
 
 export declare class NotificationsService {
