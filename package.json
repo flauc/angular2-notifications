@@ -9,6 +9,7 @@
   "scripts": {
     "lint": "tslint ./src/**.ts -t verbose",
     "tsc": "tsc",
+    "tsc:aot": "ngc -p tsconfig.aot.json",
     "test": "karma start",
     "tsc-test": "cd tests && tsc"
   },
