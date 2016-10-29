@@ -8,10 +8,10 @@ var gulp = require('gulp'),
             './lib/**',
             './src/**'
         ],
-        example: './example/node_modules/angular2-notifications',
+        example: './basic/example/node_modules/angular2-notifications',
         exampleClean: [
-            './example/node_modules/angular2-notifications/lib',
-            './example/node_modules/angular2-notifications/src'
+            './basic/example/node_modules/angular2-notifications/lib',
+            './basic/example/node_modules/angular2-notifications/src'
         ],
         declarations: {
             src: './lib/**/**.d.ts',

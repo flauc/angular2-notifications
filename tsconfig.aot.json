@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es2015",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "removeComments": true,
+    "sourceMap": true,
+    "outDir": "./lib",
+    "declaration": true,
+    "types": [
+      "node"
+    ]
+  },
+  "angularCompilerOptions": {
+    "genDir": "aot",
+    "skipMetadataEmit": false
+  },
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "files": [
+    "components.d.ts",
+    "src/icons.ts",
+    "src/max.pipe.ts",
+    "src/notification.component.ts",
+    "src/notifications.service.ts",
+    "src/simple-notifications.component.ts",
+    "src/push-notifications.service.ts",
+    "src/simple-notifications.module.ts",
+    "src/options.type.ts",
+    "src/notification.type.ts",
+    "src/notification-event.type.ts",
+    "src/notification-type.type.ts",
+    "src/push-notification.type.ts",
+    "src/push-notifications.service.ts",
+    "src/push-notifications.module.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
