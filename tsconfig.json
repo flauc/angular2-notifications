@@ -9,8 +9,11 @@
     "sourceMap": true,
     "outDir": "./lib",
     "declaration": true,
+    "typeRoots": [
+      "../node_modules/@types"
+    ],
     "types": [
-      "node"
+      "core-js"
     ]
   },
   "files": [

@@ -39,6 +39,7 @@
     "@angular/core": "^2.1.2",
     "@angular/platform-browser": "^2.1.2",
     "@angular/platform-browser-dynamic": "^2.0.1",
+    "@types/core-js": "^0.9.34",
     "@types/jasmine": "^2.5.36",
     "@types/node": "^6.0.46",
     "angular-in-memory-web-api": "^0.1.13",
