@@ -20,7 +20,7 @@
   "compileOnSave": false,
   "buildOnSave": false,
   "files": [
-    "components.d.ts",
+    "components.ts",
     "src/icons.ts",
     "src/max.pipe.ts",
     "src/notification.component.ts",
