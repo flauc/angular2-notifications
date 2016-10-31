@@ -18,3 +18,7 @@ tests/webpack.test.js.map
 coverage
 aot
 yarn.**
+src/**.d.ts
+src/**.js
+src/**.js.map
+src/**.json
