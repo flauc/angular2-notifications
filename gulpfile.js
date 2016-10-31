@@ -4,14 +4,11 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     deleteLines = require('gulp-delete-lines'),
     paths = {
-        src: [
-            './lib/**',
-            './src/**'
-        ],
-        example: './basic/example/node_modules/angular2-notifications',
+        src: './src/**',
+        example: './example/basic/node_modules/angular2-notifications',
         exampleClean: [
-            './basic/example/node_modules/angular2-notifications/lib',
-            './basic/example/node_modules/angular2-notifications/src'
+            './example/basic/node_modules/angular2-notifications/lib',
+            './examplebasic/node_modules/angular2-notifications/src'
         ],
         declarations: {
             src: './lib/**/**.d.ts',

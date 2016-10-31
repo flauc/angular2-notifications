@@ -1,6 +1,6 @@
 {
   "name": "angular2-notifications",
-  "version": "0.4.42",
+  "version": "0.4.43",
   "description": "An easy to use notification library for angular 2",
   "repository": {
     "type": "git",
@@ -11,7 +11,8 @@
     "tsc": "tsc",
     "tsc:aot": "ngc -p tsconfig.aot.json",
     "test": "karma start",
-    "tsc-test": "cd tests && tsc"
+    "tsc-test": "cd tests && tsc",
+    "prepublish": "ngc -p tsconfig.aot.json"
   },
   "keywords": [
     "Angular",
