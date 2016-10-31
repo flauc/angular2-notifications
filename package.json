@@ -7,7 +7,7 @@
     "url": "git+https://github.com/flauc/angular2-notifications.git"
   },
   "scripts": {
-    "lint": "tslint ./src/**.ts -e ./scr/**.d.ts -t verbose",
+    "lint": "tslint ./src/**.ts -t verbose",
     "tsc": "tsc",
     "tsc:aot": "ngc -p tsconfig.aot.json",
     "test": "karma start",

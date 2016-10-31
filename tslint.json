@@ -22,13 +22,6 @@
       "variable-declaration": "nospace"
     }],
 
-    "member-ordering": [
-      true,
-      "public-before-private",
-      "static-before-instance",
-      "variables-before-functions"
-    ],
-
     "variable-name": [true, "ban-keywords"],
 
     "whitespace": [true,
