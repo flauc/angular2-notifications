@@ -168,35 +168,16 @@ import {NotificationsService} from './notifications.service';
 
 export class NotificationComponent implements OnInit, OnDestroy {
 
-    @Input()
-    public timeOut: number;
-
-    @Input()
-    public showProgressBar: boolean;
-
-    @Input()
-    public pauseOnHover: boolean;
-
-    @Input()
-    public clickToClose: boolean;
-
-    @Input()
-    public maxLength: number;
-
-    @Input()
-    public theClass: string;
-
-    @Input()
-    public rtl: boolean;
-
-    @Input()
-    public animate: string;
-
-    @Input()
-    public position: number;
-
-    @Input()
-    public item: Notification;
+    @Input() public timeOut: number;
+    @Input() public showProgressBar: boolean;
+    @Input() public pauseOnHover: boolean;
+    @Input() public clickToClose: boolean;
+    @Input() public maxLength: number;
+    @Input() public theClass: string;
+    @Input() public rtl: boolean;
+    @Input() public animate: string;
+    @Input() public position: number;
+    @Input() public item: Notification;
 
 
     // Progress bar variables

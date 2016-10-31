@@ -78,8 +78,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     private rtl: boolean = false;
     private animate: 'fromRight' | 'fromLeft' | 'rotate' | 'scale' = 'fromRight';
 
-    constructor(private _service: NotificationsService) {
-    }
+    constructor(private _service: NotificationsService) {}
 
     ngOnInit(): void {
         // Listen for changes in the service
@@ -95,11 +94,8 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
                         break;
 
                     case 'set':
-                        if (item.add) {
-                            this.add(item.notification);
-                        } else {
-                            this.defaultBehavior(item);
-                        }
+                        if (item.add) this.add(item.notification);
+                        else this.defaultBehavior(item);
                         break;
 
                     default:
