@@ -7,7 +7,6 @@
     "moduleResolution": "node",
     "removeComments": true,
     "sourceMap": true,
-    "outDir": "./lib",
     "declaration": true,
     "types": [
       "node"
@@ -20,21 +19,7 @@
   "compileOnSave": false,
   "buildOnSave": false,
   "files": [
-    "components.ts",
-    "src/icons.ts",
-    "src/max.pipe.ts",
-    "src/notification.component.ts",
-    "src/notifications.service.ts",
-    "src/simple-notifications.component.ts",
-    "src/push-notifications.service.ts",
-    "src/simple-notifications.module.ts",
-    "src/options.type.ts",
-    "src/notification.type.ts",
-    "src/notification-event.type.ts",
-    "src/notification-type.type.ts",
-    "src/push-notification.type.ts",
-    "src/push-notifications.service.ts",
-    "src/push-notifications.module.ts"
+    "components.ts"
   ],
   "exclude": [
     "node_modules"

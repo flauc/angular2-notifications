@@ -41,7 +41,7 @@ gulp.task('serve', ['move-example'], () => {
 
     browserSync.init({
         server: {
-            baseDir: "./example/",
+            baseDir: "./example/basic",
             index: "index.html"
         }
     });
