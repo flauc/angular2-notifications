@@ -7,7 +7,11 @@ declare const Notification: any;
 @Injectable()
 export class PushNotificationsService {
 
-    permission: Permission = 'granted';
+    permission: Permission;
+
+    constructor() {
+        this.permission  = this.isSupported() ? Notification.permission : 'denied';
+    }
 
     requestPermission() {
         if ('Notification' in window)
@@ -26,8 +30,6 @@ export class PushNotificationsService {
                 obs.error('Notifications are not available in this envirement');
                 obs.complete();
             }
-
-            this.permission = Notification.permission;
 
             if (this.permission !== 'granted') {
                 obs.error(`The user didn't granted you permission to send push notifications`);
