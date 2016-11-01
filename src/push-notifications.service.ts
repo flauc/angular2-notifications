@@ -27,12 +27,12 @@ export class PushNotificationsService {
         return new Observable(obs => {
 
             if (!('Notification' in window)) {
-                obs.error('Notifications are not available in this envirement');
+                obs.error('Notifications are not available in this environment');
                 obs.complete();
             }
 
             if (this.permission !== 'granted') {
-                obs.error(`The user didn't granted you permission to send push notifications`);
+                obs.error(`The user hasn't granted you permission to send push notifications`);
                 obs.complete();
             }
 
@@ -42,10 +42,6 @@ export class PushNotificationsService {
             n.onclick = (e) => obs.next({notification: n, event: e});
             n.onerror = (e) => obs.error({notification: n, event: e});
             n.onclose = () => obs.complete();
-            n.close = () => {
-                n.close.bind(n);
-                obs.complete();
-            };
         });
     }
 
