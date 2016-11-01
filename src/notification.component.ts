@@ -236,7 +236,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
         return this.position !== 0 ? this.position * 90 : 0;
     }
 
-    onClick($e): void {
+    onClick($e: any): void {
         this.item.click.emit($e);
 
         if (this.clickToClose) {

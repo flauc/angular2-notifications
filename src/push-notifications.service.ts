@@ -15,7 +15,7 @@ export class PushNotificationsService {
 
     requestPermission() {
         if ('Notification' in window)
-            Notification.requestPermission(status => this.permission = status);
+            Notification.requestPermission((status: any) => this.permission = status);
     }
 
     isSupported() {
@@ -24,7 +24,7 @@ export class PushNotificationsService {
 
     create(title: string, options?: PushNotification): any {
 
-        return new Observable(obs => {
+        return new Observable((obs: any) => {
 
             if (!('Notification' in window)) {
                 obs.error('Notifications are not available in this envirement');
@@ -38,9 +38,9 @@ export class PushNotificationsService {
 
             const n = new Notification(title, options);
 
-            n.onshow = (e) => obs.next({notification: n, event: e});
-            n.onclick = (e) => obs.next({notification: n, event: e});
-            n.onerror = (e) => obs.error({notification: n, event: e});
+            n.onshow = (e: any) => obs.next({notification: n, event: e});
+            n.onclick = (e: any) => obs.next({notification: n, event: e});
+            n.onerror = (e: any) => obs.error({notification: n, event: e});
             n.onclose = () => obs.complete();
             n.close = () => {
                 n.close.bind(n);
