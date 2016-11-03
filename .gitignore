@@ -1,8 +1,9 @@
 npm-debug.log
 node_modules
 typings
-example/node_modules
-example/app/**/**.js
+example/basic/node_modules
+example/basic/app/**/**.js
+example/aot
 .idea
 .npmignore
 lib
