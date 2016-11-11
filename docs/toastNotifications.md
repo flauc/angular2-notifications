@@ -116,9 +116,9 @@ The following options can be overridden:
 This is an example of overriding global options:
 ```js
 this._notificationsService.success(
-    title: 'example',
-    content:'example',
-    override: {
+    'Some Title',
+    'Some Content',
+    {
         timeOut: 5000,
         showProgressBar: true,
         pauseOnHover: false,
