@@ -60,7 +60,7 @@ import {NotificationsService} from './notifications.service';
     template: `
         <div class="simple-notification"
             [@enterLeave]="item.state"
-            (click)="onClick($e)"
+            (click)="onClick($event)"
             [class]="theClass"
 
             [ngClass]="{
