@@ -181,7 +181,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     attachChanges(options: any): void {
         Object.keys(options).forEach(a => {
             if (this.hasOwnProperty(a)) {
-                this[a] = options[a];
+                (<any>this)[a] = options[a];
             }
         });
     }

@@ -248,7 +248,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     attachOverrides(): void {
         Object.keys(this.item.override).forEach(a => {
             if (this.hasOwnProperty(a)) {
-                this[a] = this.item.override[a];
+                (<any>this)[a] = this.item.override[a];
             }
         });
     }
