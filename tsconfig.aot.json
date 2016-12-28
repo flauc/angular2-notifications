@@ -2,14 +2,14 @@
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es2015",
+    "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
     "removeComments": true,
     "sourceMap": true,
     "declaration": true,
     "types": [
-      "node"
+      "core-js"
     ]
   },
   "angularCompilerOptions": {
