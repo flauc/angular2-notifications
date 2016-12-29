@@ -90,11 +90,11 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
                         break;
 
                     case 'clean':
-                        this.cleanSingle(item.id);
+                        this.cleanSingle(item.id!);
                         break;
 
                     case 'set':
-                        if (item.add) this.add(item.notification);
+                        if (item.add) this.add(item.notification!);
                         else this.defaultBehavior(item);
                         break;
 
