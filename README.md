@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/flauc/angular2-notifications.svg?branch=master)](https://travis-ci.org/flauc/angular2-notifications)
 [![NPM Version](https://img.shields.io/npm/v/angular2-notifications.svg)](https://www.npmjs.com/package/angular2-notifications)
 [![NPM Downloads](https://img.shields.io/npm/dt/angular2-notifications.svg)](https://www.npmjs.com/package/angular2-notifications)
+[![Gratipay User](https://img.shields.io/badge/%20Gratipay-Donate-yellowgreen.svg)](https://gratipay.com/Angular2-notifications/)
 # Angular2-Notifications
 A light and easy to use notifications library for Angular 2. It features both regular page notifications (toasts) and push notifications. 
 
