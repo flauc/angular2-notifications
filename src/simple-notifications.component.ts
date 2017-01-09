@@ -69,14 +69,14 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     private preventDuplicates: boolean = false;
 
     // Sent values
-    private timeOut: number = 0;
-    private maxLength: number = 0;
-    private clickToClose: boolean = true;
-    private showProgressBar: boolean = true;
-    private pauseOnHover: boolean = true;
-    private theClass: string = '';
-    private rtl: boolean = false;
-    private animate: 'fromRight' | 'fromLeft' | 'rotate' | 'scale' = 'fromRight';
+    public timeOut: number = 0;
+    public maxLength: number = 0;
+    public clickToClose: boolean = true;
+    public showProgressBar: boolean = true;
+    public pauseOnHover: boolean = true;
+    public theClass: string = '';
+    public rtl: boolean = false;
+    public animate: 'fromRight' | 'fromLeft' | 'rotate' | 'scale' = 'fromRight';
 
     constructor(private _service: NotificationsService) {}
 
