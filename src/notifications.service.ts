@@ -55,7 +55,7 @@ export class NotificationsService {
 
   // HTML Notification method
   html(html: any, type: string, override?: any) {
-    return this.set({html: html, type: type, icon: 'bare', override: override, title: null, content: null}, true);
+    return this.set({html: html, type: type, icon: 'bare', override: override}, true);
   }
 
   // Remove all notifications method

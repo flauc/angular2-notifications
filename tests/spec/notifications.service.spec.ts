@@ -206,8 +206,8 @@ describe('NotificationsService', () => {
             expect(notification.type).toBe('success');
             expect(notification.icon).toBe('bare');
 
-            expect(notification.title).toBeNull();
-            expect(notification.content).toBeNull();
+            expect(notification.title).toBeUndefined();
+            expect(notification.content).toBeUndefined();
             expect(notification.override).toBeUndefined();
             expect(notification.html).toBe('<B>Title</B>');
             expect(notification.state).toBeUndefined();
