@@ -12,6 +12,7 @@ Import the `PushNotificationsModule` in to your `AppModule`
     bootstrap: [AppComponent]
 })
 export class AppModule { }
+```
 
 Now import the `PushNotificationsService` where you want to use it: 
 
