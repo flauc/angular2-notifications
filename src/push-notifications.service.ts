@@ -38,7 +38,7 @@ export class PushNotificationsService {
 
             const n = new Notification(title, options);
 
-            const timeout = options.timeout || 5000;
+            const timeout = options.timeOut || 5000;
 
             setTimeout(()=> n.close(), timeout);
 
