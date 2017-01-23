@@ -45,7 +45,7 @@ export class PushNotificationsService {
 
                 const timeout = options.timeOut || 5000;
 
-                setTimeout(()=> n.close(), timeout);
+                setTimeout(()=> n.close.bind(n), timeout);
             }
 
             n.onshow = (e: any) => obs.next({notification: n, event: e});
