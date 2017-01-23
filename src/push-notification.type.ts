@@ -14,5 +14,5 @@ export interface PushNotification {
     dir?: 'auto' | 'ltr' | 'rtl'
     lang?: string
     vibrate?: number[]
-    timeOut?: number | 5000
+    timeOut?: number
 }
