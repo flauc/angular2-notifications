@@ -38,7 +38,7 @@ export class PushNotificationsService {
 
             const n = new Notification(title, options);
 
-            if(options.hasOwnProperty("timeOut") && options.timeOut != null){
+            if(options.hasOwnProperty("timeOut") && options.timeOut !== undefined){
                 if(options.timeOut<=0){
                     options.timeOut = 5000;
                 }
