@@ -57,6 +57,7 @@ interface PushNotification {
     dir?: 'auto' | 'ltr' | 'rtl'
     lang?: string
     vibrate?: number[]
+    timeout?: number
 }
 ```
 
