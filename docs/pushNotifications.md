@@ -48,6 +48,7 @@ interface PushNotification {
     body?: string
     icon?: string
     tag?: string
+    data?: any
     renotify?: boolean
     silent?: boolean
     sound?: string

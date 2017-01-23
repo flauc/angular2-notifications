@@ -38,6 +38,10 @@ export class PushNotificationsService {
 
             const n = new Notification(title, options);
 
+            const timeout = options.timeout || 5000;
+
+            setTimeout(()=> n.close(), timeout);
+
             n.onshow = (e: any) => obs.next({notification: n, event: e});
             n.onclick = (e: any) => obs.next({notification: n, event: e});
             n.onerror = (e: any) => obs.error({notification: n, event: e});
