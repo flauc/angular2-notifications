@@ -8,8 +8,16 @@ import {MaxPipe} from './max.pipe';
 @NgModule({
   imports: [CommonModule],
   declarations: [SimpleNotificationsComponent, NotificationComponent, MaxPipe],
-  providers: [NotificationsService],
+  providers: [],
   exports: [SimpleNotificationsComponent]
 })
 export class SimpleNotificationsModule {
+  public static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: SimpleNotificationsModule,
+      providers: [
+        NotificationsService
+      ]
+    };
+  }
 }
