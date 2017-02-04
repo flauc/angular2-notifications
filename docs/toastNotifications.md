@@ -3,10 +3,10 @@ Toast notifications are regular on-page notifications.
 
 ## Setup
 
-Import the `SimpleNotificationsModule` in to your `AppModule`
+Import the `SimpleNotificationsModule` in to your root `AppModule`
 ```ts
 @NgModule({
-    imports: [BrowserModule, SimpleNotificationsModule],
+    imports: [BrowserModule, SimpleNotificationsModule.forRoot()],
     declarations: [AppComponent],
     bootstrap: [AppComponent]
 })
