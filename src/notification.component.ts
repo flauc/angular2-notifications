@@ -79,7 +79,7 @@ import {NotificationsService} from './notifications.service';
                 <div class="sn-title">{{item.title}}</div>
                 <div class="sn-content">{{item.content | max:maxLength}}</div>
 
-                <div *ngIf="item.type !== 'bare'" [innerHTML]="safeSvg"></div>
+                <div class="icon" *ngIf="item.type !== 'bare'" [innerHTML]="safeSvg"></div>
             </div>
             <div *ngIf="item.html" [innerHTML]="item.html"></div>
 
@@ -116,7 +116,7 @@ import {NotificationsService} from './notifications.service';
             line-height: 20px;
         }
 
-        .simple-notification svg {
+        .simple-notification .icon {
             position: absolute;
             box-sizing: border-box;
             top: 0;
@@ -124,6 +124,9 @@ import {NotificationsService} from './notifications.service';
             width: 70px;
             height: 70px;
             padding: 10px;
+        }
+
+        .simple-notification .icon svg {
             fill: #fff;
         }
 
@@ -190,6 +193,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     private start: any;
     private diff: any;
 
+    private icon: string;
     private safeSvg: SafeHtml;
 
     constructor(
@@ -209,7 +213,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
             this.startTimeOut();
         }
 
-        this.safeSvg = this.domSanitizer.bypassSecurityTrustHtml(this.item.icon);
+        this.safeSvg = this.domSanitizer.bypassSecurityTrustHtml(this.icon || this.item.icon);
     }
 
     startTimeOut(): void {
