@@ -5,6 +5,8 @@ Toast notifications are regular on-page notifications.
 
 Import the `SimpleNotificationsModule` in to your root `AppModule`
 ```ts
+import { SimpleNotificationsModule } from 'angular2-notifications';
+
 @NgModule({
     imports: [BrowserModule, SimpleNotificationsModule.forRoot()],
     declarations: [AppComponent],
