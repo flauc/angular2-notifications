@@ -7,7 +7,7 @@ export interface Options {
   lastOnBottom?: boolean;
   clickToClose?: boolean;
   maxLength?: number;
-  maxStacks?: number;
+  maxStack?: number;
   preventDuplicates?: number;
   preventLastDuplicates?: boolean | string;
   theClass?: string;
