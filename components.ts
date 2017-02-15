@@ -6,5 +6,5 @@ export { MaxPipe } from './src/max.pipe';
 
 export { PushNotificationsModule } from './src/push-notifications.module';
 export { PushNotificationsService } from './src/push-notifications.service';
-export { Icons, DefaultIcons } from './src/icons';
+export { Icons, defaultIcons } from './src/icons';
 export { Options } from './src/options.type';
