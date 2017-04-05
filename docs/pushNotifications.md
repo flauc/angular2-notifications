@@ -48,6 +48,7 @@ interface PushNotification {
     body?: string
     icon?: string
     tag?: string
+    data?: any
     renotify?: boolean
     silent?: boolean
     sound?: string
@@ -56,6 +57,7 @@ interface PushNotification {
     dir?: 'auto' | 'ltr' | 'rtl'
     lang?: string
     vibrate?: number[]
+    timeout?: number
 }
 ```
 
