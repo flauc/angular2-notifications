@@ -79,7 +79,7 @@ import {NotificationsService} from './notifications.service';
                 <div class="sn-title">{{item.title}}</div>
                 <div class="sn-content">{{item.content | max:maxLength}}</div>
 
-                <div class="icon" *ngIf="item.type !== 'bare'" [innerHTML]="safeSvg"></div>
+                <div class="icon" *ngIf="item.icon !== 'bare'" [innerHTML]="safeSvg"></div>
             </div>
             <div *ngIf="item.html" [innerHTML]="item.html"></div>
 
