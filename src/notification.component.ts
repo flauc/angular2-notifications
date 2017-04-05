@@ -1,4 +1,5 @@
-import {Component, OnInit, OnDestroy, trigger, state, style, transition, animate, Input, ViewEncapsulation, NgZone} from '@angular/core';
+import {Component, OnInit, OnDestroy, Input, ViewEncapsulation, NgZone} from '@angular/core';
+import {trigger, state, style, transition, animate} from '@angular/animations';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {Notification} from './notification.type';
 import {NotificationsService} from './notifications.service';
