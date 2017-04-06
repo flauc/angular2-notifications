@@ -1,4 +1,3 @@
-
 export type Permission = 'denied' | 'granted' | 'default';
 
 export interface PushNotification {

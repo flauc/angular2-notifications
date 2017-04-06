@@ -7,7 +7,7 @@ import {NotificationComponent} from './notification.component';
 import {MaxPipe} from './max.pipe';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, BrowserAnimationsModule],
   declarations: [SimpleNotificationsComponent, NotificationComponent, MaxPipe],
   providers: [],
   exports: [SimpleNotificationsComponent]

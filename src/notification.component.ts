@@ -3,6 +3,7 @@ import {trigger, state, style, transition, animate} from '@angular/animations';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {Notification} from './notification.type';
 import {NotificationsService} from './notifications.service';
+
 @Component({
     selector: 'simple-notification',
     encapsulation: ViewEncapsulation.None,
