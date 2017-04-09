@@ -22,30 +22,24 @@ export class NotificationsService {
   }
 
   //// Access methods
-  success(title: string, content: string, override?: any) {
-    return this.set({
-      title: title,
-      content: content,
-      type: 'success',
-      icon: this.icons.success,
-      override: override
-    }, true);
+  success(title: string, content?: string, override?: any) {
+    return this.set({title: title, content: content || '', type: 'success', icon: this.icons.success, override: override}, true);
   }
 
-  error(title: string, content: string, override?: any) {
-    return this.set({title: title, content: content, type: 'error', icon: this.icons.error, override: override}, true);
+  error(title: string, content?: string, override?: any) {
+    return this.set({title: title, content: content || '', type: 'error', icon: this.icons.error, override: override}, true);
   }
 
-  alert(title: string, content: string, override?: any) {
-    return this.set({title: title, content: content, type: 'alert', icon: this.icons.alert, override: override}, true);
+  alert(title: string, content?: string, override?: any) {
+    return this.set({title: title, content: content || '', type: 'alert', icon: this.icons.alert, override: override}, true);
   }
 
-  info(title: string, content: string, override?: any) {
-    return this.set({title: title, content: content, type: 'info', icon: this.icons.info, override: override}, true);
+  info(title: string, content?: string, override?: any) {
+    return this.set({title: title, content: content || '', type: 'info', icon: this.icons.info, override: override}, true);
   }
 
-  bare(title: string, content: string, override?: any) {
-    return this.set({title: title, content: content, type: 'bare', icon: 'bare', override: override}, true);
+  bare(title: string, content?: string, override?: any) {
+    return this.set({title: title, content: content || '', type: 'bare', icon: 'bare', override: override}, true);
   }
 
   // With type method
@@ -63,5 +57,4 @@ export class NotificationsService {
     if (id) this.emitter.next({command: 'clean', id: id});
     else this.emitter.next({command: 'cleanAll'});
   }
-
 }
