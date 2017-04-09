@@ -1,0 +1,9 @@
+# 0.5.0
+
+### Notes
+
+* Version 0.5 has had some mayor refactoring
+* Update to angular 4.0.1
+* Folder structure refactor
+* All types are now exported
+* A lot of minor bug fixes

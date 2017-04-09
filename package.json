@@ -1,18 +1,17 @@
 {
   "name": "angular2-notifications",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "An easy to use notification library for angular 2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/flauc/angular2-notifications.git"
   },
   "scripts": {
-    "lint": "tslint ./src/**.ts -t verbose",
-    "tsc": "tsc",
-    "tsc:aot": "ngc -p tsconfig.aot.json",
-    "test": "karma start",
-    "tsc-test": "cd tests && tsc",
-    "prepublish": "ngc -p tsconfig.aot.json"
+    "build": "ngc -p tsconfig.json",
+    "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
+    "test": "tsc && karma start",
+    "prepublish": "tsc",
+    "tsc": "tsc"
   },
   "keywords": [
     "Angular",
@@ -22,12 +21,16 @@
     "Notification",
     "Toast"
   ],
-  "author": "filip.lauc93@gmail.com",
+  "author": {
+    "name": "Filip Lauc",
+    "email": "filip.lauc93@gmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/flauc/angular2-notifications/issues"
   },
   "homepage": "https://github.com/flauc/angular2-notifications",
+  "main": "./dist/index.js",
   "peerDependencies": {
     "@angular/core": "^4.0.1",
     "@angular/common": "^4.0.1",
@@ -36,44 +39,32 @@
   },
   "devDependencies": {
     "@angular/animations": "^4.0.1",
-    "@angular/common": "^4.0.1",
-    "@angular/compiler": "^4.0.1",
-    "@angular/compiler-cli": "^4.0.1",
-    "@angular/core": "^4.0.1",
-    "@angular/platform-browser": "^4.0.1",
-    "@angular/platform-browser-dynamic": "^4.0.1",
-    "@types/core-js": "^0.9.34",
-    "@types/jasmine": "^2.5.36",
-    "@types/node": "^6.0.46",
-    "angular-in-memory-web-api": "^0.1.13",
-    "awesome-typescript-loader": "^2.2.4",
-    "browser-sync": "^2.14.0",
+    "@angular/common": "^4.0.0",
+    "@angular/compiler": "^4.0.0",
+    "@angular/compiler-cli": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "@angular/platform-browser": "^4.0.0",
+    "@angular/platform-browser-dynamic": "^4.0.0",
+    "@types/jasmine": "2.5.38",
+    "@types/node": "~6.0.60",
+    "codelyzer": "~2.0.0",
     "core-js": "^2.4.1",
-    "del": "^2.2.1",
-    "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-delete-lines": "0.0.7",
-    "istanbul-instrumenter-loader": "0.2.0",
-    "jasmine-core": "^2.5.2",
-    "karma": "^1.3.0",
-    "karma-chrome-launcher": "^2.0.0",
-    "karma-coverage": "^1.1.1",
-    "karma-jasmine": "^1.0.2",
-    "karma-mocha-reporter": "^2.2.0",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^1.8.0",
-    "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.12",
-    "source-map-loader": "^0.1.5",
-    "systemjs": "^0.19.39",
-    "ts-helpers": "1.1.1",
-    "tslint": "^3.15.1",
-    "tslint-loader": "2.1.5",
-    "typescript": "2.0.10",
-    "typings": "^1.3.2",
-    "webpack": "^1.13.2",
-    "zone.js": "^0.6.23"
+    "jasmine-core": "~2.5.2",
+    "jasmine-spec-reporter": "~3.2.0",
+    "karma": "~1.4.1",
+    "karma-chrome-launcher": "~2.0.0",
+    "karma-cli": "~1.0.1",
+    "karma-jasmine": "~1.1.0",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-coverage-istanbul-reporter": "^0.2.0",
+    "protractor": "~5.1.0",
+    "rxjs": "^5.1.0",
+    "ts-node": "~2.0.0",
+    "tslint": "~4.5.0",
+    "typescript": "~2.2.0",
+    "zone.js": "^0.8.4"
   },
-  "main": "./components.js",
-  "typings": "./components.d.ts"
+  "engines": {
+    "node": ">=6.0.0"
+  }
 }

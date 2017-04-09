@@ -1,39 +1,27 @@
 {
   "compilerOptions": {
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "ES6",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "removeComments": true,
+    "allowUnusedLabels": false,
+    "noImplicitReturns": true,
     "sourceMap": true,
-    "outDir": "./lib",
     "declaration": true,
+    "outDir": "./dist",
     "typeRoots": [
-      "../node_modules/@types"
-    ],
-    "types": [
-      "core-js"
+      "node_modules/@types"
     ]
   },
-  "files": [
-    "components.d.ts",
-    "src/icons.ts",
-    "src/max.pipe.ts",
-    "src/notification.component.ts",
-    "src/notifications.service.ts",
-    "src/simple-notifications.component.ts",
-    "src/push-notifications.service.ts",
-    "src/simple-notifications.module.ts",
-    "src/options.type.ts",
-    "src/notification.type.ts",
-    "src/notification-event.type.ts",
-    "src/notification-type.type.ts",
-    "src/push-notification.type.ts",
-    "src/push-notifications.service.ts",
-    "src/push-notifications.module.ts"
-  ],
   "exclude": [
-    "node_modules"
-  ]
+    "node_modules",
+    "dist",
+    "**/*.spec.ts",
+    "example",
+    "tests"
+  ],
+  "angularCompilerOptions": {
+    "strictMetadataEmit": true
+  }
 }
