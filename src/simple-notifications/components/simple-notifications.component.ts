@@ -63,19 +63,19 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     private listener: Subscription;
 
     // Received values
-    private lastOnBottom: boolean = true;
-    private maxStack: number = 8;
+    private lastOnBottom = true;
+    private maxStack = 8;
     private preventLastDuplicates: any = false;
-    private preventDuplicates: boolean = false;
+    private preventDuplicates = false;
 
     // Sent values
-    public timeOut: number = 0;
-    public maxLength: number = 0;
-    public clickToClose: boolean = true;
-    public showProgressBar: boolean = true;
-    public pauseOnHover: boolean = true;
-    public theClass: string = '';
-    public rtl: boolean = false;
+    public timeOut = 0;
+    public maxLength = 0;
+    public clickToClose = true;
+    public showProgressBar = true;
+    public pauseOnHover = true;
+    public theClass = '';
+    public rtl = false;
     public animate: 'fromRight' | 'fromLeft' | 'rotate' | 'scale' = 'fromRight';
 
     constructor(private _service: NotificationsService) {}
@@ -209,8 +209,8 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     }
 
     cleanSingle(id: string): void {
-        let indexOfDelete: number = 0;
-        let doDelete: boolean = false;
+        let indexOfDelete = 0;
+        let doDelete = false;
 
         this.notifications.forEach((notification, idx) => {
             if (notification.id === id) {

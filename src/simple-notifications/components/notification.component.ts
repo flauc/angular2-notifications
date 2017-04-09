@@ -188,12 +188,12 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
 
     // Progress bar variables
-    public progressWidth: number = 0;
-    private stopTime: boolean = false;
+    public progressWidth = 0;
+    private stopTime = false;
     private timer: any;
     private steps: number;
     private speed: number;
-    private count: number = 0;
+    private count = 0;
     private start: any;
     private diff: any;
 

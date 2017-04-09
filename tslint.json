@@ -8,18 +8,15 @@
       true,
       "check-space"
     ],
-    "curly": true,
-    "eofline": true,
-    "forin": true,
+    "curly": false,
+    "eofline": false,
+    "forin": false,
     "indent": [
       true,
       "spaces"
     ],
     "label-position": true,
-    "max-line-length": [
-      true,
-      140
-    ],
+    "max-line-length": false,
     "member-access": false,
     "member-ordering": [
       true,
@@ -63,9 +60,7 @@
       "single"
     ],
     "radix": true,
-    "semicolon": [
-      "always"
-    ],
+    "semicolon": false,
     "triple-equals": [
       true,
       "allow-null-check"
