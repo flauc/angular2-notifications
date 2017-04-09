@@ -7,24 +7,24 @@ import { NotificationsService } from 'angular2-notifications';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private _service: NotificationsService) {}
+    constructor(private _service: NotificationsService) {}
 
-  public options = {
-    position: ["top", "left"],
-    timeOut: 0,
-    lastOnBottom: true,
-  };
+    public options = {
+        position: ["top", "left"],
+        timeOut: 0,
+        lastOnBottom: true,
+    };
 
-  create() {
-    this._service.success(
-        'Some Title',
-        'Some Content',
-        {
-          showProgressBar: true,
-          pauseOnHover: false,
-          clickToClose: false,
-          maxLength: 10
-        }
-    )
-  }
+    create() {
+        this._service.success(
+            'Some Title',
+            'Some Content',
+            {
+                showProgressBar: true,
+                pauseOnHover: false,
+                clickToClose: false,
+                maxLength: 10
+            }
+        )
+    }
 }
