@@ -1,3 +1,9 @@
+# 0.5.4
+
+### Notes
+
+* Updated tsconfig to target es5
+
 # 0.5.0
 
 ### Notes
