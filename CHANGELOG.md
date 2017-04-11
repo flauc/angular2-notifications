@@ -1,3 +1,9 @@
+# 0.5.5
+
+### Notes
+
+* Removed src folder from published library
+
 # 0.5.4
 
 ### Notes
