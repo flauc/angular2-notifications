@@ -21,7 +21,7 @@ var map = {
 }
 
 var packages = {
-    'angular2-notifications': { main: 'components.js', defaultExtension: 'js' }
+    'angular2-notifications': { main: './dist/index.js', defaultExtension: 'js' }
 }
 ```
 
