@@ -189,16 +189,17 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
     // Progress bar variables
     public progressWidth = 0;
+    public safeSvg: SafeHtml;
+
     private stopTime = false;
     private timer: any;
     private steps: number;
     private speed: number;
     private count = 0;
     private start: any;
-    private diff: any;
 
+    private diff: any;
     private icon: string;
-    private safeSvg: SafeHtml;
 
     constructor(
         private notificationService: NotificationsService,
