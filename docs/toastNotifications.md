@@ -87,6 +87,7 @@ Option | Type | Default | Description |
 __alert__ | string | Clock | html string for alert icon
 __error__ | string | Exclamation Point | html string for alert icon
 __info__ | string | Info | html string for alert icon
+__warn__ | string | Warning | html string for warning icon
 __success__ | string | Check | html string for alert icon
 
 Here is an example of passing the options to the component. You only pass the options you want changed.
