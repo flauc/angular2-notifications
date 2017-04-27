@@ -50,13 +50,14 @@ This are the currently available access methods:
 
 | Method | Description
 ---| ---
-`success(title: string, content: string, override?: any)` | Creates a success notification with the provided title and content.
-`error(title: string, content: string, override?: any)`  | Creates an error notification with the provided title and content.
-`alert(title: string, content: string, override?: any)` | Creates an alert notification with the provided title and content.
-`info(title: string, content: string, override?: any)` | Creates an info notification with the provided title and content.
-`bare(title: string, content: string, override?: any)` | Creates a bare notification with the provided title and content. This notification type is best used when adding custom html.
-`create(title: string, content: string, type: string, override?: any)` | Use this method to create any notification type ['success', 'error', 'alert', 'info', 'bare'].
-`html(html: any, type: string, override?: any` | Use this method to create a notification with custom html.
+`success(title: string, content?: string, override?: any)` | Creates a success notification with the provided title and content.
+`error(title: string, content?: string, override?: any)`  | Creates an error notification with the provided title and content.
+`alert(title: string, content?: string, override?: any)` | Creates an alert notification with the provided title and content.
+`warn(title: string, content?: string, override?: any)` | Creates a warn notification with the provided title and content.
+`info(title: string, content?: string, override?: any)` | Creates an info notification with the provided title and content.
+`bare(title: string, content?: string, override?: any)` | Creates a bare notification with the provided title and content. This notification type is best used when adding custom html.
+`create(title: string, content: string = '', type: string = 'success', override?: any)` | Use this method to create any notification type ['success', 'error', 'alert', 'info', 'bare'].
+`html(html: any, type: string = 'success', override?: any` | Use this method to create a notification with custom html.
 `remove(id?: string)` | Removes the notification that has the provided id or removes all currently open notifications if no id was provided.
 
 ## Options

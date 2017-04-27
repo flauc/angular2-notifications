@@ -1,6 +1,6 @@
 {
   "name": "angular2-notifications",
-  "version": "0.5.7",
+  "version": "0.6.0",
   "description": "An easy to use notification library for angular 2",
   "repository": {
     "type": "git",
