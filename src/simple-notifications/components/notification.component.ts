@@ -174,8 +174,8 @@ import {NotificationsService} from '../services/notifications.service';
         .simple-notification.warn .sn-progress-loader span { background: #edc242; }
         .simple-notification.bare .sn-progress-loader span { background: #ccc; }
 
-        .simple-notification.warn div .sn-title { color: #555; }
-        .simple-notification.warn div .sn-content { color: #555; }
+        .simple-notification.warn div .sn-title { color: #444; }
+        .simple-notification.warn div .sn-content { color: #444; }
     `]
 })
 
