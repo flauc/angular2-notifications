@@ -68,6 +68,7 @@ import {NotificationsService} from '../services/notifications.service';
             [ngClass]="{
                 'alert': item.type === 'alert',
                 'error': item.type === 'error',
+                'warn': item.type === 'warn',
                 'success': item.type === 'success',
                 'info': item.type === 'info',
                 'bare': item.type === 'bare',
@@ -151,6 +152,7 @@ import {NotificationsService} from '../services/notifications.service';
         .simple-notification.success { background: #8BC34A; }
         .simple-notification.alert { background: #ffdb5b; }
         .simple-notification.info { background: #03A9F4; }
+        .simple-notification.warn { background: #ffdb5b; }
 
         .simple-notification .sn-progress-loader {
             position: absolute;
@@ -169,7 +171,11 @@ import {NotificationsService} from '../services/notifications.service';
         .simple-notification.error .sn-progress-loader span { background: #D32F2F; }
         .simple-notification.alert .sn-progress-loader span { background: #edc242; }
         .simple-notification.info .sn-progress-loader span { background: #0288D1; }
+        .simple-notification.warn .sn-progress-loader span { background: #edc242; }
         .simple-notification.bare .sn-progress-loader span { background: #ccc; }
+
+        .simple-notification.warn div .sn-title { color: #444; }
+        .simple-notification.warn div .sn-content { color: #444; }
     `]
 })
 

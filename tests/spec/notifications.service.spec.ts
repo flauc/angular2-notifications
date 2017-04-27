@@ -150,6 +150,26 @@ describe('NotificationsService', () => {
         })
     );
 
+    it('Warn method',
+        inject([NotificationsService], (service: NotificationsService) => {
+            let notificationEvent: NotificationEvent = null;
+            service.getChangeEmitter().subscribe(item => notificationEvent = item);
+
+            let notification: Notification = service.warn('Title', 'Message');
+
+            expect(notification.id !== undefined).toBeTruthy();
+            expect(notification.type).toBe('warn');
+            expect(notification.icon).toBe(defaultIcons.warn);
+
+            expect(notification.title).toBe('Title');
+            expect(notification.content).toBe('Message');
+            expect(notification.override).toBeUndefined();
+            expect(notification.html).toBeUndefined();
+            expect(notification.state).toBeUndefined();
+            expect(notification.createdOn).toBeUndefined();
+            expect(notification.destroyedOn).toBeUndefined();
+        })
+    );
 
     it('Bare method',
         inject([NotificationsService], (service: NotificationsService) => {

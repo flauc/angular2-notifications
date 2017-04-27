@@ -38,6 +38,10 @@ export class NotificationsService {
     return this.set({title: title, content: content || '', type: 'info', icon: this.icons.info, override: override}, true);
   }
 
+  warn(title: string, content?: string, override?: any) {
+    return this.set({title: title, content: content || '', type: 'warn', icon: this.icons.warn, override: override}, true);
+  }
+
   bare(title: string, content?: string, override?: any) {
     return this.set({title: title, content: content || '', type: 'bare', icon: 'bare', override: override}, true);
   }
