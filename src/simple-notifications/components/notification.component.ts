@@ -173,6 +173,8 @@ import {NotificationsService} from '../services/notifications.service';
         .simple-notification.info .sn-progress-loader span { background: #0288D1; }
         .simple-notification.warn .sn-progress-loader span { background: #edc242; }
         .simple-notification.bare .sn-progress-loader span { background: #ccc; }
+
+        .simple-notification.warn div .sn-title, .simple-notification.warn div .sn-content { color: #555; }
     `]
 })
 
