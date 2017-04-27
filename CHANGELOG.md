@@ -1,3 +1,9 @@
+# 0.6.0
+
+### Features
+
+* Added warn toast notification type
+
 # 0.5.4
 
 ### Notes
