@@ -135,6 +135,10 @@ import {NotificationsService} from '../services/notifications.service';
             height: 100%;
         }
 
+        .simple-notification .icon svg g {
+            fill: #fff;
+        }
+
         .simple-notification.rtl-mode {
             direction: rtl;
         }
