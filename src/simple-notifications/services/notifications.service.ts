@@ -52,7 +52,7 @@ export class NotificationsService {
   }
 
   // HTML Notification method
-  html(html: any, type: string, override?: any) {
+  html(html: any, type = 'success', override?: any) {
     return this.set({html: html, type: type, icon: 'bare', override: override}, true);
   }
 
