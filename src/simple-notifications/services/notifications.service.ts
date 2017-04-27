@@ -47,7 +47,7 @@ export class NotificationsService {
   }
 
   // With type method
-  create(title: string, content: string, type: string, override?: any) {
+  create(title: string, content = '', type = 'success', override?: any) {
     return this.set({title: title, content: content, type: type, icon: 'bare', override: override}, true);
   }
 
