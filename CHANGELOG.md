@@ -1,3 +1,10 @@
+# 0.7.0
+
+### Breaking Changes
+
+* Removed BrowserAnimationModule from SimpleNotificationsModule. 
+BrowserAnimationsModule now needs to be imported in the projects module to use the library.
+
 # 0.6.0
 
 ### Features

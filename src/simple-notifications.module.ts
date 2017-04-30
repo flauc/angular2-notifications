@@ -1,5 +1,4 @@
 import {NgModule, ModuleWithProviders} from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CommonModule} from '@angular/common';
 import {SimpleNotificationsComponent} from './simple-notifications/components/simple-notifications.component';
 import {NotificationComponent} from './simple-notifications/components/notification.component';
@@ -18,8 +17,7 @@ export * from './simple-notifications/services/notifications.service';
 
 @NgModule({
   imports: [
-      CommonModule,
-      BrowserAnimationsModule
+      CommonModule
   ],
   declarations: [
       SimpleNotificationsComponent,
