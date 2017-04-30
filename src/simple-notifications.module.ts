@@ -24,7 +24,7 @@ export * from './simple-notifications/services/notifications.service';
       NotificationComponent,
       MaxPipe
   ],
-  providers: [],
+  providers: [NotificationsService],
   exports: [SimpleNotificationsComponent]
 })
 export class SimpleNotificationsModule {
