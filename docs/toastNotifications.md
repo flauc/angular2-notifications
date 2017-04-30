@@ -8,7 +8,12 @@ Import the `SimpleNotificationsModule` in to your root `AppModule`
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
 @NgModule({
-    imports: [BrowserModule, SimpleNotificationsModule.forRoot()],
+    imports: [
+        BrowserModule,
+        // Animations need to be imported in to your project to use the library
+        BrowserAnimationsModule, 
+        SimpleNotificationsModule.forRoot()
+    ],
     declarations: [AppComponent],
     bootstrap: [AppComponent]
 })
