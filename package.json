@@ -10,8 +10,9 @@
     "build": "ngc -p tsconfig.json",
     "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
     "test": "tsc && karma start",
-    "prepublish": "tsc",
-    "tsc": "tsc"
+    "prepublish": "npm run build:lib",
+    "tsc": "tsc",
+    "build:lib": "rm -rf dist && nglb --rootDir src/ --outDir dist"
   },
   "keywords": [
     "Angular",
@@ -30,7 +31,9 @@
     "url": "https://github.com/flauc/angular2-notifications/issues"
   },
   "homepage": "https://github.com/flauc/angular2-notifications",
-  "main": "./dist/index.js",
+  "main": "./dist/simple-notifications.module.js",
+  "module": "./dist/simple-notifications.module.js",
+  "types": "./dist/simple-notifications.module.d.ts",
   "peerDependencies": {
     "@angular/core": "^4.0.1",
     "@angular/common": "^4.0.1",
