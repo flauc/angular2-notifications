@@ -218,11 +218,11 @@ export class NotificationComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        if (this.animate) {
-            this.item.state = this.animate;
-        }
         if (this.item.override) {
             this.attachOverrides();
+        }
+        if (this.animate) {
+            this.item.state = this.animate;
         }
         if (this.timeOut !== 0) {
             this.startTimeOut();
