@@ -5,7 +5,7 @@
 A light and easy to use notifications library for Angular 2. It features both regular page notifications (toasts) and push notifications. 
 
 ## Example
-Take a look at the live demo here: [Live Demo](http://flauc.github.io/angular2-notifications)
+Take a look at the live demo here: [Live Demo](https://jaspero.co/resources/projects/ng-notifications)
 You can also clone this repository and check out the example folder.
 
 ## Setup
