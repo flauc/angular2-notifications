@@ -3,7 +3,7 @@ Toast notifications are regular on-page notifications.
 
 ## Setup
 
-Import the `SimpleNotificationsModule` in to your root `AppModule`
+Import the `SimpleNotificationsModule` in to your root `AppModule` (it will not work if you try to import it into a shared module)
 ```ts
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
