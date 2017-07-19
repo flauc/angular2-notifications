@@ -1,6 +1,6 @@
 {
   "rulesDirectory": [
-    "node_modules/codelyzer"
+    "../codelyzer"
   ],
   "rules": {
     "class-name": true,
