@@ -15,7 +15,7 @@
   },
   "keywords": [
     "Angular",
-    "2",
+    "Angular 2",
     "Library",
     "Notifications",
     "Notification",
@@ -32,13 +32,13 @@
   "homepage": "https://github.com/flauc/angular2-notifications",
   "main": "./dist/index.js",
   "peerDependencies": {
-    "@angular/core": "^4.0.1",
-    "@angular/common": "^4.0.1",
-    "@angular/platform-browser": "^4.0.0",
-    "@angular/animations": "^4.0.1"
+    "@angular/animations": "^4.0.0",
+    "@angular/common": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "@angular/platform-browser": "^4.0.0"
   },
   "devDependencies": {
-    "@angular/animations": "^4.0.1",
+    "@angular/animations": "^4.0.0",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
     "@angular/compiler-cli": "^4.0.0",
@@ -54,9 +54,9 @@
     "karma": "~1.4.1",
     "karma-chrome-launcher": "~2.0.0",
     "karma-cli": "~1.0.1",
+    "karma-coverage-istanbul-reporter": "^0.2.0",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "karma-coverage-istanbul-reporter": "^0.2.0",
     "protractor": "~5.1.0",
     "rxjs": "^5.1.0",
     "ts-node": "~2.0.0",
