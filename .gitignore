@@ -7,3 +7,4 @@ npm-debug.log
 **.ngfactory.ts
 example/node_modules
 !karma.conf.js
+coverage/
