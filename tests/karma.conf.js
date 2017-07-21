@@ -15,7 +15,9 @@ module.exports = function(config) {
          *
          * we are building the test environment in ./spec-bundle.js
          */
-        files: [ { pattern: './tests/spec-bundle.js', watched: false } ],
+        files: [ 
+            { pattern: './tests/spec-bundle.js', watched: false } 
+        ],
 
         preprocessors: { './tests/spec-bundle.js': ['coverage', 'webpack', 'sourcemap'] },
 
@@ -23,12 +25,13 @@ module.exports = function(config) {
         webpack: testWebpackConfig,
 
         coverageReporter: {
-            dir : 'coverage/',
-            reporters: [
-                { type: 'text-summary' },
-                { type: 'json' },
-                { type: 'html' }
-            ]
+            type: 'in-memory'
+        },
+
+        remapCoverageReporter: {
+            'text-summary': null,
+            json: './coverage/coverage.json',
+            html: './coverage/html'
         },
 
         // Webpack please don't spam the console when running in karma!
