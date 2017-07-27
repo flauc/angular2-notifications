@@ -8,7 +8,7 @@ import {Icons, defaultIcons} from '../interfaces/icons';
 export class NotificationsService {
 
   private emitter: Subject<NotificationEvent> = new Subject<NotificationEvent>();
-  private icons: Icons = defaultIcons;
+  public icons: Icons = defaultIcons;
 
   set(notification: Notification, to: boolean) {
     notification.id = notification.override && notification.override.id ? notification.override.id : Math.random().toString(36).substring(3);
