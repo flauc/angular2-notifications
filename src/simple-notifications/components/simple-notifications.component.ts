@@ -182,6 +182,8 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
         Object.keys(options).forEach(a => {
             if (this.hasOwnProperty(a)) {
                 (<any>this)[a] = options[a];
+            } else if (a === 'icons') {
+                this._service.icons = options[a];
             }
         });
     }
