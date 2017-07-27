@@ -120,6 +120,11 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
 
         // Save this as the last created notification
         this.lastNotificationCreated = item;
+        
+        // Override icon if set
+        if (item.override && item.override.icons && item.override.icons[item.type]) {
+            item.icon = item.override.icons[item.type];
+        }
 
         if (!toBlock) {
             // Check if the notification should be added at the start or the end of the array
