@@ -65,6 +65,32 @@ This are the currently available access methods:
 `html(html: any, type: string = 'success', override?: any` | Use this method to create a notification with custom html.
 `remove(id?: string)` | Removes the notification that has the provided id or removes all currently open notifications if no id was provided.
 
+## Subscribing to clicks
+If you are interested in the clicks that happen on a notification you have
+the possibility to subscribe to a EventEmitter.
+
+The methods (success, error, alert, warn, info, warn, bare, create and html) from the
+NotificationsService return an Object of type Notification.
+
+```js
+const toast = this.notificationsService.success('Item created!', 'Click to undo...', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+```
+
+The returned object has a click property with an EventEmitter on it. You can then
+subscribe to this EventEmitter. Your callback then gets notified with the click event
+at each click that happens on your Notification.
+
+```
+toast.click.subscribe((event) => {
+    doSomething(event)
+});
+```
+
 ## Options
 This are the current options that can be pass to the component:
 
