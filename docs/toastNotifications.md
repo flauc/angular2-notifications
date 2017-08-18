@@ -67,9 +67,7 @@ This are the currently available access methods:
 
 ## Subscribing to clicks
 If you are interested in the clicks that happen on a notification you have
-the possibility to subscribe to a EventEmitter.
-
-The methods (success, error, alert, warn, info, warn, bare, create and html) from the
+the possibility to subscribe to a EventEmitter. The methods (success, error, alert, warn, info, warn, bare, create and html) from the
 NotificationsService return an Object of type Notification.
 
 ```js
@@ -81,8 +79,7 @@ const toast = this.notificationsService.success('Item created!', 'Click to undo.
     });
 ```
 
-The returned object has a click property with an EventEmitter on it. You can then
-subscribe to this EventEmitter. Your callback then gets notified with the click event
+The returned object has a click property with an EventEmitter on it which you can subscribe to. Your callback then gets notified with the click event
 at each click that happens on your Notification.
 
 ```
