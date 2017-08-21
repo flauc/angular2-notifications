@@ -23,53 +23,23 @@ export class NotificationsService {
 
     //// Access methods
     success(title: string, content?: string, override?: any): Notification {
-        return this.set({
-            title: title,
-            content: content || '',
-            type: 'success',
-            icon: this.icons.success,
-            override: override
-        }, true);
+        return this.set({title: title, content: content || '', type: 'success', icon: this.icons.success, override: override}, true);
     }
 
     error(title: string, content?: string, override?: any): Notification {
-        return this.set({
-            title: title,
-            content: content || '',
-            type: 'error',
-            icon: this.icons.error,
-            override: override
-        }, true);
+        return this.set({title: title, content: content || '', type: 'error', icon: this.icons.error, override: override}, true);
     }
 
     alert(title: string, content?: string, override?: any): Notification {
-        return this.set({
-            title: title,
-            content: content || '',
-            type: 'alert',
-            icon: this.icons.alert,
-            override: override
-        }, true);
+        return this.set({title: title, content: content || '', type: 'alert', icon: this.icons.alert, override: override}, true);
     }
 
     info(title: string, content?: string, override?: any): Notification {
-        return this.set({
-            title: title,
-            content: content || '',
-            type: 'info',
-            icon: this.icons.info,
-            override: override
-        }, true);
+        return this.set({title: title, content: content || '', type: 'info', icon: this.icons.info, override: override}, true);
     }
 
     warn(title: string, content?: string, override?: any): Notification {
-        return this.set({
-            title: title,
-            content: content || '',
-            type: 'warn',
-            icon: this.icons.warn,
-            override: override
-        }, true);
+        return this.set({title: title, content: content || '', type: 'warn', icon: this.icons.warn, override: override}, true);
     }
 
     bare(title: string, content?: string, override?: any): Notification {
@@ -78,13 +48,7 @@ export class NotificationsService {
 
     // With type method
     create(title: string, content = '', type = 'success', override?: any): Notification {
-        return this.set({
-            title: title,
-            content: content,
-            type: type,
-            icon: (<any>this.icons)[type],
-            override: override
-        }, true);
+        return this.set({title: title, content: content, type: type, icon: (<any>this.icons)[type], override: override}, true);
     }
 
     // HTML Notification method

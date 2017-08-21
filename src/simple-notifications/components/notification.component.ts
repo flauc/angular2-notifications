@@ -155,25 +155,11 @@ import {NotificationsService} from '../services/notifications.service';
             right: auto;
         }
 
-        .simple-notification.error {
-            background: #F44336;
-        }
-
-        .simple-notification.success {
-            background: #8BC34A;
-        }
-
-        .simple-notification.alert {
-            background: #ffdb5b;
-        }
-
-        .simple-notification.info {
-            background: #03A9F4;
-        }
-
-        .simple-notification.warn {
-            background: #ffdb5b;
-        }
+        .simple-notification.error { background: #F44336; }
+        .simple-notification.success { background: #8BC34A; }
+        .simple-notification.alert { background: #ffdb5b; }
+        .simple-notification.info { background: #03A9F4; }
+        .simple-notification.warn { background: #ffdb5b; }
 
         .simple-notification .sn-progress-loader {
             position: absolute;
@@ -188,37 +174,15 @@ import {NotificationsService} from '../services/notifications.service';
             height: 100%;
         }
 
-        .simple-notification.success .sn-progress-loader span {
-            background: #689F38;
-        }
+        .simple-notification.success .sn-progress-loader span { background: #689F38; }
+        .simple-notification.error .sn-progress-loader span { background: #D32F2F; }
+        .simple-notification.alert .sn-progress-loader span { background: #edc242; }
+        .simple-notification.info .sn-progress-loader span { background: #0288D1; }
+        .simple-notification.warn .sn-progress-loader span { background: #edc242; }
+        .simple-notification.bare .sn-progress-loader span { background: #ccc; }
 
-        .simple-notification.error .sn-progress-loader span {
-            background: #D32F2F;
-        }
-
-        .simple-notification.alert .sn-progress-loader span {
-            background: #edc242;
-        }
-
-        .simple-notification.info .sn-progress-loader span {
-            background: #0288D1;
-        }
-
-        .simple-notification.warn .sn-progress-loader span {
-            background: #edc242;
-        }
-
-        .simple-notification.bare .sn-progress-loader span {
-            background: #ccc;
-        }
-
-        .simple-notification.warn div .sn-title {
-            color: #444;
-        }
-
-        .simple-notification.warn div .sn-content {
-            color: #444;
-        }
+        .simple-notification.warn div .sn-title { color: #444; }
+        .simple-notification.warn div .sn-content { color: #444; }
     `]
 })
 
@@ -250,10 +214,11 @@ export class NotificationComponent implements OnInit, OnDestroy {
     private diff: any;
     private icon: string;
 
-    constructor(private notificationService: NotificationsService,
-                private domSanitizer: DomSanitizer,
-                private zone: NgZone) {
-    }
+    constructor(
+        private notificationService: NotificationsService,
+        private domSanitizer: DomSanitizer,
+        private zone: NgZone
+    ) {}
 
     ngOnInit(): void {
         if (this.item.override) {
