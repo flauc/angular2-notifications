@@ -283,7 +283,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
         }
       } else {
         this.zone.run(() => this.remove());
-        console.log(`finished after: ${elapsedTime} ms`)
+        //        console.log(`finished after: ${elapsedTime} ms`)
       }
     })
   };
