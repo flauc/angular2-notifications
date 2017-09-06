@@ -203,12 +203,9 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
     private stopTime = false;
     private timer: any;
-    private steps: number;
-    private speed: number;
-    private count = 0;
-    private start: any;
+    private speed: 25; // time in ms for a new check if time has ellapsed
+    private start: number;
 
-    private diff: any;
     private icon: string;
 
     constructor(
@@ -216,7 +213,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
         private domSanitizer: DomSanitizer,
         private zone: NgZone
     ) {}
-
     ngOnInit(): void {
         if (this.item.override) {
             this.attachOverrides();
@@ -232,8 +228,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
     }
 
     startTimeOut(): void {
-        this.steps = this.timeOut / 10;
-        this.speed = this.timeOut / this.steps;
         this.start = new Date().getTime();
         this.zone.runOutsideAngular(() => this.timer = setTimeout(this.instance, this.speed));
     }
@@ -247,7 +241,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     onLeave(): void {
         if (this.pauseOnHover) {
             this.stopTime = false;
-            setTimeout(this.instance, (this.speed - this.diff));
+            setTimeout(this.instance, (this.speed));
         }
     }
 
@@ -278,13 +272,17 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
     private instance = () => {
         this.zone.runOutsideAngular(() => {
-            this.zone.run(() => this.diff = (new Date().getTime() - this.start) - (this.count * this.speed));
-
-            if (this.count++ === this.steps) this.zone.run(() => this.remove());
-            else if (!this.stopTime) {
-                if (this.showProgressBar) this.zone.run(() => this.progressWidth += 100 / this.steps);
-
-                this.timer = setTimeout(this.instance, (this.speed - this.diff));
+            const elapsedTime = (new Date().getTime() - this.start);
+            if (elapsedTime < this.timeOut) {
+                if (!this.stopTime && this.showProgressBar) {
+                    this.zone.run(() =>
+                        this.progressWidth = Math.min(Math.round(elapsedTime / this.timeOut * 100), 100)
+                    )
+                    this.timer = setTimeout(this.instance, this.speed);
+                }
+            } else {
+                this.zone.run(() => this.remove());
+                //        console.log(`finished after: ${elapsedTime} ms`)
             }
         })
     };
