@@ -213,7 +213,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
     private domSanitizer: DomSanitizer,
     private zone: NgZone
   ) {}
-
   ngOnInit(): void {
     if (this.item.override) {
       this.attachOverrides();

@@ -1,4 +1,4 @@
-import {Injectable, EventEmitter} from '@angular/core';
+import {Injectable, EventEmitter, NgZone} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {NotificationEvent} from '../interfaces/notification-event.type';
 import {Notification} from '../interfaces/notification.type';
@@ -10,10 +10,14 @@ export class NotificationsService {
   private emitter: Subject<NotificationEvent> = new Subject<NotificationEvent>();
   public icons: Icons = defaultIcons;
 
+  constructor(private zone: NgZone) {}
+
   set(notification: Notification, to: boolean) {
     notification.id = notification.override && notification.override.id ? notification.override.id : Math.random().toString(36).substring(3);
     notification.click = new EventEmitter<{}>();
-    this.emitter.next({command: 'set', notification: notification, add: to});
+    this.zone.run(() => { // <=== wrapper!!!
+      this.emitter.next({command: 'set', notification: notification, add: to});
+    });
     return notification;
   };
 
