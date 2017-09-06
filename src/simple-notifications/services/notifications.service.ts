@@ -62,7 +62,10 @@ export class NotificationsService {
 
   // Remove all notifications method
   remove(id?: string) {
-    if (id) this.emitter.next({command: 'clean', id: id});
-    else this.emitter.next({command: 'cleanAll'});
+    if (id) {
+      this.emitter.next({command: 'clean', id: id});
+    } else {
+      this.emitter.next({command: 'cleanAll'});
+    }
   }
 }
