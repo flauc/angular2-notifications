@@ -5,61 +5,61 @@ import {Notification} from '../interfaces/notification.type';
 import {NotificationsService} from '../services/notifications.service';
 
 @Component({
-    selector: 'simple-notification',
-    encapsulation: ViewEncapsulation.None,
-    animations: [
-        trigger('enterLeave', [
+  selector: 'simple-notification',
+  encapsulation: ViewEncapsulation.None,
+  animations: [
+    trigger('enterLeave', [
 
-            // Enter from right
-            state('fromRight', style({opacity: 1, transform: 'translateX(0)'})),
-            transition('* => fromRight', [
-                style({opacity: 0, transform: 'translateX(5%)'}),
-                animate('400ms ease-in-out')
-            ]),
-            state('fromRightOut', style({opacity: 0, transform: 'translateX(-5%)'})),
-            transition('fromRight => fromRightOut', [
-                style({opacity: 1, transform: 'translateX(0)'}),
-                animate('300ms ease-in-out')
-            ]),
+      // Enter from right
+      state('fromRight', style({opacity: 1, transform: 'translateX(0)'})),
+      transition('* => fromRight', [
+        style({opacity: 0, transform: 'translateX(5%)'}),
+        animate('400ms ease-in-out')
+      ]),
+      state('fromRightOut', style({opacity: 0, transform: 'translateX(-5%)'})),
+      transition('fromRight => fromRightOut', [
+        style({opacity: 1, transform: 'translateX(0)'}),
+        animate('300ms ease-in-out')
+      ]),
 
-            // Enter from left
-            state('fromLeft', style({opacity: 1, transform: 'translateX(0)'})),
-            transition('* => fromLeft', [
-                style({opacity: 0, transform: 'translateX(-5%)'}),
-                animate('400ms ease-in-out')
-            ]),
-            state('fromLeftOut', style({opacity: 0, transform: 'translateX(5%)'})),
-            transition('fromLeft => fromLeftOut', [
-                style({opacity: 1, transform: 'translateX(0)'}),
-                animate('300ms ease-in-out')
-            ]),
+      // Enter from left
+      state('fromLeft', style({opacity: 1, transform: 'translateX(0)'})),
+      transition('* => fromLeft', [
+        style({opacity: 0, transform: 'translateX(-5%)'}),
+        animate('400ms ease-in-out')
+      ]),
+      state('fromLeftOut', style({opacity: 0, transform: 'translateX(5%)'})),
+      transition('fromLeft => fromLeftOut', [
+        style({opacity: 1, transform: 'translateX(0)'}),
+        animate('300ms ease-in-out')
+      ]),
 
-            // Rotate
-            state('scale', style({opacity: 1, transform: 'scale(1)'})),
-            transition('* => scale', [
-                style({opacity: 0, transform: 'scale(0)'}),
-                animate('400ms ease-in-out')
-            ]),
-            state('scaleOut', style({opacity: 0, transform: 'scale(0)'})),
-            transition('scale => scaleOut', [
-                style({opacity: 1, transform: 'scale(1)'}),
-                animate('400ms ease-in-out')
-            ]),
+      // Rotate
+      state('scale', style({opacity: 1, transform: 'scale(1)'})),
+      transition('* => scale', [
+        style({opacity: 0, transform: 'scale(0)'}),
+        animate('400ms ease-in-out')
+      ]),
+      state('scaleOut', style({opacity: 0, transform: 'scale(0)'})),
+      transition('scale => scaleOut', [
+        style({opacity: 1, transform: 'scale(1)'}),
+        animate('400ms ease-in-out')
+      ]),
 
-            // Scale
-            state('rotate', style({opacity: 1, transform: 'rotate(0deg)'})),
-            transition('* => rotate', [
-                style({opacity: 0, transform: 'rotate(5deg)'}),
-                animate('400ms ease-in-out')
-            ]),
-            state('rotateOut', style({opacity: 0, transform: 'rotate(-5deg)'})),
-            transition('rotate => rotateOut', [
-                style({opacity: 1, transform: 'rotate(0deg)'}),
-                animate('400ms ease-in-out')
-            ])
-        ])
-    ],
-    template: `
+      // Scale
+      state('rotate', style({opacity: 1, transform: 'rotate(0deg)'})),
+      transition('* => rotate', [
+        style({opacity: 0, transform: 'rotate(5deg)'}),
+        animate('400ms ease-in-out')
+      ]),
+      state('rotateOut', style({opacity: 0, transform: 'rotate(-5deg)'})),
+      transition('rotate => rotateOut', [
+        style({opacity: 1, transform: 'rotate(0deg)'}),
+        animate('400ms ease-in-out')
+      ])
+    ])
+  ],
+  template: `
         <div class="simple-notification"
             [@enterLeave]="item.state"
             (click)="onClick($event)"
@@ -92,7 +92,7 @@ import {NotificationsService} from '../services/notifications.service';
 
         </div>
     `,
-    styles: [`
+  styles: [`
         .simple-notification {
             width: 100%;
             padding: 10px 20px;
@@ -185,120 +185,119 @@ import {NotificationsService} from '../services/notifications.service';
 
 export class NotificationComponent implements OnInit, OnDestroy {
 
-    @Input() public timeOut: number;
-    @Input() public showProgressBar: boolean;
-    @Input() public pauseOnHover: boolean;
-    @Input() public clickToClose: boolean;
-    @Input() public maxLength: number;
-    @Input() public theClass: string;
-    @Input() public rtl: boolean;
-    @Input() public animate: string;
-    @Input() public position: number;
-    @Input() public item: Notification;
+  @Input() public timeOut: number;
+  @Input() public showProgressBar: boolean;
+  @Input() public pauseOnHover: boolean;
+  @Input() public clickToClose: boolean;
+  @Input() public maxLength: number;
+  @Input() public theClass: string;
+  @Input() public rtl: boolean;
+  @Input() public animate: string;
+  @Input() public position: number;
+  @Input() public item: Notification;
 
 
-    // Progress bar variables
-    public progressWidth = 0;
-    public safeSvg: SafeHtml;
+  // Progress bar variables
+  public progressWidth = 0;
+  public safeSvg: SafeHtml;
 
-    private stopTime = false;
-    private timer: any;
-    private steps: number;
-    private speed: number;
-    private count = 0;
-    private start: any;
+  private stopTime = false;
+  private timer: any;
+  private speed: 25; // time in ms for a new check if time has ellapsed
+  private start: number;
 
-    private diff: any;
-    private icon: string;
+  private icon: string;
 
-    constructor(
-        private notificationService: NotificationsService,
-        private domSanitizer: DomSanitizer,
-        private zone: NgZone
-    ) {}
+  constructor(
+    private notificationService: NotificationsService,
+    private domSanitizer: DomSanitizer,
+    private zone: NgZone
+  ) {}
 
-    ngOnInit(): void {
-        if (this.item.override) {
-            this.attachOverrides();
+  ngOnInit(): void {
+    if (this.item.override) {
+      this.attachOverrides();
+    }
+    if (this.animate) {
+      this.item.state = this.animate;
+    }
+    if (this.timeOut !== 0) {
+      this.startTimeOut();
+    }
+
+    this.safeSvg = this.domSanitizer.bypassSecurityTrustHtml(this.icon || this.item.icon);
+  }
+
+  startTimeOut(): void {
+    this.start = new Date().getTime();
+    this.zone.runOutsideAngular(() => this.timer = setTimeout(this.instance, this.speed));
+  }
+
+  onEnter(): void {
+    if (this.pauseOnHover) {
+      this.stopTime = true;
+    }
+  }
+
+  onLeave(): void {
+    if (this.pauseOnHover) {
+      this.stopTime = false;
+      setTimeout(this.instance, (this.speed));
+    }
+  }
+
+  setPosition(): number {
+    return this.position !== 0 ? this.position * 90 : 0;
+  }
+
+  onClick($e: MouseEvent): void {
+    this.item.click!.emit($e);
+
+    if (this.clickToClose) {
+      this.remove();
+    }
+  }
+
+  // Attach all the overrides
+  attachOverrides(): void {
+    Object.keys(this.item.override).forEach(a => {
+      if (this.hasOwnProperty(a)) {
+        (<any>this)[a] = this.item.override[a];
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    clearTimeout(this.timer);
+  }
+
+  private instance = () => {
+    this.zone.runOutsideAngular(() => {
+      const elapsedTime = (new Date().getTime() - this.start);
+      if (elapsedTime < this.timeOut) {
+        if (!this.stopTime && this.showProgressBar) {
+          this.zone.run(() =>
+            this.progressWidth = Math.min(Math.round(elapsedTime / this.timeOut * 100), 100)
+          )
+          this.timer = setTimeout(this.instance, this.speed);
         }
-        if (this.animate) {
-            this.item.state = this.animate;
-        }
-        if (this.timeOut !== 0) {
-            this.startTimeOut();
-        }
+      } else {
+        this.zone.run(() => this.remove());
+        console.log(`finished after: ${elapsedTime} ms`)
+      }
+    })
+  };
 
-        this.safeSvg = this.domSanitizer.bypassSecurityTrustHtml(this.icon || this.item.icon);
+  private remove() {
+    if (this.animate) {
+      this.item.state = this.animate + 'Out';
+      this.zone.runOutsideAngular(() => {
+        setTimeout(() => {
+          this.zone.run(() => this.notificationService.set(this.item, false))
+        }, 310);
+      })
+    } else {
+      this.notificationService.set(this.item, false);
     }
-
-    startTimeOut(): void {
-        this.steps = this.timeOut / 10;
-        this.speed = this.timeOut / this.steps;
-        this.start = new Date().getTime();
-        this.zone.runOutsideAngular(() => this.timer = setTimeout(this.instance, this.speed));
-    }
-
-    onEnter(): void {
-        if (this.pauseOnHover) {
-            this.stopTime = true;
-        }
-    }
-
-    onLeave(): void {
-        if (this.pauseOnHover) {
-            this.stopTime = false;
-            setTimeout(this.instance, (this.speed - this.diff));
-        }
-    }
-
-    setPosition(): number {
-        return this.position !== 0 ? this.position * 90 : 0;
-    }
-
-    onClick($e: MouseEvent): void {
-        this.item.click!.emit($e);
-
-        if (this.clickToClose) {
-            this.remove();
-        }
-    }
-
-    // Attach all the overrides
-    attachOverrides(): void {
-        Object.keys(this.item.override).forEach(a => {
-            if (this.hasOwnProperty(a)) {
-                (<any>this)[a] = this.item.override[a];
-            }
-        });
-    }
-
-    ngOnDestroy(): void {
-        clearTimeout(this.timer);
-    }
-
-    private instance = () => {
-        this.zone.runOutsideAngular(() => {
-            this.zone.run(() => this.diff = (new Date().getTime() - this.start) - (this.count * this.speed));
-
-            if (this.count++ === this.steps) this.zone.run(() => this.remove());
-            else if (!this.stopTime) {
-                if (this.showProgressBar) this.zone.run(() => this.progressWidth += 100 / this.steps);
-
-                this.timer = setTimeout(this.instance, (this.speed - this.diff));
-            }
-        })
-    };
-
-    private remove() {
-        if (this.animate) {
-            this.item.state = this.animate + 'Out';
-            this.zone.runOutsideAngular(() => {
-                setTimeout(() => {
-                    this.zone.run(() => this.notificationService.set(this.item, false))
-                }, 310);
-            })
-        } else {
-            this.notificationService.set(this.item, false);
-        }
-    }
+  }
 }
