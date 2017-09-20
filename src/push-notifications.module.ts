@@ -5,6 +5,7 @@ export * from './push-notifications/interfaces/push-notification.type';
 export * from './push-notifications/services/push-notifications.service';
 
 @NgModule({
-    providers: [PushNotificationsService]
+    providers: [PushNotificationsService],
+    exports: [PushNotificationsService]
 })
 export class PushNotificationsModule {}
