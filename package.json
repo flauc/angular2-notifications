@@ -1,6 +1,6 @@
 {
   "name": "angular2-notifications",
-  "version": "0.7.7",
+  "version": "0.7.8",
   "description": "An easy to use notification library for angular 2",
   "repository": {
     "type": "git",
@@ -10,9 +10,9 @@
     "build": "ngc -p tsconfig.json",
     "lint": "npm run tslint \"src/**/*.ts\"",
     "test": "npm run lint && karma start",
-    "prepublish": "tsc",
     "tsc": "tsc",
-    "tslint": "tslint"
+    "tslint": "tslint",
+    "packagr": "ng-packagr -p ng-package.json"
   },
   "keywords": [
     "Angular",
@@ -39,6 +39,7 @@
     "@angular/platform-browser": "^4.0.0"
   },
   "devDependencies": {
+    "ng-packagr": "^1.1.0",
     "@angular/animations": "^4.0.0",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",

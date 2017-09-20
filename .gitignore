@@ -8,3 +8,5 @@ npm-debug.log
 example/node_modules
 !karma.conf.js
 coverage/
+.ng_build
+dist
