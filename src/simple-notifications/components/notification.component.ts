@@ -1,8 +1,8 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { Notification } from '../interfaces/notification.type';
-import { NotificationsService } from '../services/notifications.service';
+import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import {Notification} from '../interfaces/notification.type';
+import {NotificationsService} from '../services/notifications.service';
 
 @Component({
     selector: 'simple-notification',
