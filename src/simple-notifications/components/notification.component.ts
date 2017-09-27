@@ -1,5 +1,5 @@
-import {Component, OnInit, OnDestroy, Input, ViewEncapsulation, NgZone} from '@angular/core';
-import {trigger, state, style, transition, animate} from '@angular/animations';
+import {ChangeDetectorRef, Component, Input, NgZone, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {Notification} from '../interfaces/notification.type';
 import {NotificationsService} from '../services/notifications.service';
@@ -214,6 +214,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     constructor(
         private notificationService: NotificationsService,
         private domSanitizer: DomSanitizer,
+        private changeRef: ChangeDetectorRef,
         private zone: NgZone
     ) {}
 
@@ -247,7 +248,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     onLeave(): void {
         if (this.pauseOnHover) {
             this.stopTime = false;
-            setTimeout(this.instance, (this.speed - this.diff));
+            this.zone.runOutsideAngular(() => setTimeout(this.instance, (this.speed - this.diff)));
         }
     }
 
@@ -277,26 +278,23 @@ export class NotificationComponent implements OnInit, OnDestroy {
     }
 
     private instance = () => {
-        this.zone.runOutsideAngular(() => {
-            this.zone.run(() => this.diff = (new Date().getTime() - this.start) - (this.count * this.speed));
+        this.diff = (new Date().getTime() - this.start) - (this.count * this.speed);
 
-            if (this.count++ === this.steps) this.zone.run(() => this.remove());
-            else if (!this.stopTime) {
-                if (this.showProgressBar) this.zone.run(() => this.progressWidth += 100 / this.steps);
+        if (this.count++ === this.steps) this.remove();
+        else if (!this.stopTime) {
+            if (this.showProgressBar) this.progressWidth += 100 / this.steps;
 
-                this.timer = setTimeout(this.instance, (this.speed - this.diff));
-            }
-        })
+            this.timer = setTimeout(this.instance, (this.speed - this.diff));
+        }
+        this.zone.run(() => this.changeRef.detectChanges());
     };
 
     private remove() {
         if (this.animate) {
             this.item.state = this.animate + 'Out';
-            this.zone.runOutsideAngular(() => {
-                setTimeout(() => {
-                    this.zone.run(() => this.notificationService.set(this.item, false))
-                }, 310);
-            })
+            setTimeout(() => {
+                this.notificationService.set(this.item, false);
+            }, 310);
         } else {
             this.notificationService.set(this.item, false);
         }
