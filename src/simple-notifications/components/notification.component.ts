@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, NgZone, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {Notification} from '../interfaces/notification.type';
@@ -214,7 +214,8 @@ export class NotificationComponent implements OnInit, OnDestroy {
     constructor(
         private notificationService: NotificationsService,
         private domSanitizer: DomSanitizer,
-        private changeRef: ChangeDetectorRef
+        private changeRef: ChangeDetectorRef,
+        private zone: NgZone
     ) {}
 
     ngOnInit(): void {
@@ -235,7 +236,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
         this.steps = this.timeOut / 10;
         this.speed = this.timeOut / this.steps;
         this.start = new Date().getTime();
-        this.timer = setTimeout(this.instance, this.speed);
+        this.zone.runOutsideAngular(() => this.timer = setTimeout(this.instance, this.speed));
     }
 
     onEnter(): void {
@@ -247,7 +248,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     onLeave(): void {
         if (this.pauseOnHover) {
             this.stopTime = false;
-            setTimeout(this.instance, (this.speed - this.diff));
+            this.zone.runOutsideAngular(() => setTimeout(this.instance, (this.speed - this.diff)));
         }
     }
 
@@ -285,7 +286,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
             this.timer = setTimeout(this.instance, (this.speed - this.diff));
         }
-        this.changeRef.detectChanges();
+        this.zone.run(() => this.changeRef.detectChanges());
     };
 
     private remove() {
