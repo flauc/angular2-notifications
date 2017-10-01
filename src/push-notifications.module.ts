@@ -6,6 +6,6 @@ export * from './push-notifications/services/push-notifications.service';
 
 @NgModule({
     providers: [PushNotificationsService],
-    exports: [PushNotificationsService]
+    exports: []
 })
 export class PushNotificationsModule {}
