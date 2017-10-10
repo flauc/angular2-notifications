@@ -8,7 +8,7 @@ export interface Options {
   clickToClose?: boolean;
   maxLength?: number;
   maxStack?: number;
-  preventDuplicates?: number;
+  preventDuplicates?: boolean;
   preventLastDuplicates?: boolean | string;
   theClass?: string;
   rtl?: boolean;
