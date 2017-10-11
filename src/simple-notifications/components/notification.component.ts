@@ -10,6 +10,30 @@ import {NotificationsService} from '../services/notifications.service';
     animations: [
         trigger('enterLeave', [
 
+            // Fade
+            state('fade', style({opacity: 1})),
+            transition('* => fade', [
+                style({opacity: 0}),
+                animate('400ms ease-in-out')
+            ]),
+            state('fadeOut', style({opacity: 0})),
+            transition('fade => fadeOut', [
+                style({opacity: 1}),
+                animate('300ms ease-in-out')
+            ]),
+
+            // Enter from top
+            state('fromTop', style({opacity: 1, transform: 'translateY(0)'})),
+            transition('* => fromTop', [
+                style({opacity: 0, transform: 'translateY(-5%)'}),
+                animate('400ms ease-in-out')
+            ]),
+            state('fromTopOut', style({opacity: 0, transform: 'translateY(5%)'})),
+            transition('fromTop => fromTopOut', [
+                style({opacity: 1, transform: 'translateY(0)'}),
+                animate('300ms ease-in-out')
+            ]),
+
             // Enter from right
             state('fromRight', style({opacity: 1, transform: 'translateX(0)'})),
             transition('* => fromRight', [
@@ -19,6 +43,18 @@ import {NotificationsService} from '../services/notifications.service';
             state('fromRightOut', style({opacity: 0, transform: 'translateX(-5%)'})),
             transition('fromRight => fromRightOut', [
                 style({opacity: 1, transform: 'translateX(0)'}),
+                animate('300ms ease-in-out')
+            ]),
+
+            // Enter from bottom
+            state('fromBottom', style({opacity: 1, transform: 'translateY(0)'})),
+            transition('* => fromBottom', [
+                style({opacity: 0, transform: 'translateY(5%)'}),
+                animate('400ms ease-in-out')
+            ]),
+            state('fromBottomOut', style({opacity: 0, transform: 'translateY(-5%)'})),
+            transition('fromBottom => fromBottomOut', [
+                style({opacity: 1, transform: 'translateY(0)'}),
                 animate('300ms ease-in-out')
             ]),
 
