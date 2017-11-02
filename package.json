@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/flauc/angular2-notifications",
   "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "peerDependencies": {
     "@angular/animations": "^4.0.0",
     "@angular/common": "^4.0.0",
