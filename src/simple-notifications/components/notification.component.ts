@@ -97,11 +97,11 @@ import {NotificationsService} from '../services/notifications.service';
     ],
     template: `
         <div class="simple-notification"
-            [@enterLeave]="item.state"
-            (click)="onClick($event)"
-            [class]="theClass"
+             [@enterLeave]="item.state"
+             (click)="onClick($event)"
+             [class]="theClass"
 
-            [ngClass]="{
+             [ngClass]="{
                 'alert': item.type === 'alert',
                 'error': item.type === 'error',
                 'warn': item.type === 'warn',
@@ -111,8 +111,8 @@ import {NotificationsService} from '../services/notifications.service';
                 'rtl-mode': rtl
             }"
 
-            (mouseenter)="onEnter()"
-            (mouseleave)="onLeave()">
+             (mouseenter)="onEnter()"
+             (mouseleave)="onLeave()">
 
             <div *ngIf="!item.html">
                 <div class="sn-title">{{item.title}}</div>
@@ -120,7 +120,10 @@ import {NotificationsService} from '../services/notifications.service';
 
                 <div class="icon" *ngIf="item.icon !== 'bare'" [innerHTML]="safeSvg"></div>
             </div>
-            <div *ngIf="item.html" [innerHTML]="item.html"></div>
+            <div *ngIf="item.html">
+                <div class="sn-content" [innerHTML]="item.html"></div>
+                <div class="icon" *ngIf="item.icon" [innerHTML]="safeSvg"></div>
+            </div>
 
             <div class="sn-progress-loader" *ngIf="showProgressBar">
                 <span [ngStyle]="{'width': progressWidth + '%'}"></span>

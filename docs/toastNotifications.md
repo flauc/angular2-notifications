@@ -62,7 +62,7 @@ This are the currently available access methods:
 `info(title: string, content?: string, override?: any)` | Creates an info notification with the provided title and content.
 `bare(title: string, content?: string, override?: any)` | Creates a bare notification with the provided title and content. This notification type is best used when adding custom html.
 `create(title: string, content: string = '', type: string = 'success', override?: any)` | Use this method to create any notification type ['success', 'error', 'alert', 'info', 'bare'].
-`html(html: any, type: string = 'success', override?: any` | Use this method to create a notification with custom html.
+`html(html: any, type: string = 'success', override?: any, icon: string = 'bare')` | Use this method to create a notification with custom html. By specifying an icon (success, error, alert, info or warn) you can use the default icons in addition to your custom html. If you do not explicitly pass an icon param no icon will be shown by default.
 `remove(id?: string)` | Removes the notification that has the provided id or removes all currently open notifications if no id was provided.
 
 ## Subscribing to clicks
