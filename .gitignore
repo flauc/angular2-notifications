@@ -5,6 +5,7 @@ npm-debug.log
 *.d.ts
 .idea
 **.ngfactory.ts
+**.ngsummary.json
 example/node_modules
 !karma.conf.js
 coverage/
