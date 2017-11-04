@@ -11,8 +11,7 @@
     "lint": "npm run tslint \"src/**/*.ts\"",
     "test": "npm run lint && karma start",
     "tsc": "tsc",
-    "tslint": "tslint",
-    "packagr": "ng-packagr -p ng-package.json"
+    "tslint": "tslint"
   },
   "keywords": [
     "Angular",
@@ -40,7 +39,6 @@
     "@angular/platform-browser": "^5.0.0"
   },
   "devDependencies": {
-    "ng-packagr": "1.1.0",
     "@angular/animations": "5.0.0",
     "@angular/common": "5.0.0",
     "@angular/compiler": "5.0.0",
