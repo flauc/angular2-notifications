@@ -16,9 +16,9 @@ export * from './simple-notifications/pipes/max.pipe';
 export * from './simple-notifications/services/notifications.service';
 
 @NgModule({
-    providers: [NotificationsService],
-    imports: [
-      CommonModule
+  providers: [],
+  imports: [
+    CommonModule
   ],
   declarations: [
       SimpleNotificationsComponent,
@@ -31,6 +31,7 @@ export class SimpleNotificationsModule {
   public static forRoot(): ModuleWithProviders {
     return {
       ngModule: SimpleNotificationsModule,
+      providers: [NotificationsService]
     };
   }
 }

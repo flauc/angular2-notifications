@@ -1,6 +1,6 @@
 {
   "name": "angular2-notifications",
-  "version": "0.7.10",
+  "version": "0.8.0",
   "description": "An easy to use notification library for angular 2",
   "repository": {
     "type": "git",
@@ -66,14 +66,14 @@
     "karma-sourcemap-loader": "0.3.7",
     "karma-webpack": "2.0.4",
     "protractor": "5.1.0",
-    "rxjs": "5.1.0",
     "source-map-loader": "0.2.1",
     "ts-helpers": "1.1.2",
     "ts-node": "2.0.0",
     "tslint": "4.5.0",
-    "typescript": "2.2.0",
+    "typescript": "2.5.3",
     "webpack": "2.6.1",
-    "zone.js": "0.8.4"
+    "rxjs": "5.4.2",
+    "zone.js": "0.8.14"
   },
   "engines": {
     "node": ">=6.0.0"
