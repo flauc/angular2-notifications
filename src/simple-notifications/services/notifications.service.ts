@@ -7,22 +7,16 @@ import {Icons, defaultIcons} from '../interfaces/icons';
 @Injectable()
 export class NotificationsService {
 
-    private emitter = new Subject<NotificationEvent>();
+    public emitter = new Subject<NotificationEvent>();
     public icons: Icons = defaultIcons;
 
     set(notification: Notification, to: boolean): Notification {
         notification.id = notification.override && notification.override.id ? notification.override.id : Math.random().toString(36).substring(3);
         notification.click = new EventEmitter<{}>();
 
-
-
         this.emitter.next({command: 'set', notification: notification, add: to});
         return notification;
     };
-
-    getChangeEmitter() {
-        return this.emitter;
-    }
 
     success(title = '' as string, content = '', override?: any): Notification {
         return this.set({title: title, content: content || '', type: 'success', icon: this.icons.success, override: override}, true);

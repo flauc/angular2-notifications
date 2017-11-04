@@ -82,7 +82,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         // Listen for changes in the service
-        this.listener = this._service.getChangeEmitter()
+        this.listener = this._service.emitter
             .subscribe(item => {
                 switch (item.command) {
                     case 'cleanAll':
