@@ -190,16 +190,19 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
   cleanSingle(id: string): void {
     let indexOfDelete = 0;
     let doDelete = false;
+    let noti;
 
     this.notifications.forEach((notification, idx) => {
       if (notification.id === id) {
         indexOfDelete = idx;
+        noti = notification;
         doDelete = true;
       }
     });
 
     if (doDelete) {
       this.notifications.splice(indexOfDelete, 1);
+      this.onDestroy.emit(this.buildEmit(noti, false));
     }
   }
 

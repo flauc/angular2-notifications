@@ -245,8 +245,5 @@ export class NotificationComponent implements OnInit, OnDestroy {
     }
 
     this[key + 'IsTemplate'] = item instanceof TemplateRef;
-
-    console.log(key, this[key]);
-    console.log(key, this[key + 'IsTemplate']);
   }
 }
