@@ -18,32 +18,32 @@ export class NotificationsService {
         return notification;
     };
 
-    success(title = '', content = '', override?: any): Notification {
+    success(title: any = '', content: any = '', override?: any): Notification {
         return this.set({title: title, content: content || '', type: 'success', icon: this.icons.success, override: override}, true);
     }
 
-    error(title = '', content = '', override?: any): Notification {
+    error(title: any = '', content: any = '', override?: any): Notification {
         return this.set({title: title, content: content || '', type: 'error', icon: this.icons.error, override: override}, true);
     }
 
-    alert(title = '', content = '', override?: any): Notification {
+    alert(title: any = '', content: any = '', override?: any): Notification {
         return this.set({title: title, content: content || '', type: 'alert', icon: this.icons.alert, override: override}, true);
     }
 
-    info(title = '', content = '', override?: any): Notification {
+    info(title: any = '', content: any = '', override?: any): Notification {
         return this.set({title: title, content: content || '', type: 'info', icon: this.icons.info, override: override}, true);
     }
 
-    warn(title = '', content = '', override?: any): Notification {
+    warn(title: any = '', content: any = '', override?: any): Notification {
         return this.set({title: title, content: content || '', type: 'warn', icon: this.icons.warn, override: override}, true);
     }
 
-    bare(title = '', content = '', override?: any): Notification {
+    bare(title: any = '', content: any = '', override?: any): Notification {
         return this.set({title: title, content: content || '', type: 'bare', icon: 'bare', override: override}, true);
     }
 
     // With type method
-    create(title = '', content = '', type = 'success', override?: any): Notification {
+    create(title: any = '', content: any = '', type = 'success', override?: any): Notification {
         return this.set({title: title, content: content, type: type, icon: (<any>this.icons)[type], override: override}, true);
     }
 

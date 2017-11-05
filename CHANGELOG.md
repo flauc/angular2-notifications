@@ -1,3 +1,13 @@
+# 0.9.0
+
+### Notes
+
+* Refactored build system to support AOT and Angular version 5.
+
+### Features
+
+* Title and content now support TemplateRef and HTML
+
 # 0.7.0
 
 ### Breaking Changes
