@@ -1,3 +1,9 @@
+# 0.9.4
+
+### Features
+
+* Extended position to support "middle" and "center" as options
+
 # 0.9.0
 
 ### Notes
