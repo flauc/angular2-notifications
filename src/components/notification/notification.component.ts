@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   Input,
@@ -105,7 +106,8 @@ import {NotificationsService} from '../../services/notifications.service';
     ])
   ],
   templateUrl: './notification.component.html',
-  styleUrls: ['./notification.component.css']
+  styleUrls: ['./notification.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class NotificationComponent implements OnInit, OnDestroy {
@@ -145,7 +147,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   constructor(
     private notificationService: NotificationsService,
     private domSanitizer: DomSanitizer,
-    private changeRef: ChangeDetectorRef,
+    private cdr: ChangeDetectorRef,
     private zone: NgZone
   ) {}
 
@@ -153,9 +155,11 @@ export class NotificationComponent implements OnInit, OnDestroy {
     if (this.item.override) {
       this.attachOverrides();
     }
+
     if (this.animate) {
       this.item.state = this.animate;
     }
+
     if (this.timeOut !== 0) {
       this.startTimeOut();
     }
@@ -184,10 +188,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
       this.stopTime = false;
       this.zone.runOutsideAngular(() => setTimeout(this.instance, (this.speed - this.diff)));
     }
-  }
-
-  setPosition(): number {
-    return this.position !== 0 ? this.position * 90 : 0;
   }
 
   onClick($e: MouseEvent): void {
@@ -223,7 +223,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
       this.timer = setTimeout(this.instance, (this.speed - this.diff));
     }
-    this.zone.run(() => this.changeRef.detectChanges());
+    this.zone.run(() => this.cdr.detectChanges());
   }
 
   private remove() {

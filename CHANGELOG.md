@@ -1,3 +1,9 @@
+# 0.9.5
+
+### Notes
+
+* Notifications now use ChangeDetectionStrategy.OnPush
+
 # 0.9.4
 
 ### Features

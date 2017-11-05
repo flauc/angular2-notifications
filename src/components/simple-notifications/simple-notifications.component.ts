@@ -1,4 +1,7 @@
-import {Component, EventEmitter, OnInit, OnDestroy, ViewEncapsulation, Input, Output} from '@angular/core';
+import {
+  Component, EventEmitter, OnInit, OnDestroy, ViewEncapsulation, Input, Output,
+  ChangeDetectionStrategy, ChangeDetectorRef
+} from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 import {Options} from '../../interfaces/options.type';
 import {Notification} from '../../interfaces/notification.type';
@@ -8,7 +11,8 @@ import {NotificationsService} from '../../services/notifications.service';
   selector: 'simple-notifications',
   encapsulation: ViewEncapsulation.None,
   templateUrl: './simple-notifications.component.html',
-  styleUrls: ['./simple-notifications.component.css']
+  styleUrls: ['./simple-notifications.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SimpleNotificationsComponent implements OnInit, OnDestroy {
 
@@ -41,11 +45,14 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
   public rtl = false;
   public animate: 'fade' | 'fromTop' | 'fromRight' | 'fromBottom' | 'fromLeft' | 'rotate' | 'scale' = 'fromRight';
 
-  constructor(private _service: NotificationsService) {}
+  constructor(
+    private service: NotificationsService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     // Listen for changes in the service
-    this.listener = this._service.emitter
+    this.listener = this.service.emitter
       .subscribe(item => {
         switch (item.command) {
           case 'cleanAll':
@@ -68,6 +75,8 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
             this.defaultBehavior(item);
             break;
         }
+
+        this.cdr.markForCheck();
       });
   }
 
@@ -159,7 +168,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
       if (this.hasOwnProperty(a)) {
         (<any>this)[a] = options[a];
       } else if (a === 'icons') {
-        this._service.icons = options[a];
+        this.service.icons = options[a];
       }
     });
   }
