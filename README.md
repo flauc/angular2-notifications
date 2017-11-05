@@ -16,6 +16,7 @@
     - [Webpack](#webpack)
   - [Setup](#setup)
   - [Creating Notifications](#crating-notifications)
+    - [Example using TemplateRef](#example-using-templateref)
   - [Subscribing to clicks](#subscribing-to-clicks)
   - [Options](#options)
 
@@ -110,15 +111,45 @@ This are the currently available access methods:
 
 | Method | Description
 ---| ---
-`success(title: string, content?: string, override?: any)` | Creates a success notification with the provided title and content.
-`error(title: string, content?: string, override?: any)`  | Creates an error notification with the provided title and content.
-`alert(title: string, content?: string, override?: any)` | Creates an alert notification with the provided title and content.
-`warn(title: string, content?: string, override?: any)` | Creates a warn notification with the provided title and content.
-`info(title: string, content?: string, override?: any)` | Creates an info notification with the provided title and content.
-`bare(title: string, content?: string, override?: any)` | Creates a bare notification with the provided title and content. This notification type is best used when adding custom html.
-`create(title: string, content: string = '', type: string = 'success', override?: any)` | Use this method to create any notification type ['success', 'error', 'alert', 'info', 'bare'].
+`success(title: any, content?: any, override?: any)` | Creates a success notification with the provided title and content.
+`error(title: any, content?: any, override?: any)`  | Creates an error notification with the provided title and content.
+`alert(title: any, content?: any, override?: any)` | Creates an alert notification with the provided title and content.
+`warn(title: any, content?: any, override?: any)` | Creates a warn notification with the provided title and content.
+`info(title: any, content?: any, override?: any)` | Creates an info notification with the provided title and content.
+`bare(title: any, content?: any, override?: any)` | Creates a bare notification with the provided title and content. This notification type is best used when adding custom html.
+`create(title: any, content: any = '', type: string = 'success', override?: any)` | Use this method to create any notification type ['success', 'error', 'alert', 'info', 'bare'].
 `html(html: any, type: string = 'success', override?: any, icon: string = 'bare')` | Use this method to create a notification with custom html. By specifying an icon (success, error, alert, info or warn) you can use the default icons in addition to your custom html. If you do not explicitly pass an icon param no icon will be shown by default.
 `remove(id?: string)` | Removes the notification that has the provided id or removes all currently open notifications if no id was provided.
+
+The `title` and `content` arguments can be a string, html string or `TemplateRef`.
+
+### Example using `TemplateRef`
+
+To use a `TemplateRef` in the title or content you need to create it in a component template: 
+
+```html
+<ng-template #example>
+    <p>Simple example</p>
+</ng-template>
+```
+
+Then you need to somehow get it to the component: 
+
+```ts 
+  @ViewChild('example') example: TemplateRef<any>;
+
+  open() {
+    this._service.success(this.example);
+  }
+```
+
+You could also pass the template through the `open()` method:
+
+```ts
+    open(temp: TemplateRef<any>) {
+        this._service.success(temp);
+    }
+```
 
 ## Subscribing to clicks
 If you are interested in the clicks that happen on a notification you have

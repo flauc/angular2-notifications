@@ -11,8 +11,7 @@
     "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
     "lite": "lite-server",
     "playground:build": "tsc -p playground -w",
-    "playground": "concurrently \"npm run build:watch\" \"npm run playground:build\" \"npm run lite\"",
-    "test": "tsc && karma start"
+    "playground": "concurrently \"npm run build:watch\" \"npm run playground:build\" \"npm run lite\""
   },
   "repository": {
     "type": "git",
@@ -47,7 +46,6 @@
     "@types/jasmine": "2.5.38",
     "@types/node": "6.0.60",
     "angular-in-memory-web-api": "0.5.1",
-    "codelyzer": "2.0.0",
     "concurrently": "3.4.0",
     "core-js": "2.4.1",
     "del": "2.2.2",
