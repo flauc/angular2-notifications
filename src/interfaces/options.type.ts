@@ -14,5 +14,5 @@ export interface Options {
   rtl?: boolean;
   animate?: 'fade' | 'fromTop' | 'fromRight' | 'fromBottom' | 'fromLeft' | 'rotate' | 'scale';
   icons?: Icons;
-  position?: ['top' | 'bottom', 'right' | 'left'];
+  position?: ['top' | 'bottom' | 'middle', 'right' | 'left' | 'center'];
 }
