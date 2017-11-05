@@ -4,10 +4,35 @@
     z-index: 1000;
 }
 
-.simple-notification-wrapper.left { left: 20px; }
-.simple-notification-wrapper.top { top: 20px; }
-.simple-notification-wrapper.right { right: 20px; }
-.simple-notification-wrapper.bottom { bottom: 20px; }
+.simple-notification-wrapper.left {
+    left: 20px;
+}
+
+.simple-notification-wrapper.top {
+    top: 20px;
+}
+
+.simple-notification-wrapper.right {
+    right: 20px;
+}
+
+.simple-notification-wrapper.bottom {
+    bottom: 20px;
+}
+
+.simple-notification-wrapper.center {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.simple-notification-wrapper.middle {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.simple-notification-wrapper.middle.center {
+    transform: translate(-50%, -50%);
+}
 
 @media (max-width: 340px) {
     .simple-notification-wrapper {

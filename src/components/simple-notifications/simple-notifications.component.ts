@@ -10,7 +10,6 @@ import {NotificationsService} from '../../services/notifications.service';
   templateUrl: './simple-notifications.component.html',
   styleUrls: ['./simple-notifications.component.css']
 })
-
 export class SimpleNotificationsComponent implements OnInit, OnDestroy {
 
   @Input() set options(opt: Options) {
@@ -21,7 +20,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
   @Output() onDestroy = new EventEmitter();
 
   public notifications: Notification[] = [];
-  public position: ['top' | 'bottom', 'right' | 'left'] = ['bottom', 'right'];
+  public position: ['top' | 'bottom' | 'middle', 'right' | 'left' | 'center'] = ['bottom', 'right'];
 
   private lastNotificationCreated: Notification;
   private listener: Subscription;

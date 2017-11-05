@@ -179,7 +179,7 @@ This are the current options that can be pass to the component:
 
 Option | Type | Default | Description |
 ------------ | ------------- | ------------- | -------------
-__position__ | ["top" or "bottom", "right" or "left"] | ["bottom", "right"] | Set the position on the screen where the notifications should display. Pass an array with two values example: ["top", "left"]. 
+__position__ | ["top" or "bottom" or "middle", "right" or "left" or "center"] | ["bottom", "right"] | Set the position on the screen where the notifications should display. Pass an array with two values example: ["top", "left"]. 
 __timeOut__ | int | 0 | Determine how long a notification should wait before closing. If set to 0 a notification won't close it self.
 __showProgressBar__ | boolean | true | Determine if a progress bar should be shown or not.
 __pauseOnHover__ | boolean | true | Determines if the timeOut should be paused when the notification is hovered.
