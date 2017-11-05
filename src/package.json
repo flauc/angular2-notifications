@@ -1,0 +1,30 @@
+{
+  "name": "angular2-notifications",
+  "version": "0.9.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flauc/angular2-notifications"
+  },
+  "author": {
+    "name": "Filip Lauc",
+    "email": "filip.lauc93@gmail.com"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flauc/angular2-notifications/issues"
+  },
+  "main": "angular2-notifications.umd.js",
+  "module": "angular2-notifications.js",
+  "jsnext:main": "angular2-notifications.js",
+  "typings": "angular2-notifications.d.ts",
+  "peerDependencies": {
+    "@angular/animations": "^5.0.0",
+    "@angular/common": "^5.0.0",
+    "@angular/core": "^5.0.0",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.8.4"
+  }
+}

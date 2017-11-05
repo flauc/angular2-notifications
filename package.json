@@ -1,17 +1,26 @@
 {
   "name": "angular2-notifications",
-  "version": "0.8.2",
-  "description": "An easy to use notification library for angular 2",
+  "version": "0.9.0",
+  "scripts": {
+    "build": "gulp build",
+    "build:watch": "gulp",
+    "docs": "npm run docs:build",
+    "docs:build": "compodoc -p tsconfig.json -n angular2-notifications -d docs --hideGenerator",
+    "docs:serve": "npm run docs:build -- -s",
+    "docs:watch": "npm run docs:build -- -s -w",
+    "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
+    "lite": "lite-server",
+    "playground:build": "tsc -p playground -w",
+    "playground": "concurrently \"npm run build:watch\" \"npm run playground:build\" \"npm run lite\"",
+    "test": "tsc && karma start"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/flauc/angular2-notifications.git"
+    "url": "https://github.com/username/repo"
   },
-  "scripts": {
-    "build": "ngc -p tsconfig.json",
-    "lint": "npm run tslint \"src/**/*.ts\"",
-    "test": "npm run lint && karma start",
-    "tsc": "tsc",
-    "tslint": "tslint"
+  "author": {
+    "name": "Filip Lauc",
+    "email": "filip.lauc93@gmail.com"
   },
   "keywords": [
     "Angular",
@@ -21,58 +30,50 @@
     "Notification",
     "Toast"
   ],
-  "author": {
-    "name": "Filip Lauc",
-    "email": "filip.lauc93@gmail.com"
-  },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/flauc/angular2-notifications/issues"
+    "url": "https://github.com/username/repo/issues"
   },
   "homepage": "https://github.com/flauc/angular2-notifications",
-  "main": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
-  "peerDependencies": {
-    "@angular/animations": "^5.0.0",
-    "@angular/common": "^5.0.0",
-    "@angular/core": "^5.0.0",
-    "@angular/platform-browser": "^5.0.0"
-  },
   "devDependencies": {
-    "@angular/animations": "5.0.0",
     "@angular/common": "5.0.0",
     "@angular/compiler": "5.0.0",
+    "@angular/animations": "5.0.0",
     "@angular/compiler-cli": "5.0.0",
     "@angular/core": "5.0.0",
     "@angular/platform-browser": "5.0.0",
     "@angular/platform-browser-dynamic": "5.0.0",
+    "@compodoc/compodoc": "1.0.0-beta.10",
     "@types/jasmine": "2.5.38",
     "@types/node": "6.0.60",
-    "awesome-typescript-loader": "3.2.1",
+    "angular-in-memory-web-api": "0.5.1",
     "codelyzer": "2.0.0",
+    "concurrently": "3.4.0",
     "core-js": "2.4.1",
-    "istanbul-instrumenter-loader": "2.0.0",
+    "del": "2.2.2",
+    "gulp": "3.9.1",
+    "gulp-rename": "1.2.2",
+    "gulp-rollup": "2.15.0",
     "jasmine-core": "2.5.2",
     "jasmine-spec-reporter": "3.2.0",
     "karma": "1.4.1",
     "karma-chrome-launcher": "2.0.0",
     "karma-cli": "1.0.1",
-    "karma-coverage": "^1.1.1",
     "karma-coverage-istanbul-reporter": "0.2.0",
     "karma-jasmine": "1.1.0",
     "karma-jasmine-html-reporter": "0.2.2",
-    "karma-mocha-reporter": "2.2.3",
-    "karma-remap-coverage": "0.1.4",
-    "karma-sourcemap-loader": "0.3.7",
-    "karma-webpack": "2.0.4",
+    "lite-server": "2.3.0",
+    "node-sass": "4.5.2",
+    "node-sass-tilde-importer": "1.0.0",
+    "node-watch": "0.5.2",
     "protractor": "5.1.0",
-    "source-map-loader": "0.2.1",
-    "ts-helpers": "1.1.2",
+    "rollup": "0.49.3",
+    "run-sequence": "1.2.2",
+    "systemjs": "0.20.12",
     "ts-node": "2.0.0",
     "tslint": "4.5.0",
-    "typescript": "2.5.3",
-    "webpack": "2.6.1",
-    "rxjs": "5.4.2",
+    "typescript": "2.4.2",
+    "rxjs": "5.5.2",
     "zone.js": "0.8.14"
   },
   "engines": {

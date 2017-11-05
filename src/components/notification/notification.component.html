@@ -1,0 +1,46 @@
+<div class="simple-notification"
+     [@enterLeave]="item.state"
+     (click)="onClick($event)"
+     [class]="theClass"
+     [ngClass]="{
+            'alert': item.type === 'alert',
+            'error': item.type === 'error',
+            'warn': item.type === 'warn',
+            'success': item.type === 'success',
+            'info': item.type === 'info',
+            'bare': item.type === 'bare',
+            'rtl-mode': rtl
+        }"
+     (mouseenter)="onEnter()"
+     (mouseleave)="onLeave()">
+
+    <div *ngIf="!item.html">
+
+        <div class="sn-title" *ngIf="titleIsTemplate else regularTitle">
+            <ng-container ngTemplateOutlet="title"></ng-container>
+        </div>
+
+        <ng-template #regularTitle>
+            <div class="sn-title" [innerHTML]="title"></div>
+        </ng-template>
+
+        <div class="sn-content" *ngIf="contentIsTemplate else regularContent">
+            <ng-container ngTemplateOutlet="content"></ng-container>
+        </div>
+
+        <ng-template #regularContent>
+            <div class="sn-content" [innerHTML]="content"></div>
+        </ng-template>
+
+        <div class="icon" *ngIf="item.icon !== 'bare'" [innerHTML]="safeSvg"></div>
+    </div>
+    <div *ngIf="item.html">
+        <div class="sn-content" [innerHTML]="item.html"></div>
+        <div class="icon" *ngIf="item.icon" [innerHTML]="safeSvg"></div>
+    </div>
+
+    <div class="sn-progress-loader" *ngIf="showProgressBar">
+        <span [ngStyle]="{'width': progressWidth + '%'}"></span>
+    </div>
+
+</div>
