@@ -214,14 +214,17 @@ export class NotificationComponent implements OnInit, OnDestroy {
   private instance = () => {
     this.diff = (new Date().getTime() - this.start) - (this.count * this.speed);
 
-    if (this.count++ === this.steps) this.remove();
-    else if (!this.stopTime) {
-      if (this.showProgressBar) this.progressWidth += 100 / this.steps;
+    if (this.count++ === this.steps) {
+      this.remove();
+    } else if (!this.stopTime) {
+      if (this.showProgressBar) {
+        this.progressWidth += 100 / this.steps;
+      }
 
       this.timer = setTimeout(this.instance, (this.speed - this.diff));
     }
     this.zone.run(() => this.changeRef.detectChanges());
-  };
+  }
 
   private remove() {
     if (this.animate) {
@@ -242,5 +245,8 @@ export class NotificationComponent implements OnInit, OnDestroy {
     }
 
     this[key + 'IsTemplate'] = item instanceof TemplateRef;
+
+    console.log(key, this[key]);
+    console.log(key, this[key + 'IsTemplate']);
   }
 }
