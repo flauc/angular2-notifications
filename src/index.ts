@@ -7,6 +7,10 @@ import {NotificationsService} from './services/notifications.service';
 export * from './components/notification/notification.component';
 export * from './components/simple-notifications/simple-notifications.component';
 export * from './services/notifications.service';
+export * from './interfaces/icons';
+export * from './interfaces/notification-event.type';
+export * from './interfaces/notification.type';
+export * from './interfaces/options.type';
 
 @NgModule({
   imports: [
