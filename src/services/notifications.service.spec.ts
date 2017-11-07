@@ -22,6 +22,7 @@ describe('NotificationsService', () => {
         timeOut: 0,
         maxLength: 0,
         clickToClose: true,
+        clickIconToClose: false,
         showProgressBar: true,
         pauseOnHover: true,
         theClass: 'initial',

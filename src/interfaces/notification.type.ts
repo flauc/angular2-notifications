@@ -16,6 +16,8 @@ export interface Notification {
   maxLength?: number
   pauseOnHover?: boolean
   clickToClose?: boolean
+  clickIconToClose?: boolean
   theClass?: string
   click?: EventEmitter<{}>;
+  clickIcon?: EventEmitter<{}>;
 }
