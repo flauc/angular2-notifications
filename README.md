@@ -174,6 +174,26 @@ toast.click.subscribe((event) => {
 });
 ```
 
+If you have configured the notification to close when the icon is clicked, an EventEmitter exists to listen for those clicks as well.
+
+```js
+const toast = this.notificationsService.success('Item created!', 'Click to undo...', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: false,
+      clickIconToClose: true
+    });
+```
+
+With the corresponding clickIcon property as above.
+
+```
+toast.clickIcon.subscribe((event) => {
+    doSomething(event)
+});
+```
+
 ## Options
 This are the current options that can be pass to the component:
 
@@ -185,6 +205,7 @@ __showProgressBar__ | boolean | true | Determine if a progress bar should be sho
 __pauseOnHover__ | boolean | true | Determines if the timeOut should be paused when the notification is hovered.
 __lastOnBottom__ | boolean | true | Determines if new notifications should appear at the bottom or top of the list.
 __clickToClose__ | boolean | true | Determines if notifications should close on click.
+__clickIconToClose__ | boolean | false | Determines if notifications should close when user clicks the icon.
 __maxLength__ | int | 0 | Set the maximum allowed length of the content string. If set to 0 or not defined there is no maximum length.
 __maxStack__ | int | 8 | Set the maximum number of notifications that can be on the screen at once.
 __preventDuplicates__ | boolean | false | If true prevents duplicates of open notifications.
@@ -227,6 +248,7 @@ The following options can be overridden:
 * showProgressBar
 * pauseOnHover
 * clickToClose
+* clickIconToClose
 * maxLength
 * theClass
 * icon

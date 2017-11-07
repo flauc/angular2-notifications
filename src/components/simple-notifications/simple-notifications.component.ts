@@ -39,6 +39,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
   public timeOut = 0;
   public maxLength = 0;
   public clickToClose = true;
+  public clickIconToClose = false;
   public showProgressBar = true;
   public pauseOnHover = true;
   public theClass = '';

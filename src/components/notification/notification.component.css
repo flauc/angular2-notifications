@@ -35,6 +35,10 @@
     padding: 10px;
 }
 
+.simple-notification .icon.icon-hover:hover {
+    opacity: 0.5;
+}
+
 .simple-notification .icon svg {
     fill: #fff;
     width: 100%;

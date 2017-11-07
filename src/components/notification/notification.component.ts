@@ -116,6 +116,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   @Input() public showProgressBar: boolean;
   @Input() public pauseOnHover: boolean;
   @Input() public clickToClose: boolean;
+  @Input() public clickIconToClose: boolean;
   @Input() public maxLength: number;
   @Input() public theClass: string;
   @Input() public rtl: boolean;
@@ -194,6 +195,14 @@ export class NotificationComponent implements OnInit, OnDestroy {
     this.item.click!.emit($e);
 
     if (this.clickToClose) {
+      this.remove();
+    }
+  }
+
+  onClickIcon($e: MouseEvent): void {
+    this.item.clickIcon!.emit($e);
+
+    if (this.clickIconToClose) {
       this.remove();
     }
   }

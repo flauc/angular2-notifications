@@ -6,6 +6,7 @@ export interface Options {
   pauseOnHover?: boolean;
   lastOnBottom?: boolean;
   clickToClose?: boolean;
+  clickIconToClose?: boolean;
   maxLength?: number;
   maxStack?: number;
   preventDuplicates?: boolean;

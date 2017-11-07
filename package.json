@@ -61,8 +61,6 @@
     "karma-jasmine": "1.1.0",
     "karma-jasmine-html-reporter": "0.2.2",
     "lite-server": "2.3.0",
-    "node-sass": "4.5.2",
-    "node-sass-tilde-importer": "1.0.0",
     "node-watch": "0.5.2",
     "protractor": "5.1.0",
     "rollup": "0.49.3",
