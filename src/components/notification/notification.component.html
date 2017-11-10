@@ -32,7 +32,7 @@
             <div class="sn-content" [innerHTML]="content"></div>
         </ng-template>
 
-        <div class="icon" *ngIf="item.icon !== 'bare'" [innerHTML]="safeSvg"></div>
+        <div class="icon" [class.icon-hover]="clickIconToClose" *ngIf="item.icon !== 'bare'" [innerHTML]="safeSvg" (click)="onClickIcon($event)"></div>
     </div>
     <div *ngIf="item.html">
         <div class="sn-content" [innerHTML]="item.html"></div>

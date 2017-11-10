@@ -153,6 +153,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    console.log('wesh');
     if (this.item.override) {
       this.attachOverrides();
     }
@@ -194,7 +195,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   onClick($e: MouseEvent): void {
     this.item.click!.emit($e);
 
-    if (this.clickToClose) {
+    if (this.clickToClose && !this.clickIconToClose) {
       this.remove();
     }
   }
