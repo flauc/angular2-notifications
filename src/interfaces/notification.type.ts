@@ -20,4 +20,5 @@ export interface Notification {
   theClass?: string
   click?: EventEmitter<{}>;
   clickIcon?: EventEmitter<{}>;
+  timeoutEnd?: EventEmitter<{}>;
 }
