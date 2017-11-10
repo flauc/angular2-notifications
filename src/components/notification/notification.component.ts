@@ -131,6 +131,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
   public titleIsTemplate = false;
   public contentIsTemplate = false;
+  public htmlIsTemplate = false;
 
   public progressWidth = 0;
   public safeSvg: SafeHtml;
@@ -167,6 +168,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
     this.contentType(this.item.title, 'title');
     this.contentType(this.item.content, 'content');
+    this.contentType(this.item.html, 'html');
 
     this.safeSvg = this.domSanitizer.bypassSecurityTrustHtml(this.icon || this.item.icon);
   }
