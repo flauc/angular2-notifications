@@ -153,7 +153,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log('wesh');
     if (this.item.override) {
       this.attachOverrides();
     }

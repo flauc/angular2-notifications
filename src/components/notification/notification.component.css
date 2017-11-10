@@ -13,16 +13,20 @@
 
 .simple-notification .sn-title {
     margin: 0;
-    padding: 0 50px 0 0;
     line-height: 30px;
     font-size: 20px;
 }
 
+
 .simple-notification .sn-content {
     margin: 0;
     font-size: 16px;
-    padding: 0 50px 0 0;
     line-height: 20px;
+}
+
+.simple-notification.has-icon .sn-title,
+.simple-notification.has-icon .sn-content {
+    padding: 0 50px 0 0;
 }
 
 .simple-notification .icon {
@@ -49,12 +53,13 @@
     fill: #fff;
 }
 
-.simple-notification.rtl-mode {
-    direction: rtl;
+.simple-notification.rtl-mode.has-icon .sn-title,
+.simple-notification.rtl-mode.has-icon .sn-content {
+    padding: 0 0 0 50px;
 }
 
-.simple-notification.rtl-mode .sn-content {
-    padding: 0 0 0 50px;
+.simple-notification.rtl-mode {
+    direction: rtl;
 }
 
 .simple-notification.rtl-mode svg {
