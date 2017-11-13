@@ -11,16 +11,27 @@
     min-height: 70px;
 }
 
-.simple-notification .sn-title {
+.simple-notification .sn-title,
+.simple-notification .sn-content,
+.simple-notification .sn-html {
     margin: 0;
+}
+
+.simple-notification .sn-title {
     line-height: 30px;
     font-size: 20px;
 }
 
 
 .simple-notification .sn-content {
-    margin: 0;
     font-size: 16px;
+    line-height: 20px;
+}
+
+.simple-notification.has-icon .sn-title,
+.simple-notification.has-icon .sn-content,
+.simple-notification.has-icon .sn-html {
+    padding: 0 50px 0 0;
     line-height: 20px;
 }
 
@@ -54,8 +65,13 @@
 }
 
 .simple-notification.rtl-mode.has-icon .sn-title,
-.simple-notification.rtl-mode.has-icon .sn-content {
+.simple-notification.rtl-mode.has-icon .sn-content,
+.simple-notification.rtl-mode.has-icon .sn-html {
     padding: 0 0 0 50px;
+}
+
+.simple-notification.rtl-mode {
+    direction: rtl;
 }
 
 .simple-notification.rtl-mode {
@@ -93,5 +109,6 @@
 .simple-notification.warn .sn-progress-loader span { background: #edc242; }
 .simple-notification.bare .sn-progress-loader span { background: #ccc; }
 
-.simple-notification.warn div .sn-title { color: #444; }
-.simple-notification.warn div .sn-content { color: #444; }
+.simple-notification.warn div .sn-title,
+.simple-notification.warn div .sn-content,
+.simple-notification.warn div .sn-html { color: #444; }

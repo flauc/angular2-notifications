@@ -36,7 +36,7 @@
         <div class="icon" [class.icon-hover]="clickIconToClose" *ngIf="item.icon !== 'bare'" [innerHTML]="safeSvg" (click)="onClickIcon($event)"></div>
     </div>
     <div *ngIf="item.html">
-        <div class="sn-content" *ngIf="htmlIsTemplate else regularHtml">
+        <div class="sn-html" *ngIf="htmlIsTemplate else regularHtml">
             <ng-container *ngTemplateOutlet="item.html"></ng-container>
         </div>
 

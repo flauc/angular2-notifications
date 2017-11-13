@@ -14,6 +14,7 @@ export class NotificationsService {
         notification.id = notification.override && notification.override.id ? notification.override.id : Math.random().toString(36).substring(3);
         notification.click = new EventEmitter<{}>();
         notification.clickIcon = new EventEmitter<{}>();
+        notification.timeoutEnd = new EventEmitter<{}>();
 
         this.emitter.next({command: 'set', notification: notification, add: to});
         return notification;
