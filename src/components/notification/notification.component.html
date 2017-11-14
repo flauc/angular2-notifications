@@ -17,30 +17,39 @@
     <div *ngIf="!item.html">
 
         <div class="sn-title" *ngIf="titleIsTemplate else regularTitle">
-            <ng-container *ngTemplateOutlet="title"></ng-container>
+            <ng-template [ngTemplateOutlet]="item.title"
+                         [ngTemplateOutletContext]="templateData"
+            >
+            </ng-template>
         </div>
 
         <ng-template #regularTitle>
-            <div class="sn-title" [innerHTML]="title"></div>
+            <div class="sn-title" [innerHTML]="item.title"></div>
         </ng-template>
 
         <div class="sn-content" *ngIf="contentIsTemplate else regularContent">
-            <ng-container *ngTemplateOutlet="content"></ng-container>
+            <ng-template [ngTemplateOutlet]="item.content"
+                         [ngTemplateOutletContext]="templateData"
+            >
+            </ng-template>
         </div>
 
         <ng-template #regularContent>
-            <div class="sn-content" [innerHTML]="content"></div>
+            <div class="sn-content" [innerHTML]="item.content"></div>
         </ng-template>
 
         <div class="icon" *ngIf="item.icon !== 'bare'" [innerHTML]="safeSvg"></div>
     </div>
     <div *ngIf="item.html">
         <div class="sn-html" *ngIf="htmlIsTemplate else regularHtml">
-            <ng-container *ngTemplateOutlet="item.html"></ng-container>
+            <ng-template [ngTemplateOutlet]="item.html"
+                         [ngTemplateOutletContext]="templateData"
+            >
+            </ng-template>
         </div>
 
         <ng-template #regularHtml>
-            <div class="sn-content" [innerHTML]="item.html"></div>
+            <div class="sn-html" [innerHTML]="item.html"></div>
         </ng-template>
 
         <div class="icon" [class.icon-hover]="clickIconToClose" *ngIf="item.icon" [innerHTML]="safeSvg" (click)="onClickIcon($event)"></div>
