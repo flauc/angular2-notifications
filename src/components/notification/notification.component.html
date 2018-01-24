@@ -9,7 +9,8 @@
             'success': item.type === 'success',
             'info': item.type === 'info',
             'bare': item.type === 'bare',
-            'rtl-mode': rtl
+            'rtl-mode': rtl,
+            'has-icon': item.icon !== 'bare'
         }"
      (mouseenter)="onEnter()"
      (mouseleave)="onLeave()">
