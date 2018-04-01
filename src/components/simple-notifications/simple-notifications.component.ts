@@ -28,27 +28,28 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
   @Output() onDestroy = new EventEmitter();
 
   public notifications: Notification[] = [];
-  public position: Position;
+  public position: Position = ['bottom', 'right'];
 
   private lastNotificationCreated: Notification;
   private listener: Subscription;
 
   // Received values
-  private lastOnBottom: boolean;
-  private maxStack: number;
-  private preventLastDuplicates: string | boolean;
-  private preventDuplicates: boolean;
+  private lastOnBottom = true;
+  private maxStack = 8;
+  private preventLastDuplicates: any = false;
+  private preventDuplicates = false;
 
   // Sent values
-  public timeOut: number;
-  public maxLength: number;
-  public clickToClose: boolean;
-  public clickIconToClose: boolean;
-  public showProgressBar: boolean;
-  public pauseOnHover: boolean;
-  public theClass: string;
-  public rtl: boolean;
-  public animate: Animate;
+  public timeOut = 0;
+  public maxLength = 0;
+  public clickToClose = true;
+  public clickIconToClose = false;
+  public showProgressBar = true;
+  public pauseOnHover = true;
+  public theClass = '';
+  public rtl = false;
+  public animate: Animate = 'fromRight';
+
 
   ngOnInit() {
 
@@ -173,14 +174,14 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
   }
 
   // Attach all the changes received in the options object
-  attachChanges(options: any): void {
-    Object.keys(options).forEach(option => {
-      if (this.hasOwnProperty(option)) {
-        (<any>this)[option] = options[option];
-      } else if (option === 'icons') {
-        this.service.icons = options[option];
+  attachChanges(options: any) {
+    for (const key in options) {
+      if (this.hasOwnProperty(key)) {
+        (<any>this)[key] = options[key];
+      } else if (key === 'icons') {
+        this.service.icons = options[key];
       }
-    });
+    }
   }
 
   buildEmit(notification: Notification, to: boolean) {

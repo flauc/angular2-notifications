@@ -33,8 +33,8 @@ export class SimpleNotificationsModule {
         {
           provide: 'options',
           useValue: {
-            ...options,
-            ...DEFAULT_OPTIONS
+            ...DEFAULT_OPTIONS,
+            ...options
           }
         }
       ]

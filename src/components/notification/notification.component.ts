@@ -153,7 +153,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     private zone: NgZone
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     if (this.item.override) {
       this.attachOverrides();
     }
@@ -171,6 +171,10 @@ export class NotificationComponent implements OnInit, OnDestroy {
     this.contentType(this.item.html, 'html');
 
     this.safeSvg = this.domSanitizer.bypassSecurityTrustHtml(this.icon || this.item.icon);
+  }
+
+  ngOnDestroy() {
+    clearTimeout(this.timer);
   }
 
   startTimeOut(): void {
@@ -216,10 +220,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
         (<any>this)[a] = this.item.override[a];
       }
     });
-  }
-
-  ngOnDestroy(): void {
-    clearTimeout(this.timer);
   }
 
   private instance = () => {

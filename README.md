@@ -80,7 +80,7 @@ export class AppModule { }
 Add the SimpleNotificationsComponent in to the component where you want to use the notifications. Or in your top level component for use in child components.
 ```js
 ...
-template: '<simple-notifications [options]="options"></simple-notifications>'
+template: '<simple-notifications></simple-notifications>'
 ...
 ```
 
@@ -195,7 +195,22 @@ toast.clickIcon.subscribe((event) => {
 ```
 
 ## Options
-This are the current options that can be pass to the component:
+
+Global options can be added in two ways. They can be passed through the `forRoot()` method on the module.
+
+```js
+SimpleNotificationsModule.forRoot({
+    ...options
+})
+```
+
+You can also pass them in to the root component.
+
+```js
+<simple-notifications [options]="options"></simple-notifications>
+```
+
+This are the current options that can be set globally:
 
 Option | Type | Default | Description |
 ------------ | ------------- | ------------- | -------------
