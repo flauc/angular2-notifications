@@ -3,7 +3,7 @@ import {
   ChangeDetectionStrategy, ChangeDetectorRef
 } from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
-import {Options} from '../../interfaces/options.type';
+import {Options, Animate, Position} from '../../interfaces/options.type';
 import {Notification} from '../../interfaces/notification.type';
 import {NotificationsService} from '../../services/notifications.service';
 
@@ -15,6 +15,10 @@ import {NotificationsService} from '../../services/notifications.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SimpleNotificationsComponent implements OnInit, OnDestroy {
+  constructor(
+    private service: NotificationsService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   @Input() set options(opt: Options) {
     this.attachChanges(opt);
@@ -24,35 +28,34 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
   @Output() onDestroy = new EventEmitter();
 
   public notifications: Notification[] = [];
-  public position: ['top' | 'bottom' | 'middle', 'right' | 'left' | 'center'] = ['bottom', 'right'];
+  public position: Position;
 
   private lastNotificationCreated: Notification;
   private listener: Subscription;
 
   // Received values
-  private lastOnBottom = true;
-  private maxStack = 8;
-  private preventLastDuplicates: any = false;
-  private preventDuplicates = false;
+  private lastOnBottom: boolean;
+  private maxStack: number;
+  private preventLastDuplicates: string | boolean;
+  private preventDuplicates: boolean;
 
   // Sent values
-  public timeOut = 0;
-  public maxLength = 0;
-  public clickToClose = true;
-  public clickIconToClose = false;
-  public showProgressBar = true;
-  public pauseOnHover = true;
-  public theClass = '';
-  public rtl = false;
-  public animate: 'fade' | 'fromTop' | 'fromRight' | 'fromBottom' | 'fromLeft' | 'rotate' | 'scale' = 'fromRight';
+  public timeOut: number;
+  public maxLength: number;
+  public clickToClose: boolean;
+  public clickIconToClose: boolean;
+  public showProgressBar: boolean;
+  public pauseOnHover: boolean;
+  public theClass: string;
+  public rtl: boolean;
+  public animate: Animate;
 
-  constructor(
-    private service: NotificationsService,
-    private cdr: ChangeDetectorRef
-  ) {}
+  ngOnInit() {
 
-  ngOnInit(): void {
-    // Listen for changes in the service
+    this.attachChanges(
+      this.service.globalOptions
+    );
+
     this.listener = this.service.emitter
       .subscribe(item => {
         switch (item.command) {
@@ -79,6 +82,12 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
 
         this.cdr.markForCheck();
       });
+  }
+
+  ngOnDestroy() {
+    if (this.listener) {
+      this.listener.unsubscribe();
+    }
   }
 
   // Default behavior on event
@@ -165,17 +174,17 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
 
   // Attach all the changes received in the options object
   attachChanges(options: any): void {
-    Object.keys(options).forEach(a => {
-      if (this.hasOwnProperty(a)) {
-        (<any>this)[a] = options[a];
-      } else if (a === 'icons') {
-        this.service.icons = options[a];
+    Object.keys(options).forEach(option => {
+      if (this.hasOwnProperty(option)) {
+        (<any>this)[option] = options[option];
+      } else if (option === 'icons') {
+        this.service.icons = options[option];
       }
     });
   }
 
   buildEmit(notification: Notification, to: boolean) {
-    let toEmit: Notification = {
+    const toEmit: Notification = {
       createdOn: notification.createdOn,
       type: notification.type,
       icon: notification.icon,
@@ -212,12 +221,6 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     if (doDelete) {
       this.notifications.splice(indexOfDelete, 1);
       this.onDestroy.emit(this.buildEmit(noti, false));
-    }
-  }
-
-  ngOnDestroy(): void {
-    if (this.listener) {
-      this.listener.unsubscribe();
     }
   }
 }

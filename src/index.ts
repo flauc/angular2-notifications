@@ -3,6 +3,8 @@ import {CommonModule} from '@angular/common';
 import {SimpleNotificationsComponent} from './components/simple-notifications/simple-notifications.component';
 import {NotificationComponent} from './components/notification/notification.component';
 import {NotificationsService} from './services/notifications.service';
+import {Options} from './interfaces/options.type';
+import {DEFAULT_OPTIONS} from './consts/default-options.const';
 
 export * from './components/notification/notification.component';
 export * from './components/simple-notifications/simple-notifications.component';
@@ -23,10 +25,19 @@ export * from './interfaces/options.type';
   exports: [SimpleNotificationsComponent]
 })
 export class SimpleNotificationsModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(options: Options = {}): ModuleWithProviders {
     return {
       ngModule: SimpleNotificationsModule,
-      providers: [NotificationsService]
+      providers: [
+        NotificationsService,
+        {
+          provide: 'options',
+          useValue: {
+            ...options,
+            ...DEFAULT_OPTIONS
+          }
+        }
+      ]
     };
   }
 }

@@ -1,6 +1,10 @@
 import {Icons} from './icons';
 
+export type Position = ['top' | 'bottom' | 'middle', 'right' | 'left' | 'center'];
+export type Animate = 'fade' | 'fromTop' | 'fromRight' | 'fromBottom' | 'fromLeft' | 'rotate' | 'scale';
+
 export interface Options {
+  position?: Position;
   timeOut?: number;
   showProgressBar?: boolean;
   pauseOnHover?: boolean;
@@ -13,7 +17,6 @@ export interface Options {
   preventLastDuplicates?: boolean | string;
   theClass?: string;
   rtl?: boolean;
-  animate?: 'fade' | 'fromTop' | 'fromRight' | 'fromBottom' | 'fromLeft' | 'rotate' | 'scale';
+  animate?: Animate;
   icons?: Icons;
-  position?: ['top' | 'bottom' | 'middle', 'right' | 'left' | 'center'];
 }
