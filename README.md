@@ -22,8 +22,7 @@
 
 ## Example
 
-Take a look at the live demo here: [Live Demo](https://jaspero.co/resources/projects/ng-notifications)
-You can also clone this repository and check out the example folder.
+Take a look at the live demo here: [Live Demo](https://stackblitz.com/edit/angular2-notifications-example)
 
 ## Setup
 
