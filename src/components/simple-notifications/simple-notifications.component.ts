@@ -21,6 +21,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
   ) {}
 
   @Input() set options(opt: Options) {
+    this._usingComponentOptions = true;
     this.attachChanges(opt);
   }
 
@@ -50,12 +51,19 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
   public rtl = false;
   public animate: Animate = 'fromRight';
 
+  private _usingComponentOptions = false;
 
   ngOnInit() {
 
-    this.attachChanges(
-      this.service.globalOptions
-    );
+    /**
+     * Only attach global options if config
+     * options were never sent through input
+     */
+    if (!this._usingComponentOptions) {
+      this.attachChanges(
+        this.service.globalOptions
+      );
+    }
 
     this.listener = this.service.emitter
       .subscribe(item => {
