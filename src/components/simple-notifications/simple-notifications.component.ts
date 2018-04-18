@@ -1,235 +1,260 @@
 import {
-  Component, EventEmitter, OnInit, OnDestroy, ViewEncapsulation, Input, Output,
-  ChangeDetectionStrategy, ChangeDetectorRef
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  TemplateRef,
+  ViewEncapsulation
 } from '@angular/core';
-import {Subscription} from 'rxjs/Subscription';
-import {Options, Animate, Position} from '../../interfaces/options.type';
-import {Notification} from '../../interfaces/notification.type';
-import {NotificationsService} from '../../services/notifications.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Notification } from '../../interfaces/notification.type';
+import { NotificationsService } from '../../services/notifications.service';
 
 @Component({
-  selector: 'simple-notifications',
+  selector: 'simple-notification',
   encapsulation: ViewEncapsulation.None,
-  templateUrl: './simple-notifications.component.html',
-  styleUrls: ['./simple-notifications.component.css'],
+  animations: [
+    trigger('enterLeave', [
+
+      // Fade
+      state('fade', style({ opacity: 1 })),
+      transition('* => fade', [
+        style({ opacity: 0 }),
+        animate('400ms ease-in-out')
+      ]),
+      state('fadeOut', style({ opacity: 0 })),
+      transition('fade => fadeOut', [
+        style({ opacity: 1 }),
+        animate('300ms ease-in-out')
+      ]),
+
+      // Enter from top
+      state('fromTop', style({ opacity: 1, transform: 'translateY(0)' })),
+      transition('* => fromTop', [
+        style({ opacity: 0, transform: 'translateY(-5%)' }),
+        animate('400ms ease-in-out')
+      ]),
+      state('fromTopOut', style({ opacity: 0, transform: 'translateY(5%)' })),
+      transition('fromTop => fromTopOut', [
+        style({ opacity: 1, transform: 'translateY(0)' }),
+        animate('300ms ease-in-out')
+      ]),
+
+      // Enter from right
+      state('fromRight', style({ opacity: 1, transform: 'translateX(0)' })),
+      transition('* => fromRight', [
+        style({ opacity: 0, transform: 'translateX(5%)' }),
+        animate('400ms ease-in-out')
+      ]),
+      state('fromRightOut', style({ opacity: 0, transform: 'translateX(-5%)' })),
+      transition('fromRight => fromRightOut', [
+        style({ opacity: 1, transform: 'translateX(0)' }),
+        animate('300ms ease-in-out')
+      ]),
+
+      // Enter from bottom
+      state('fromBottom', style({ opacity: 1, transform: 'translateY(0)' })),
+      transition('* => fromBottom', [
+        style({ opacity: 0, transform: 'translateY(5%)' }),
+        animate('400ms ease-in-out')
+      ]),
+      state('fromBottomOut', style({ opacity: 0, transform: 'translateY(-5%)' })),
+      transition('fromBottom => fromBottomOut', [
+        style({ opacity: 1, transform: 'translateY(0)' }),
+        animate('300ms ease-in-out')
+      ]),
+
+      // Enter from left
+      state('fromLeft', style({ opacity: 1, transform: 'translateX(0)' })),
+      transition('* => fromLeft', [
+        style({ opacity: 0, transform: 'translateX(-5%)' }),
+        animate('400ms ease-in-out')
+      ]),
+      state('fromLeftOut', style({ opacity: 0, transform: 'translateX(5%)' })),
+      transition('fromLeft => fromLeftOut', [
+        style({ opacity: 1, transform: 'translateX(0)' }),
+        animate('300ms ease-in-out')
+      ]),
+
+      // Rotate
+      state('scale', style({ opacity: 1, transform: 'scale(1)' })),
+      transition('* => scale', [
+        style({ opacity: 0, transform: 'scale(0)' }),
+        animate('400ms ease-in-out')
+      ]),
+      state('scaleOut', style({ opacity: 0, transform: 'scale(0)' })),
+      transition('scale => scaleOut', [
+        style({ opacity: 1, transform: 'scale(1)' }),
+        animate('400ms ease-in-out')
+      ]),
+
+      // Scale
+      state('rotate', style({ opacity: 1, transform: 'rotate(0deg)' })),
+      transition('* => rotate', [
+        style({ opacity: 0, transform: 'rotate(5deg)' }),
+        animate('400ms ease-in-out')
+      ]),
+      state('rotateOut', style({ opacity: 0, transform: 'rotate(-5deg)' })),
+      transition('rotate => rotateOut', [
+        style({ opacity: 1, transform: 'rotate(0deg)' }),
+        animate('400ms ease-in-out')
+      ])
+    ])
+  ],
+  templateUrl: './notification.component.html',
+  styleUrls: ['./notification.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SimpleNotificationsComponent implements OnInit, OnDestroy {
+
+export class NotificationComponent implements OnInit, OnDestroy {
+
+  @Input() public timeOut: number;
+  @Input() public showProgressBar: boolean;
+  @Input() public pauseOnHover: boolean;
+  @Input() public clickToClose: boolean;
+  @Input() public clickIconToClose: boolean;
+  @Input() public maxLength: number;
+  @Input() public theClass: string;
+  @Input() public rtl: boolean;
+  @Input() public animate: string;
+  @Input() public position: number;
+  @Input() public item: Notification;
+
+
+  // Progress bar variables
+  public title: any;
+  public content: any;
+
+  public titleIsTemplate = false;
+  public contentIsTemplate = false;
+  public htmlIsTemplate = false;
+
+  public progressWidth = 0;
+  public safeSvg: SafeHtml;
+
+  private stopTime = false;
+  private timer: any;
+  private framesPerSecond: number = 40;
+  private sleepTime: number;
+  private startTime: number;
+  private endTime: number;
+
+  private icon: string;
+
   constructor(
-    private service: NotificationsService,
-    private cdr: ChangeDetectorRef
-  ) {}
-
-  @Input() set options(opt: Options) {
-    this._usingComponentOptions = true;
-    this.attachChanges(opt);
-  }
-
-  @Output() onCreate = new EventEmitter();
-  @Output() onDestroy = new EventEmitter();
-
-  public notifications: Notification[] = [];
-  public position: Position = ['bottom', 'right'];
-
-  private lastNotificationCreated: Notification;
-  private listener: Subscription;
-
-  // Received values
-  private lastOnBottom = true;
-  private maxStack = 8;
-  private preventLastDuplicates: any = false;
-  private preventDuplicates = false;
-
-  // Sent values
-  public timeOut = 0;
-  public maxLength = 0;
-  public clickToClose = true;
-  public clickIconToClose = false;
-  public showProgressBar = true;
-  public pauseOnHover = true;
-  public theClass = '';
-  public rtl = false;
-  public animate: Animate = 'fromRight';
-
-  private _usingComponentOptions = false;
+    private notificationService: NotificationsService,
+    private domSanitizer: DomSanitizer,
+    private cdr: ChangeDetectorRef,
+    private zone: NgZone
+  ) { }
 
   ngOnInit() {
-
-    /**
-     * Only attach global options if config
-     * options were never sent through input
-     */
-    if (!this._usingComponentOptions) {
-      this.attachChanges(
-        this.service.globalOptions
-      );
+    if (this.item.override) {
+      this.attachOverrides();
     }
 
-    this.listener = this.service.emitter
-      .subscribe(item => {
-        switch (item.command) {
-          case 'cleanAll':
-            this.notifications = [];
-            break;
+    if (this.animate) {
+      this.item.state = this.animate;
+    }
 
-          case 'clean':
-            this.cleanSingle(item.id!);
-            break;
+    if (this.timeOut !== 0) {
+      this.startTimeOut();
+    }
 
-          case 'set':
-            if (item.add) {
-              this.add(item.notification!);
-            } else {
-              this.defaultBehavior(item);
-            }
-            break;
+    this.contentType(this.item.title, 'title');
+    this.contentType(this.item.content, 'content');
+    this.contentType(this.item.html, 'html');
 
-          default:
-            this.defaultBehavior(item);
-            break;
-        }
-
-        this.cdr.markForCheck();
-      });
+    this.safeSvg = this.domSanitizer.bypassSecurityTrustHtml(this.icon || this.item.icon);
   }
 
   ngOnDestroy() {
-    if (this.listener) {
-      this.listener.unsubscribe();
+    clearTimeout(this.timer);
+  }
+
+  startTimeOut(): void {
+    this.sleepTime = 1000 / this.framesPerSecond /* ms */;
+    this.startTime = new Date().getTime();
+    this.endTime = this.startTime + this.timeOut;
+    this.zone.runOutsideAngular(() => this.timer = setTimeout(this.instance, this.sleepTime));
+  }
+
+  onEnter(): void {
+    if (this.pauseOnHover) {
+      this.stopTime = true;
     }
   }
 
-  // Default behavior on event
-  defaultBehavior(value: any): void {
-    this.notifications.splice(this.notifications.indexOf(value.notification), 1);
-    this.onDestroy.emit(this.buildEmit(value.notification, false));
-  }
-
-
-  // Add the new notification to the notification array
-  add(item: Notification): void {
-    item.createdOn = new Date();
-
-    let toBlock: boolean = this.preventLastDuplicates || this.preventDuplicates ? this.block(item) : false;
-
-    // Save this as the last created notification
-    this.lastNotificationCreated = item;
-    // Override icon if set
-    if (item.override && item.override.icons && item.override.icons[item.type]) {
-      item.icon = item.override.icons[item.type];
-    }
-
-    if (!toBlock) {
-      // Check if the notification should be added at the start or the end of the array
-      if (this.lastOnBottom) {
-        if (this.notifications.length >= this.maxStack) {
-          this.notifications.splice(0, 1);
-        }
-
-        this.notifications.push(item);
-      } else {
-        if (this.notifications.length >= this.maxStack) {
-          this.notifications.splice(this.notifications.length - 1, 1);
-        }
-
-        this.notifications.splice(0, 0, item);
-      }
-
-      this.onCreate.emit(this.buildEmit(item, true));
+  onLeave(): void {
+    if (this.pauseOnHover) {
+      this.stopTime = false;
+      this.zone.runOutsideAngular(() => setTimeout(this.instance, this.sleepTime));
     }
   }
 
-  // Check if notifications should be prevented
-  block(item: Notification): boolean {
+  onClick($e: MouseEvent): void {
+    this.item.click!.emit($e);
 
-    const toCheck = item.html ? this.checkHtml : this.checkStandard;
-
-    if (this.preventDuplicates && this.notifications.length > 0) {
-      for (let i = 0; i < this.notifications.length; i++) {
-        if (toCheck(this.notifications[i], item)) {
-          return true;
-        }
-      }
-    }
-
-    if (this.preventLastDuplicates) {
-
-      let comp: Notification;
-
-      if (this.preventLastDuplicates === 'visible' && this.notifications.length > 0) {
-        if (this.lastOnBottom) {
-          comp = this.notifications[this.notifications.length - 1];
-        } else {
-          comp = this.notifications[0];
-        }
-      } else if (this.preventLastDuplicates === 'all' && this.lastNotificationCreated) {
-        comp = this.lastNotificationCreated;
-      } else {
-        return false;
-      }
-      return toCheck(comp, item);
-    }
-
-    return false;
-  }
-
-  checkStandard(checker: Notification, item: Notification): boolean {
-    return checker.type === item.type && checker.title === item.title && checker.content === item.content;
-  }
-
-  checkHtml(checker: Notification, item: Notification): boolean {
-    return checker.html ? checker.type === item.type && checker.title === item.title && checker.content === item.content && checker.html === item.html : false;
-  }
-
-  // Attach all the changes received in the options object
-  attachChanges(options: any) {
-    for (const key in options) {
-      if (this.hasOwnProperty(key)) {
-        (<any>this)[key] = options[key];
-      } else if (key === 'icons') {
-        this.service.icons = options[key];
-      }
+    if (this.clickToClose) {
+      this.remove();
     }
   }
 
-  buildEmit(notification: Notification, to: boolean) {
-    const toEmit: Notification = {
-      createdOn: notification.createdOn,
-      type: notification.type,
-      icon: notification.icon,
-      id: notification.id
-    };
+  onClickIcon($e: MouseEvent): void {
+    this.item.clickIcon!.emit($e);
 
-    if (notification.html) {
-      toEmit.html = notification.html;
-    } else {
-      toEmit.title = notification.title;
-      toEmit.content = notification.content;
+    if (this.clickIconToClose) {
+      this.remove();
     }
-
-    if (!to) {
-      toEmit.destroyedOn = new Date();
-    }
-
-    return toEmit;
   }
 
-  cleanSingle(id: string): void {
-    let indexOfDelete = 0;
-    let doDelete = false;
-    let noti;
-
-    this.notifications.forEach((notification, idx) => {
-      if (notification.id === id) {
-        indexOfDelete = idx;
-        noti = notification;
-        doDelete = true;
+  // Attach all the overrides
+  attachOverrides(): void {
+    Object.keys(this.item.override).forEach(a => {
+      if (this.hasOwnProperty(a)) {
+        (<any>this)[a] = this.item.override[a];
       }
     });
+  }
 
-    if (doDelete) {
-      this.notifications.splice(indexOfDelete, 1);
-      this.onDestroy.emit(this.buildEmit(noti, false));
+  private instance = () => {
+    var now = new Date().getTime();
+
+    if (this.endTime < now) {
+      this.remove();
+      this.item.timeoutEnd!.emit();
+    } else if (!this.stopTime) {
+      if (this.showProgressBar) {
+        this.progressWidth = Math.min((now - this.startTime + this.sleepTime /* We add this.sleepTime just to have 100% before close */) * 100 / this.timeOut, 100);
+      }
+
+      this.timer = setTimeout(this.instance, this.sleepTime);
     }
+    this.zone.run(() => this.cdr.detectChanges());
+  }
+
+  private remove() {
+    if (this.animate) {
+      this.item.state = this.animate + 'Out';
+      setTimeout(() => {
+        this.notificationService.set(this.item, false);
+      }, 310);
+    } else {
+      this.notificationService.set(this.item, false);
+    }
+  }
+
+  private contentType(item: any, key: string) {
+    if (item instanceof TemplateRef) {
+      (this as any)[key] = item;
+    } else {
+      (this as any)[key] = this.domSanitizer.bypassSecurityTrustHtml(item);
+    }
+
+    (this as any)[key + 'IsTemplate'] = item instanceof TemplateRef;
   }
 }
