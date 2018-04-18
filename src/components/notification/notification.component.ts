@@ -222,7 +222,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   private instance = () => {
-    var now = new Date().getTime();
+    const now = new Date().getTime();
 
     if (this.endTime < now) {
       this.remove();
