@@ -89,7 +89,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
             break;
         }
 
-        this.cdr.markForCheck();
+        this.cdr.detectChanges();
       });
   }
 
