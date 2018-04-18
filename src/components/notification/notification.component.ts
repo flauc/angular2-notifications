@@ -138,12 +138,11 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
   private stopTime = false;
   private timer: any;
-  private steps: number;
-  private speed: number;
-  private count = 0;
-  private start: any;
+  private framesPerSecond: number = 40;
+  private sleepTime: number;
+  private startTime: number;
+  private endTime: number;
 
-  private diff: any;
   private icon: string;
 
   constructor(
@@ -178,10 +177,10 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   startTimeOut(): void {
-    this.steps = this.timeOut / 10;
-    this.speed = this.timeOut / this.steps;
-    this.start = new Date().getTime();
-    this.zone.runOutsideAngular(() => this.timer = setTimeout(this.instance, this.speed));
+    this.sleepTime = 1000 / this.framesPerSecond /* ms */;
+    this.startTime = new Date().getTime();
+    this.endTime = this.startTime + this.timeOut;
+    this.zone.runOutsideAngular(() => this.timer = setTimeout(this.instance, this.sleepTime));
   }
 
   onEnter(): void {
@@ -193,7 +192,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   onLeave(): void {
     if (this.pauseOnHover) {
       this.stopTime = false;
-      this.zone.runOutsideAngular(() => setTimeout(this.instance, (this.speed - this.diff)));
+      this.zone.runOutsideAngular(() => setTimeout(this.instance, this.sleepTime));
     }
   }
 
@@ -223,17 +222,17 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   private instance = () => {
-    this.diff = (new Date().getTime() - this.start) - (this.count * this.speed);
+    var now = new Date().getTime();
 
-    if (this.count++ === this.steps) {
+    if (this.endTime < now) {
       this.remove();
       this.item.timeoutEnd!.emit();
     } else if (!this.stopTime) {
       if (this.showProgressBar) {
-        this.progressWidth += 100 / this.steps;
+        this.progressWidth = Math.min((now - this.startTime + this.sleepTime /* We add this.sleepTime just to have 100% before close */) * 100 / this.timeOut, 100);
       }
 
-      this.timer = setTimeout(this.instance, (this.speed - this.diff));
+      this.timer = setTimeout(this.instance, this.sleepTime);
     }
     this.zone.run(() => this.cdr.detectChanges());
   }
