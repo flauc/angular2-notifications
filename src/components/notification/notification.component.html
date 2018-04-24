@@ -41,7 +41,7 @@
         </div>
 
         <ng-template #regularHtml>
-            <div class="sn-content" [innerHTML]="item.html"></div>
+            <div class="sn-content" [innerHTML]="safeInputHtml"></div>
         </ng-template>
 
         <div class="icon" [class.icon-hover]="clickIconToClose" *ngIf="item.icon" [innerHTML]="safeSvg" (click)="onClickIcon($event)"></div>

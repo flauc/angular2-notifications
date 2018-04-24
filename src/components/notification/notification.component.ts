@@ -135,6 +135,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
   public progressWidth = 0;
   public safeSvg: SafeHtml;
+  public safeInputHtml: SafeHtml;
 
   private stopTime = false;
   private timer: any;
@@ -170,6 +171,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     this.contentType(this.item.html, 'html');
 
     this.safeSvg = this.domSanitizer.bypassSecurityTrustHtml(this.icon || this.item.icon);
+    this.safeInputHtml = this.domSanitizer.bypassSecurityTrustHtml(this.item.html);
   }
 
   ngOnDestroy() {
