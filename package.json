@@ -1,5 +1,6 @@
 {
   "name": "angular2-notifications",
+  "typings": "./dist/index.d.ts",
   "version": "1.0.1",
   "scripts": {
     "build": "gulp build",
