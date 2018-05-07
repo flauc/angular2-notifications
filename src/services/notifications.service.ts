@@ -1,5 +1,5 @@
 import {Injectable, EventEmitter, Inject} from '@angular/core';
-import {Subject} from 'rxjs/Subject';
+import {Subject} from 'rxjs';
 import {NotificationEvent} from '../interfaces/notification-event.type';
 import {Notification} from '../interfaces/notification.type';
 import {Icons} from '../interfaces/icons';

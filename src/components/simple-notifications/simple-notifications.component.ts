@@ -2,7 +2,7 @@ import {
   Component, EventEmitter, OnInit, OnDestroy, ViewEncapsulation, Input, Output,
   ChangeDetectionStrategy, ChangeDetectorRef
 } from '@angular/core';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {Options, Animate, Position} from '../../interfaces/options.type';
 import {Notification} from '../../interfaces/notification.type';
 import {NotificationsService} from '../../services/notifications.service';
