@@ -1,6 +1,11 @@
 import {Icons} from './icons';
 
-export type Position = ['top' | 'bottom' | 'middle', 'right' | 'left' | 'center'];
+export type VerticalPosition = 'top' | 'bottom' | 'middle';
+export type HorizontalPosition = 'right' | 'left' | 'center';
+export interface Position extends Array<VerticalPosition | HorizontalPosition> {
+    0: VerticalPosition;
+    1: HorizontalPosition;
+}
 export type Animate = 'fade' | 'fromTop' | 'fromRight' | 'fromBottom' | 'fromLeft' | 'rotate' | 'scale';
 
 export interface Options {
