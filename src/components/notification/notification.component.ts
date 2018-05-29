@@ -126,9 +126,8 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
 
   // Progress bar variables
-  public title: any;
-  public content: any;
 
+  public templateData: any = null;
   public titleIsTemplate = false;
   public contentIsTemplate = false;
   public htmlIsTemplate = false;
@@ -249,12 +248,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   private contentType(item: any, key: string) {
-    if (item instanceof TemplateRef) {
-      this[key] = item;
-    } else {
-      this[key] = this.domSanitizer.bypassSecurityTrustHtml(item);
-    }
-
     this[key + 'IsTemplate'] = item instanceof TemplateRef;
   }
 }

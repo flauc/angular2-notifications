@@ -150,6 +150,23 @@ You could also pass the template through the `open()` method:
     }
 ```
 
+You can pass arbitrary data to your template:
+```html
+<ng-template #example let-text="text">
+    <p>{{ text }}!</p>
+</ng-template>
+```
+```ts 
+  @ViewChild('example') example: TemplateRef<any>;
+
+  open() {
+    this._service.success(this.example, null, {
+        templateData: {text: 'hi'},
+    });
+  }
+```
+
+
 ## Subscribing to clicks
 If you are interested in the clicks that happen on a notification you have
 the possibility to subscribe to a EventEmitter. The methods (success, error, alert, warn, info, warn, bare, create and html) from the
