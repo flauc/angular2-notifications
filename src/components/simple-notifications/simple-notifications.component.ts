@@ -97,6 +97,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     if (this.listener) {
       this.listener.unsubscribe();
     }
+    this.cdr.detach();
   }
 
   // Default behavior on event
