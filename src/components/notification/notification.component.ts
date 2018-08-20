@@ -176,6 +176,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     clearTimeout(this.timer);
+    this.cdr.detach();
   }
 
   startTimeOut(): void {
@@ -236,7 +237,11 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
       this.timer = setTimeout(this.instance, this.sleepTime);
     }
-    this.zone.run(() => this.cdr.detectChanges());
+    this.zone.run(() => {
+      if (!this.cdr['destroyed']) {
+        this.cdr.detectChanges();
+      }
+    });
   }
 
   private remove() {

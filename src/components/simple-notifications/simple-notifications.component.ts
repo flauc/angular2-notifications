@@ -88,8 +88,9 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
             this.defaultBehavior(item);
             break;
         }
-
-        this.cdr.detectChanges();
+        if (!this.cdr['destroyed']) {
+          this.cdr.detectChanges();
+        }
       });
   }
 
@@ -97,6 +98,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     if (this.listener) {
       this.listener.unsubscribe();
     }
+    this.cdr.detach();
   }
 
   // Default behavior on event
