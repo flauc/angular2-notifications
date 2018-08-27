@@ -17,7 +17,7 @@
 
     <div *ngIf="!item.html">
 
-        <div class="sn-title" *ngIf="titleIsTemplate else regularTitle">
+        <div class="sn-title" *ngIf="titleIsTemplate; else regularTitle">
             <ng-container *ngTemplateOutlet="title"></ng-container>
         </div>
 
@@ -36,7 +36,7 @@
         <div class="icon" *ngIf="item.icon !== 'bare'" [innerHTML]="safeSvg"></div>
     </div>
     <div *ngIf="item.html">
-        <div class="sn-html" *ngIf="htmlIsTemplate else regularHtml">
+        <div class="sn-html" *ngIf="htmlIsTemplate; else regularHtml">
             <ng-container *ngTemplateOutlet="item.html"></ng-container>
         </div>
 

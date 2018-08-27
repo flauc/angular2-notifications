@@ -1,11 +1,19 @@
 import {
-  Component, EventEmitter, OnInit, OnDestroy, ViewEncapsulation, Input, Output,
-  ChangeDetectionStrategy, ChangeDetectorRef
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewEncapsulation
 } from '@angular/core';
 import {Subscription} from 'rxjs';
-import {Options, Animate, Position} from '../../interfaces/options.type';
+import {Options, Position} from '../../interfaces/options.type';
 import {Notification} from '../../interfaces/notification.type';
 import {NotificationsService} from '../../services/notifications.service';
+import {NotificationAnimationType} from '../../enums/notification-animation-type.enum';
 
 @Component({
   selector: 'simple-notifications',
@@ -49,7 +57,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
   public pauseOnHover = true;
   public theClass = '';
   public rtl = false;
-  public animate: Animate = 'fromRight';
+  public animate: NotificationAnimationType = NotificationAnimationType.FromRight;
 
   private _usingComponentOptions = false;
 

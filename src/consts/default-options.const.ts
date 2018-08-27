@@ -1,5 +1,6 @@
 import {DEFAULT_ICONS} from './default-icons.const';
 import {Options} from '../interfaces/options.type';
+import {NotificationAnimationType} from '../enums/notification-animation-type.enum'
 
 export const DEFAULT_OPTIONS: Options = {
   position: ['bottom', 'right'],
@@ -15,6 +16,6 @@ export const DEFAULT_OPTIONS: Options = {
   preventLastDuplicates: false,
   theClass: '',
   rtl: false,
-  animate: 'fromRight',
+  animate: NotificationAnimationType.FromRight,
   icons: DEFAULT_ICONS
 };

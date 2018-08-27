@@ -13,6 +13,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {Notification} from '../../interfaces/notification.type';
 import {NotificationsService} from '../../services/notifications.service';
+import {NotificationAnimationType} from '../../enums/notification-animation-type.enum';
 
 @Component({
   selector: 'simple-notification',
@@ -120,7 +121,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   @Input() public maxLength: number;
   @Input() public theClass: string;
   @Input() public rtl: boolean;
-  @Input() public animate: string;
+  @Input() public animate: NotificationAnimationType;
   @Input() public position: number;
   @Input() public item: Notification;
 
@@ -139,7 +140,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
   private stopTime = false;
   private timer: any;
-  private framesPerSecond: number = 40;
+  private framesPerSecond = 40;
   private sleepTime: number;
   private startTime: number;
   private endTime: number;
@@ -186,29 +187,29 @@ export class NotificationComponent implements OnInit, OnDestroy {
     this.zone.runOutsideAngular(() => this.timer = setTimeout(this.instance, this.sleepTime));
   }
 
-  onEnter(): void {
+  onEnter() {
     if (this.pauseOnHover) {
       this.stopTime = true;
     }
   }
 
-  onLeave(): void {
+  onLeave() {
     if (this.pauseOnHover) {
       this.stopTime = false;
       this.zone.runOutsideAngular(() => setTimeout(this.instance, this.sleepTime));
     }
   }
 
-  onClick($e: MouseEvent): void {
-    this.item.click!.emit($e);
+  onClick(event: MouseEvent) {
+    this.item.click!.emit(event);
 
     if (this.clickToClose) {
       this.remove();
     }
   }
 
-  onClickIcon($e: MouseEvent): void {
-    this.item.clickIcon!.emit($e);
+  onClickIcon(event: MouseEvent) {
+    this.item.clickIcon!.emit(event);
 
     if (this.clickIconToClose) {
       this.remove();
@@ -216,7 +217,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   }
 
   // Attach all the overrides
-  attachOverrides(): void {
+  attachOverrides() {
     Object.keys(this.item.override).forEach(a => {
       if (this.hasOwnProperty(a)) {
         (<any>this)[a] = this.item.override[a];
@@ -224,7 +225,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
     });
   }
 
-  private instance = () => {
+  private instance() {
     const now = new Date().getTime();
 
     if (this.endTime < now) {

@@ -1,4 +1,5 @@
 import {Icons} from './icons';
+import {NotificationAnimationType} from '../enums/notification-animation-type.enum';
 
 export type VerticalPosition = 'top' | 'bottom' | 'middle';
 export type HorizontalPosition = 'right' | 'left' | 'center';
@@ -6,7 +7,6 @@ export interface Position extends Array<VerticalPosition | HorizontalPosition> {
     0: VerticalPosition;
     1: HorizontalPosition;
 }
-export type Animate = 'fade' | 'fromTop' | 'fromRight' | 'fromBottom' | 'fromLeft' | 'rotate' | 'scale';
 
 export interface Options {
   position?: Position;
@@ -22,6 +22,6 @@ export interface Options {
   preventLastDuplicates?: boolean | string;
   theClass?: string;
   rtl?: boolean;
-  animate?: Animate;
+  animate?: NotificationAnimationType;
   icons?: Icons;
 }

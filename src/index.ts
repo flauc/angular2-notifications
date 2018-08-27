@@ -14,6 +14,8 @@ export * from './interfaces/icons';
 export * from './interfaces/notification-event.type';
 export * from './interfaces/notification.type';
 export * from './interfaces/options.type';
+export * from './enums/notification-type.enum';
+export * from './enums/notification-animation-type.enum';
 
 export const OPTIONS = new InjectionToken<Options>('options');
 export function optionsFactory(options) {
