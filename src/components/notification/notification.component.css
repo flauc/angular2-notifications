@@ -27,12 +27,6 @@
     line-height: 20px;
 }
 
-.simple-notification.has-icon .sn-title,
-.simple-notification.has-icon .sn-content,
-.simple-notification.has-icon .sn-html {
-    padding: 0 50px 0 0;
-}
-
 .simple-notification .icon {
     position: absolute;
     box-sizing: border-box;
@@ -55,12 +49,6 @@
 
 .simple-notification .icon svg g {
     fill: #fff;
-}
-
-.simple-notification.rtl-mode.has-icon .sn-title,
-.simple-notification.rtl-mode.has-icon .sn-content,
-.simple-notification.rtl-mode.has-icon .sn-html {
-    padding: 0 0 0 50px;
 }
 
 .simple-notification.rtl-mode {
