@@ -6,7 +6,7 @@
 [![NPM Version](https://img.shields.io/npm/v/angular2-notifications.svg)](https://www.npmjs.com/package/angular2-notifications)
 [![NPM Downloads](https://img.shields.io/npm/dt/angular2-notifications.svg)](https://www.npmjs.com/package/angular2-notifications)
 
-**Push Notifications have bean moved to a separate library [ng-push](https://github.com/flauc/ng-push)**
+**Push Notifications have been moved to a separate library [ng-push](https://github.com/flauc/ng-push)**
 
 ## Table of Contents
 
@@ -152,7 +152,7 @@ You could also pass the template through the `open()` method:
 
 ## Subscribing to clicks
 If you are interested in the clicks that happen on a notification you have
-the possibility to subscribe to a EventEmitter. The methods (success, error, alert, warn, info, warn, bare, create and html) from the
+the possibility to subscribe to a EventEmitter. The methods (success, error, alert, warn, info, bare, create and html) from the
 NotificationsService return an Object of type Notification.
 
 ```js
