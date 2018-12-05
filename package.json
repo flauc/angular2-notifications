@@ -49,7 +49,7 @@
     "codelyzer": "^4.5.0",
     "core-js": "^2.5.7",
     "del": "^3.0.0",
-    "gulp": "^4.0.0",
+    "gulp": "3.9.1",
     "gulp-rename": "^1.4.0",
     "gulp-rollup": "^2.16.2",
     "jasmine-core": "2.9.1",
