@@ -1,6 +1,6 @@
 {
   "name": "angular2-notifications",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/flauc/angular2-notifications"
@@ -21,10 +21,10 @@
   "jsnext:main": "angular2-notifications.js",
   "typings": "angular2-notifications.d.ts",
   "peerDependencies": {
-    "@angular/animations": "^6.0.0",
-    "@angular/common": "^6.0.0",
-    "@angular/core": "^6.0.0",
-    "rxjs": "^6.1.0",
+    "@angular/animations": "^7.0.0",
+    "@angular/common": "^7.0.0",
+    "@angular/core": "^7.0.0",
+    "rxjs": "^6.3.3",
     "zone.js": "^0.8.26"
   }
 }

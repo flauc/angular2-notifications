@@ -18,6 +18,7 @@
     "types": []
   },
   "angularCompilerOptions": {
+    "enableResourceInlining": true,
     "annotateForClosureCompiler": true,
     "strictMetadataEmit": true,
     "skipTemplateCodegen": true,
