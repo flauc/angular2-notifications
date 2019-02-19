@@ -1,3 +1,9 @@
+# 2.0.0
+
+### Notes
+
+* Added template context management
+
 # 0.9.5
 
 ### Notes
