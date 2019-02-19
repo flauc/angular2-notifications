@@ -23,4 +23,5 @@ export interface Notification {
   click?: EventEmitter<{}>;
   clickIcon?: EventEmitter<{}>;
   timeoutEnd?: EventEmitter<{}>;
+  context?: any;
 }
