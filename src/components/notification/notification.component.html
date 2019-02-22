@@ -18,7 +18,7 @@
     <div *ngIf="!item.html">
 
         <div class="sn-title" *ngIf="titleIsTemplate; else regularTitle">
-            <ng-container *ngTemplateOutlet="title"></ng-container>
+            <ng-container *ngTemplateOutlet="title; context: item.context"></ng-container>
         </div>
 
         <ng-template #regularTitle>
@@ -26,7 +26,7 @@
         </ng-template>
 
         <div class="sn-content" *ngIf="contentIsTemplate else regularContent">
-            <ng-container *ngTemplateOutlet="content"></ng-container>
+            <ng-container *ngTemplateOutlet="content; context: item.context"></ng-container>
         </div>
 
         <ng-template #regularContent>
@@ -37,7 +37,7 @@
     </div>
     <div *ngIf="item.html">
         <div class="sn-html" *ngIf="htmlIsTemplate; else regularHtml">
-            <ng-container *ngTemplateOutlet="item.html"></ng-container>
+            <ng-container *ngTemplateOutlet="item.html; context: item.context"></ng-container>
         </div>
 
         <ng-template #regularHtml>
