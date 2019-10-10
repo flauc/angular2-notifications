@@ -71,7 +71,7 @@
     padding: 0 0 0 50px;
 }
 
-.simple-notification.rtl-mode svg {
+.simple-notification.rtl-mode .icon {
     left: 0;
     right: auto;
 }
