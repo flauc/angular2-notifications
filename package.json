@@ -1,16 +1,15 @@
 {
-  "name": "angular2-notifications",
+  "name": "angular9-notifications-gpu",
   "typings": "./dist/index.d.ts",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "scripts": {
-    "build": "gulp build",
-    "build:watch": "gulp",
+    "build": "ng build",
     "docs": "npm run docs:build",
-    "docs:build": "compodoc -p tsconfig.json -n angular2-notifications -d docs --hideGenerator",
+    "docs:build": "compodoc -p tsconfig.json -n angular9-notifications -d docs --hideGenerator",
     "docs:serve": "npm run docs:build -- -s",
     "docs:watch": "npm run docs:build -- -s -w",
-    "lint": "tslint --project src/tsconfig.es5.json",
-    "publish": "npm run build && npm publish dist",
+    "lint": "tslint -c tslint.json --project ./tsconfig.json -t verbose",
+    "publish_lib": "npm publish dist/angular9-notifications",
     "test": "npm run lint && npm run build"
   },
   "repository": {
@@ -51,9 +50,6 @@
     "codelyzer": "^5.1.2",
     "core-js": "^2.5.4",
     "del": "^3.0.0",
-    "gulp": "3.9.1",
-    "gulp-rename": "^1.4.0",
-    "gulp-rollup": "^2.16.2",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~3.1.1",

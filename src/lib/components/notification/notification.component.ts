@@ -113,30 +113,30 @@ import {NotificationAnimationType} from '../../enums/notification-animation-type
 
 export class NotificationComponent implements OnInit, OnDestroy {
 
-  @Input() public timeOut: number;
-  @Input() public showProgressBar: boolean;
-  @Input() public pauseOnHover: boolean;
-  @Input() public clickToClose: boolean;
-  @Input() public clickIconToClose: boolean;
-  @Input() public maxLength: number;
-  @Input() public theClass: string;
-  @Input() public rtl: boolean;
-  @Input() public animate: NotificationAnimationType;
-  @Input() public position: number;
-  @Input() public item: Notification;
+  @Input() timeOut: number;
+  @Input() showProgressBar: boolean;
+  @Input() pauseOnHover: boolean;
+  @Input() clickToClose: boolean;
+  @Input() clickIconToClose: boolean;
+  @Input() maxLength: number;
+  @Input() theClass: string;
+  @Input() rtl: boolean;
+  @Input() animate: NotificationAnimationType;
+  @Input() position: number;
+  @Input() item: Notification;
 
 
   // Progress bar variables
-  public title: any;
-  public content: any;
+  title: any;
+  content: any;
 
-  public titleIsTemplate = false;
-  public contentIsTemplate = false;
-  public htmlIsTemplate = false;
+  titleIsTemplate = false;
+  contentIsTemplate = false;
+  htmlIsTemplate = false;
 
-  public progressWidth = 0;
-  public safeSvg: SafeHtml;
-  public safeInputHtml: SafeHtml;
+  progressWidth = 0;
+  safeSvg: SafeHtml;
+  safeInputHtml: SafeHtml;
 
   private stopTime = false;
   private timer: any;

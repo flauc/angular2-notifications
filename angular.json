@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular2-notifications": {
+    "angular9-notifications": {
       "root": "/",
       "sourceRoot": "/src",
       "projectType": "library",
@@ -12,7 +12,7 @@
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "./tsconfig.lib.json",
+            "tsConfig": "src/lib/tsconfig.lib.json",
             "project": "./ng-package.json"
           }
         },
@@ -20,7 +20,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
-            "tsConfig": "./tsconfig.spec.json",
+            "tsConfig": "src/lib/tsconfig.spec.json",
             "karmaConfig": "./karma.conf.js"
           }
         },
