@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular9-notifications": {
+    "angular2-notifications": {
       "root": "/",
       "sourceRoot": "/src",
       "projectType": "library",

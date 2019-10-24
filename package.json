@@ -1,15 +1,15 @@
 {
-  "name": "angular9-notifications-gpu",
+  "name": "angular2-notifications",
   "typings": "./dist/index.d.ts",
   "version": "1.0.0",
   "scripts": {
     "build": "ng build",
     "docs": "npm run docs:build",
-    "docs:build": "compodoc -p tsconfig.json -n angular9-notifications -d docs --hideGenerator",
+    "docs:build": "compodoc -p tsconfig.json -n angular2-notifications -d docs --hideGenerator",
     "docs:serve": "npm run docs:build -- -s",
     "docs:watch": "npm run docs:build -- -s -w",
     "lint": "tslint -c tslint.json --project ./tsconfig.json -t verbose",
-    "publish_lib": "npm publish dist/angular9-notifications",
+    "publish_lib": "npm publish dist/angular2-notifications",
     "test": "npm run lint && npm run build"
   },
   "repository": {
