@@ -44,6 +44,7 @@
     "@angular-devkit/build-angular": "~0.803.14",
     "@angular-devkit/build-ng-packagr": "~0.803.14",
     "@angular/animations": "~8.2.11",
+    "@angular/cli": "~8.2.11",
     "@angular/common": "~8.2.11",
     "@angular/compiler": "~8.2.11",
     "@angular/compiler-cli": "~8.2.11",
