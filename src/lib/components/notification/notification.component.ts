@@ -1,19 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  NgZone,
-  OnDestroy,
-  OnInit,
-  TemplateRef,
-  ViewEncapsulation
-} from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
-import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
-import {Notification} from '../../interfaces/notification.type';
-import {NotificationsService} from '../../services/notifications.service';
-import {NotificationAnimationType} from '../../enums/notification-animation-type.enum';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { ChangeDetectionStrategy, Component, Input, NgZone, OnDestroy, OnInit, TemplateRef, ViewEncapsulation, ViewRef } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { NotificationAnimationType } from '../../enums/notification-animation-type.enum';
+import { Notification } from '../../interfaces/notification.type';
+import { NotificationsService } from '../../services/notifications.service';
 
 @Component({
   selector: 'simple-notification',
@@ -150,7 +140,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   constructor(
     private notificationService: NotificationsService,
     private domSanitizer: DomSanitizer,
-    private cdr: ChangeDetectorRef,
+    private viewRef: ViewRef,
     private zone: NgZone
   ) {}
 
@@ -177,7 +167,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     clearTimeout(this.timer);
-    this.cdr.detach();
+    this.viewRef.detach();
   }
 
   startTimeOut(): void {
@@ -220,7 +210,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   attachOverrides() {
     Object.keys(this.item.override).forEach(a => {
       if (this.hasOwnProperty(a)) {
-        (<any>this)[a] = this.item.override[a];
+        (this as any)[a] = this.item.override[a];
       }
     });
   }
@@ -233,14 +223,15 @@ export class NotificationComponent implements OnInit, OnDestroy {
       this.item.timeoutEnd!.emit();
     } else if (!this.stopTime) {
       if (this.showProgressBar) {
-        this.progressWidth = Math.min((now - this.startTime + this.sleepTime /* We add this.sleepTime just to have 100% before close */) * 100 / this.timeOut, 100);
+        // We add this.sleepTime just to have 100% before close
+        this.progressWidth = Math.min((now - this.startTime + this.sleepTime) * 100 / this.timeOut, 100);
       }
 
       this.timer = setTimeout(this.instance, this.sleepTime);
     }
     this.zone.run(() => {
-      if (!this.cdr['destroyed']) {
-        this.cdr.detectChanges();
+      if (!this.viewRef.destroyed) {
+        this.viewRef.detectChanges();
       }
     });
   }

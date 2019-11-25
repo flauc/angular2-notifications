@@ -1,19 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  ViewEncapsulation
-} from '@angular/core';
-import {Subscription} from 'rxjs';
-import {Options, Position} from '../../interfaces/options.type';
-import {Notification} from '../../interfaces/notification.type';
-import {NotificationsService} from '../../services/notifications.service';
-import {NotificationAnimationType} from '../../enums/notification-animation-type.enum';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation, ViewRef } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { NotificationAnimationType } from '../../enums/notification-animation-type.enum';
+import { Notification } from '../../interfaces/notification.type';
+import { Options, Position } from '../../interfaces/options.type';
+import { NotificationsService } from '../../services/notifications.service';
 
 @Component({
   selector: 'simple-notifications',
@@ -25,16 +15,16 @@ import {NotificationAnimationType} from '../../enums/notification-animation-type
 export class SimpleNotificationsComponent implements OnInit, OnDestroy {
   constructor(
     private service: NotificationsService,
-    private cdr: ChangeDetectorRef
-  ) {}
+    private viewRef: ViewRef
+  ) { }
 
   @Input() set options(opt: Options) {
-    this._usingComponentOptions = true;
+    this.usingComponentOptions = true;
     this.attachChanges(opt);
   }
 
-  @Output() onCreate = new EventEmitter();
-  @Output() onDestroy = new EventEmitter();
+  @Output() create = new EventEmitter();
+  @Output() destroy = new EventEmitter();
 
   notifications: Notification[] = [];
   position: Position = ['bottom', 'right'];
@@ -59,7 +49,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
   rtl = false;
   animate: NotificationAnimationType = NotificationAnimationType.FromRight;
 
-  private _usingComponentOptions = false;
+  private usingComponentOptions = false;
 
   ngOnInit() {
 
@@ -67,7 +57,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
      * Only attach global options if config
      * options were never sent through input
      */
-    if (!this._usingComponentOptions) {
+    if (!this.usingComponentOptions) {
       this.attachChanges(
         this.service.globalOptions
       );
@@ -96,8 +86,8 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
             this.defaultBehavior(item);
             break;
         }
-        if (!this.cdr['destroyed']) {
-          this.cdr.detectChanges();
+        if (!this.viewRef.destroyed) {
+          this.viewRef.detectChanges();
         }
       });
   }
@@ -106,13 +96,13 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     if (this.listener) {
       this.listener.unsubscribe();
     }
-    this.cdr.detach();
+    this.viewRef.detach();
   }
 
   // Default behavior on event
   defaultBehavior(value: any): void {
     this.notifications.splice(this.notifications.indexOf(value.notification), 1);
-    this.onDestroy.emit(this.buildEmit(value.notification, false));
+    this.destroy.emit(this.buildEmit(value.notification, false));
   }
 
 
@@ -120,7 +110,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
   add(item: Notification): void {
     item.createdOn = new Date();
 
-    let toBlock: boolean = this.preventLastDuplicates || this.preventDuplicates ? this.block(item) : false;
+    const toBlock: boolean = this.preventLastDuplicates || this.preventDuplicates ? this.block(item) : false;
 
     // Save this as the last created notification
     this.lastNotificationCreated = item;
@@ -145,7 +135,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
         this.notifications.splice(0, 0, item);
       }
 
-      this.onCreate.emit(this.buildEmit(item, true));
+      this.create.emit(this.buildEmit(item, true));
     }
   }
 
@@ -155,8 +145,8 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     const toCheck = item.html ? this.checkHtml : this.checkStandard;
 
     if (this.preventDuplicates && this.notifications.length > 0) {
-      for (let i = 0; i < this.notifications.length; i++) {
-        if (toCheck(this.notifications[i], item)) {
+      for (const notification of this.notifications) {
+        if (toCheck(notification, item)) {
           return true;
         }
       }
@@ -188,14 +178,16 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
   }
 
   checkHtml(checker: Notification, item: Notification): boolean {
-    return checker.html ? checker.type === item.type && checker.title === item.title && checker.content === item.content && checker.html === item.html : false;
+    return checker.html ?
+      checker.type === item.type && checker.title === item.title && checker.content === item.content && checker.html === item.html :
+      false;
   }
 
   // Attach all the changes received in the options object
   attachChanges(options: any) {
     for (const key in options) {
       if (this.hasOwnProperty(key)) {
-        (<any>this)[key] = options[key];
+        (this as any)[key] = options[key];
       } else if (key === 'icons') {
         this.service.icons = options[key];
       }
@@ -239,7 +231,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
 
     if (doDelete) {
       this.notifications.splice(indexOfDelete, 1);
-      this.onDestroy.emit(this.buildEmit(noti, false));
+      this.destroy.emit(this.buildEmit(noti, false));
     }
   }
 }

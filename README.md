@@ -90,9 +90,9 @@ constructor( private _service: NotificationsService ) {}
 ...
 ```
 
-The onCreate and onDestroy Event Emitters emit the notification that was created or destroyed you can utilise this functionality like this:
+The create and destroy Event Emitters emit the notification that was created or destroyed you can utilise this functionality like this:
 ```js
-<simple-notifications [options]="options" (onCreate)="created($event)" (onDestroy)="destroyed($event)"></simple-notifications>
+<simple-notifications [options]="options" (create)="created($event)" (destroy)="destroyed($event)"></simple-notifications>
 ```
 
 **If your app cannot find the built JS files for this package,** you may need to tell your build script to scan the `angular2-notifications` directory. See the related issue [#25](https://github.com/flauc/angular2-notifications/issues/25). Example:

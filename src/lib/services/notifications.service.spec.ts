@@ -1,8 +1,8 @@
-import {inject, TestBed} from '@angular/core/testing';
-import {NotificationsService} from './notifications.service';
-import {defaultIcons} from '../interfaces/icons';
-import {NotificationEvent} from '../interfaces/notification-event.type';
-import {Notification} from '../interfaces/notification.type';
+import { inject, TestBed } from '@angular/core/testing';
+import { defaultIcons } from '../interfaces/icons';
+import { NotificationEvent } from '../interfaces/notification-event.type';
+import { Notification } from '../interfaces/notification.type';
+import { NotificationsService } from './notifications.service';
 
 describe('NotificationsService', () => {
 
@@ -13,7 +13,7 @@ describe('NotificationsService', () => {
         });
     });
 
-    let defaultNotification = {
+    const defaultNotification = {
         id: '0',
         title: 'Test title',
         type: 'success',
@@ -54,12 +54,12 @@ describe('NotificationsService', () => {
 
     it('If override id is set its used',
         inject([NotificationsService], (service: NotificationsService) => {
-            let notificationEvent: NotificationEvent = null,
-                override = {id: '1'};
+            let notificationEvent: NotificationEvent = null;
+            const override = {id: '1'};
 
             service.emitter.subscribe(item => notificationEvent = item);
 
-            service.set(Object.assign(defaultNotification, {override: override}), true);
+            service.set(Object.assign(defaultNotification, {override}), true);
 
             expect(notificationEvent.notification.id).toBe('1');
         })
@@ -70,7 +70,7 @@ describe('NotificationsService', () => {
             let notificationEvent: NotificationEvent = null;
             service.emitter.subscribe(item => notificationEvent = item);
 
-            let notification: Notification = service.success('Title', 'Message');
+            const notification: Notification = service.success('Title', 'Message');
 
             expect(notification.id !== undefined).toBeTruthy();
             expect(notification.type).toBe('success');
@@ -91,7 +91,7 @@ describe('NotificationsService', () => {
             let notificationEvent: NotificationEvent = null;
             service.emitter.subscribe(item => notificationEvent = item);
 
-            let notification: Notification = service.error('Title', 'Message');
+            const notification: Notification = service.error('Title', 'Message');
 
             expect(notification.id !== undefined).toBeTruthy();
             expect(notification.type).toBe('error');
@@ -113,7 +113,7 @@ describe('NotificationsService', () => {
             let notificationEvent: NotificationEvent = null;
             service.emitter.subscribe(item => notificationEvent = item);
 
-            let notification: Notification = service.alert('Title', 'Message');
+            const notification: Notification = service.alert('Title', 'Message');
 
             expect(notification.id !== undefined).toBeTruthy();
             expect(notification.type).toBe('alert');
@@ -135,7 +135,7 @@ describe('NotificationsService', () => {
             let notificationEvent: NotificationEvent = null;
             service.emitter.subscribe(item => notificationEvent = item);
 
-            let notification: Notification = service.info('Title', 'Message');
+            const notification: Notification = service.info('Title', 'Message');
 
             expect(notification.id !== undefined).toBeTruthy();
             expect(notification.type).toBe('info');
@@ -156,7 +156,7 @@ describe('NotificationsService', () => {
             let notificationEvent: NotificationEvent = null;
             service.emitter.subscribe(item => notificationEvent = item);
 
-            let notification: Notification = service.warn('Title', 'Message');
+            const notification: Notification = service.warn('Title', 'Message');
 
             expect(notification.id !== undefined).toBeTruthy();
             expect(notification.type).toBe('warn');
@@ -177,7 +177,7 @@ describe('NotificationsService', () => {
             let notificationEvent: NotificationEvent = null;
             service.emitter.subscribe(item => notificationEvent = item);
 
-            let notification: Notification = service.bare('Title', 'Message');
+            const notification: Notification = service.bare('Title', 'Message');
 
             expect(notification.id !== undefined).toBeTruthy();
             expect(notification.type).toBe('bare');
@@ -199,7 +199,7 @@ describe('NotificationsService', () => {
             let notificationEvent: NotificationEvent = null;
             service.emitter.subscribe(item => notificationEvent = item);
 
-            let notification: Notification = service.create('Title', 'Message', 'create');
+            const notification: Notification = service.create('Title', 'Message', 'create');
 
             expect(notification.id !== undefined).toBeTruthy();
             expect(notification.type).toBe('create');
@@ -221,7 +221,7 @@ describe('NotificationsService', () => {
             let notificationEvent: NotificationEvent = null;
             service.emitter.subscribe(item => notificationEvent = item);
 
-            let notification: Notification = service.html('<B>Title</B>', 'success');
+            const notification: Notification = service.html('<B>Title</B>', 'success');
 
             expect(notification.id !== undefined).toBeTruthy();
             expect(notification.type).toBe('success');
