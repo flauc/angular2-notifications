@@ -12,8 +12,8 @@ export class NotificationsService {
     @Inject('options') public globalOptions: any
   ) {}
 
-  public emitter = new Subject<NotificationEvent>();
-  public icons: Icons = DEFAULT_ICONS;
+  emitter = new Subject<NotificationEvent>();
+  icons: Icons = DEFAULT_ICONS;
 
   set(notification: Notification, to: boolean): Notification {
     notification.id = notification.override && notification.override.id ? notification.override.id : Math.random().toString(36).substring(3);
@@ -23,7 +23,7 @@ export class NotificationsService {
 
     this.emitter.next({command: 'set', notification: notification, add: to});
     return notification;
-  };
+  }
 
   success(title: any = '', content: any = '', override?: any, context?: any): Notification {
     return this.set({title: title, content: content || '', type: NotificationType.Success, icon: this.icons.success, override: override, context: context}, true);
