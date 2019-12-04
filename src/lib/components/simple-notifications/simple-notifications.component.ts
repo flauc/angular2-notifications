@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation, ViewRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation, ChangeDetectorRef, ViewRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NotificationAnimationType } from '../../enums/notification-animation-type.enum';
 import { Notification } from '../../interfaces/notification.type';
@@ -15,7 +15,7 @@ import { NotificationsService } from '../../services/notifications.service';
 export class SimpleNotificationsComponent implements OnInit, OnDestroy {
   constructor(
     private service: NotificationsService,
-    private viewRef: ViewRef
+    private cd: ChangeDetectorRef
   ) { }
 
   @Input() set options(opt: Options) {
@@ -86,8 +86,8 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
             this.defaultBehavior(item);
             break;
         }
-        if (!this.viewRef.destroyed) {
-          this.viewRef.detectChanges();
+        if (!(this.cd as ViewRef).destroyed) {
+          this.cd.detectChanges();
         }
       });
   }
@@ -96,7 +96,7 @@ export class SimpleNotificationsComponent implements OnInit, OnDestroy {
     if (this.listener) {
       this.listener.unsubscribe();
     }
-    this.viewRef.detach();
+    this.cd.detach();
   }
 
   // Default behavior on event

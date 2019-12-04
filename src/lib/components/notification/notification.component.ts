@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, Input, NgZone, OnDestroy, OnInit, TemplateRef, ViewEncapsulation, ViewRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, NgZone, OnDestroy, OnInit, TemplateRef, ViewEncapsulation, ChangeDetectorRef, ViewRef } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NotificationAnimationType } from '../../enums/notification-animation-type.enum';
 import { Notification } from '../../interfaces/notification.type';
@@ -140,7 +140,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   constructor(
     private notificationService: NotificationsService,
     private domSanitizer: DomSanitizer,
-    private viewRef: ViewRef,
+    private cd: ChangeDetectorRef,
     private zone: NgZone
   ) {}
 
@@ -167,7 +167,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     clearTimeout(this.timer);
-    this.viewRef.detach();
+    this.cd.detach();
   }
 
   startTimeOut(): void {
@@ -230,8 +230,8 @@ export class NotificationComponent implements OnInit, OnDestroy {
       this.timer = setTimeout(this.instance, this.sleepTime);
     }
     this.zone.run(() => {
-      if (!this.viewRef.destroyed) {
-        this.viewRef.detectChanges();
+      if (!(this.cd as ViewRef).destroyed) {
+        this.cd.detectChanges();
       }
     });
   }
