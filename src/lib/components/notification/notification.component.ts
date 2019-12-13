@@ -134,6 +134,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
   private sleepTime: number;
   private startTime: number;
   private endTime: number;
+  private pauseStart: number;
 
   private icon: string;
 
@@ -180,12 +181,15 @@ export class NotificationComponent implements OnInit, OnDestroy {
   onEnter() {
     if (this.pauseOnHover) {
       this.stopTime = true;
+      this.pauseStart = new Date().getTime();
     }
   }
 
   onLeave() {
     if (this.pauseOnHover) {
       this.stopTime = false;
+      this.startTime += (new Date().getTime() - this.pauseStart);
+      this.endTime += (new Date().getTime() - this.pauseStart);
       this.zone.runOutsideAngular(() => setTimeout(this.instance, this.sleepTime));
     }
   }
