@@ -2,6 +2,7 @@
     "compilerOptions": {
         "baseUrl": "./src",
         "experimentalDecorators": true,
+    "module": "esnext",
         "moduleResolution": "node",
         "rootDir": "./src",
         "lib": [

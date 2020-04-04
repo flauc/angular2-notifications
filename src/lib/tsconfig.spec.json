@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "module": "esnext",
     "outDir": "../../out-tsc/spec",
     "types": [
       "jasmine",
