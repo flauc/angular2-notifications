@@ -1,9 +1,9 @@
 {
   "name": "angular2-notifications",
   "typings": "./dist/index.d.ts",
-  "version": "3.0.0",
+  "version": "9.0.0",
   "scripts": {
-    "build": "ng build",
+    "build": "ng run angular2-notifications:build:production",
     "docs": "npm run docs:build",
     "docs:build": "compodoc -p tsconfig.json -n angular2-notifications -d docs --hideGenerator",
     "docs:serve": "npm run docs:build -- -s",
@@ -33,22 +33,26 @@
     "url": "https://github.com/username/repo/issues"
   },
   "homepage": "https://github.com/flauc/angular2-notifications",
-  "dependencies": {
-    "@angular/animations": "~9.1.0",
-    "@angular/common": "~9.1.0",
-    "@angular/core": "~9.1.0",
-    "@angular/platform-browser": "~9.1.0",
-    "@angular/platform-browser-dynamic": "~9.1.0",
-    "rxjs": "~6.5.5",
-    "tslib": "^1.10.0",
-    "tslint": "~5.15.0",
-    "zone.js": "~0.10.2"
+  "peerDependencies": {
+    "@angular/animations": "^9.0.0",
+    "@angular/common": "^9.0.0",
+    "@angular/core": "^9.0.0",
+    "@angular/platform-browser": "^9.0.0",
+    "@angular/platform-browser-dynamic": "^9.0.0",
+    "rxjs": "^6.5.0",
+    "zone.js": "^0.10.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.901.0",
-    "@angular-devkit/build-ng-packagr": "~0.901.0",
-    "@angular/cli": "~9.1.0",
-    "@angular/compiler-cli": "~9.1.0",
+    "@angular/animations": "^9.0.0",
+    "@angular/common": "^9.0.0",
+    "@angular/compiler": "~9.0.0",
+    "@angular/core": "^9.0.0",
+    "@angular/platform-browser": "~9.0.0",
+    "@angular/platform-browser-dynamic": "~9.0.0",
+    "@angular-devkit/build-angular": "~0.900.0",
+    "@angular-devkit/build-ng-packagr": "~0.900.0",
+    "@angular/cli": "~9.0.0",
+    "@angular/compiler-cli": "~9.0.0",
     "@compodoc/compodoc": "^1.1.7",
     "@types/jasmine": "~3.3.8",
     "@types/node": "^12.11.1",
@@ -63,9 +67,12 @@
     "karma-jasmine-html-reporter": "^1.4.0",
     "ng-packagr": "^9.0.0",
     "protractor": "~5.4.0",
+    "rxjs": "^6.5.0",
     "ts-node": "~7.0.0",
+    "tslib": "^1.10.0",
     "tslint": "~5.18.0",
-    "typescript": "~3.8.3"
+    "typescript": "~3.6.4",
+    "zone.js": "^0.10.0"
   },
   "engines": {
     "node": ">=6.0.0"
