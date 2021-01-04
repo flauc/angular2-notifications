@@ -1,23 +1,37 @@
 import { inject, TestBed } from '@angular/core/testing';
-import { defaultIcons } from '../interfaces/icons';
+import { NotificationType } from '../enums/notification-type.enum';
+import { NotificationAnimationType } from '../enums/notification-animation-type.enum';
+import { DEFAULT_ICONS } from '../consts/default-icons.const';
 import { NotificationEvent } from '../interfaces/notification-event.type';
 import { Notification } from '../interfaces/notification.type';
 import { NotificationsService } from './notifications.service';
+import { OPTIONS, optionsFactory } from '../simple-notifications.module'
 
 describe('NotificationsService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [],
-            providers: [NotificationsService],
+            providers: [
+                NotificationsService,
+                {
+                    provide: OPTIONS,
+                    useValue: {}
+                },
+                {
+                    provide: 'options',
+                    useFactory: optionsFactory,
+                    deps: [OPTIONS]
+                }
+            ],
         });
     });
 
     const defaultNotification = {
         id: '0',
         title: 'Test title',
-        type: 'success',
-        icon: defaultIcons.success,
+        type: NotificationType.Success,
+        icon: DEFAULT_ICONS.success,
         content: 'Test Content',
         timeOut: 0,
         maxLength: 0,
@@ -27,7 +41,7 @@ describe('NotificationsService', () => {
         pauseOnHover: true,
         theClass: 'initial',
         rtl: false,
-        animate: 'fromRight',
+        animate: NotificationAnimationType.FromRight,
         createdOn: new Date(),
         destroyedOn: new Date()
     };
@@ -55,11 +69,11 @@ describe('NotificationsService', () => {
     it('If override id is set its used',
         inject([NotificationsService], (service: NotificationsService) => {
             let notificationEvent: NotificationEvent = null;
-            const override = {id: '1'};
+            const override = { id: '1' };
 
             service.emitter.subscribe(item => notificationEvent = item);
 
-            service.set(Object.assign(defaultNotification, {override}), true);
+            service.set(Object.assign(defaultNotification, { override }), true);
 
             expect(notificationEvent.notification.id).toBe('1');
         })
@@ -74,7 +88,7 @@ describe('NotificationsService', () => {
 
             expect(notification.id !== undefined).toBeTruthy();
             expect(notification.type).toBe('success');
-            expect(notification.icon).toBe(defaultIcons.success);
+            expect(notification.icon).toBe(DEFAULT_ICONS.success);
 
             expect(notification.title).toBe('Title');
             expect(notification.content).toBe('Message');
@@ -95,7 +109,7 @@ describe('NotificationsService', () => {
 
             expect(notification.id !== undefined).toBeTruthy();
             expect(notification.type).toBe('error');
-            expect(notification.icon).toBe(defaultIcons.error);
+            expect(notification.icon).toBe(DEFAULT_ICONS.error);
 
             expect(notification.title).toBe('Title');
             expect(notification.content).toBe('Message');
@@ -117,7 +131,7 @@ describe('NotificationsService', () => {
 
             expect(notification.id !== undefined).toBeTruthy();
             expect(notification.type).toBe('alert');
-            expect(notification.icon).toBe(defaultIcons.alert);
+            expect(notification.icon).toBe(DEFAULT_ICONS.alert);
 
             expect(notification.title).toBe('Title');
             expect(notification.content).toBe('Message');
@@ -139,7 +153,7 @@ describe('NotificationsService', () => {
 
             expect(notification.id !== undefined).toBeTruthy();
             expect(notification.type).toBe('info');
-            expect(notification.icon).toBe(defaultIcons.info);
+            expect(notification.icon).toBe(DEFAULT_ICONS.info);
 
             expect(notification.title).toBe('Title');
             expect(notification.content).toBe('Message');
@@ -160,7 +174,7 @@ describe('NotificationsService', () => {
 
             expect(notification.id !== undefined).toBeTruthy();
             expect(notification.type).toBe('warn');
-            expect(notification.icon).toBe(defaultIcons.warn);
+            expect(notification.icon).toBe(DEFAULT_ICONS.warn);
 
             expect(notification.title).toBe('Title');
             expect(notification.content).toBe('Message');
@@ -199,10 +213,10 @@ describe('NotificationsService', () => {
             let notificationEvent: NotificationEvent = null;
             service.emitter.subscribe(item => notificationEvent = item);
 
-            const notification: Notification = service.create('Title', 'Message', 'create');
+            const notification: Notification = service.create('Title', 'Message', NotificationType.Success);
 
             expect(notification.id !== undefined).toBeTruthy();
-            expect(notification.type).toBe('create');
+            expect(notification.type).toBe(NotificationType.Success);
             // expect(notification.icon).toBe('bare');
 
             expect(notification.title).toBe('Title');
@@ -221,11 +235,11 @@ describe('NotificationsService', () => {
             let notificationEvent: NotificationEvent = null;
             service.emitter.subscribe(item => notificationEvent = item);
 
-            const notification: Notification = service.html('<B>Title</B>', 'success');
+            const notification: Notification = service.html('<B>Title</B>', NotificationType.Bare);
 
             expect(notification.id !== undefined).toBeTruthy();
-            expect(notification.type).toBe('success');
-            expect(notification.icon).toBe('bare');
+            expect(notification.type).toBe('bare');
+            expect(notification.icon).toBe(undefined);
 
             expect(notification.title).toBeUndefined();
             expect(notification.content).toBeUndefined();
