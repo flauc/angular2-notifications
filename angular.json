@@ -4,40 +4,37 @@
   "newProjectRoot": "projects",
   "projects": {
     "angular2-notifications": {
-      "root": "/",
-      "sourceRoot": "/src",
+      "root": "",
+      "sourceRoot": "src",
       "projectType": "library",
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "src/lib/tsconfig.lib.json",
-            "project": "./ng-package.json"
+            "project": "ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "tsconfig.lib.prod.json"
+              "tsConfig": "src/lib/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
+            "main": "src/lib/test.ts",
             "tsConfig": "src/lib/tsconfig.spec.json",
-            "karmaConfig": "./karma.conf.js"
+            "karmaConfig": "src/lib/karma.conf.js"
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "./tsconfig.lib.json",
-              "./tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
             ]
           }
         }
