@@ -5,6 +5,7 @@ import { SimpleNotificationsComponent } from './components/simple-notifications/
 import { DEFAULT_OPTIONS } from './consts/default-options.const';
 import { Options } from './interfaces/options.type';
 import { NotificationsService } from './services/notifications.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export const OPTIONS = new InjectionToken<Options>('options');
 export function optionsFactory(options) {
@@ -16,7 +17,8 @@ export function optionsFactory(options) {
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    BrowserAnimationsModule,
   ],
   declarations: [
     SimpleNotificationsComponent,
