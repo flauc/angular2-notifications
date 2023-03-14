@@ -1,0 +1,48 @@
+# This workflow will run tests using node and then publish a package to npm when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: Node.js Publish
+
+on:
+  workflow_dispatch:
+  # release:
+  #   types: [created]
+
+# This allows a subsequently queued workflow run to interrupt previous runs
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  # build:
+  #   uses: ./.github/workflows/build.yml  
+
+  publish-npm:
+    # needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.20.1]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: 'https://registry.npmjs.org'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run build only library
+        run: npm run build --if-present
+    
+      - name: Publish package
+        run: npm publish ./dist/angular2-notifications
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
