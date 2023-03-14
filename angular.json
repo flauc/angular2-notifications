@@ -4,9 +4,9 @@
   "newProjectRoot": "projects",
   "projects": {
     "angular2-notifications": {
-      "root": "",
-      "sourceRoot": "src",
       "projectType": "library",
+      "root": "./src",
+      "sourceRoot": "./src",      
       "prefix": "lib",
       "architect": {
         "build": {
@@ -19,7 +19,8 @@
             "production": {
               "tsConfig": "src/lib/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
@@ -40,8 +41,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "analytics": "77332a81-cd25-487c-805b-f20186e07788"
   }
 }
