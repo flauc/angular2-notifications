@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular2-notifications": {
+    "@talentia/angular2-notifications": {
       "projectType": "library",
       "root": "./src",
       "sourceRoot": "./src",      
