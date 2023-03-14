@@ -41,7 +41,6 @@
       }
     }
   },
-  "defaultProject": "angular2-notifications",
   "cli": {
     "analytics": "77332a81-cd25-487c-805b-f20186e07788"
   }
