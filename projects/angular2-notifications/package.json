@@ -1,7 +1,17 @@
 {
   "name": "angular2-notifications",
   "typings": "./dist/index.d.ts",
-  "version": "16.0.0",
+  "version": "12.0.0",
+  "scripts": {
+    "build": "ng run angular2-notifications:build:production",
+    "docs": "npm run docs:build",
+    "docs:build": "compodoc -p tsconfig.json -n angular2-notifications -d docs --hideGenerator",
+    "docs:serve": "npm run docs:build -- -s",
+    "docs:watch": "npm run docs:build -- -s -w",
+    "lint": "ng lint",
+    "publish_lib": "npm publish dist/angular2-notifications",
+    "test": "npm run lint && npm run build"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/username/repo"
@@ -29,11 +39,11 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.2.8",
-    "@angular-eslint/builder": "16.2.0",
-    "@angular-eslint/eslint-plugin": "16.2.0",
-    "@angular-eslint/eslint-plugin-template": "16.2.0",
-    "@angular-eslint/schematics": "16.2.0",
-    "@angular-eslint/template-parser": "16.2.0",
+    "@angular-eslint/builder": "12.3.1",
+    "@angular-eslint/eslint-plugin": "12.3.1",
+    "@angular-eslint/eslint-plugin-template": "12.3.1",
+    "@angular-eslint/schematics": "12.6.1",
+    "@angular-eslint/template-parser": "12.3.1",
     "@angular/animations": "^16.2.11",
     "@angular/cli": "^16.2.8",
     "@angular/common": "^16.2.11",
