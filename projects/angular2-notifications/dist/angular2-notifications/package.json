@@ -1,10 +1,10 @@
 {
   "name": "angular2-notifications",
   "typings": "index.d.ts",
-  "version": "12.0.0",
+  "version": "16.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/username/repo"
+    "url": "https://github.com/flauc/angular2-notifications.git"
   },
   "author": {
     "name": "Filip Lauc",

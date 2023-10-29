@@ -12,7 +12,7 @@
     "moduleResolution": "node",
     "paths": {
       "angular2-notifications": [
-        "./dist/angular2-notifications"
+        "./projects/angular2-notifications/dist/angular2-notifications"
       ]
     },
     "importHelpers": true,
