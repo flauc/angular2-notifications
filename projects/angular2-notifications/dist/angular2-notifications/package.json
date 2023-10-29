@@ -1,0 +1,46 @@
+{
+  "name": "angular2-notifications",
+  "typings": "index.d.ts",
+  "version": "12.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/repo"
+  },
+  "author": {
+    "name": "Filip Lauc",
+    "email": "filip.lauc93@gmail.com"
+  },
+  "keywords": [
+    "Angular",
+    "Angular 2",
+    "Library",
+    "Notifications",
+    "Notification",
+    "Toast"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/username/repo/issues"
+  },
+  "homepage": "https://github.com/flauc/angular2-notifications",
+  "peerDependencies": {},
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "module": "fesm2022/angular2-notifications.mjs",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "esm2022": "./esm2022/angular2-notifications.mjs",
+      "esm": "./esm2022/angular2-notifications.mjs",
+      "default": "./fesm2022/angular2-notifications.mjs"
+    }
+  },
+  "sideEffects": false
+}

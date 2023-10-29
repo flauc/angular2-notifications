@@ -15,12 +15,8 @@
             "project": "projects/angular2-notifications/ng-package.json"
           },
           "configurations": {
-            "production": {
-              "tsConfig": "projects/angular2-notifications/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/angular2-notifications/tsconfig.lib.json"
-            }
+            "production": { },
+            "development": { }
           },
           "defaultConfiguration": "production"
         },

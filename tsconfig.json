@@ -1,8 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./src",
-    "rootDir": "./src",
     "forceConsistentCasingInFileNames": true,
     "strict": false,
     "noImplicitReturns": true,
@@ -14,7 +12,7 @@
     "moduleResolution": "node",
     "paths": {
       "angular2-notifications": [
-        "dist/angular2-notifications"
+        "./dist/angular2-notifications"
       ]
     },
     "importHelpers": true,
