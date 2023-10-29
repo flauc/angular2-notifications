@@ -1,0 +1,143 @@
+/* Add application styles & imports to this file! */
+
+html {
+  box-sizing: border-box;
+  font-family: sans-serif;
+  overflow-y: scroll;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+form {
+  box-shadow: 0 2px 8px 2px rgba(0,0,0,.16);
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+label[class^='fe_'] > * {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.field {
+  margin-bottom: 20px;
+}
+
+.field.half {
+  width: 50%;
+  float: left;
+}
+
+.field-label {
+  margin-bottom: 5px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+
+select {
+  cursor: pointer;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+input[type=checkbox],
+input[type=radio] {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-radius: 0;
+  background: white;
+}
+
+.fe_select-container {
+  width: 100%;
+  position: relative;
+}
+.fe_select-container svg {
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+.fe_radio {
+  display: block;
+  cursor: pointer;
+  padding: 10px 0;
+}
+
+.fe_radio .control {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 5px;
+  background: #eee;
+  transition: .35s;
+}
+
+.fe_radio .control:after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%,-50%,0) scale3d(0,0,0);
+  transition: .35s;
+  background: #333;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
+}
+
+
+input[type=radio]:focus ~ .control,
+input[type=radio]:hover ~ .control {
+  background: darken(#eee,10%);
+}
+
+input[type=radio]:checked ~ .control:after {
+  transform: translate3d(-50%,-50%,0) scale3d(1,1,1);
+}
+
+.cta-field {
+  text-align: center;
+  padding: 10px;
+  margin: 0;
+}
+
+button {
+  background: #ec4a1d;
+  border: none;
+  width: 150px;
+  height: 30px;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}

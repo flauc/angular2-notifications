@@ -1,3 +1,4 @@
+/.angular/cache
 # Node
 node_modules/*
 npm-debug.log
@@ -33,3 +34,6 @@ dist/*
 
 # Playground tmp files
 .playground
+
+# Docs
+docs/*

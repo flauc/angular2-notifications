@@ -2,16 +2,6 @@
   "name": "angular2-notifications",
   "typings": "./dist/index.d.ts",
   "version": "16.0.1",
-  "scripts": {
-    "build": "ng run angular2-notifications:build:production",
-    "docs": "npm run docs:build",
-    "docs:build": "compodoc -p tsconfig.json -n angular2-notifications -d docs --hideGenerator",
-    "docs:serve": "npm run docs:build -- -s",
-    "docs:watch": "npm run docs:build -- -s -w",
-    "lint": "ng lint",
-    "publish_lib": "npm publish dist/angular2-notifications",
-    "test": "npm run lint && npm run build"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/flauc/angular2-notifications.git"
@@ -33,8 +23,8 @@
     "url": "https://github.com/username/repo/issues"
   },
   "homepage": "https://github.com/flauc/angular2-notifications",
+  "peerDependencies": {},
   "dependencies": {
-    "@angular/forms": "^16.2.11",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
