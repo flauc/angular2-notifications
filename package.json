@@ -1,7 +1,7 @@
 {
   "name": "angular2-notifications",
   "typings": "./dist/index.d.ts",
-  "version": "16.0.1",
+  "version": "17.0.0",
   "scripts": {
     "build": "ng run angular2-notifications:build:production",
     "docs": "npm run docs:build",
@@ -34,24 +34,24 @@
   },
   "homepage": "https://github.com/flauc/angular2-notifications",
   "dependencies": {
-    "@angular/forms": "^16.2.11",
+    "@angular/forms": "^17.0.6",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^16.2.8",
+    "@angular-devkit/build-angular": "^15.2.10",
     "@angular-eslint/builder": "16.2.0",
     "@angular-eslint/eslint-plugin": "16.2.0",
     "@angular-eslint/eslint-plugin-template": "16.2.0",
     "@angular-eslint/schematics": "16.2.0",
     "@angular-eslint/template-parser": "16.2.0",
-    "@angular/animations": "^16.2.11",
-    "@angular/cli": "^16.2.8",
-    "@angular/common": "^16.2.11",
-    "@angular/compiler": "^16.2.11",
-    "@angular/compiler-cli": "^16.2.11",
-    "@angular/core": "^16.2.11",
-    "@angular/platform-browser": "^16.2.11",
-    "@angular/platform-browser-dynamic": "^16.2.11",
+    "@angular/animations": "^17.0.6",
+    "@angular/cli": "^17.0.6",
+    "@angular/common": "^17.0.6",
+    "@angular/compiler": "^17.0.6",
+    "@angular/compiler-cli": "^17.0.6",
+    "@angular/core": "^17.0.6",
+    "@angular/platform-browser": "^17.0.6",
+    "@angular/platform-browser-dynamic": "^17.0.6",
     "@compodoc/compodoc": "^1.1.14",
     "@types/jasmine": "~3.8.1",
     "@types/node": "^16.4.0",
@@ -68,12 +68,12 @@
     "karma-coverage-istanbul-reporter": "~3.0.3",
     "karma-jasmine": "~4.0.1",
     "karma-jasmine-html-reporter": "^1.7.0",
-    "ng-packagr": "^16.2.3",
-    "protractor": "~7.0.0",
+    "ng-packagr": "^17.0.2",
+    "protractor": "^3.3.0",
     "rxjs": "^6.6.3",
     "ts-node": "^10.1.0",
-    "typescript": "^4.9.5",
-    "zone.js": "^0.13.3"
+    "typescript": "^5.2.2",
+    "zone.js": "^0.14.2"
   },
   "engines": {
     "node": ">=6.0.0"
